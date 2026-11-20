@@ -1,18 +1,92 @@
 ---
-import '../styles/global.css';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Metadata from '../components/Metadata.astro';
+import ActionLink from '../components/ActionLink.astro';
+import ContentPreview from '../components/ContentPreview.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>goutamprusty.com</title>
-  </head>
-  <body>
-    <main>
-      <h1>goutamprusty.com</h1>
-      <p>Website foundation in progress.</p>
-    </main>
-  </body>
-</html>
+<SiteLayout title="Design system preview | goutamprusty.com">
+  <PageIntro
+    eyebrow="Development-only sample"
+    title="A calm foundation for considered work."
+    summary="This preview demonstrates the site's type, colour, spacing, navigation and reusable content elements. All copy and linked examples on this page are placeholders for design review."
+  />
+
+  <section class="demo-section" aria-labelledby="type-heading">
+    <p class="section-label">01 / Type &amp; rhythm</p>
+    <h2 id="type-heading">A clear reading hierarchy</h2>
+    <p class="lead">Editorial design gives each idea room to breathe while keeping the path through a page easy to follow.</p>
+    <h3>Section heading for a longer piece</h3>
+    <p>Body text uses a system sans-serif stack for dependable rendering, paired with a system serif stack for headings. Paragraph measure stays comfortable, and spacing changes with the available screen width.</p>
+    <blockquote><p>Sample quotation styling for a future sourced passage. This is demonstration copy, not a quotation from a real source.</p></blockquote>
+    <p class="mono-note">Metadata / code sample: content type · date · source ID</p>
+  </section>
+
+  <section class="demo-section" aria-labelledby="colour-heading">
+    <p class="section-label">02 / Palette</p>
+    <h2 id="colour-heading">Quiet, useful contrast</h2>
+    <div class="swatches" aria-label="Design token colour samples">
+      <div><span class="swatch paper"></span><strong>Paper</strong><code>#F8F7F3</code></div>
+      <div><span class="swatch ink"></span><strong>Ink</strong><code>#242622</code></div>
+      <div><span class="swatch muted"></span><strong>Muted</strong><code>#686B63</code></div>
+      <div><span class="swatch accent"></span><strong>Accent</strong><code>#356B59</code></div>
+      <div><span class="swatch line"></span><strong>Line</strong><code>#D9D8D0</code></div>
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="components-heading">
+    <p class="section-label">03 / Reusable elements</p>
+    <h2 id="components-heading">Links, metadata and previews</h2>
+    <Metadata items={['Sample page', 'Development content', 'No publication date']} />
+    <div class="actions">
+      <ActionLink href="#preview">Primary action</ActionLink>
+      <ActionLink href="#preview" variant="secondary">Secondary action</ActionLink>
+      <ActionLink href="#" disabled>Disabled action</ActionLink>
+    </div>
+    <div id="preview" class="preview-grid">
+      <ContentPreview title="Sample research title" type="Research" href="#preview" summary="A neutral excerpt illustrating title hierarchy and summary length for a future content item." />
+      <ContentPreview title="Sample writing title" type="Writing" href="#preview" summary="A second demonstration item shows how content previews retain editorial rhythm without becoming identical dashboard cards." />
+    </div>
+  </section>
+
+  <section class="demo-section" aria-labelledby="layout-heading">
+    <p class="section-label">04 / Layout</p>
+    <h2 id="layout-heading">Responsive by default</h2>
+    <p>Page gutters grow with the viewport, the content column remains bounded, and sample code or wide tables can scroll within their own containers.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Sample responsive table. Scroll horizontally when needed.">
+      <table>
+        <caption>Sample responsive table for visual review</caption>
+        <thead><tr><th scope="col">Viewport</th><th scope="col">Layout</th><th scope="col">Reading measure</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Small phone</th><td>Single column</td><td>Bounded</td></tr>
+          <tr><th scope="row">Tablet</th><td>Selective two column</td><td>Bounded</td></tr>
+          <tr><th scope="row">Desktop</th><td>Editorial composition</td><td>Bounded</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre tabindex="0" role="region" aria-label="Sample code. Scroll horizontally with arrow keys when needed."><code>{"const readingExperience = { calm: true, readable: true, responsive: true, measure: 'controlled' };"}</code></pre>
+  </section>
+</SiteLayout>
+
+<style>
+  .demo-section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--color-line); }
+  .section-label { margin-bottom: 1rem; color: var(--color-accent); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .lead { max-width: 62ch; color: var(--color-muted); font-size: clamp(1.1rem, 2.4vw, 1.45rem); }
+  .mono-note, code { color: var(--color-muted); font-family: var(--font-mono); font-size: 0.83rem; overflow-wrap: anywhere; }
+  .swatches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .swatches > div { display: grid; gap: 0.25rem; min-width: 0; }
+  .swatches > div:last-child { grid-column: span 2; grid-template-columns: 1fr auto; align-items: center; }
+  .swatch { height: 4rem; border: 1px solid var(--color-line); }
+  .paper { background: var(--color-paper); } .ink { background: var(--color-ink); } .muted { background: var(--color-muted); } .accent { background: var(--color-accent); } .line { background: var(--color-line); }
+  .swatches strong { font-size: 0.9rem; }
+  .swatches code { font-size: 0.72rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block: 1.5rem 2.5rem; }
+  .preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .table-wrap { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; -webkit-overflow-scrolling: touch; margin-block: 1.5rem; }
+  table { min-width: 34rem; font-size: 0.9rem; }
+  caption { padding: 0.5rem; color: var(--color-muted); text-align: left; }
+  pre { padding: 1rem; border: 1px solid var(--color-line); background: var(--color-surface); }
+  @media (min-width: 40rem) { .swatches { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); } .swatches > div:last-child { grid-column: auto; display: grid; } }
+  @media (max-width: 48rem) { .preview-grid { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+</style>

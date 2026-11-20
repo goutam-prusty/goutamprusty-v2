@@ -1,0 +1,19 @@
+---
+import Metadata from './Metadata.astro';
+interface Props { title: string; summary: string; href: string; type: string; }
+const { title, summary, href, type } = Astro.props;
+---
+
+<article class="preview">
+  <Metadata items={[type, 'Sample content']} />
+  <h3><a href={href}>{title}</a></h3>
+  <p>{summary}</p>
+</article>
+
+<style>
+  .preview { padding-block: 1.25rem; border-top: 1px solid var(--color-line); }
+  .preview h3 { margin-top: 0.7rem; }
+  .preview h3 a { color: var(--color-ink); text-decoration: none; }
+  .preview h3 a:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 0.18em; }
+  .preview p { max-width: 58ch; margin-bottom: 0; color: var(--color-muted); }
+</style>
