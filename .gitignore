@@ -45,5 +45,3 @@ Desktop.ini
 *.key
 
 # Private cryptographic keys
-*.pem
-*.key
