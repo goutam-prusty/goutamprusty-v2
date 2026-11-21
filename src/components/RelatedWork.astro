@@ -1,0 +1,5 @@
+---
+import ContentList from './ContentList.astro';
+const { entries = [] } = Astro.props;
+---
+{entries.length > 0 && <aside aria-labelledby="related-heading"><h2 id="related-heading">Related work</h2><ContentList entries={entries} /></aside>}

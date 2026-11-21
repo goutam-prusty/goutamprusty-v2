@@ -1,0 +1,44 @@
+---
+import '../styles/paper-signal.css';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const nav = [
+  { label: 'Home', href: '/design-exploration/paper-signal/' },
+  { label: 'Projects', href: '/design-exploration/paper-signal/project/' },
+  { label: 'Research', href: '/design-exploration/paper-signal/research/' },
+  { label: 'Writing', href: '/writing/' },
+  { label: 'Topics', href: '/topics/' },
+  { label: 'About', href: '/design-exploration/paper-signal/about/' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="ps" id="top">
+    <a class="ps-skip" href="#main">Skip to content</a>
+    <div class="ps-shell">
+      <header class="ps-header">
+        <a class="ps-wordmark" href="/design-exploration/paper-signal/" aria-label="Paper and Signal prototype home">g<span>.</span></a>
+        <details class="ps-nav-menu">
+          <summary aria-label="Open site navigation"><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
+          <nav aria-label="Prototype navigation">
+            {nav.map((item) => <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>)}
+          </nav>
+        </details>
+        <a class="ps-contact-link" href="/design-exploration/paper-signal/#contact">Get in touch <span aria-hidden="true">↗</span></a>
+      </header>
+      <main id="main"><slot /></main>
+      <footer class="ps-footer">
+        <a class="ps-wordmark" href="/design-exploration/paper-signal/" aria-label="Back to prototype home">g<span>.</span></a>
+        <p>Paper &amp; Signal <span>·</span> A design exploration</p>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </div>
+  </body>
+</html>

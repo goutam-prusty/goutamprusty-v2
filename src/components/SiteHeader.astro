@@ -7,6 +7,12 @@ const links = [
   { label: 'Topics', href: '/topics/' },
   { label: 'About', href: '/about/' },
 ];
+const normalizePath = (path: string) => path.length > 1 ? path.replace(/\/+$/, '') : path;
+const currentPath = normalizePath(Astro.url.pathname);
+const isActive = (href: string) => {
+  const targetPath = normalizePath(href);
+  return targetPath === '/' ? currentPath === '/' : currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+};
 ---
 
 <header class="site-header">
@@ -14,11 +20,11 @@ const links = [
   <details class="mobile-menu">
     <summary aria-label="Site navigation" aria-controls="mobile-navigation"><span></span><span></span></summary>
     <nav id="mobile-navigation" aria-label="Main navigation">
-      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      {links.map((link) => <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>)}
     </nav>
   </details>
   <nav class="desktop-nav" aria-label="Main navigation">
-    {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    {links.map((link) => <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>)}
   </nav>
 </header>
 

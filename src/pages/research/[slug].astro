@@ -1,0 +1,8 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { works } from '../../data/fixtures';
+import VisualFigure from '../../components/VisualFigure.astro';
+export function getStaticPaths() { return works.filter((work) => work.type === 'Research').map((work) => ({ params: { slug: 'sample-report' }, props: { work } })); }
+const { work } = Astro.props;
+---
+<DetailLayout title={work.title} summary={work.summary} type="Research" sections={[{id:'scope',title:'Scope',body:'Placeholder section for report scope.'},{id:'discussion',title:'Discussion',body:'Placeholder report section with no research claims.'},{id:'references',title:'References',body:'Citation placeholders will be supplied from verified source material.'}]}><VisualFigure slot="visual" kind="figure" label="Optional research figure" caption="Figure slot for verified data, diagram, or source material." /></DetailLayout>

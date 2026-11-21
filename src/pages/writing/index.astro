@@ -1,0 +1,5 @@
+---
+import ListingLayout from '../../layouts/ListingLayout.astro';
+import { works } from '../../data/fixtures';
+---
+<ListingLayout title="Writing" summary="Articles and essays template using development fixtures." entries={works.filter((work) => work.type === 'Writing')} />

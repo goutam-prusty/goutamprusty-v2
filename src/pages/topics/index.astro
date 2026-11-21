@@ -1,0 +1,7 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { topics, topicSlug, fixtureNotice } from '../../data/fixtures';
+---
+<SiteLayout title="Topics | goutamprusty.com"><PageIntro eyebrow="Development template" title="Topics" summary="A subject index structure for browsing related work." /><p class="fixture-note">{fixtureNotice}</p><ul class="topic-index">{topics.map((topic, index) => <li><a href={`/topics/${topicSlug(topic)}/`}><span class="topic-number">0{index + 1}</span><span>{topic}</span><span aria-hidden="true">↗</span></a></li>)}</ul></SiteLayout>
+<style>.fixture-note{color:var(--color-muted);font-size:.9rem}.topic-index{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:2rem 0 4rem;padding:1px;background:var(--color-line);list-style:none}.topic-index li{min-width:0;background:var(--color-paper)}.topic-index a{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:1rem;min-height:8rem;padding:1.25rem;color:var(--color-ink);text-decoration:none}.topic-index a:hover{background:var(--color-accent-soft);color:var(--color-accent)}.topic-number{color:var(--color-accent);font-size:.75rem;font-weight:700;letter-spacing:.1em}@media(max-width:48rem){.topic-index{grid-template-columns:1fr}.topic-index a{min-height:5.5rem}}</style>

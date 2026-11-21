@@ -1,0 +1,5 @@
+---
+import ListingLayout from '../../layouts/ListingLayout.astro';
+import { collections } from '../../data/fixtures';
+---
+<ListingLayout title="Collections / Series" summary="Curated paths through related work." entries={collections.map((item) => ({ ...item, type: 'Collection' }))} />

@@ -1,0 +1,8 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { works } from '../../data/fixtures';
+import VisualFigure from '../../components/VisualFigure.astro';
+export function getStaticPaths() { return works.filter((work) => work.type === 'Project').map((work) => ({ params: { slug: 'sample-project' }, props: { work } })); }
+const { work } = Astro.props;
+---
+<DetailLayout title={work.title} summary={work.summary} type="Project" sections={[{id:'problem',title:'Problem',body:'Placeholder problem statement.'},{id:'approach',title:'Approach',body:'Placeholder approach.'},{id:'evidence',title:'Evidence and contribution',body:'Verified evidence and contribution details will be added later.'}]}><VisualFigure slot="visual" label="Project visual area" caption="Optional slot for verified screenshots or project imagery." /></DetailLayout>

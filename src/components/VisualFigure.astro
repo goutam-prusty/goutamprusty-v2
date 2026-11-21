@@ -1,0 +1,35 @@
+---
+interface Props {
+  label: string;
+  kind?: 'image' | 'figure' | 'diagram' | 'chart';
+  caption?: string;
+  ratio?: 'landscape' | 'portrait' | 'square';
+  src?: string;
+  alt?: string;
+}
+
+const { label, kind = 'image', caption, ratio = 'landscape', src, alt = label } = Astro.props;
+---
+
+<figure class={`visual-placeholder visual-placeholder--${ratio}`} aria-label={`${kind}: ${label}`}>
+  {src ? <img class="visual-image" src={src} alt={alt} loading="lazy" /> : <div class="placeholder-frame">
+    <span class="placeholder-kind">{kind}</span>
+    <span class="placeholder-label">{label}</span>
+    <span class="placeholder-note">Development placeholder · verified asset required</span>
+  </div>}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .visual-placeholder { min-width: 0; margin: 0; }
+  .visual-image { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .visual-placeholder--portrait .visual-image { aspect-ratio: 4 / 5; }
+  .visual-placeholder--square .visual-image { aspect-ratio: 1; }
+  .placeholder-frame { display: flex; min-height: 13rem; height: 100%; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--color-line); background: var(--color-accent-soft); }
+  .visual-placeholder--portrait .placeholder-frame { min-height: 22rem; }
+  .visual-placeholder--square .placeholder-frame { aspect-ratio: 1; min-height: 0; }
+  .placeholder-kind { color: var(--color-accent); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .placeholder-label { max-width: 30ch; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; }
+  .placeholder-note { color: var(--color-muted); font-size: 0.78rem; line-height: 1.4; }
+  figcaption { margin-top: 0.55rem; color: var(--color-muted); font-size: 0.82rem; }
+</style>

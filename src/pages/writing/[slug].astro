@@ -1,0 +1,7 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { works } from '../../data/fixtures';
+export function getStaticPaths() { return works.filter((work) => work.type === 'Writing').map((work) => ({ params: { slug: 'sample-article' }, props: { work } })); }
+const { work } = Astro.props;
+---
+<DetailLayout title={work.title} summary={work.summary} type="Writing" sections={[{id:'opening',title:'Opening',body:'Placeholder article body.'},{id:'ideas',title:'Main ideas',body:'Placeholder article section.'}]} />

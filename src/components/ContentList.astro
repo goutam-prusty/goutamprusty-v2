@@ -1,0 +1,6 @@
+---
+import ContentPreview from './ContentPreview.astro';
+interface Entry { title: string; summary: string; href: string; type: string; }
+const { entries } = Astro.props as { entries: Entry[] };
+---
+<div class="content-list">{entries.map((entry) => <ContentPreview {...entry} />)}</div>

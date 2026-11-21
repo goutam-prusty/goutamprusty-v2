@@ -1,0 +1,7 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { collections } from '../../data/fixtures';
+export function getStaticPaths() { return collections.map((item) => ({ params: { slug: 'sample-series' }, props: { item } })); }
+const { item } = Astro.props;
+---
+<DetailLayout title={item.title} summary={item.summary} type="Collection" sections={[{id:'sequence',title:'Suggested sequence',body:'Placeholder collection sequence.'}]} />

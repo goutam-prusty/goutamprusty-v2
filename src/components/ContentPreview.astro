@@ -1,19 +1,28 @@
 ---
 import Metadata from './Metadata.astro';
-interface Props { title: string; summary: string; href: string; type: string; }
-const { title, summary, href, type } = Astro.props;
+import VisualFigure from './VisualFigure.astro';
+interface Props { title: string; summary: string; href: string; type: string; visualSlot?: boolean; }
+const { title, summary, href, type, visualSlot = false } = Astro.props;
 ---
 
-<article class="preview">
-  <Metadata items={[type, 'Sample content']} />
-  <h3><a href={href}>{title}</a></h3>
-  <p>{summary}</p>
+<article class:list={['preview', { 'preview--visual': visualSlot }]} data-type={type.toLowerCase()}>
+  {visualSlot && <a class="preview-visual-link" href={href} aria-label={`View ${title}`}><VisualFigure label="Project image area" caption="Image slot for verified project material." /></a>}
+  <div class="preview-copy">
+    <Metadata items={[type, 'Development fixture']} />
+    <h3><a href={href}>{title}</a></h3>
+    <p>{summary}</p>
+  </div>
 </article>
 
 <style>
   .preview { padding-block: 1.25rem; border-top: 1px solid var(--color-line); }
+  .preview--visual { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(1.25rem, 4vw, 3rem); padding-block: 1.75rem; }
+  .preview[data-type='collection'] { padding: 1.5rem; border: 1px solid var(--color-line); border-top: 2px solid var(--color-accent); background: var(--color-accent-soft); }
+  .preview-visual-link { display: block; color: inherit; text-decoration: none; }
+  .preview-visual-link:focus-visible { outline-offset: 5px; }
   .preview h3 { margin-top: 0.7rem; }
   .preview h3 a { color: var(--color-ink); text-decoration: none; }
   .preview h3 a:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 0.18em; }
   .preview p { max-width: 58ch; margin-bottom: 0; color: var(--color-muted); }
+  @media (max-width: 40rem) { .preview--visual { grid-template-columns: 1fr; gap: 1rem; } }
 </style>

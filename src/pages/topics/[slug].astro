@@ -1,0 +1,7 @@
+---
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { topics, topicSlug } from '../../data/fixtures';
+export function getStaticPaths() { return topics.map((topic) => ({ params: { slug: topicSlug(topic) }, props: { topic } })); }
+const { topic } = Astro.props;
+---
+<DetailLayout title={topic} summary="Placeholder topic description." type="Topic" sections={[{id:'overview',title:'Overview',body:'Topic description fixture.'}]} />

@@ -1,0 +1,26 @@
+---
+import PaperSignalLayout from '../../../layouts/PaperSignalLayout.astro';
+---
+<PaperSignalLayout title="Research article — Paper & Signal" description="Development-only long-form research article reading prototype.">
+  <header class="ps-page-head"><p class="ps-eyebrow">Research · Development sample</p><h1>Following an idea through the evidence</h1><p class="ps-lede">A placeholder abstract for a serious reading experience: clear scope, careful claims and a useful path through the argument.</p><div class="ps-meta"><span><strong>Published</strong> Date to confirm</span><span><strong>Reading time</strong> Sample layout</span><span><strong>Topics</strong> Methods · Systems</span></div></header>
+  <div class="ps-body-grid">
+    <article class="ps-article">
+      <section id="abstract"><p class="ps-eyebrow">Abstract</p><h2>Summary</h2><p>This development article demonstrates the visual rhythm and components used for long-form research. Replace the summary, claims and sources with verified research content before publication.</p></section>
+      <section id="framing"><p class="ps-eyebrow">01 · Framing</p><h2>Start with a clear question</h2><p>Long-form reading benefits from a steady measure, visible hierarchy and enough space between ideas. A reader should be able to understand the scope before entering the detail.</p><p>The opening section states the question, explains why it matters and defines what the article does not attempt to settle. These boundaries help keep later claims proportional to the evidence.</p><h3>What is in scope?</h3><p>Use plain language to separate observations, interpretations and open questions. Each paragraph can build one step in the reasoning without competing interface elements.</p></section>
+      <section id="method"><p class="ps-eyebrow">02 · Method</p><h2>Make the method visible</h2><p>Describe the evidence, selection process and analytical steps. A good methods section gives readers enough context to understand how a conclusion was reached and where uncertainty remains.</p><figure class="ps-figure"><div class="ps-figure-art" role="img" aria-label="Research process diagram from question to evidence to interpretation"><span class="ps-node">Question</span><span class="ps-arrow" aria-hidden="true">→</span><span class="ps-node">Evidence</span><span class="ps-arrow" aria-hidden="true">→</span><span class="ps-node">Interpretation</span></div><figcaption>Figure 1. A simple research flow. Replace this conceptual placeholder with an accurate figure and alt text.</figcaption></figure></section>
+      <section id="comparison"><p class="ps-eyebrow">03 · Comparison</p><h2>Use tables when comparison helps</h2><p>On narrow screens the table stays inside its own scroll region. The page itself remains within the viewport.</p><div class="ps-table-wrap" role="region" aria-label="Scrollable comparison table" tabindex="0"><table><caption>Illustrative comparison — development placeholder</caption><thead><tr><th scope="col">Dimension</th><th scope="col">Option A</th><th scope="col">Option B</th><th scope="col">Question to verify</th></tr></thead><tbody><tr><th scope="row">Evidence</th><td>Placeholder detail</td><td>Placeholder detail</td><td>What source supports this?</td></tr><tr><th scope="row">Trade-off</th><td>Placeholder detail</td><td>Placeholder detail</td><td>Which constraint matters?</td></tr></tbody></table></div></section>
+      <section id="example"><p class="ps-eyebrow">04 · Example</p><h2>Keep code readable</h2><p>Code can scroll within its own frame on small screens. Include only examples that contribute to the explanation.</p><div class="ps-code-wrap" role="region" aria-label="Scrollable code example" tabindex="0"><pre><code>type EvidenceNote = &#123;
+  source: string;
+  observation: string;
+  limitation?: string;
+&#125;;
+
+function record(note: EvidenceNote) &#123;
+  return &#123; ...note, reviewed: false &#125;;
+&#125;</code></pre></div></section>
+      <section id="discussion"><p class="ps-eyebrow">05 · Discussion</p><h2>Interpret with care</h2><p>Distinguish what the evidence shows from what it may suggest. Explain competing readings and conditions that could change the interpretation.</p><h3>Limitations</h3><p>State what could not be measured, which assumptions remain, and what a future study would need to address.</p></section>
+      <section id="references"><p class="ps-eyebrow">Sources</p><h2>References</h2><p class="ps-placeholder">Development placeholder — no citations are supplied here. Add verified references and preserve their original metadata.</p><h3>Related research</h3><p><a href="/design-exploration/paper-signal/project/">Related project case-study prototype ↗</a></p></section>
+    </article>
+    <aside class="ps-aside" aria-label="Article table of contents"><h2>In this article</h2><ol><li><a href="#abstract">Summary</a></li><li><a href="#framing">The question</a></li><li><a href="#method">Method</a></li><li><a href="#comparison">Comparison</a></li><li><a href="#example">Code example</a></li><li><a href="#discussion">Discussion</a></li><li><a href="#references">References</a></li></ol></aside>
+  </div>
+</PaperSignalLayout>
