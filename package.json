@@ -11,6 +11,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "test:auth": "node migration/tests/sanity-auth.test.cjs",
     "astro": "astro"
   },
   "dependencies": {

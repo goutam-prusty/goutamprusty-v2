@@ -1,46 +1,147 @@
 import { createClient } from '@sanity/client';
-import localVerticalSliceDocs from '../data/verticalSliceData.json';
+import localVerticalSliceDocs from '../data/verticalSliceData.json' with { type: 'json' };
 
-const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || import.meta.env.SANITY_PROJECT_ID;
-const dataset = import.meta.env.PUBLIC_SANITY_DATASET || import.meta.env.SANITY_DATASET || 'development';
+const proc = (globalThis as any).process;
+const env = typeof import.meta !== 'undefined' && (import.meta as any).env ? (import.meta as any).env : {};
 
-function resolveSanityToken(): string | undefined {
-  const proc = (globalThis as any).process;
-  const envToken =
-    proc?.env?.SANITY_API_READ_TOKEN ||
-    proc?.env?.SANITY_AUTH_TOKEN ||
-    import.meta.env.SANITY_API_READ_TOKEN ||
-    import.meta.env.SANITY_AUTH_TOKEN;
-  if (envToken) return envToken;
+const projectId =
+  env.PUBLIC_SANITY_PROJECT_ID ||
+  env.SANITY_PROJECT_ID ||
+  proc?.env?.PUBLIC_SANITY_PROJECT_ID ||
+  proc?.env?.SANITY_PROJECT_ID;
 
-  try {
-    const fs = proc?.getBuiltinModule ? proc.getBuiltinModule('fs') : null;
-    const path = proc?.getBuiltinModule ? proc.getBuiltinModule('path') : null;
-    const os = proc?.getBuiltinModule ? proc.getBuiltinModule('os') : null;
+const dataset =
+  env.PUBLIC_SANITY_DATASET ||
+  env.SANITY_DATASET ||
+  proc?.env?.PUBLIC_SANITY_DATASET ||
+  proc?.env?.SANITY_DATASET ||
+  'development';
 
-    if (fs && path && os) {
-      const configPath = path.join(os.homedir(), '.config', 'sanity', 'config.json');
-      if (fs.existsSync(configPath)) {
-        const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-        if (config?.authToken) return config.authToken;
-      }
-    }
-  } catch {
-    // Ignore error in non-Node or restricted environments
-  }
-  return undefined;
+export interface SanityAuthResolution {
+  token?: string;
+  source: 'env' | 'cli-config' | 'none';
+  variableName?: string;
 }
 
-const token = resolveSanityToken();
+export interface ResolveAuthOptions {
+  env?: Record<string, string | undefined>;
+  allowLocalConfigFallback?: boolean;
+  fsModule?: any;
+  pathModule?: any;
+  osModule?: any;
+  customConfigPath?: string;
+}
+
+/**
+ * Resolves the Sanity authentication token in order of precedence:
+ * 1. Dedicated read-only API token (SANITY_API_READ_TOKEN)
+ * 2. Fallback environment aliases (SANITY_READ_TOKEN, SANITY_API_TOKEN, SANITY_AUTH_TOKEN)
+ * 3. Local Sanity CLI configuration file (~/.config/sanity/config.json) for developer convenience
+ *    (disabled in deployment environments such as Cloudflare Pages or CI)
+ *
+ * Never accepts PUBLIC_ variables; never exposes or logs token values.
+ */
+export function resolveSanityAuth(options?: ResolveAuthOptions): SanityAuthResolution {
+  const p = (globalThis as any).process;
+  const metaEnv = typeof import.meta !== 'undefined' && (import.meta as any).env ? (import.meta as any).env : {};
+
+  const envSource = options?.env || {
+    ...p?.env,
+    SANITY_API_READ_TOKEN: p?.env?.SANITY_API_READ_TOKEN || metaEnv.SANITY_API_READ_TOKEN,
+    SANITY_READ_TOKEN: p?.env?.SANITY_READ_TOKEN || metaEnv.SANITY_READ_TOKEN,
+    SANITY_API_TOKEN: p?.env?.SANITY_API_TOKEN || metaEnv.SANITY_API_TOKEN,
+    SANITY_AUTH_TOKEN: p?.env?.SANITY_AUTH_TOKEN || metaEnv.SANITY_AUTH_TOKEN,
+    CF_PAGES: p?.env?.CF_PAGES || metaEnv.CF_PAGES,
+    CI: p?.env?.CI || metaEnv.CI,
+  };
+
+  // 1. Check server-only environment variables in precedence order
+  const envVarCandidates = [
+    'SANITY_API_READ_TOKEN',
+    'SANITY_READ_TOKEN',
+    'SANITY_API_TOKEN',
+    'SANITY_AUTH_TOKEN',
+  ] as const;
+
+  for (const varName of envVarCandidates) {
+    const candidate = envSource[varName];
+    if (typeof candidate === 'string' && candidate.trim().length > 0) {
+      return {
+        token: candidate.trim(),
+        source: 'env',
+        variableName: varName,
+      };
+    }
+  }
+
+  // 2. Local CLI configuration fallback (permitted only outside deployment environments)
+  const isDeployment = Boolean(envSource.CF_PAGES || envSource.CI);
+  const allowCliFallback = options?.allowLocalConfigFallback ?? !isDeployment;
+
+  if (allowCliFallback) {
+    try {
+      const fs = options?.fsModule || (p?.getBuiltinModule ? p.getBuiltinModule('fs') : null);
+      const path = options?.pathModule || (p?.getBuiltinModule ? p.getBuiltinModule('path') : null);
+      const os = options?.osModule || (p?.getBuiltinModule ? p.getBuiltinModule('os') : null);
+
+      if (fs && path && os) {
+        const configPath = options?.customConfigPath || path.join(os.homedir(), '.config', 'sanity', 'config.json');
+        if (fs.existsSync(configPath)) {
+          const raw = fs.readFileSync(configPath, 'utf8');
+          const config = JSON.parse(raw);
+          if (typeof config?.authToken === 'string' && config.authToken.trim().length > 0) {
+            return {
+              token: config.authToken.trim(),
+              source: 'cli-config',
+            };
+          }
+        }
+      }
+    } catch {
+      // Ignore error in non-Node or restricted sandbox environments
+    }
+  }
+
+  return {
+    token: undefined,
+    source: 'none',
+  };
+}
+
+export function resolveSanityToken(options?: ResolveAuthOptions): string | undefined {
+  return resolveSanityAuth(options).token;
+}
+
+const auth = resolveSanityAuth();
+const token = auth.token;
 
 export const isSanityConfigured = Boolean(
   projectId && projectId !== 'unconfigured-local-project'
 );
 
 export const requireLiveSanity = Boolean(
-  (globalThis as any).process?.env?.SANITY_REQUIRE_LIVE === 'true' ||
-  import.meta.env.SANITY_REQUIRE_LIVE === 'true'
+  proc?.env?.SANITY_REQUIRE_LIVE === 'true' ||
+  env.SANITY_REQUIRE_LIVE === 'true'
 );
+
+export function assertLiveSanityAuthentication(): void {
+  if (!requireLiveSanity) return;
+
+  if (!isSanityConfigured) {
+    throw new Error(
+      '[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured (missing project ID).'
+    );
+  }
+
+  if (!token && dataset !== 'production') {
+    throw new Error(
+      `[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled for private dataset "${dataset}", but no valid Sanity authentication token was found. Set SANITY_API_READ_TOKEN in your environment.`
+    );
+  }
+}
+
+// Ensure live authentication requirements are evaluated upfront
+assertLiveSanityAuthentication();
 
 export const sanityClient = isSanityConfigured
   ? createClient({
