@@ -66,6 +66,25 @@ export const research = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
+      name: 'researchMethod',
+      title: 'Research Methodology',
+      type: 'string',
+    }),
+    defineField({
+      name: 'lengthEstimateMinutes',
+      title: 'Estimated Reading Time (Minutes)',
+      type: 'number',
+    }),
+    defineField({
       name: 'readingTimeMinutes',
       title: 'Reading Time (Minutes)',
       type: 'number',
@@ -93,6 +112,18 @@ export const research = defineType({
       ],
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: [{ type: 'author' }],
+    }),
+    defineField({
+      name: 'topics',
+      title: 'Taxonomy Topics',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'topic' }] })],
+    }),
+    defineField({
       name: 'derivedPosts',
       title: 'Derived Articles',
       type: 'array',
@@ -105,9 +136,20 @@ export const research = defineType({
       description: 'Articles derived from this research report (clean Sanity reference).',
     }),
     defineField({
+      name: 'relatedProjects',
+      title: 'Related Projects',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'project' }] })],
+    }),
+    defineField({
       name: 'body',
       title: 'Article Body',
       type: 'portableTextBody',
+    }),
+    defineField({
+      name: 'bibliographyHeading',
+      title: 'Bibliography Section Heading',
+      type: 'string',
     }),
     defineField({
       name: 'bibliography',
@@ -125,6 +167,11 @@ export const research = defineType({
       name: 'sourceArchive',
       title: 'Source Archive Provenance',
       type: 'sourceArchive',
+    }),
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
     }),
     defineField({
       name: 'seo',

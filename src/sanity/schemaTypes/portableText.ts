@@ -48,6 +48,8 @@ export const portableTextBlock = defineArrayMember({
   },
   of: [
     defineArrayMember({ type: 'citationMarker' }),
+    defineArrayMember({ type: 'inlineFormula' }),
+    defineArrayMember({ type: 'inlineImage' }),
   ],
 });
 
@@ -59,5 +61,9 @@ export const portableTextBody = defineType({
     portableTextBlock,
     defineArrayMember({ type: 'tableBlock' }),
     defineArrayMember({ type: 'formulaBlock' }),
+    defineArrayMember({ type: 'imageBlock' }),
+    defineArrayMember({ type: 'mermaidBlock' }),
+    defineArrayMember({ type: 'codeBlock' }),
+    defineArrayMember({ type: 'dividerBlock' }),
   ],
 });

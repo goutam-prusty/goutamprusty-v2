@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity';
+import { defineType, defineField, defineArrayMember } from 'sanity';
 
 export const writing = defineType({
   name: 'writing',
@@ -66,6 +66,20 @@ export const writing = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      options: {
+        layout: 'tags',
+      },
+    }),
+    defineField({
+      name: 'readingTimeOverride',
+      title: 'Reading Time Override (Minutes)',
+      type: 'number',
+    }),
+    defineField({
       name: 'readingTimeMinutes',
       title: 'Reading Time (Minutes)',
       type: 'number',
@@ -93,6 +107,12 @@ export const writing = defineType({
       ],
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: [{ type: 'author' }],
+    }),
+    defineField({
       name: 'sourceReport',
       title: 'Source Research Report',
       type: 'reference',
@@ -100,14 +120,42 @@ export const writing = defineType({
       description: 'Clean Sanity reference to parent research report (e.g. RES-018).',
     }),
     defineField({
+      name: 'relatedProjects',
+      title: 'Related Projects',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'project' }] })],
+    }),
+    defineField({
+      name: 'topics',
+      title: 'Taxonomy Topics',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'topic' }] })],
+    }),
+    defineField({
       name: 'body',
       title: 'Article Body',
       type: 'portableTextBody',
     }),
     defineField({
+      name: 'bibliographyHeading',
+      title: 'Bibliography Heading',
+      type: 'string',
+    }),
+    defineField({
+      name: 'bibliography',
+      title: 'Bibliography & References',
+      type: 'array',
+      of: [defineArrayMember({ type: 'bibliographyEntry' })],
+    }),
+    defineField({
       name: 'sourceArchive',
       title: 'Source Archive Provenance',
       type: 'sourceArchive',
+    }),
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
     }),
     defineField({
       name: 'seo',
