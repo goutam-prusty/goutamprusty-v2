@@ -41,9 +41,10 @@ function slugify(text: string): string {
       // Render children helper
       const renderChildren = (children: any[] = []) => children.map((child: any) => {
         if (child._type === 'citationMarker') {
+          const num = child.citationNumber ?? child.number;
           return (
             <sup class="text-xs font-mono text-stone-500 ml-0.5">
-              <a href={`#cite-${child.number}`} class="hover:text-stone-900 underline decoration-stone-300">[{child.number}]</a>
+              <a href={`#cite-${num}`} class="hover:text-stone-900 underline decoration-stone-300">[{num}]</a>
             </sup>
           );
         }
@@ -165,9 +166,10 @@ function slugify(text: string): string {
                                     );
                                   }
                                   if (child._type === 'citationMarker') {
+                                    const num = child.citationNumber ?? child.number;
                                     return (
                                       <sup class="text-xs font-mono text-stone-500 ml-0.5">
-                                        <a href={`#cite-${child.number}`} class="hover:text-stone-900 underline decoration-stone-300">[{child.number}]</a>
+                                        <a href={`#cite-${num}`} class="hover:text-stone-900 underline decoration-stone-300">[{num}]</a>
                                       </sup>
                                     );
                                   }

@@ -6,10 +6,16 @@ export const citationMarker = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'number',
+      name: 'citationNumber',
       title: 'Citation Number',
       type: 'number',
       validation: (Rule) => Rule.required().positive(),
+    }),
+    defineField({
+      name: 'number',
+      title: 'Citation Number (Alias)',
+      type: 'number',
+      description: 'Legacy alias for citationNumber to maintain compatibility across schema versions.',
     }),
     defineField({
       name: 'rawMarker',
