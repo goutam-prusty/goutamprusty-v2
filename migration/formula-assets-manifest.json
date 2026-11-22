@@ -1,0 +1,785 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-11-21T17:04:55.913Z",
+  "tool": "sharp.webp (lossless)",
+  "v1SourceCommit": "71ef2c7c5c6a8995cc6901d350cc29c35d427423",
+  "summary": {
+    "totalDocumentsProcessed": 5,
+    "totalUniquePngDefinitionsExtracted": 24,
+    "totalWebpFilesCreated": 24,
+    "allDimensionsPreserved": true,
+    "allFormatsVerifiedWebp": true,
+    "allAlphaPreserved": true,
+    "allLossless": true
+  },
+  "assets": [
+    {
+      "documentId": "RES-001",
+      "slug": "empirical-evaluation-of-indias-economic-structure",
+      "originalSourceFile": "content/research/empirical-evaluation-of-indias-economic-structure.mdx",
+      "formulaDefinitionId": "image1",
+      "definitionSourceLine": 557,
+      "originalPng": {
+        "width": 91,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1007,
+        "sha256": "bf599eb2ec26fb316b58baa46ed187314afe1766f0f54c1b7a6bbde68408205f"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/empirical-evaluation-of-indias-economic-structure/formula-1.webp",
+        "fileName": "formula-1.webp",
+        "width": 91,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 616,
+        "sha256": "e3e351b888247581a6a2e38b0c443dfd37aa432c49378567999264a5e405d6bb"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-001",
+      "slug": "empirical-evaluation-of-indias-economic-structure",
+      "originalSourceFile": "content/research/empirical-evaluation-of-indias-economic-structure.mdx",
+      "formulaDefinitionId": "image2",
+      "definitionSourceLine": 558,
+      "originalPng": {
+        "width": 95,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1008,
+        "sha256": "08c181e3ec3fc5175f6afd89efe2cc53fb4ba288ec6ebc3a7958cdc0f2e8506a"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/empirical-evaluation-of-indias-economic-structure/formula-2.webp",
+        "fileName": "formula-2.webp",
+        "width": 95,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 604,
+        "sha256": "05530573e5dc2e4c97fddb2e4645b777473baf0da8ab2cb2659347c978b737b6"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-001",
+      "slug": "empirical-evaluation-of-indias-economic-structure",
+      "originalSourceFile": "content/research/empirical-evaluation-of-indias-economic-structure.mdx",
+      "formulaDefinitionId": "image3",
+      "definitionSourceLine": 559,
+      "originalPng": {
+        "width": 192,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 2266,
+        "sha256": "f5a9402fa65b764028c53fd34e43326acd1c255ca88f0878d7d1bbd8b672a4af"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/empirical-evaluation-of-indias-economic-structure/formula-3.webp",
+        "fileName": "formula-3.webp",
+        "width": 192,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1490,
+        "sha256": "56212ec3fcfab1fa1d401da9a4c6cc79372263cac798336af5d7010d86bbc6cf"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-004",
+      "slug": "indias-digital-governance-ecosystem-evaluation",
+      "originalSourceFile": "content/research/indias-digital-governance-ecosystem-evaluation.mdx",
+      "formulaDefinitionId": "image1",
+      "definitionSourceLine": 571,
+      "originalPng": {
+        "width": 234,
+        "height": 22,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 2967,
+        "sha256": "23d448bc764d7322a7b3fb75b6281f667c6f68e0bd16dcc12ff218797366f9ce"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/indias-digital-governance-ecosystem-evaluation/formula-1.webp",
+        "fileName": "formula-1.webp",
+        "width": 234,
+        "height": 22,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1942,
+        "sha256": "f195795dc7f0751283306445eafc9884cd011a80f58db74b50f306504bb1542b"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-018",
+      "slug": "strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026",
+      "originalSourceFile": "content/research/strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026.mdx",
+      "formulaDefinitionId": "image1",
+      "definitionSourceLine": 439,
+      "originalPng": {
+        "width": 620,
+        "height": 63,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 2967,
+        "sha256": "f67169031e3ba043f896ac603819a6103050614ff5c29de3abfacbf1040a0f11"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026/formula-1.webp",
+        "fileName": "formula-1.webp",
+        "width": 620,
+        "height": 63,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1592,
+        "sha256": "299e20c89e3f6d951e0dbebd35f6d2712d734c6481afc2a95511bed9d9daf42e"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image1",
+      "definitionSourceLine": 408,
+      "originalPng": {
+        "width": 80,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 759,
+        "sha256": "5cdfa8e69d13424c73c1fed356f6aabe5d3189c7f7087509e97f2729e7e1c521"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-1.webp",
+        "fileName": "formula-1.webp",
+        "width": 80,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 474,
+        "sha256": "8d0bef50084d298d7afe035248b20933e4a0b80c89446a7d2c1dc2bb08383ef1"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image2",
+      "definitionSourceLine": 409,
+      "originalPng": {
+        "width": 15,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 287,
+        "sha256": "3b53429c36756aa9ce617e985642afd39181c28aabef600738382e10a7cc733f"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-2.webp",
+        "fileName": "formula-2.webp",
+        "width": 15,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 178,
+        "sha256": "97b15428121a6ad4e49c5b2a4b678d149535e10ef531d4bc3a0157ce611e23eb"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image3",
+      "definitionSourceLine": 410,
+      "originalPng": {
+        "width": 15,
+        "height": 27,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 301,
+        "sha256": "25240d0894d6991b185f36c6aeacecdb1533f61d7ca5fe9ea5e7b486bc826f18"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-3.webp",
+        "fileName": "formula-3.webp",
+        "width": 15,
+        "height": 27,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 190,
+        "sha256": "63f169991e4efa9dd79b4c8058a75d2a805ae5aefae621f4565d1de3a248a7be"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image4",
+      "definitionSourceLine": 411,
+      "originalPng": {
+        "width": 14,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 250,
+        "sha256": "5cc2730306093ffcc2b31dfa6176320be66db34f8eb63b4b537b83b462bbf3bd"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-4.webp",
+        "fileName": "formula-4.webp",
+        "width": 14,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 162,
+        "sha256": "a752403c0462760f43cba7c8f1bedd1629383c9a82ea96cb3ba0b4485ae3dda0"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image5",
+      "definitionSourceLine": 412,
+      "originalPng": {
+        "width": 16,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 280,
+        "sha256": "cccaa81e5ae668a6046f50bb1a52799fd16954874ab34c0c5589b7bdd6fcdf3f"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-5.webp",
+        "fileName": "formula-5.webp",
+        "width": 16,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 174,
+        "sha256": "8310d4846a2dd9444fd3cfdd2ef02c413db60074ae2f3ab784e1a88d89a64ffe"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image6",
+      "definitionSourceLine": 413,
+      "originalPng": {
+        "width": 12,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 239,
+        "sha256": "25c18e5467a468a7abc037ef92e9fb3784c1568092164a191cf0f06a816eacf3"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-6.webp",
+        "fileName": "formula-6.webp",
+        "width": 12,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 150,
+        "sha256": "346f61df2a0d013f186c9502225a528078aed8a5904ecdd135911b29ad4f9550"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image7",
+      "definitionSourceLine": 414,
+      "originalPng": {
+        "width": 61,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 716,
+        "sha256": "237b874ea4c0b4b83e68ae5bc4ca74ccfed55c61589aeef9ae013b39dec2a296"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-7.webp",
+        "fileName": "formula-7.webp",
+        "width": 61,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 438,
+        "sha256": "574f109e8c33397303aba9bf06c2e54df914ec32375c33c085c11f574f0a6793"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image8",
+      "definitionSourceLine": 415,
+      "originalPng": {
+        "width": 49,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 578,
+        "sha256": "c63c43d6a88001a8273ce2cf619cffef8686f81e79a93e8fd793ac36c107c0e5"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-8.webp",
+        "fileName": "formula-8.webp",
+        "width": 49,
+        "height": 26,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 354,
+        "sha256": "a939204e53d833336fa01854930afbb322c3e1613e27be630ea022f15d1957ee"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image9",
+      "definitionSourceLine": 416,
+      "originalPng": {
+        "width": 128,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1397,
+        "sha256": "dbcfa0804e25728744fe280beeaf2f8710df47a38a56acb16b2655149d992ef1"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-9.webp",
+        "fileName": "formula-9.webp",
+        "width": 128,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 882,
+        "sha256": "7128d29d72f9d591b48acd28c82d2805759de8549850f6bfaa8cc56ea90e5d31"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image10",
+      "definitionSourceLine": 417,
+      "originalPng": {
+        "width": 26,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 464,
+        "sha256": "833d7a6ddd96fb6593ac74378e7d15bf544139a30bc385790a91d075b9908fde"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-10.webp",
+        "fileName": "formula-10.webp",
+        "width": 26,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 292,
+        "sha256": "7e7ea68cc277cc31c98cac92d9c8978c5faa776fd3f82bd7ac9ce0e98fc25ba9"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image11",
+      "definitionSourceLine": 418,
+      "originalPng": {
+        "width": 29,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 450,
+        "sha256": "ace29a4fff196e41320bae3b030092164487db9266d39c40cf341585ef444f3c"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-11.webp",
+        "fileName": "formula-11.webp",
+        "width": 29,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 284,
+        "sha256": "78d728e28f0e92a76706719ed0986f881efa90c4b450e22c41c6cd3a028a2459"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image12",
+      "definitionSourceLine": 419,
+      "originalPng": {
+        "width": 46,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 773,
+        "sha256": "41dc3b86a8d3d836cc9fe448e2b832ebada6957b8e55a13921a828eb78ce7489"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-12.webp",
+        "fileName": "formula-12.webp",
+        "width": 46,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 476,
+        "sha256": "8f31cf4151ac322778c37ba6462baa417beb96ce3a1ec1932001c5e7736bc920"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image13",
+      "definitionSourceLine": 420,
+      "originalPng": {
+        "width": 150,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1608,
+        "sha256": "b0f10253530f7b7abc60f2e5dffd7128357729f90c8e758baaa2669aaa7e98cc"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-13.webp",
+        "fileName": "formula-13.webp",
+        "width": 150,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1012,
+        "sha256": "1cd921a52e9944629bc79d6c359fc13c9f68db52180f178289817ebb39146878"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-020",
+      "slug": "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity",
+      "originalSourceFile": "content/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity.mdx",
+      "formulaDefinitionId": "image14",
+      "definitionSourceLine": 421,
+      "originalPng": {
+        "width": 145,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1549,
+        "sha256": "3cb527362c40b23b94964f942e5bc2e1a1fbc4b807d39722ae57f6aba5414379"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity/formula-14.webp",
+        "fileName": "formula-14.webp",
+        "width": 145,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 974,
+        "sha256": "4c457fe8b6e47a5bf4367c575a3c134f23f49152ab16c9c176c2c56379829877"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-022",
+      "slug": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset",
+      "originalSourceFile": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+      "formulaDefinitionId": "image1",
+      "definitionSourceLine": 414,
+      "originalPng": {
+        "width": 620,
+        "height": 60,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 2339,
+        "sha256": "8f1b71240186857661a433d42f94273402917838be057d17a8ddca64d51c337c"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-1.webp",
+        "fileName": "formula-1.webp",
+        "width": 620,
+        "height": 60,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 1220,
+        "sha256": "7f47a27861ac074065b468b24b2a65821999accf2a70bfc51232a6c0ea0767b4"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-022",
+      "slug": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset",
+      "originalSourceFile": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+      "formulaDefinitionId": "image2",
+      "definitionSourceLine": 415,
+      "originalPng": {
+        "width": 21,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 387,
+        "sha256": "cd84eb4e9a96a5cc65ec778ee88850b472b53539c608615fd14414514810cc35"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-2.webp",
+        "fileName": "formula-2.webp",
+        "width": 21,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 240,
+        "sha256": "80995c79a501b495082db7896b5791702b3eb9a495e1a2418be78b787e81fd44"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-022",
+      "slug": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset",
+      "originalSourceFile": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+      "formulaDefinitionId": "image3",
+      "definitionSourceLine": 416,
+      "originalPng": {
+        "width": 18,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 279,
+        "sha256": "7cf335911942fba9eccb2d317f7872ee5f324cfc8edbde32d36a80e670a9becc"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-3.webp",
+        "fileName": "formula-3.webp",
+        "width": 18,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 186,
+        "sha256": "7e1cdb25534caefb1733bd0731ce5ebcfc0e436aed36d7a84617dc7f748dfc9c"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-022",
+      "slug": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset",
+      "originalSourceFile": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+      "formulaDefinitionId": "image4",
+      "definitionSourceLine": 417,
+      "originalPng": {
+        "width": 16,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 294,
+        "sha256": "114278846248e6b5c1f5e7df28efc76757060df4484ed8571c4810a2702bd000"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-4.webp",
+        "fileName": "formula-4.webp",
+        "width": 16,
+        "height": 24,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 186,
+        "sha256": "3ea8ba037a31fb576af7be12d2fb3377de5546ab074b5d967ae7b9deacf327bd"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    },
+    {
+      "documentId": "RES-022",
+      "slug": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset",
+      "originalSourceFile": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+      "formulaDefinitionId": "image5",
+      "definitionSourceLine": 418,
+      "originalPng": {
+        "width": 13,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 312,
+        "sha256": "3631796bc5f1ca04f24f8ccd586c90cbf0905ba42062df446925a8df924dfbac"
+      },
+      "outputWebp": {
+        "relativePath": "public/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-5.webp",
+        "fileName": "formula-5.webp",
+        "width": 13,
+        "height": 25,
+        "channels": 4,
+        "hasAlpha": true,
+        "byteLength": 184,
+        "sha256": "517b51d9eb20c5c7c100638c62c550ce2727758fcdb400ec5c3b275900d1ec77"
+      },
+      "validation": {
+        "dimensionParity": true,
+        "formatVerifiedWebp": true,
+        "alphaTransparencyVerified": true,
+        "losslessEncoding": true,
+        "conversionMethod": "sharp.webp({ lossless: true })"
+      }
+    }
+  ]
+}
