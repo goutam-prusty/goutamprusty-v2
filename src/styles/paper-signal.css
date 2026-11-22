@@ -203,6 +203,35 @@
   line-height: 1.55;
 }
 
+/* Single-item listing composition */
+.ps-project-grid:has(> :only-child),
+.ps-project-grid--single {
+  grid-template-columns: 1fr;
+}
+.ps-project-grid:has(> :only-child) .ps-card-editorial h3,
+.ps-project-grid--single .ps-card-editorial h3 {
+  max-width: 38ch;
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+}
+.ps-project-grid:has(> :only-child) .ps-card-editorial p,
+.ps-project-grid--single .ps-card-editorial p {
+  max-width: 62ch;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Article header: generous desktop maximum width independent of reading column */
+.ps-page-head.ps-article-head h1,
+.ps-article-head h1 {
+  max-width: 34ch;
+  font-size: clamp(2.35rem, 4.4vw, 3.65rem);
+  line-height: 1.12;
+}
+.ps-page-head.ps-article-head .ps-lede,
+.ps-article-head .ps-lede {
+  max-width: 54rem !important;
+}
+
 .ps-link-item-text {
   display: flex;
   flex-direction: column;

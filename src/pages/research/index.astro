@@ -50,7 +50,7 @@ const getSlug = (item: any): string => {
   </header>
 
   <section class="ps-section" aria-label="Research reports">
-    <div class="ps-project-grid">
+    <div class:list={['ps-project-grid', { 'ps-project-grid--single': reports.length === 1 }]}>
       {reports.map((report: any, idx: number) => {
         const slug = getSlug(report);
         const readingTime = report.lengthEstimateMinutes
