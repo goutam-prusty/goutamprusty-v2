@@ -1,8 +1,104 @@
 ---
-import DetailLayout from '../../layouts/DetailLayout.astro';
-import { works } from '../../data/fixtures';
-import VisualFigure from '../../components/VisualFigure.astro';
-export function getStaticPaths() { return works.filter((work) => work.type === 'Research').map((work) => ({ params: { slug: 'sample-report' }, props: { work } })); }
-const { work } = Astro.props;
+import PaperSignalLayout from '../../layouts/PaperSignalLayout.astro';
+import PortableText from '../../components/PortableText.astro';
+import { getAllResearchSlugs, getResearchReportBySlug, requireLiveSanity } from '../../lib/sanityClient';
+
+export async function getStaticPaths() {
+  const slugs = await getAllResearchSlugs();
+  // In normal development, include sample-report for baseline prototype compatibility.
+  // In live-only mode, strictly build real documents from Sanity Content Lake.
+  const allSlugs = requireLiveSanity
+    ? slugs
+    : Array.from(new Set(['sample-report', ...slugs]));
+  return allSlugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const report = await getResearchReportBySlug(slug as string);
+
+// Fallback for sample-report route
+const title = report ? report.title : 'Sample Research Report';
+const summary = report ? report.summary : 'Placeholder abstract for a research article.';
+const category = report ? report.category : 'General Research';
+const publishedAt = report ? new Date(report.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Unpublished';
+const readingTime = (report?.lengthEstimateMinutes || report?.readingTimeMinutes) ? `${report.lengthEstimateMinutes || report.readingTimeMinutes} min read` : '15 min read';
+const bodyBlocks = report?.body || [];
+const bibliography = report?.bibliography || [];
+const derivedPosts = report?.derivedPosts || [];
+const coverImage = report?.coverImage;
 ---
-<DetailLayout title={work.title} summary={work.summary} type="Research" sections={[{id:'scope',title:'Scope',body:'Placeholder section for report scope.'},{id:'discussion',title:'Discussion',body:'Placeholder report section with no research claims.'},{id:'references',title:'References',body:'Citation placeholders will be supplied from verified source material.'}]}><VisualFigure slot="visual" kind="figure" label="Optional research figure" caption="Figure slot for verified data, diagram, or source material." /></DetailLayout>
+
+<PaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Research · {category}</p>
+    <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>
+    <p class="ps-lede text-lg md:text-xl text-stone-700 leading-relaxed font-serif max-w-3xl mb-6">{summary}</p>
+    <div class="ps-meta flex flex-wrap gap-4 text-xs font-mono text-stone-500 border-t border-stone-200 pt-3">
+      <span><strong>Published</strong> {publishedAt}</span>
+      <span><strong>Reading time</strong> {readingTime}</span>
+      <span><strong>ID</strong> {report?.workbookId || 'SAMPLE'}</span>
+    </div>
+  </header>
+
+  <div class="ps-body-grid max-w-4xl mx-auto my-8">
+    <article class="ps-article">
+      {coverImage?.assetPath && (
+        <div class="my-8 rounded overflow-hidden border border-stone-200">
+          <img src={coverImage.assetPath} alt={coverImage.alt || title} class="w-full h-auto" loading="eager" />
+          {coverImage.caption && <p class="text-xs text-stone-500 p-2 italic">{coverImage.caption}</p>}
+        </div>
+      )}
+
+      {bodyBlocks.length > 0 ? (
+        <PortableText blocks={bodyBlocks} />
+      ) : (
+        <div class="my-8 p-6 bg-stone-50 border border-stone-200 rounded">
+          <p class="text-stone-600 italic">Sample research report placeholder content.</p>
+        </div>
+      )}
+
+      {derivedPosts.length > 0 && (
+        <section id="derived-articles" class="mt-12 pt-8 border-t border-stone-200">
+          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Derived Writing</p>
+          <h2 class="text-2xl font-serif font-bold text-stone-900 mb-4">Articles Derived from this Research</h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {derivedPosts.map((post: any) => (
+              <a href={`/writing/${post.slug?.current || post.slug}/`} class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors">
+                <h3 class="font-serif font-semibold text-stone-900 mb-1">{post.title}</h3>
+                {post.summary && <p class="text-xs text-stone-600 line-clamp-2">{post.summary}</p>}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {bibliography.length > 0 && (
+        <section id="references" class="mt-12 pt-8 border-t border-stone-200">
+          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Sources & Methodology</p>
+          <h2 class="text-2xl font-serif font-bold text-stone-900 mb-6">Works Cited ({bibliography.length})</h2>
+          <ol class="space-y-3 text-sm text-stone-700">
+            {bibliography.map((entry: any, idx: number) => {
+              const num = entry.order || entry.number || (idx + 1);
+              return (
+                <li id={`cite-${num}`} class="flex gap-3 leading-relaxed">
+                  <span class="text-stone-400 font-mono text-xs pt-0.5 select-none">[{num}]</span>
+                  <div>
+                    {entry.url ? (
+                      <a href={entry.url} target="_blank" rel="noopener noreferrer" class="font-medium text-stone-900 hover:underline underline-offset-2 break-all">
+                        {entry.title || entry.rawText}
+                      </a>
+                    ) : (
+                      <span class="font-medium text-stone-900">{entry.title || entry.rawText}</span>
+                    )}
+                    {entry.publication && <span class="text-stone-500"> — {entry.publication}</span>}
+                    {entry.date && <span class="text-stone-400"> ({entry.date})</span>}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      )}
+    </article>
+  </div>
+</PaperSignalLayout>

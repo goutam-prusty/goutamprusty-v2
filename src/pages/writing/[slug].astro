@@ -1,7 +1,72 @@
 ---
-import DetailLayout from '../../layouts/DetailLayout.astro';
-import { works } from '../../data/fixtures';
-export function getStaticPaths() { return works.filter((work) => work.type === 'Writing').map((work) => ({ params: { slug: 'sample-article' }, props: { work } })); }
-const { work } = Astro.props;
+import PaperSignalLayout from '../../layouts/PaperSignalLayout.astro';
+import PortableText from '../../components/PortableText.astro';
+import { getAllWritingSlugs, getWritingArticleBySlug, requireLiveSanity } from '../../lib/sanityClient';
+
+export async function getStaticPaths() {
+  const slugs = await getAllWritingSlugs();
+  // In normal development, include sample-article for baseline prototype compatibility.
+  // In live-only mode, strictly build real documents from Sanity Content Lake.
+  const allSlugs = requireLiveSanity
+    ? slugs
+    : Array.from(new Set(['sample-article', ...slugs]));
+  return allSlugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const article = await getWritingArticleBySlug(slug as string);
+
+// Fallback for sample-article route
+const title = article ? article.title : 'Sample Article';
+const summary = article ? article.summary : 'Placeholder summary for a writing article.';
+const category = article ? article.category : 'General Writing';
+const publishedAt = article ? new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Unpublished';
+const readingTime = (article?.readingTimeOverride || article?.readingTimeMinutes) ? `${article.readingTimeOverride || article.readingTimeMinutes} min read` : '5 min read';
+const bodyBlocks = article?.body || [];
+const sourceReport = article?.sourceReport;
+const coverImage = article?.coverImage;
 ---
-<DetailLayout title={work.title} summary={work.summary} type="Writing" sections={[{id:'opening',title:'Opening',body:'Placeholder article body.'},{id:'ideas',title:'Main ideas',body:'Placeholder article section.'}]} />
+
+<PaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Writing · {category}</p>
+    <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>
+    <p class="ps-lede text-lg md:text-xl text-stone-700 leading-relaxed font-serif max-w-3xl mb-6">{summary}</p>
+    <div class="ps-meta flex flex-wrap gap-4 text-xs font-mono text-stone-500 border-t border-stone-200 pt-3">
+      <span><strong>Published</strong> {publishedAt}</span>
+      <span><strong>Reading time</strong> {readingTime}</span>
+      <span><strong>ID</strong> {article?.workbookId || 'SAMPLE'}</span>
+    </div>
+  </header>
+
+  <div class="ps-body-grid max-w-4xl mx-auto my-8">
+    <article class="ps-article">
+      {coverImage?.assetPath && (
+        <div class="my-8 rounded overflow-hidden border border-stone-200">
+          <img src={coverImage.assetPath} alt={coverImage.alt || title} class="w-full h-auto" loading="eager" />
+          {coverImage.caption && <p class="text-xs text-stone-500 p-2 italic">{coverImage.caption}</p>}
+        </div>
+      )}
+
+      {sourceReport && (
+        <div class="my-6 p-4 bg-stone-50 border-l-4 border-lime-400 rounded-r text-sm">
+          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-1">Parent Research Report</p>
+          <p class="text-stone-800">
+            This article is an editorial companion to:
+            <a href={`/research/${sourceReport.slug?.current || sourceReport.slug}/`} class="font-serif font-medium text-stone-900 underline underline-offset-2 ml-1 hover:text-stone-700">
+              {sourceReport.title} &rarr;
+            </a>
+          </p>
+        </div>
+      )}
+
+      {bodyBlocks.length > 0 ? (
+        <PortableText blocks={bodyBlocks} />
+      ) : (
+        <div class="my-8 p-6 bg-stone-50 border border-stone-200 rounded">
+          <p class="text-stone-600 italic">Sample article placeholder content.</p>
+        </div>
+      )}
+    </article>
+  </div>
+</PaperSignalLayout>

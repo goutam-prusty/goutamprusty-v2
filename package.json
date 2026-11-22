@@ -14,12 +14,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@sanity/client": "^8.17.0",
     "@tailwindcss/vite": "^4.3.5",
     "astro": "^7.4.13",
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "sanity": "^6.24.0",
+    "styled-components": "^6.6.0",
     "typescript": "^6.0.3"
   }
 }

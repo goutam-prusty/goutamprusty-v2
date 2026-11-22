@@ -1,0 +1,149 @@
+---
+export interface Props {
+  blocks: any[];
+}
+
+const { blocks = [] } = Astro.props;
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+}
+---
+
+<div class="ps-article-content">
+  {blocks.map((block) => {
+    // 1. Text blocks
+    if (block._type === 'block') {
+      const headingText = block.children?.map((c: any) => c.text || '').join('') || '';
+      const headingId = slugify(headingText);
+
+      if (block.style === 'h2') {
+        return <h2 id={headingId} class="text-2xl md:text-3xl font-serif font-bold text-stone-900 mt-12 mb-4 scroll-mt-20">{headingText}</h2>;
+      }
+      if (block.style === 'h3') {
+        return <h3 id={headingId} class="text-xl md:text-2xl font-serif font-semibold text-stone-900 mt-8 mb-3 scroll-mt-20">{headingText}</h3>;
+      }
+      if (block.style === 'h4') {
+        return <h4 id={headingId} class="text-lg font-serif font-medium text-stone-900 mt-6 mb-2">{headingText}</h4>;
+      }
+      if (block.style === 'blockquote') {
+        return (
+          <blockquote class="border-l-2 border-stone-400 pl-4 py-1 my-6 italic text-stone-700 font-serif">
+            {block.children?.map((child: any) => child.text)}
+          </blockquote>
+        );
+      }
+
+      // Normal paragraph
+      return (
+        <p class="text-stone-800 leading-relaxed my-4 text-base md:text-lg">
+          {block.children?.map((child: any) => {
+            if (child._type === 'citationMarker') {
+              return (
+                <sup class="text-xs font-mono text-stone-500 ml-0.5">
+                  <a href={`#cite-${child.number}`} class="hover:text-stone-900 underline decoration-stone-300">[{child.number}]</a>
+                </sup>
+              );
+            }
+
+            let textContent: any = child.text || '';
+            const marks = child.marks || [];
+
+            // Check if link mark exists
+            const linkMark = marks.find((m: string) => block.markDefs?.some((d: any) => d._key === m));
+            if (linkMark) {
+              const def = block.markDefs.find((d: any) => d._key === linkMark);
+              if (def?.href) {
+                textContent = (
+                  <a href={def.href} target="_blank" rel="noopener noreferrer" class="text-stone-900 underline underline-offset-4 decoration-stone-400 hover:decoration-stone-900">
+                    {textContent}
+                  </a>
+                );
+              }
+            }
+
+            if (marks.includes('strong')) {
+              textContent = <strong class="font-semibold text-stone-900">{textContent}</strong>;
+            }
+            if (marks.includes('em')) {
+              textContent = <em>{textContent}</em>;
+            }
+            if (marks.includes('code')) {
+              textContent = <code class="bg-stone-100 text-stone-800 px-1 py-0.5 rounded text-sm font-mono">{textContent}</code>;
+            }
+
+            return <span>{textContent}</span>;
+          })}
+        </p>
+      );
+    }
+
+    // 2. Table Block
+    if (block._type === 'tableBlock') {
+      return (
+        <div class="my-8 overflow-x-auto border border-stone-200 rounded" role="region" tabindex="0">
+          <table class="w-full text-left border-collapse text-sm">
+            {block.caption && (
+              <caption class="text-xs font-sans text-stone-500 p-2 text-left bg-stone-50 border-b border-stone-200">
+                {block.caption}
+              </caption>
+            )}
+            <tbody>
+              {block.rows?.map((row: any, rIdx: number) => (
+                <tr class={rIdx === 0 ? "bg-stone-100 border-b border-stone-300 font-semibold" : "border-b border-stone-100 hover:bg-stone-50"}>
+                  {row.cells?.map((cell: any) => (
+                    rIdx === 0 ? (
+                      <th class="p-3 align-top font-medium text-stone-900">{cell.plainText || cell.text || ''}</th>
+                    ) : (
+                      <td class="p-3 align-top text-stone-700">{cell.plainText || cell.text || ''}</td>
+                    )
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    // 3. Formula Block
+    if (block._type === 'formulaBlock') {
+      return (
+        <figure class="my-8 text-center p-6 bg-stone-50 border border-stone-200 rounded">
+          <img
+            src={block.assetPath}
+            alt={block.label || "Mathematical formula"}
+            width={block.width}
+            height={block.height}
+            class="inline-block max-w-full h-auto"
+            loading="lazy"
+          />
+          {block.label && <figcaption class="text-xs text-stone-500 mt-3 font-mono">{block.label}</figcaption>}
+        </figure>
+      );
+    }
+
+    // 4. Image Block
+    if (block._type === 'imageBlock') {
+      return (
+        <figure class="my-8">
+          <img
+            src={block.assetPath}
+            alt={block.alt || ""}
+            width={block.width}
+            height={block.height}
+            class="w-full h-auto rounded"
+            loading="lazy"
+          />
+          {block.caption && <figcaption class="text-xs text-stone-500 mt-2">{block.caption}</figcaption>}
+        </figure>
+      );
+    }
+
+    return null;
+  })}
+</div>
