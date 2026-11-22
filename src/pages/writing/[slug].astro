@@ -2,6 +2,7 @@
 import PaperSignalLayout from '../../layouts/PaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import { getAllWritingSlugs, getWritingArticleBySlug, requireLiveSanity } from '../../lib/sanityClient';
+import { getArticleReadingTime } from '../../lib/readingTime';
 
 export async function getStaticPaths() {
   const slugs = await getAllWritingSlugs();
@@ -21,7 +22,7 @@ const title = article ? article.title : 'Sample Article';
 const summary = article ? article.summary : 'Placeholder summary for a writing article.';
 const category = article ? article.category : 'General Writing';
 const publishedAt = article ? new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Unpublished';
-const readingTime = (article?.readingTimeOverride || article?.readingTimeMinutes) ? `${article.readingTimeOverride || article.readingTimeMinutes} min read` : '5 min read';
+const readingTime = getArticleReadingTime(article);
 const bodyBlocks = article?.body || [];
 const sourceReport = article?.sourceReport;
 const coverImage = article?.coverImage;

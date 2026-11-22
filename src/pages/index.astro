@@ -1,10 +1,157 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
-import ContentList from '../components/ContentList.astro';
-import ActionLink from '../components/ActionLink.astro';
-import VisualFigure from '../components/VisualFigure.astro';
-import { works, topics, topicSlug, fixtureNotice } from '../data/fixtures';
+import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
+import { getResearchReportBySlug, getWritingArticleBySlug } from '../lib/sanityClient';
+import { getArticleReadingTime } from '../lib/readingTime';
+
+const res018Slug = 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026';
+const blg001Slug = 'agentic-inflection-point';
+const blg002Slug = 'ai-physical-limits';
+
+const [res018, blg001, blg002] = await Promise.all([
+  getResearchReportBySlug(res018Slug),
+  getWritingArticleBySlug(blg001Slug),
+  getWritingArticleBySlug(blg002Slug),
+]);
+
+const resTitle = res018?.title || 'Strategic Intelligence Report: The State of Artificial Intelligence and Frontier Technologies in 2026';
+const resSummary = res018?.summary || 'A comprehensive 2026 strategic briefing on AI progress, compute constraints, reasoning models, enterprise ROI, and sovereign technology developments.';
+const resLength = (res018?.lengthEstimateMinutes || 15) + ' min read';
+const resCitations = Array.isArray(res018?.bibliography) ? `${res018.bibliography.length} citations` : '71 citations';
+
+const blg1Title = blg001?.title || 'The Agentic Inflection Point';
+const blg1Summary = blg001?.summary || 'A strategic analysis of where autonomous AI systems actually are, the capability gaps that remain, and what the trajectory implies for organizations.';
+const blg1Length = getArticleReadingTime(blg001);
+
+const blg2Title = blg002?.title || "AI's Physical Limits";
+const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy constraints, and water scarcity on the AI trajectory.';
 ---
-<SiteLayout title="Home | goutamprusty.com"><div class="home-hero"><PageIntro eyebrow="Development template" title="Explore. Understand. Build. Explain." summary="A development-only homepage composition preview. Replace this introductory copy with approved, verified content." /><VisualFigure label="Homepage visual companion" caption="Optional image area for verified work or portrait material." /></div><section class="selected-work"><div class="section-heading"><p class="eyebrow">A sample library</p><h2>Selected work</h2></div><p class="fixture-note">{fixtureNotice}</p><ContentList entries={works} /></section><section class="topics-section"><div><p class="eyebrow">Browse by subject</p><h2>Explore topics</h2></div><ul class="topic-list">{topics.map((topic) => <li><a href={`/topics/${topicSlug(topic)}/`}>{topic}<span aria-hidden="true">↗</span></a></li>)}</ul></section><section class="library-section"><h2>Browse the library</h2><p>Development-only route preview.</p><ActionLink href="/research/">Explore research</ActionLink></section></SiteLayout>
-<style>.home-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(15rem,.85fr);align-items:center;gap:clamp(2rem,6vw,5rem);padding-bottom:clamp(2rem,5vw,4rem)}.home-hero :global(.page-intro){padding-block:clamp(3.5rem,8vw,6.5rem)}section{padding-block:clamp(2rem,5vw,4rem);border-top:1px solid var(--color-line)}.fixture-note{color:var(--color-muted);font-size:.9rem}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:2rem}.eyebrow{margin-bottom:.65rem;color:var(--color-accent);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.topics-section{display:grid;grid-template-columns:minmax(12rem,.65fr) minmax(0,1.35fr);gap:clamp(2rem,6vw,5rem);background:var(--color-accent-soft);padding-inline:clamp(1.25rem,4vw,3rem)}.topics-section h2{margin-bottom:0}.topic-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:0;padding:0;list-style:none}.topic-list li a{display:flex;min-height:5rem;align-items:center;justify-content:space-between;gap:1rem;padding:1rem;border-bottom:1px solid var(--color-line);color:var(--color-ink);text-decoration:none}.topic-list li a:hover{color:var(--color-accent);border-color:var(--color-accent)}.library-section{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}.library-section h2,.library-section p{margin:0}.library-section p{color:var(--color-muted)}@media(max-width:48rem){.home-hero{grid-template-columns:1fr;gap:0}.home-hero :global(.page-intro){padding-bottom:2rem}.topics-section{grid-template-columns:1fr}.topic-list{grid-template-columns:1fr}.section-heading{display:block}}</style>
+
+<ProductionPaperSignalLayout
+  title="Goutam Prusty — Research, writing, and practical systems"
+  description="A personal library of strategic intelligence, analytical writing, and practical experiments by Goutam Prusty."
+>
+  <section class="ps-hero" aria-labelledby="hero-title">
+    <div class="ps-hero-copy">
+      <p class="ps-eyebrow">Research · Writing · Systems</p>
+      <h1 id="hero-title">Curiosity, made <em>useful.</em></h1>
+      <p class="ps-lede">
+        A personal library of strategic intelligence, analytical writing, and practical experiments. Exploring how complex technologies work, where their limits lie, and how ideas become dependable systems.
+      </p>
+      <div class="ps-actions">
+        <a class="ps-button" href="#selected-work">Explore selected work <span aria-hidden="true">↓</span></a>
+        <a class="ps-text-link" href="/about/">About Goutam <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="ps-art" role="img" aria-label="Abstract geometric composition in peach, lime and blue representing inquiry and systems">
+      <div class="art-arch"></div>
+      <div class="art-circle"></div>
+      <div class="art-half"></div>
+      <div class="art-ring"></div>
+      <span class="ps-art-label" aria-hidden="true">PAPER / SIGNAL</span>
+    </div>
+  </section>
+
+  <section class="ps-section" id="selected-work" aria-labelledby="selected-title">
+    <div class="ps-section-head">
+      <div>
+        <p class="ps-eyebrow">Curated briefings &amp; analysis</p>
+        <h2 id="selected-title">Selected work</h2>
+      </div>
+      <a class="ps-text-link" href="/research/">Explore all research ↗</a>
+    </div>
+    <div class="ps-project-grid">
+      <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res018Slug}/`}>
+        <div class="ps-card-top">
+          <span class="ps-card-mark" aria-hidden="true">01</span>
+          <span class="ps-card-badge">Research report</span>
+        </div>
+        <p class="ps-kicker">Research · RES-018 · July 2026</p>
+        <h3>{resTitle}</h3>
+        <p>{resSummary}</p>
+        <span class="ps-card-foot">
+          <span>{resLength} · {resCitations}</span>
+          <span aria-hidden="true">Read report ↗</span>
+        </span>
+      </a>
+
+      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg001Slug}/`}>
+        <div class="ps-card-top">
+          <span class="ps-card-mark" aria-hidden="true">02</span>
+          <span class="ps-card-badge">Strategic essay</span>
+        </div>
+        <p class="ps-kicker">Writing · BLG-001 · July 2026</p>
+        <h3>{blg1Title}</h3>
+        <p>{blg1Summary}</p>
+        <span class="ps-card-foot">
+          <span>{blg1Length} · Derived from RES-018</span>
+          <span aria-hidden="true">Read article ↗</span>
+        </span>
+      </a>
+    </div>
+    <p class="ps-shelf-note">
+      Independent research and analysis are presented as static, structured briefings. Full source archives and data tables are linked directly within each document.
+    </p>
+  </section>
+
+  <section class="ps-section ps-discovery" id="analysis" aria-label="Research, writing and topics">
+    <div>
+      <p class="ps-eyebrow">Keep following a thread</p>
+      <h2>Connected analysis</h2>
+      <p class="ps-muted">
+        Long-form research briefings connect directly into focused essays examining specific bottlenecks, capabilities, and real-world implications.
+      </p>
+      <a class="ps-text-link" href="/writing/">Browse all writing ↗</a>
+    </div>
+    <div>
+      <p class="ps-eyebrow">Recent briefings &amp; articles</p>
+      <ul class="ps-link-list">
+        <li>
+          <a href={`/writing/${blg002Slug}/`}>
+            <span class="ps-link-item-text">
+              <strong class="ps-link-title">{blg2Title}</strong>
+              <span class="ps-link-desc">{blg2Summary}</span>
+            </span>
+            <span class="ps-arrow-link" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href={`/writing/${blg001Slug}/`}>
+            <span class="ps-link-item-text">
+              <strong class="ps-link-title">{blg1Title}</strong>
+              <span class="ps-link-desc">{blg1Summary}</span>
+            </span>
+            <span class="ps-arrow-link" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+      <div class="ps-topic-row" aria-label="Research topics">
+        <span class="ps-topic">Artificial Intelligence</span>
+        <span class="ps-topic">Frontier Infrastructure</span>
+        <span class="ps-topic">Autonomous Systems</span>
+        <span class="ps-topic">Semiconductors &amp; Energy</span>
+        <a class="ps-topic" href="/topics/">All topics →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ps-section" id="about" aria-labelledby="about-title">
+    <p class="ps-eyebrow">A note about this place</p>
+    <h2 id="about-title">Work worth understanding.</h2>
+    <p class="ps-lede">
+      This site serves as an open personal library for long-form research, strategic analysis, and systems inquiry. Every document is anchored in primary source evidence, clear methodologies, and transparent citations.
+    </p>
+    <p>
+      Rather than chasing brief commentary or ephemeral news, the focus here is on questions with lasting consequences: how artificial intelligence reshapes computing and institutions, where physical constraints bind digital ambitions, and how complex ideas become dependable systems.
+    </p>
+    <a class="ps-text-link" href="/about/">Read more about the library and ethos ↗</a>
+  </section>
+
+  <section class="ps-contact" id="contact" aria-labelledby="contact-title">
+    <div>
+      <p class="ps-eyebrow">Inquiries &amp; Exchange</p>
+      <h2 id="contact-title">Have a thoughtful question or discussion?</h2>
+      <p>Whether discussing frontier research, technical methodology, or potential collaboration, genuine inquiries are welcome.</p>
+    </div>
+    <a class="ps-button" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
+  </section>
+</ProductionPaperSignalLayout>
