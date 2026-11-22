@@ -1,0 +1,5169 @@
+{
+  "_id": "research-RES-022",
+  "_type": "research",
+  "workbookId": "RES-022",
+  "title": "The Macroeconomic Evolution of Bitcoin: From Peer-to-Peer Electronic Cash to a Global Digital Reserve Asset",
+  "slug": {
+    "_type": "slug",
+    "current": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset"
+  },
+  "summary": "An analysis of Bitcoin's transition from a peer-to-peer cash network to a global reserve asset, exploring institutional adoption, risks, and economic models.",
+  "status": "published",
+  "publishedAt": "2026-03-13",
+  "category": "business-strategy",
+  "tags": [
+    "bitcoin",
+    "cryptocurrency",
+    "macroeconomics",
+    "digital-gold",
+    "finance"
+  ],
+  "researchMethod": "Market Research",
+  "lengthEstimateMinutes": 11,
+  "coverImage": {
+    "_type": "image",
+    "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/cover.webp"
+  },
+  "derivedPosts": [],
+  "relatedProjects": [],
+  "sourceMaterial": [
+    {
+      "_key": "b320c49db8bc",
+      "title": "Bitcoin whitepaper - bitFlyer",
+      "url": "https://bitflyer.com/en-eu/s/glossary/bitcoin-whitepaper"
+    },
+    {
+      "_key": "e239072c982c",
+      "title": "Bitcoin Whitepaper - Northcrypto",
+      "url": "https://www.northcrypto.com/learn/blog/bitcoin-whitepaper-eng"
+    },
+    {
+      "_key": "75a2505067d2",
+      "title": "Satoshi Nakamoto's Bitcoin whitepaper turns 10 | Mashable",
+      "url": "https://mashable.com/article/bitcoin-whitepaper-10"
+    },
+    {
+      "_key": "415e0756d9b5",
+      "title": "The Bitcoin Whitepaper: The Foundation of BTC Explained Simply - 21bitcoin",
+      "url": "https://21bitcoin.app/en/blog/the-bitcoin-whitepaper"
+    },
+    {
+      "_key": "add75faa369d",
+      "title": "BITCOIN INVESTMENT THESIS - Fidelity Digital Assets",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_BitcoinInvestmentThesis_AspirationalStoreValue_937894.2.0_V1.pdf"
+    },
+    {
+      "_key": "3cbc52029d5d",
+      "title": "Why investors need to consider bitcoin separately from other digital assets",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/Bitcoin%20First_Nov1%20(2).pdf"
+    },
+    {
+      "_key": "f4f5a02e594c",
+      "title": "Full article: Bitcoin, Central Bank Digital Currency and the Loss of Money Value(s)",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/09538259.2025.2456734"
+    },
+    {
+      "_key": "d771f96758e8",
+      "title": "Flat Prices, Sharp Shifts - Fidelity Digital Assets",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_2026_LookAheadReport_V3.pdf"
+    },
+    {
+      "_key": "04d609122a1b",
+      "title": "Bitcoin Hedge Against Inflation: Complete 2025 Guide",
+      "url": "https://cash2bitcoin.com/blog/bitcoin-hedge-against-inflation/"
+    },
+    {
+      "_key": "bc2d78aee34b",
+      "title": "BITCOIN, GOLD & GLOBAL MONEY SUPPLY: - WisdomTree",
+      "url": "https://www.wisdomtree.com/investments/-/media/us-media-files/documents/resource-library/market-insights/wisdomtree-commentary/bitcoin-and-gold-model-forecasts.pdf"
+    },
+    {
+      "_key": "c5f871bfc28a",
+      "title": "Bitcoin's price history (2009 - 2025) – key market events, data charts, and insights | Crypto",
+      "url": "https://www.oanda.com/us-en/trade-tap-blog/asset-classes/crypto/oanda-bitcoin-price-history-key-market-events-data-charts-insights-volatility/"
+    },
+    {
+      "_key": "e4b748ff76b2",
+      "title": "Bitcoin price history: how BTC has evolved since 2009 - Capital.com",
+      "url": "https://capital.com/en-int/analysis/bitcoin-price-change-over-time"
+    },
+    {
+      "_key": "c6646470c398",
+      "title": "Direct Evidence of Bitcoin Wash Trading - EFMA",
+      "url": "http://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-232.pdf"
+    },
+    {
+      "_key": "b32645809522",
+      "title": "Report on analysis of bitcoin price evolution to detect signs of market manipulation",
+      "url": "https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5e316da5e&appId=PPGMS"
+    },
+    {
+      "_key": "b7915ae88f18",
+      "title": "Cryptocurrencies and decentralised finance: functions and financial stability implications - BIS",
+      "url": "https://www.bis.org/publ/bppdf/bispap156.pdf"
+    },
+    {
+      "_key": "431409dc0148",
+      "title": "North America Crypto Adoption: Institutions and ETFs - Chainalysis",
+      "url": "https://www.chainalysis.com/blog/north-america-crypto-adoption-2025/"
+    },
+    {
+      "_key": "59d2fe7a968c",
+      "title": "A Closer Look at Bitcoin's Volatility - Fidelity Digital Assets",
+      "url": "https://www.fidelitydigitalassets.com/research-and-insights/closer-look-bitcoins-volatility"
+    },
+    {
+      "_key": "86a98f63ab9a",
+      "title": "Cryptocurrency Market Manipulation: A Systematic Literature Review - ResearchGate",
+      "url": "https://www.researchgate.net/profile/Felix-Eigelshoven/publication/354995772_Cryptocurrency_Market_Manipulation_A_Systematic_Literature_Review/links/617705340be8ec17a9303d70/Cryptocurrency-Market-Manipulation-A-Systematic-Literature-Review.pdf"
+    },
+    {
+      "_key": "3f098bca6da9",
+      "title": "Institutional Cryptocurrency Adoption 2025: Bitcoin ETF Boom ...",
+      "url": "https://powerdrill.ai/blog/institutional-cryptocurrency-adoption"
+    },
+    {
+      "_key": "1d4710c676db",
+      "title": "Corporate Crypto Treasuries From MicroStrategy to Mainstream - FinTech Weekly",
+      "url": "https://www.fintechweekly.com/magazine/articles/corporate-crypto-treasuries-bitcoin-mainstream-adoption"
+    },
+    {
+      "_key": "23bdafd891f5",
+      "title": "The year in data: 5 charts that show how crypto changed in 2025 - The Block",
+      "url": "https://www.theblock.co/post/381902/the-year-in-data-5-charts-that-show-how-crypto-changed-in-2025"
+    },
+    {
+      "_key": "06a701df5f68",
+      "title": "Bitcoin ETF Impact: How Exchange-Traded Funds Are Reshaping Cryptocurrency Markets",
+      "url": "https://cash2bitcoin.com/blog/bitcoin-etf-impact/"
+    },
+    {
+      "_key": "689e65b8847b",
+      "title": "JPMorgan expects crypto inflows to rise further in 2026 after record $130 billion in 2025",
+      "url": "https://www.theblock.co/post/385670/jpmorgan-crypto-inflows-2026-record-130-billion-2025"
+    },
+    {
+      "_key": "baa18e5656df",
+      "title": "Bitcoin ETF Inflows and Falling Exchange Supply Strengthen Price Floor | Investing.com",
+      "url": "https://www.investing.com/analysis/bitcoin-etf-inflows-and-falling-exchange-supply-strengthen-price-floor-200676398"
+    },
+    {
+      "_key": "22b6abe91e74",
+      "title": "2025 Crypto Adoption and Stablecoin Usage Report - TRM Labs",
+      "url": "https://www.trmlabs.com/reports-and-whitepapers/2025-crypto-adoption-and-stablecoin-usage-report"
+    },
+    {
+      "_key": "daf7a68ce167",
+      "title": "Nigeria and Turkey Biggest Adopters of Crypto in 2024 - Union of Arab Banks",
+      "url": "https://uabonline.org/english-news/nigeria-and-turkey-biggest-adopters-of-crypto-in-2024/"
+    },
+    {
+      "_key": "c9819f90f726",
+      "title": "Fiat inflation drives crypto adoption across the globe - TradingView",
+      "url": "https://www.tradingview.com/news/cointelegraph:9e767242a094b:0-fiat-inflation-drives-crypto-adoption-across-the-globe/"
+    },
+    {
+      "_key": "bbc1a44baec4",
+      "title": "Cryptocurrencies as an Inflation Hedge: A Comparative Study Across High-Inflation Economies - RSIS International",
+      "url": "https://rsisinternational.org/journals/ijriss/uploads/vol9-iss10-pg8526-8545-202511_pdf.pdf"
+    },
+    {
+      "_key": "400110cb0ffa",
+      "title": "El Salvador: Selected Issues; IMF Country Report No ... - IMF eLibrary",
+      "url": "https://www.elibrary.imf.org/view/journals/002/2025/068/article-A001-en.pdf"
+    },
+    {
+      "_key": "54e9c06c2872",
+      "title": "El Salvador: Selected Issues - International Monetary Fund",
+      "url": "https://www.imf.org/en/publications/cr/issues/2025/03/19/el-salvador-selected-issues-565394"
+    },
+    {
+      "_key": "6056611a699f",
+      "title": "The Rise and Fall of Bitcoin as Legal Tender: An Analysis of El Salvador's Experiment - SvedbergOpen",
+      "url": "https://www.svedbergopen.com/files/1752741747_1_IJCCR202500451300VRZW_(p_1-9).pdf"
+    },
+    {
+      "_key": "084636684db4",
+      "title": "The IMF Is Bailing Out El Salvador. It Shouldn't Be So Lenient on Cryptocurrency. - CFR.org",
+      "url": "https://www.cfr.org/articles/imf-bailing-out-el-salvador-it-shouldnt-be-so-lenient-cryptocurrency"
+    },
+    {
+      "_key": "babda091c41e",
+      "title": "El Salvador amends bitcoin law following IMF loan deal - Electronic Payments International",
+      "url": "https://www.electronicpaymentsinternational.com/news/el-salvador-amends-bitcoin-law-imf/"
+    },
+    {
+      "_key": "d573e99e28eb",
+      "title": "Gold vs. Bitcoin - Market Capitalization | Gold | Collection - MacroMicro",
+      "url": "https://en.macromicro.me/collections/45/mm-gold-price/120695/gold-market-cap-vs-bitcoin-market-cap"
+    },
+    {
+      "_key": "0ea5c7ba66f2",
+      "title": "Bitcoin and gold: 3 model forecasts for 2030 and beyond - WisdomTree.eu",
+      "url": "https://www.wisdomtree.eu/-/media/eu-media-files/other-documents/research/whitepapers/bitcoin-and-gold-3-model-forecasts-for-2030-and-beyond.pdf?sc_lang=en-gb"
+    },
+    {
+      "_key": "925bf66aaf55",
+      "title": "The Maturation of Digital Assets",
+      "url": "https://www.fidelitydigitalassets.com/research-and-insights/maturation-digital-assets"
+    },
+    {
+      "_key": "fdc397701d78",
+      "title": "Bitcoin vs. M2 Money Supply - Updated Chart - LongtermTrends",
+      "url": "https://www.longtermtrends.com/bitcoin-vs-m2/"
+    },
+    {
+      "_key": "9a9b866b8a11",
+      "title": "Cash, Gold, and Crypto: Safe Havens in an Age of Uncertainty (2023–2025)",
+      "url": "https://cashessentials.org/cash-gold-and-crypto-safe-havens-in-an-age-of-uncertainty-2023-2025/"
+    },
+    {
+      "_key": "0e7cae25923a",
+      "title": "Full article: Monetary sovereignty in the digital age: the role of Central bank digital currencies - Taylor & Francis",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/08911916.2026.2624900"
+    },
+    {
+      "_key": "2f43a71ec68d",
+      "title": "(PDF) Monetary Sovereignty and Central Bank Digital Currencies: Competing Models for Future Cross‐Border Payment Platforms - ResearchGate",
+      "url": "https://www.researchgate.net/publication/389140918_Monetary_Sovereignty_and_Central_Bank_Digital_Currencies_Competing_Models_for_Future_Cross-Border_Payment_Platforms"
+    },
+    {
+      "_key": "43dafa0d079c",
+      "title": "Crypto Adoption in Europe: The World's Largest Crypto Market - Chainalysis",
+      "url": "https://www.chainalysis.com/blog/europe-crypto-adoption-2025/"
+    },
+    {
+      "_key": "eb6a28f0f234",
+      "title": "Institutional Adoption of Crypto: 2026 Trends & Analysis - B2BROKER",
+      "url": "https://b2broker.com/news/institutional-adoption-of-crypto/"
+    },
+    {
+      "_key": "29cc25b500ea",
+      "title": "Stablecoins on the rise: still small in the euro area, but spillover risks loom",
+      "url": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202511_05~63636227b4.en.html"
+    },
+    {
+      "_key": "fa781627c090",
+      "title": "Global Crypto Policy Review Outlook 2025/26 Report - TRM Labs",
+      "url": "https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26"
+    },
+    {
+      "_key": "640bc28fb297",
+      "title": "Global Financial Stability Report - IMF",
+      "url": "https://www.imf.org/en/publications/gfsr"
+    },
+    {
+      "_key": "a67553e369e6",
+      "title": "BIS Warns of Stablecoin Risks to Financial Systems | Comsure, Jersey",
+      "url": "https://www.comsuregroup.com/news/bis-warns-of-stablecoin-risks-to-financial-systems/"
+    },
+    {
+      "_key": "18beb16e30cc",
+      "title": "Stablecoins: the BIS Flags Risks, the U.S. Seize Opportunity by passing the GENIUS Act – Where Does Switzerland Stand? - Borel Barbey",
+      "url": "https://www.borel-barbey.ch/en/stablecoins-the-bis-flags-risks-the-u-s-seize-opportunity-by-passing-the-genius-act-where-does-switzerland-stand/"
+    },
+    {
+      "_key": "b53badf766c4",
+      "title": "Journal of Organizational Behavior Research CBDC as a Point of Contention in Transatlantic Divergence: Gaps in Digital Monetary",
+      "url": "https://odad.org/storage/files/article/dcb98515-0738-4589-9374-d2c8ddb6c0fb-ZSMmFkY8zTyLo1JA/4JDKJUvStqlpqyK.pdf"
+    },
+    {
+      "_key": "e7d9e7aafcee",
+      "title": "The Decentralisation Dilemma: Cryptocurrency's Impact on Financial Inclusion and Wealth Disparity (2020–2025) | OxJournal",
+      "url": "https://www.oxjournal.org/the-decentralisation-dilemma/"
+    },
+    {
+      "_key": "b01df61f3643",
+      "title": "2025 Crypto Theft Reaches $3.4 Billion - Chainalysis",
+      "url": "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/"
+    },
+    {
+      "_key": "0aa132954adf",
+      "title": "2025 Crypto Crime Mid-year Update: Stolen Funds Surge as DPRK Sets New Records",
+      "url": "https://www.chainalysis.com/blog/2025-crypto-crime-mid-year-update/"
+    },
+    {
+      "_key": "a4919de5446c",
+      "title": "Research shows: The cost of a 51% attack on the Bitcoin | 奔跑财经-FinaceRun on Binance Square",
+      "url": "https://www.binance.com/en/square/post/30996984411762"
+    },
+    {
+      "_key": "12d42269ec7f",
+      "title": "Preventing Manipulation in the Digital Assets Market — Why and How? - Infosys",
+      "url": "https://www.infosys.com/industries/financial-services/insights/documents/preventing-manipulation-digital-assets-market.pdf"
+    },
+    {
+      "_key": "38a4e0fdcde5",
+      "title": "Manipulation of the Bitcoin market: an agent-based study - PMC",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9159387/"
+    },
+    {
+      "_key": "816b21e74a05",
+      "title": "Bitcoin Energy Consumption Index - Digiconomist",
+      "url": "https://digiconomist.net/bitcoin-energy-consumption"
+    },
+    {
+      "_key": "2cfa364b38d0",
+      "title": "Bitcoin Energy Consumption Statistics 2026: Insights - SQ Magazine",
+      "url": "https://sqmagazine.co.uk/bitcoin-energy-consumption-statistics/"
+    },
+    {
+      "_key": "d740fbed9c25",
+      "title": "How Much Electricity Does Bitcoin Mining Use? 2025 Analysis - SolarTech",
+      "url": "https://solartechonline.com/blog/bitcoin-electricity-consumption-mining-2025/"
+    }
+  ],
+  "bibliographyHeading": "Works cited",
+  "bibliography": [
+    {
+      "_key": "c114fbb93b71",
+      "order": 1,
+      "rawText": "1. Bitcoin whitepaper \\- bitFlyer, accessed on March 13, 2026, [https://bitflyer.com/en-eu/s/glossary/bitcoin-whitepaper](https://bitflyer.com/en-eu/s/glossary/bitcoin-whitepaper)",
+      "title": "https://bitflyer.com/en-eu/s/glossary/bitcoin-whitepaper",
+      "url": "https://bitflyer.com/en-eu/s/glossary/bitcoin-whitepaper"
+    },
+    {
+      "_key": "5957a6845473",
+      "order": 2,
+      "rawText": "2. Bitcoin Whitepaper \\- Northcrypto, accessed on March 13, 2026, [https://www.northcrypto.com/learn/blog/bitcoin-whitepaper-eng](https://www.northcrypto.com/learn/blog/bitcoin-whitepaper-eng)",
+      "title": "https://www.northcrypto.com/learn/blog/bitcoin-whitepaper-eng",
+      "url": "https://www.northcrypto.com/learn/blog/bitcoin-whitepaper-eng"
+    },
+    {
+      "_key": "bd8c3ea8bb60",
+      "order": 3,
+      "rawText": "3. Satoshi Nakamoto's Bitcoin whitepaper turns 10 | Mashable, accessed on March 13, 2026, [https://mashable.com/article/bitcoin-whitepaper-10](https://mashable.com/article/bitcoin-whitepaper-10)",
+      "title": "https://mashable.com/article/bitcoin-whitepaper-10",
+      "url": "https://mashable.com/article/bitcoin-whitepaper-10"
+    },
+    {
+      "_key": "94840bc49a5d",
+      "order": 4,
+      "rawText": "4. The Bitcoin Whitepaper: The Foundation of BTC Explained Simply \\- 21bitcoin, accessed on March 13, 2026, [https://21bitcoin.app/en/blog/the-bitcoin-whitepaper](https://21bitcoin.app/en/blog/the-bitcoin-whitepaper)",
+      "title": "https://21bitcoin.app/en/blog/the-bitcoin-whitepaper",
+      "url": "https://21bitcoin.app/en/blog/the-bitcoin-whitepaper"
+    },
+    {
+      "_key": "045d0c64a387",
+      "order": 5,
+      "rawText": "5. BITCOIN INVESTMENT THESIS \\- Fidelity Digital Assets, accessed on March 13, 2026, [https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_BitcoinInvestmentThesis_AspirationalStoreValue_937894.2.0_V1.pdf](https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_BitcoinInvestmentThesis_AspirationalStoreValue_937894.2.0_V1.pdf)",
+      "title": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_BitcoinInvestmentThesis_AspirationalStoreValue_937894.2.0_V1.pdf",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_BitcoinInvestmentThesis_AspirationalStoreValue_937894.2.0_V1.pdf"
+    },
+    {
+      "_key": "0b9d2047d442",
+      "order": 6,
+      "rawText": "6. Why investors need to consider bitcoin separately from other digital assets, accessed on March 13, 2026, [https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/Bitcoin%20First_Nov1%20(2).pdf](<https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/Bitcoin%20First_Nov1%20(2).pdf>)",
+      "title": "Why investors need to consider bitcoin separately from other digital assets",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/Bitcoin%20First_Nov1%20(2"
+    },
+    {
+      "_key": "6a39cd5c4194",
+      "order": 7,
+      "rawText": "7. Full article: Bitcoin, Central Bank Digital Currency and the Loss of Money Value(s), accessed on March 13, 2026, [https://www.tandfonline.com/doi/full/10.1080/09538259.2025.2456734](https://www.tandfonline.com/doi/full/10.1080/09538259.2025.2456734)",
+      "title": "https://www.tandfonline.com/doi/full/10.1080/09538259.2025.2456734",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/09538259.2025.2456734"
+    },
+    {
+      "_key": "6fdd2c0630b3",
+      "order": 8,
+      "rawText": "8. Flat Prices, Sharp Shifts \\- Fidelity Digital Assets, accessed on March 13, 2026, [https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_2026_LookAheadReport_V3.pdf](https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_2026_LookAheadReport_V3.pdf)",
+      "title": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_2026_LookAheadReport_V3.pdf",
+      "url": "https://www.fidelitydigitalassets.com/sites/g/files/djuvja3256/files/acquiadam/FDA_2026_LookAheadReport_V3.pdf"
+    },
+    {
+      "_key": "7f71e5d47e70",
+      "order": 9,
+      "rawText": "9. Bitcoin Hedge Against Inflation: Complete 2025 Guide, accessed on March 13, 2026, [https://cash2bitcoin.com/blog/bitcoin-hedge-against-inflation/](https://cash2bitcoin.com/blog/bitcoin-hedge-against-inflation/)",
+      "title": "https://cash2bitcoin.com/blog/bitcoin-hedge-against-inflation/",
+      "url": "https://cash2bitcoin.com/blog/bitcoin-hedge-against-inflation/"
+    },
+    {
+      "_key": "f2803461b6ad",
+      "order": 10,
+      "rawText": "10. BITCOIN, GOLD & GLOBAL MONEY SUPPLY: \\- WisdomTree, accessed on March 13, 2026, [https://www.wisdomtree.com/investments/-/media/us-media-files/documents/resource-library/market-insights/wisdomtree-commentary/bitcoin-and-gold-model-forecasts.pdf](https://www.wisdomtree.com/investments/-/media/us-media-files/documents/resource-library/market-insights/wisdomtree-commentary/bitcoin-and-gold-model-forecasts.pdf)",
+      "title": "https://www.wisdomtree.com/investments/-/media/us-media-files/documents/resource-library/market-insights/wisdomtree-commentary/bitcoin-and-gold-model-forecasts.pdf",
+      "url": "https://www.wisdomtree.com/investments/-/media/us-media-files/documents/resource-library/market-insights/wisdomtree-commentary/bitcoin-and-gold-model-forecasts.pdf"
+    },
+    {
+      "_key": "fb3698e456d4",
+      "order": 11,
+      "rawText": "11. Bitcoin's price history (2009 \\- 2025\\) – key market events, data charts, and insights | Crypto, accessed on March 13, 2026, [https://www.oanda.com/us-en/trade-tap-blog/asset-classes/crypto/oanda-bitcoin-price-history-key-market-events-data-charts-insights-volatility/](https://www.oanda.com/us-en/trade-tap-blog/asset-classes/crypto/oanda-bitcoin-price-history-key-market-events-data-charts-insights-volatility/)",
+      "title": "https://www.oanda.com/us-en/trade-tap-blog/asset-classes/crypto/oanda-bitcoin-price-history-key-market-events-data-charts-insights-volatility/",
+      "url": "https://www.oanda.com/us-en/trade-tap-blog/asset-classes/crypto/oanda-bitcoin-price-history-key-market-events-data-charts-insights-volatility/"
+    },
+    {
+      "_key": "d5def70ecd5e",
+      "order": 12,
+      "rawText": "12. Bitcoin price history: how BTC has evolved since 2009 \\- Capital.com, accessed on March 13, 2026, [https://capital.com/en-int/analysis/bitcoin-price-change-over-time](https://capital.com/en-int/analysis/bitcoin-price-change-over-time)",
+      "title": "https://capital.com/en-int/analysis/bitcoin-price-change-over-time",
+      "url": "https://capital.com/en-int/analysis/bitcoin-price-change-over-time"
+    },
+    {
+      "_key": "c30a5fc0647d",
+      "order": 13,
+      "rawText": "13. Direct Evidence of Bitcoin Wash Trading \\- EFMA, accessed on March 13, 2026, [http://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-232.pdf](http://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-232.pdf)",
+      "title": "http://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-232.pdf",
+      "url": "http://www.efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2022-Rome/papers/EFMA%202022_stage-3032_question-Full%20Paper_id-232.pdf"
+    },
+    {
+      "_key": "142929ae1b0e",
+      "order": 14,
+      "rawText": "14. Report on analysis of bitcoin price evolution to detect signs of market manipulation, accessed on March 13, 2026, [https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5e316da5e\\&appId=PPGMS](https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5e316da5e&appId=PPGMS)",
+      "title": "https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5e316da5e\\&appId=PPGMS",
+      "url": "https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5e316da5e&appId=PPGMS"
+    },
+    {
+      "_key": "293f796eda98",
+      "order": 15,
+      "rawText": "15. Cryptocurrencies and decentralised finance: functions and financial stability implications \\- BIS, accessed on March 13, 2026, [https://www.bis.org/publ/bppdf/bispap156.pdf](https://www.bis.org/publ/bppdf/bispap156.pdf)",
+      "title": "https://www.bis.org/publ/bppdf/bispap156.pdf",
+      "url": "https://www.bis.org/publ/bppdf/bispap156.pdf"
+    },
+    {
+      "_key": "e4345ffbb9cd",
+      "order": 16,
+      "rawText": "16. North America Crypto Adoption: Institutions and ETFs \\- Chainalysis, accessed on March 13, 2026, [https://www.chainalysis.com/blog/north-america-crypto-adoption-2025/](https://www.chainalysis.com/blog/north-america-crypto-adoption-2025/)",
+      "title": "https://www.chainalysis.com/blog/north-america-crypto-adoption-2025/",
+      "url": "https://www.chainalysis.com/blog/north-america-crypto-adoption-2025/"
+    },
+    {
+      "_key": "f4acb4c81c19",
+      "order": 17,
+      "rawText": "17. A Closer Look at Bitcoin's Volatility \\- Fidelity Digital Assets, accessed on March 13, 2026, [https://www.fidelitydigitalassets.com/research-and-insights/closer-look-bitcoins-volatility](https://www.fidelitydigitalassets.com/research-and-insights/closer-look-bitcoins-volatility)",
+      "title": "https://www.fidelitydigitalassets.com/research-and-insights/closer-look-bitcoins-volatility",
+      "url": "https://www.fidelitydigitalassets.com/research-and-insights/closer-look-bitcoins-volatility"
+    },
+    {
+      "_key": "11e759be209f",
+      "order": 18,
+      "rawText": "18. Cryptocurrency Market Manipulation: A Systematic Literature Review \\- ResearchGate, accessed on March 13, 2026, [https://www.researchgate.net/profile/Felix-Eigelshoven/publication/354995772_Cryptocurrency_Market_Manipulation_A_Systematic_Literature_Review/links/617705340be8ec17a9303d70/Cryptocurrency-Market-Manipulation-A-Systematic-Literature-Review.pdf](https://www.researchgate.net/profile/Felix-Eigelshoven/publication/354995772_Cryptocurrency_Market_Manipulation_A_Systematic_Literature_Review/links/617705340be8ec17a9303d70/Cryptocurrency-Market-Manipulation-A-Systematic-Literature-Review.pdf)",
+      "title": "https://www.researchgate.net/profile/Felix-Eigelshoven/publication/354995772_Cryptocurrency_Market_Manipulation_A_Systematic_Literature_Review/links/617705340be8ec17a9303d70/Cryptocurrency-Market-Manipulation-A-Systematic-Literature-Review.pdf",
+      "url": "https://www.researchgate.net/profile/Felix-Eigelshoven/publication/354995772_Cryptocurrency_Market_Manipulation_A_Systematic_Literature_Review/links/617705340be8ec17a9303d70/Cryptocurrency-Market-Manipulation-A-Systematic-Literature-Review.pdf"
+    },
+    {
+      "_key": "8371249f0464",
+      "order": 19,
+      "rawText": "19. Institutional Cryptocurrency Adoption 2025: Bitcoin ETF Boom ..., accessed on March 13, 2026, [https://powerdrill.ai/blog/institutional-cryptocurrency-adoption](https://powerdrill.ai/blog/institutional-cryptocurrency-adoption)",
+      "title": "https://powerdrill.ai/blog/institutional-cryptocurrency-adoption",
+      "url": "https://powerdrill.ai/blog/institutional-cryptocurrency-adoption"
+    },
+    {
+      "_key": "3dcb79cc0f5d",
+      "order": 20,
+      "rawText": "20. Corporate Crypto Treasuries From MicroStrategy to Mainstream \\- FinTech Weekly, accessed on March 13, 2026, [https://www.fintechweekly.com/magazine/articles/corporate-crypto-treasuries-bitcoin-mainstream-adoption](https://www.fintechweekly.com/magazine/articles/corporate-crypto-treasuries-bitcoin-mainstream-adoption)",
+      "title": "https://www.fintechweekly.com/magazine/articles/corporate-crypto-treasuries-bitcoin-mainstream-adoption",
+      "url": "https://www.fintechweekly.com/magazine/articles/corporate-crypto-treasuries-bitcoin-mainstream-adoption"
+    },
+    {
+      "_key": "b453a1f261c3",
+      "order": 21,
+      "rawText": "21. The year in data: 5 charts that show how crypto changed in 2025 \\- The Block, accessed on March 13, 2026, [https://www.theblock.co/post/381902/the-year-in-data-5-charts-that-show-how-crypto-changed-in-2025](https://www.theblock.co/post/381902/the-year-in-data-5-charts-that-show-how-crypto-changed-in-2025)",
+      "title": "https://www.theblock.co/post/381902/the-year-in-data-5-charts-that-show-how-crypto-changed-in-2025",
+      "url": "https://www.theblock.co/post/381902/the-year-in-data-5-charts-that-show-how-crypto-changed-in-2025"
+    },
+    {
+      "_key": "718645fb47b1",
+      "order": 22,
+      "rawText": "22. Bitcoin ETF Impact: How Exchange-Traded Funds Are Reshaping Cryptocurrency Markets, accessed on March 13, 2026, [https://cash2bitcoin.com/blog/bitcoin-etf-impact/](https://cash2bitcoin.com/blog/bitcoin-etf-impact/)",
+      "title": "https://cash2bitcoin.com/blog/bitcoin-etf-impact/",
+      "url": "https://cash2bitcoin.com/blog/bitcoin-etf-impact/"
+    },
+    {
+      "_key": "682942be3941",
+      "order": 23,
+      "rawText": "23. JPMorgan expects crypto inflows to rise further in 2026 after record $130 billion in 2025, accessed on March 13, 2026, [https://www.theblock.co/post/385670/jpmorgan-crypto-inflows-2026-record-130-billion-2025](https://www.theblock.co/post/385670/jpmorgan-crypto-inflows-2026-record-130-billion-2025)",
+      "title": "https://www.theblock.co/post/385670/jpmorgan-crypto-inflows-2026-record-130-billion-2025",
+      "url": "https://www.theblock.co/post/385670/jpmorgan-crypto-inflows-2026-record-130-billion-2025"
+    },
+    {
+      "_key": "cac296a625a7",
+      "order": 24,
+      "rawText": "24. Bitcoin ETF Inflows and Falling Exchange Supply Strengthen Price Floor | Investing.com, accessed on March 13, 2026, [https://www.investing.com/analysis/bitcoin-etf-inflows-and-falling-exchange-supply-strengthen-price-floor-200676398](https://www.investing.com/analysis/bitcoin-etf-inflows-and-falling-exchange-supply-strengthen-price-floor-200676398)",
+      "title": "https://www.investing.com/analysis/bitcoin-etf-inflows-and-falling-exchange-supply-strengthen-price-floor-200676398",
+      "url": "https://www.investing.com/analysis/bitcoin-etf-inflows-and-falling-exchange-supply-strengthen-price-floor-200676398"
+    },
+    {
+      "_key": "b9388361aed6",
+      "order": 25,
+      "rawText": "25. 2025 Crypto Adoption and Stablecoin Usage Report \\- TRM Labs, accessed on March 13, 2026, [https://www.trmlabs.com/reports-and-whitepapers/2025-crypto-adoption-and-stablecoin-usage-report](https://www.trmlabs.com/reports-and-whitepapers/2025-crypto-adoption-and-stablecoin-usage-report)",
+      "title": "https://www.trmlabs.com/reports-and-whitepapers/2025-crypto-adoption-and-stablecoin-usage-report",
+      "url": "https://www.trmlabs.com/reports-and-whitepapers/2025-crypto-adoption-and-stablecoin-usage-report"
+    },
+    {
+      "_key": "be96685a78a8",
+      "order": 26,
+      "rawText": "26. Nigeria and Turkey Biggest Adopters of Crypto in 2024 \\- Union of Arab Banks, accessed on March 13, 2026, [https://uabonline.org/english-news/nigeria-and-turkey-biggest-adopters-of-crypto-in-2024/](https://uabonline.org/english-news/nigeria-and-turkey-biggest-adopters-of-crypto-in-2024/)",
+      "title": "https://uabonline.org/english-news/nigeria-and-turkey-biggest-adopters-of-crypto-in-2024/",
+      "url": "https://uabonline.org/english-news/nigeria-and-turkey-biggest-adopters-of-crypto-in-2024/"
+    },
+    {
+      "_key": "43fb1ef4a008",
+      "order": 27,
+      "rawText": "27. Fiat inflation drives crypto adoption across the globe \\- TradingView, accessed on March 13, 2026, [https://www.tradingview.com/news/cointelegraph:9e767242a094b:0-fiat-inflation-drives-crypto-adoption-across-the-globe/](https://www.tradingview.com/news/cointelegraph:9e767242a094b:0-fiat-inflation-drives-crypto-adoption-across-the-globe/)",
+      "title": "https://www.tradingview.com/news/cointelegraph:9e767242a094b:0-fiat-inflation-drives-crypto-adoption-across-the-globe/",
+      "url": "https://www.tradingview.com/news/cointelegraph:9e767242a094b:0-fiat-inflation-drives-crypto-adoption-across-the-globe/"
+    },
+    {
+      "_key": "f33e2f8fddc6",
+      "order": 28,
+      "rawText": "28. Cryptocurrencies as an Inflation Hedge: A Comparative Study Across High-Inflation Economies \\- RSIS International, accessed on March 13, 2026, [https://rsisinternational.org/journals/ijriss/uploads/vol9-iss10-pg8526-8545-202511_pdf.pdf](https://rsisinternational.org/journals/ijriss/uploads/vol9-iss10-pg8526-8545-202511_pdf.pdf)",
+      "title": "https://rsisinternational.org/journals/ijriss/uploads/vol9-iss10-pg8526-8545-202511_pdf.pdf",
+      "url": "https://rsisinternational.org/journals/ijriss/uploads/vol9-iss10-pg8526-8545-202511_pdf.pdf"
+    },
+    {
+      "_key": "02301793b73d",
+      "order": 29,
+      "rawText": "29. El Salvador: Selected Issues; IMF Country Report No ... \\- IMF eLibrary, accessed on March 13, 2026, [https://www.elibrary.imf.org/view/journals/002/2025/068/article-A001-en.pdf](https://www.elibrary.imf.org/view/journals/002/2025/068/article-A001-en.pdf)",
+      "title": "https://www.elibrary.imf.org/view/journals/002/2025/068/article-A001-en.pdf",
+      "url": "https://www.elibrary.imf.org/view/journals/002/2025/068/article-A001-en.pdf"
+    },
+    {
+      "_key": "d8b2fbfabf03",
+      "order": 30,
+      "rawText": "30. El Salvador: Selected Issues \\- International Monetary Fund, accessed on March 13, 2026, [https://www.imf.org/en/publications/cr/issues/2025/03/19/el-salvador-selected-issues-565394](https://www.imf.org/en/publications/cr/issues/2025/03/19/el-salvador-selected-issues-565394)",
+      "title": "https://www.imf.org/en/publications/cr/issues/2025/03/19/el-salvador-selected-issues-565394",
+      "url": "https://www.imf.org/en/publications/cr/issues/2025/03/19/el-salvador-selected-issues-565394"
+    },
+    {
+      "_key": "ecc0f374330a",
+      "order": 31,
+      "rawText": "31. The Rise and Fall of Bitcoin as Legal Tender: An Analysis of El Salvador's Experiment \\- SvedbergOpen, accessed on March 13, 2026, [https://www.svedbergopen.com/files/1752741747_1_IJCCR202500451300VRZW\\_(p_1-9).pdf](<https://www.svedbergopen.com/files/1752741747_1_IJCCR202500451300VRZW_(p_1-9).pdf>)",
+      "title": "The Rise and Fall of Bitcoin as Legal Tender: An Analysis of El Salvador's Experiment \\",
+      "url": "https://www.svedbergopen.com/files/1752741747_1_IJCCR202500451300VRZW\\_(p_1-9"
+    },
+    {
+      "_key": "575d8d673f11",
+      "order": 32,
+      "rawText": "32. The IMF Is Bailing Out El Salvador. It Shouldn't Be So Lenient on Cryptocurrency. \\- CFR.org, accessed on March 13, 2026, [https://www.cfr.org/articles/imf-bailing-out-el-salvador-it-shouldnt-be-so-lenient-cryptocurrency](https://www.cfr.org/articles/imf-bailing-out-el-salvador-it-shouldnt-be-so-lenient-cryptocurrency)",
+      "title": "https://www.cfr.org/articles/imf-bailing-out-el-salvador-it-shouldnt-be-so-lenient-cryptocurrency",
+      "url": "https://www.cfr.org/articles/imf-bailing-out-el-salvador-it-shouldnt-be-so-lenient-cryptocurrency"
+    },
+    {
+      "_key": "c00d7585edd7",
+      "order": 33,
+      "rawText": "33. El Salvador amends bitcoin law following IMF loan deal \\- Electronic Payments International, accessed on March 13, 2026, [https://www.electronicpaymentsinternational.com/news/el-salvador-amends-bitcoin-law-imf/](https://www.electronicpaymentsinternational.com/news/el-salvador-amends-bitcoin-law-imf/)",
+      "title": "https://www.electronicpaymentsinternational.com/news/el-salvador-amends-bitcoin-law-imf/",
+      "url": "https://www.electronicpaymentsinternational.com/news/el-salvador-amends-bitcoin-law-imf/"
+    },
+    {
+      "_key": "32f590802d15",
+      "order": 34,
+      "rawText": "34. Gold vs. Bitcoin \\- Market Capitalization | Gold | Collection \\- MacroMicro, accessed on March 13, 2026, [https://en.macromicro.me/collections/45/mm-gold-price/120695/gold-market-cap-vs-bitcoin-market-cap](https://en.macromicro.me/collections/45/mm-gold-price/120695/gold-market-cap-vs-bitcoin-market-cap)",
+      "title": "https://en.macromicro.me/collections/45/mm-gold-price/120695/gold-market-cap-vs-bitcoin-market-cap",
+      "url": "https://en.macromicro.me/collections/45/mm-gold-price/120695/gold-market-cap-vs-bitcoin-market-cap"
+    },
+    {
+      "_key": "95b96ecaf133",
+      "order": 35,
+      "rawText": "35. Bitcoin and gold: 3 model forecasts for 2030 and beyond \\- WisdomTree.eu, accessed on March 13, 2026, [https://www.wisdomtree.eu/-/media/eu-media-files/other-documents/research/whitepapers/bitcoin-and-gold-3-model-forecasts-for-2030-and-beyond.pdf?sc_lang=en-gb](https://www.wisdomtree.eu/-/media/eu-media-files/other-documents/research/whitepapers/bitcoin-and-gold-3-model-forecasts-for-2030-and-beyond.pdf?sc_lang=en-gb)",
+      "title": "https://www.wisdomtree.eu/-/media/eu-media-files/other-documents/research/whitepapers/bitcoin-and-gold-3-model-forecasts-for-2030-and-beyond.pdf?sc_lang=en-gb",
+      "url": "https://www.wisdomtree.eu/-/media/eu-media-files/other-documents/research/whitepapers/bitcoin-and-gold-3-model-forecasts-for-2030-and-beyond.pdf?sc_lang=en-gb"
+    },
+    {
+      "_key": "7984c180595b",
+      "order": 36,
+      "rawText": "36. The Maturation of Digital Assets, accessed on March 13, 2026, [https://www.fidelitydigitalassets.com/research-and-insights/maturation-digital-assets](https://www.fidelitydigitalassets.com/research-and-insights/maturation-digital-assets)",
+      "title": "https://www.fidelitydigitalassets.com/research-and-insights/maturation-digital-assets",
+      "url": "https://www.fidelitydigitalassets.com/research-and-insights/maturation-digital-assets"
+    },
+    {
+      "_key": "d6ce88064927",
+      "order": 37,
+      "rawText": "37. Bitcoin vs. M2 Money Supply \\- Updated Chart \\- LongtermTrends, accessed on March 13, 2026, [https://www.longtermtrends.com/bitcoin-vs-m2/](https://www.longtermtrends.com/bitcoin-vs-m2/)",
+      "title": "https://www.longtermtrends.com/bitcoin-vs-m2/",
+      "url": "https://www.longtermtrends.com/bitcoin-vs-m2/"
+    },
+    {
+      "_key": "e352161fb6fe",
+      "order": 38,
+      "rawText": "38. Cash, Gold, and Crypto: Safe Havens in an Age of Uncertainty (2023–2025), accessed on March 13, 2026, [https://cashessentials.org/cash-gold-and-crypto-safe-havens-in-an-age-of-uncertainty-2023-2025/](https://cashessentials.org/cash-gold-and-crypto-safe-havens-in-an-age-of-uncertainty-2023-2025/)",
+      "title": "https://cashessentials.org/cash-gold-and-crypto-safe-havens-in-an-age-of-uncertainty-2023-2025/",
+      "url": "https://cashessentials.org/cash-gold-and-crypto-safe-havens-in-an-age-of-uncertainty-2023-2025/"
+    },
+    {
+      "_key": "96e4472c014a",
+      "order": 39,
+      "rawText": "39. Full article: Monetary sovereignty in the digital age: the role of Central bank digital currencies \\- Taylor & Francis, accessed on March 13, 2026, [https://www.tandfonline.com/doi/full/10.1080/08911916.2026.2624900](https://www.tandfonline.com/doi/full/10.1080/08911916.2026.2624900)",
+      "title": "https://www.tandfonline.com/doi/full/10.1080/08911916.2026.2624900",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/08911916.2026.2624900"
+    },
+    {
+      "_key": "6f83ec2536f5",
+      "order": 40,
+      "rawText": "40. (PDF) Monetary Sovereignty and Central Bank Digital Currencies: Competing Models for Future Cross‐Border Payment Platforms \\- ResearchGate, accessed on March 13, 2026, [https://www.researchgate.net/publication/389140918_Monetary_Sovereignty_and_Central_Bank_Digital_Currencies_Competing_Models_for_Future_Cross-Border_Payment_Platforms](https://www.researchgate.net/publication/389140918_Monetary_Sovereignty_and_Central_Bank_Digital_Currencies_Competing_Models_for_Future_Cross-Border_Payment_Platforms)",
+      "title": "https://www.researchgate.net/publication/389140918_Monetary_Sovereignty_and_Central_Bank_Digital_Currencies_Competing_Models_for_Future_Cross-Border_Payment_Platforms",
+      "url": "https://www.researchgate.net/publication/389140918_Monetary_Sovereignty_and_Central_Bank_Digital_Currencies_Competing_Models_for_Future_Cross-Border_Payment_Platforms"
+    },
+    {
+      "_key": "28253838f722",
+      "order": 41,
+      "rawText": "41. Crypto Adoption in Europe: The World's Largest Crypto Market \\- Chainalysis, accessed on March 13, 2026, [https://www.chainalysis.com/blog/europe-crypto-adoption-2025/](https://www.chainalysis.com/blog/europe-crypto-adoption-2025/)",
+      "title": "https://www.chainalysis.com/blog/europe-crypto-adoption-2025/",
+      "url": "https://www.chainalysis.com/blog/europe-crypto-adoption-2025/"
+    },
+    {
+      "_key": "9401310d1c99",
+      "order": 42,
+      "rawText": "42. Institutional Adoption of Crypto: 2026 Trends & Analysis \\- B2BROKER, accessed on March 13, 2026, [https://b2broker.com/news/institutional-adoption-of-crypto/](https://b2broker.com/news/institutional-adoption-of-crypto/)",
+      "title": "https://b2broker.com/news/institutional-adoption-of-crypto/",
+      "url": "https://b2broker.com/news/institutional-adoption-of-crypto/"
+    },
+    {
+      "_key": "1c4531a84a2c",
+      "order": 43,
+      "rawText": "43. Stablecoins on the rise: still small in the euro area, but spillover risks loom, accessed on March 13, 2026, [https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202511_05\\~63636227b4.en.html](https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202511_05~63636227b4.en.html)",
+      "title": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202511_05\\~63636227b4.en.html",
+      "url": "https://www.ecb.europa.eu/press/financial-stability-publications/fsr/focus/2025/html/ecb.fsrbox202511_05~63636227b4.en.html"
+    },
+    {
+      "_key": "8158826894eb",
+      "order": 44,
+      "rawText": "44. Global Crypto Policy Review Outlook 2025/26 Report \\- TRM Labs, accessed on March 13, 2026, [https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26](https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26)",
+      "title": "https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26",
+      "url": "https://www.trmlabs.com/reports-and-whitepapers/global-crypto-policy-review-outlook-2025-26"
+    },
+    {
+      "_key": "f64678bb8728",
+      "order": 45,
+      "rawText": "45. Global Financial Stability Report \\- IMF, accessed on March 13, 2026, [https://www.imf.org/en/publications/gfsr](https://www.imf.org/en/publications/gfsr)",
+      "title": "https://www.imf.org/en/publications/gfsr",
+      "url": "https://www.imf.org/en/publications/gfsr"
+    },
+    {
+      "_key": "350c03efccb3",
+      "order": 46,
+      "rawText": "46. BIS Warns of Stablecoin Risks to Financial Systems | Comsure, Jersey, accessed on March 13, 2026, [https://www.comsuregroup.com/news/bis-warns-of-stablecoin-risks-to-financial-systems/](https://www.comsuregroup.com/news/bis-warns-of-stablecoin-risks-to-financial-systems/)",
+      "title": "https://www.comsuregroup.com/news/bis-warns-of-stablecoin-risks-to-financial-systems/",
+      "url": "https://www.comsuregroup.com/news/bis-warns-of-stablecoin-risks-to-financial-systems/"
+    },
+    {
+      "_key": "b1442e7408a4",
+      "order": 47,
+      "rawText": "47. Stablecoins: the BIS Flags Risks, the U.S. Seize Opportunity by passing the GENIUS Act – Where Does Switzerland Stand? \\- Borel Barbey, accessed on March 13, 2026, [https://www.borel-barbey.ch/en/stablecoins-the-bis-flags-risks-the-u-s-seize-opportunity-by-passing-the-genius-act-where-does-switzerland-stand/](https://www.borel-barbey.ch/en/stablecoins-the-bis-flags-risks-the-u-s-seize-opportunity-by-passing-the-genius-act-where-does-switzerland-stand/)",
+      "title": "https://www.borel-barbey.ch/en/stablecoins-the-bis-flags-risks-the-u-s-seize-opportunity-by-passing-the-genius-act-where-does-switzerland-stand/",
+      "url": "https://www.borel-barbey.ch/en/stablecoins-the-bis-flags-risks-the-u-s-seize-opportunity-by-passing-the-genius-act-where-does-switzerland-stand/"
+    },
+    {
+      "_key": "53cc125ab4ec",
+      "order": 48,
+      "rawText": "48. Journal of Organizational Behavior Research CBDC as a Point of Contention in Transatlantic Divergence: Gaps in Digital Monetary, accessed on March 13, 2026, [https://odad.org/storage/files/article/dcb98515-0738-4589-9374-d2c8ddb6c0fb-ZSMmFkY8zTyLo1JA/4JDKJUvStqlpqyK.pdf](https://odad.org/storage/files/article/dcb98515-0738-4589-9374-d2c8ddb6c0fb-ZSMmFkY8zTyLo1JA/4JDKJUvStqlpqyK.pdf)",
+      "title": "https://odad.org/storage/files/article/dcb98515-0738-4589-9374-d2c8ddb6c0fb-ZSMmFkY8zTyLo1JA/4JDKJUvStqlpqyK.pdf",
+      "url": "https://odad.org/storage/files/article/dcb98515-0738-4589-9374-d2c8ddb6c0fb-ZSMmFkY8zTyLo1JA/4JDKJUvStqlpqyK.pdf"
+    },
+    {
+      "_key": "173032c02d34",
+      "order": 49,
+      "rawText": "49. The Decentralisation Dilemma: Cryptocurrency's Impact on Financial Inclusion and Wealth Disparity (2020–2025) | OxJournal, accessed on March 13, 2026, [https://www.oxjournal.org/the-decentralisation-dilemma/](https://www.oxjournal.org/the-decentralisation-dilemma/)",
+      "title": "https://www.oxjournal.org/the-decentralisation-dilemma/",
+      "url": "https://www.oxjournal.org/the-decentralisation-dilemma/"
+    },
+    {
+      "_key": "af72618962d1",
+      "order": 50,
+      "rawText": "50. 2025 Crypto Theft Reaches $3.4 Billion \\- Chainalysis, accessed on March 13, 2026, [https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/](https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/)",
+      "title": "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/",
+      "url": "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2026/"
+    },
+    {
+      "_key": "ea898a82bc7b",
+      "order": 51,
+      "rawText": "51. 2025 Crypto Crime Mid-year Update: Stolen Funds Surge as DPRK Sets New Records, accessed on March 13, 2026, [https://www.chainalysis.com/blog/2025-crypto-crime-mid-year-update/](https://www.chainalysis.com/blog/2025-crypto-crime-mid-year-update/)",
+      "title": "https://www.chainalysis.com/blog/2025-crypto-crime-mid-year-update/",
+      "url": "https://www.chainalysis.com/blog/2025-crypto-crime-mid-year-update/"
+    },
+    {
+      "_key": "667cf7792a99",
+      "order": 52,
+      "rawText": "52. Research shows: The cost of a 51% attack on the Bitcoin | 奔跑财经-FinaceRun on Binance Square, accessed on March 13, 2026, [https://www.binance.com/en/square/post/30996984411762](https://www.binance.com/en/square/post/30996984411762)",
+      "title": "https://www.binance.com/en/square/post/30996984411762",
+      "url": "https://www.binance.com/en/square/post/30996984411762"
+    },
+    {
+      "_key": "0f82a35bbd76",
+      "order": 53,
+      "rawText": "53. Preventing Manipulation in the Digital Assets Market — Why and How? \\- Infosys, accessed on March 13, 2026, [https://www.infosys.com/industries/financial-services/insights/documents/preventing-manipulation-digital-assets-market.pdf](https://www.infosys.com/industries/financial-services/insights/documents/preventing-manipulation-digital-assets-market.pdf)",
+      "title": "https://www.infosys.com/industries/financial-services/insights/documents/preventing-manipulation-digital-assets-market.pdf",
+      "url": "https://www.infosys.com/industries/financial-services/insights/documents/preventing-manipulation-digital-assets-market.pdf"
+    },
+    {
+      "_key": "f8c2f0b53c3d",
+      "order": 54,
+      "rawText": "54. Manipulation of the Bitcoin market: an agent-based study \\- PMC, accessed on March 13, 2026, [https://pmc.ncbi.nlm.nih.gov/articles/PMC9159387/](https://pmc.ncbi.nlm.nih.gov/articles/PMC9159387/)",
+      "title": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9159387/",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9159387/"
+    },
+    {
+      "_key": "b229c69d6d69",
+      "order": 55,
+      "rawText": "55. Bitcoin Energy Consumption Index \\- Digiconomist, accessed on March 13, 2026, [https://digiconomist.net/bitcoin-energy-consumption](https://digiconomist.net/bitcoin-energy-consumption)",
+      "title": "https://digiconomist.net/bitcoin-energy-consumption",
+      "url": "https://digiconomist.net/bitcoin-energy-consumption"
+    },
+    {
+      "_key": "4ec822c296d4",
+      "order": 56,
+      "rawText": "56. Bitcoin Energy Consumption Statistics 2026: Insights \\- SQ Magazine, accessed on March 13, 2026, [https://sqmagazine.co.uk/bitcoin-energy-consumption-statistics/](https://sqmagazine.co.uk/bitcoin-energy-consumption-statistics/)",
+      "title": "https://sqmagazine.co.uk/bitcoin-energy-consumption-statistics/",
+      "url": "https://sqmagazine.co.uk/bitcoin-energy-consumption-statistics/"
+    },
+    {
+      "_key": "99c8ba3b5ea6",
+      "order": 57,
+      "rawText": "57. How Much Electricity Does Bitcoin Mining Use? 2025 Analysis \\- SolarTech, accessed on March 13, 2026, [https://solartechonline.com/blog/bitcoin-electricity-consumption-mining-2025/](https://solartechonline.com/blog/bitcoin-electricity-consumption-mining-2025/)",
+      "title": "https://solartechonline.com/blog/bitcoin-electricity-consumption-mining-2025/",
+      "url": "https://solartechonline.com/blog/bitcoin-electricity-consumption-mining-2025/"
+    }
+  ],
+  "body": [
+    {
+      "_key": "f5c3cfb7cee6",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "1e6bdd02281b",
+          "_type": "span",
+          "text": "The Historical Origins and Conceptual Framework of the Bitcoin Protocol",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "7c9ed5176e0a",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "6a65ed2c7e92",
+          "_type": "span",
+          "text": "The inception of Bitcoin on October 31, 2008, marked a pivotal moment in the history of monetary systems, emerging precisely at the nadir of the Global Financial Crisis. The whitepaper, authored by the pseudonymous Satoshi Nakamoto and titled \"Bitcoin: A Peer-to-Peer Electronic Cash System,\" did not merely propose a new digital currency but introduced a fundamental critique of the existing centralized financial architecture.1 Nakamoto argued that the traditional model, which relies on trusted intermediaries like banks to process payments, is inherently flawed due to the \"trust-based\" nature of the system. This reliance necessitates the mediation of disputes, which in turn increases transaction costs, prevents the possibility of small casual transactions, and requires the collection of extensive personal data, thereby eroding financial privacy.2",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "b37561417ae1",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "5aaec2fd67b8",
+          "_type": "span",
+          "text": "The design goals of the Bitcoin protocol were specifically engineered to overcome these systemic weaknesses. At its core, the system was intended to enable direct, peer-to-peer (P2P) payments without the need for a central clearinghouse.2 To achieve this, Nakamoto synthesized several existing cryptographic concepts into a novel architecture. The primary technical challenge was the \"double-spending problem,\" a risk unique to digital assets where a single unit of currency could be spent more than once. Bitcoin addressed this through a public, distributed ledger known as the blockchain, which records all transactions in chronological order.3",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "af16cdd905c6",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "11346d9fd8fc",
+          "_type": "span",
+          "text": "The integrity of this ledger is maintained by a consensus mechanism called Proof-of-Work (PoW). Under this system, participants (miners) must expend significant computational energy to solve complex mathematical puzzles to validate a block of transactions. Once a block is added to the chain, it is timestamped and cryptographically linked to the preceding block, making any retrospective alteration prohibitively expensive and technically unfeasible.2 This shift from \"trust\" in institutions to \"proof\" in mathematics allowed for the creation of a decentralized network that remains secure even in the absence of a central authority.2",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "2af97a0d011a",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "5d3ff2a9930a",
+          "_type": "span",
+          "text": "Another critical design feature was the strictly limited supply. Bitcoin’s protocol mandates a hard cap of 21 million units, with a transparent issuance schedule that halves approximately every four years.5 This scarcity was intended to contrast with the discretionary monetary expansion (quantitative easing) practiced by central banks, which can lead to currency debasement. While the original vision focused on Bitcoin as a medium of exchange—electronic cash—the inherent difficulty of scaling on-chain transactions and the asset's growing market value led to a significant narrative evolution.3 By the mid-2010s, as the network proved its resilience and the fixed supply became its most lauded feature, the primary thesis shifted from \"digital currency\" to \"digital gold\".8 This transition reflects the market’s realization that Bitcoin’s most unique properties—immutability, scarcity, and decentralization—make it more suitable as a long-term store of value than a high-frequency payment rail.5",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "333dc043e082",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "7c71a92b4f95",
+          "_type": "span",
+          "text": "The Mechanics of Trustless Consensus and Scarcity",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "e26c40e8788c",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "4fe836bbf458",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "80aeb0501cf1",
+              "plainText": "Component",
+              "content": [
+                {
+                  "_key": "9e5dc4018398",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "a66e95ee527a",
+                      "_type": "span",
+                      "text": "Component",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "22653682ebea",
+              "plainText": "Technical Function",
+              "content": [
+                {
+                  "_key": "fdd4de20b3e8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "75d2a6faf90d",
+                      "_type": "span",
+                      "text": "Technical Function",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "76787c479dfc",
+              "plainText": "Economic Implication",
+              "content": [
+                {
+                  "_key": "e2e771c9345c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f809effedcb0",
+                      "_type": "span",
+                      "text": "Economic Implication",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "b00e78b758e6",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "4e5ef1afbe7b",
+              "plainText": "Proof-of-Work",
+              "content": [
+                {
+                  "_key": "2e193f7653f5",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "982830cc14d0",
+                      "_type": "span",
+                      "text": "Proof-of-Work",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "6d21f50a4133",
+              "plainText": "Computational energy used to secure the network",
+              "content": [
+                {
+                  "_key": "4fe54c150be0",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "cad41c733384",
+                      "_type": "span",
+                      "text": "Computational energy used to secure the network",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "d2fa65c4f9ba",
+              "plainText": "Creates a \"cost of production\" and prevents forgery 2",
+              "content": [
+                {
+                  "_key": "ff64ad698e20",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "47b6f7e068e7",
+                      "_type": "span",
+                      "text": "Creates a \"cost of production\" and prevents forgery 2",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "b09c32341b98",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "c94f36bb7540",
+              "plainText": "Blockchain",
+              "content": [
+                {
+                  "_key": "11baed4d531a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f4134b8a4e3b",
+                      "_type": "span",
+                      "text": "Blockchain",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "a3e7a895222d",
+              "plainText": "Distributed, immutable ledger of all transactions",
+              "content": [
+                {
+                  "_key": "648a5e2dd3e4",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "a1e3024cfb15",
+                      "_type": "span",
+                      "text": "Distributed, immutable ledger of all transactions",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "bc0ed2a134f8",
+              "plainText": "Eliminates the need for a central trusted third party 4",
+              "content": [
+                {
+                  "_key": "323cde29e6bb",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "ec6b69721895",
+                      "_type": "span",
+                      "text": "Eliminates the need for a central trusted third party 4",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "6ddea6fcece8",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "9b638499ef41",
+              "plainText": "Difficulty Adjustment",
+              "content": [
+                {
+                  "_key": "1ac3820bdf97",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "dbdf2fccda4d",
+                      "_type": "span",
+                      "text": "Difficulty Adjustment",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "46135cdf534b",
+              "plainText": "Automatically tunes mining difficulty every 2,016 blocks",
+              "content": [
+                {
+                  "_key": "0ca34600d67b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f0321383c88b",
+                      "_type": "span",
+                      "text": "Automatically tunes mining difficulty every 2,016 blocks",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "33fa6ef8b294",
+              "plainText": "Ensures a constant issuance rate regardless of hardware power 5",
+              "content": [
+                {
+                  "_key": "783224a7fd4a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "d8f2506c35e5",
+                      "_type": "span",
+                      "text": "Ensures a constant issuance rate regardless of hardware power 5",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "d72e0793f749",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "82198ea28068",
+              "plainText": "Halving Schedule",
+              "content": [
+                {
+                  "_key": "3ad7383cdc5d",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "42178e23194e",
+                      "_type": "span",
+                      "text": "Halving Schedule",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e86eee9b18f3",
+              "plainText": "Reduces block rewards by 50% every 210,000 blocks",
+              "content": [
+                {
+                  "_key": "8f90c170cd98",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "62c2e045fff1",
+                      "_type": "span",
+                      "text": "Reduces block rewards by 50% every 210,000 blocks",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "78b779c64bf9",
+              "plainText": "Enforces mathematical scarcity and disinflationary pressure 9",
+              "content": [
+                {
+                  "_key": "96be61813737",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "010b15517f10",
+                      "_type": "span",
+                      "text": "Enforces mathematical scarcity and disinflationary pressure 9",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "494a7b41f2f5",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "bc76424fbeea",
+              "plainText": "Hard Cap",
+              "content": [
+                {
+                  "_key": "3381fb9c7caa",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "6b7a863bc15e",
+                      "_type": "span",
+                      "text": "Hard Cap",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "092ad8a2e535",
+              "plainText": "Fixed terminal supply of 21,000,000 BTC",
+              "content": [
+                {
+                  "_key": "c65ccef29e43",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "0617c1f054b5",
+                      "_type": "span",
+                      "text": "Fixed terminal supply of 21,000,000 BTC",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "fa9fdd00452c",
+              "plainText": "Protects against the debasement typical of fiat currencies 5",
+              "content": [
+                {
+                  "_key": "c17e0fb65a3e",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "4e210b1ae2b8",
+                      "_type": "span",
+                      "text": "Protects against the debasement typical of fiat currencies 5",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "806fd79d71e5",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "eb5ad7764e25",
+          "_type": "span",
+          "text": "The narrative shift toward \"digital gold\" was not merely a change in marketing but a response to the technical reality of the network. As transaction fees fluctuated and confirmation times grew during periods of high demand, the \"cash\" use case faced challenges. However, these same constraints highlighted the asset's \"hard money\" properties. Investors began to value Bitcoin not for its ability to buy coffee, but for its role as a decentralized, non-sovereign reserve asset that could hedge against systemic financial risks and the expansion of the global money supply.8",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "07140f4bdcfd",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "d36ea6b43111",
+          "_type": "span",
+          "text": "The Evolution of Bitcoin Usage and Market Maturation",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ca8269e998a9",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "f07509f2a821",
+          "_type": "span",
+          "text": "The usage patterns of Bitcoin have evolved through three distinct phases, reflecting its journey from an experimental tool for cryptographers to a recognized institutional asset class.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "d475e9cd6fbf",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "11989d54c057",
+          "_type": "span",
+          "text": "The Early Adoption and Payment Phase (2010–2015)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "a07a09ec6d00",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "a999da51b14d",
+          "_type": "span",
+          "text": "In its first five years, Bitcoin usage was largely restricted to tech-savvy individuals, libertarians, and \"cypherpunks\" who were attracted to its decentralized nature and potential for financial privacy.11 This era was characterized by casual exchanges and early proof-of-concept transactions. The most famous of these occurred in May 2010, when Laszlo Hanyecz paid 10,000 BTC for two pizzas, establishing the first real-world exchange rate for Bitcoin at a fraction of a cent.11",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "aab7d133618e",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "735095df9e72",
+          "_type": "span",
+          "text": "During this period, the infrastructure for buying and selling Bitcoin was extremely primitive. The launch of BitcoinMarket.com in March 2010 marked the beginning of organized trading, followed soon after by the rise of Mt. Gox.12 At its peak, Mt. Gox handled over 70% of global Bitcoin volume. However, the exchange's collapse in 2014 following a massive hack served as a harsh lesson in custodial risk and underscored the importance of the protocol's \"not your keys, not your coins\" ethos.12 Despite the volatility and the association with illicit marketplaces like Silk Road, this phase proved that a decentralized currency could function and maintain a market value without state backing.14",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "705f21c7781e",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "7f5c343f0e1c",
+          "_type": "span",
+          "text": "The Speculative and Trading Phase (2016–2020)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "dec34b8dba74",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "bfff88c82242",
+          "_type": "span",
+          "text": "The second phase of Bitcoin’s evolution was defined by a surge in retail interest and the professionalization of crypto-native trading. The launch of Ethereum in 2015 introduced smart contracts, leading to the ICO (Initial Coin Offering) boom of 2017.15 While Bitcoin did not support smart contracts, it benefited from the massive influx of capital into the broader ecosystem, acting as the primary gateway and liquidity pair for the thousands of new digital assets entering the market.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "d3b1c1d2d014",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "22fec7903b4a",
+          "_type": "span",
+          "text": "This era saw the 2017 bull run, where Bitcoin reached nearly $20,000, followed by a severe \"crypto winter\" in 2018.11 Crucially, the introduction of Bitcoin futures on the Chicago Mercantile Exchange (CME) in late 2017 provided the first regulated derivative instrument for institutional players, signaling a maturing market structure.8 However, the primary drivers of price action remained retail speculation and the emergence of high-frequency trading bots, which contributed to the asset's notorious volatility.17",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "161764f70d30",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "3821a9af5273",
+          "_type": "span",
+          "text": "The Institutional Adoption and Strategic Reserve Phase (2020–Present)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "1e8a8f6d79ba",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "e77a4ba9a962",
+          "_type": "span",
+          "text": "The onset of the COVID-19 pandemic and the unprecedented monetary stimulus that followed acted as a catalyst for the third phase: institutionalization. In May 2020, the third Bitcoin halving coincided with a period of massive expansion in the M2 money supply, creating a compelling \"digital gold\" narrative for macro investors.5 This phase was marked by the entry of major public companies into the space. MicroStrategy, led by Michael Saylor, famously rebranded its treasury strategy to focus on Bitcoin, acquiring 257,000 BTC in 2024 alone.19 By mid-2025, Strategy (formerly MicroStrategy) held over 672,000 BTC, representing more than 3% of the total supply.21",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "00ebf8e489d2",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "440755d250cf",
+          "_type": "span",
+          "text": "The most significant development in this phase was the SEC's approval of spot Bitcoin ETFs in January 2024. These products, led by BlackRock’s IBIT and Fidelity’s FBTC, opened a regulated pathway for trillions of dollars in traditional capital.19 By August 2025, Bitcoin ETFs held approximately 6.52% of the total Bitcoin supply, with over $54.75 billion in net inflows since launch.22 This institutionalization has fundamentally altered the market's structure, reducing daily volatility and shifting the concentration of trading volume to U.S. market hours.22",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ef844f439fa9",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "608b9b6ca9c8",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "c37ae993fd25",
+              "plainText": "Metric",
+              "content": [
+                {
+                  "_key": "f9c53d634ef1",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "1df0724fd287",
+                      "_type": "span",
+                      "text": "Metric",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "a998adffde48",
+              "plainText": "Pre-ETF (2021)",
+              "content": [
+                {
+                  "_key": "11b34f745e36",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "6fc05c026028",
+                      "_type": "span",
+                      "text": "Pre-ETF (2021)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e786897755b2",
+              "plainText": "Post-ETF (2025)",
+              "content": [
+                {
+                  "_key": "6e9882005a14",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "55e43f033f41",
+                      "_type": "span",
+                      "text": "Post-ETF (2025)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f2d095a57bb2",
+              "plainText": "Growth/Change",
+              "content": [
+                {
+                  "_key": "6552d2b113ce",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "badf4669955d",
+                      "_type": "span",
+                      "text": "Growth/Change",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "e59478fdc99f",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "b64ac1ccaa46",
+              "plainText": "U.S. Market Hours Volume Share",
+              "content": [
+                {
+                  "_key": "0e881818b8e1",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "9e32c582c578",
+                      "_type": "span",
+                      "text": "U.S. Market Hours Volume Share",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "b1860a16a562",
+              "plainText": "41.4%",
+              "content": [
+                {
+                  "_key": "429e004cb7a8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "fd073e9d8451",
+                      "_type": "span",
+                      "text": "41.4%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "94f48045bad9",
+              "plainText": "57.3%",
+              "content": [
+                {
+                  "_key": "ae3694c5220d",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "8252099dd9c3",
+                      "_type": "span",
+                      "text": "57.3%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "2dead7d9801e",
+              "plainText": "+38.4% 22",
+              "content": [
+                {
+                  "_key": "84c7cac056d2",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "40e4351e0661",
+                      "_type": "span",
+                      "text": "+38.4% 22",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "3a641731af67",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "a2f553fc7d36",
+              "plainText": "90-Day Volatility Range",
+              "content": [
+                {
+                  "_key": "378f45bb3c83",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "9e2773bddbb1",
+                      "_type": "span",
+                      "text": "90-Day Volatility Range",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "afad2831e719",
+              "plainText": "60% - 120%",
+              "content": [
+                {
+                  "_key": "5868e26330ca",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "8fdc4b8e35b1",
+                      "_type": "span",
+                      "text": "60% - 120%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ed55ae7ee910",
+              "plainText": "25% - 45%",
+              "content": [
+                {
+                  "_key": "479d3f07a752",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "d5547409bae8",
+                      "_type": "span",
+                      "text": "25% - 45%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "d52e17a5281e",
+              "plainText": "Significant Decline 22",
+              "content": [
+                {
+                  "_key": "855847e5843a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "db6d6d90bf9c",
+                      "_type": "span",
+                      "text": "Significant Decline 22",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "af68d6c60bd2",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "512d9b9a189b",
+              "plainText": "Institutional Inflow (Annual)",
+              "content": [
+                {
+                  "_key": "916e0208c0ed",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "872bb8ab8f3a",
+                      "_type": "span",
+                      "text": "Institutional Inflow (Annual)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ca65d4d14c11",
+              "plainText": "~$15 Billion",
+              "content": [
+                {
+                  "_key": "4036f83eb4b3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "7ea31d01b6c5",
+                      "_type": "span",
+                      "text": "~$15 Billion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "0b1a64b4d973",
+              "plainText": "~$130 Billion",
+              "content": [
+                {
+                  "_key": "a6cd3e9fac8e",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "279f38c52066",
+                      "_type": "span",
+                      "text": "~$130 Billion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "b4da82b18fe6",
+              "plainText": "~8.6x Increase 19",
+              "content": [
+                {
+                  "_key": "75900b9fb8a9",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "6e68d5aa361c",
+                      "_type": "span",
+                      "text": "~8.6x Increase 19",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "14122a974e90",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "d30c85bab22b",
+              "plainText": "Corporate Treasury Holdings",
+              "content": [
+                {
+                  "_key": "17e9252d5e9a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "449ca78f7319",
+                      "_type": "span",
+                      "text": "Corporate Treasury Holdings",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "958d588848c9",
+              "plainText": "Niche/Experimental",
+              "content": [
+                {
+                  "_key": "cfe3c76d17c4",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "a163b290181c",
+                      "_type": "span",
+                      "text": "Niche/Experimental",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "012b593048a2",
+              "plainText": ">$6.7 Billion",
+              "content": [
+                {
+                  "_key": "95caf5345567",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "d1b7637fae18",
+                      "_type": "span",
+                      "text": ">$6.7 Billion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3f0599ee7248",
+              "plainText": "Global Trend 19",
+              "content": [
+                {
+                  "_key": "6f56a7c5c5b3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "9e9617ee062a",
+                      "_type": "span",
+                      "text": "Global Trend 19",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "90587fae10c6",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "530f142462b1",
+          "_type": "span",
+          "text": "This phase also saw the emergence of Bitcoin as a strategic asset for sovereign states. Beyond El Salvador's legal tender experiment, rumors of a U.S. Strategic Bitcoin Reserve and the actual holdings of countries like Bhutan and Ukraine (the latter receiving substantial crypto donations) have moved Bitcoin into the realm of global geopolitics.22",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "64619a255c03",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "19e4139e2e2b",
+          "_type": "span",
+          "text": "Global Adoption Trends and the Emerging Economy Paradigm",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "084fa014e92f",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "0bbcfdd03c70",
+          "_type": "span",
+          "text": "While institutional adoption dominates the headlines in the West, the grassroots adoption of Bitcoin in emerging economies provides a more nuanced understanding of its utility. According to the 2025 Global Crypto Adoption Index, countries with weak monetary institutions and high inflation are leading the world in crypto participation.25",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "e03a4da698a2",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "c037cf0b6c52",
+          "_type": "span",
+          "text": "The Drivers of Adoption in Emerging Markets",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ce1042a46354",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "6891cf72b059",
+          "_type": "span",
+          "text": "In regions like Sub-Saharan Africa, South Asia, and Latin America, Bitcoin is not merely a speculative asset but a financial lifeline. In Nigeria, which consistently ranks near the top of adoption indices, citizens utilize Bitcoin and stablecoins to hedge against the rapid devaluation of the Naira.26 Despite government restrictions and fluctuating policies, Nigeria received over $92.1 billion in crypto value between July 2024 and June 2025.27 Similarly, in Turkey, where inflation reached 85% in 2022, the population has turned to digital assets for both savings and payments, with annual transaction volumes exceeding $200 billion.9",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ad3e1156e5db",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "197c4f52c596",
+          "_type": "span",
+          "text": "The common drivers in these regions include:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "93b979bb4b79",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "62b3b2c78e05",
+          "_type": "span",
+          "text": "Currency Devaluation:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "24f538f8c166",
+          "_type": "span",
+          "text": " Local fiat currencies often lose 20-50% of their value annually, making Bitcoin’s fixed supply highly attractive.9",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "d5861a776cbc",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "36c075c13316",
+          "_type": "span",
+          "text": "Remittances:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "5eeae96fdde4",
+          "_type": "span",
+          "text": " Traditional remittance services charge high fees (up to 10% in some corridors). Bitcoin allows for near-instant, low-cost cross-border transfers.26",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "6b6ece266c7d",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "67567e0c711b",
+          "_type": "span",
+          "text": "Financial Exclusion:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "9a49ecac0a6d",
+          "_type": "span",
+          "text": " Large portions of these populations are unbanked. A Bitcoin wallet requires only a smartphone and internet access, bypassing the need for traditional bank accounts.26",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "154df17432e4",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "da335b057a05",
+          "_type": "span",
+          "text": "The Case of El Salvador: A Bold but Flawed Experiment",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "c135379c4ef6",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "3274b541b70d",
+          "_type": "span",
+          "text": "In September 2021, El Salvador became the first country to adopt Bitcoin as legal tender alongside the U.S. dollar. The \"Bitcoin Law\" mandated that businesses accept Bitcoin and introduced the state-backed Chivo wallet to facilitate transactions.29 However, the experiment has faced significant challenges. IMF reports indicate that adoption has not led to visible improvements in financial inclusion, with only a tiny fraction of the unbanked population actively using the technology.29",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "4ede2732b899",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "9d15cf2a2165",
+          "_type": "span",
+          "text": "Surveys conducted between 2021 and 2024 reveal that while the government provided incentives like a $30 signup bonus, upwards of 92% of Salvadorans refrained from using Bitcoin for everyday transactions.31 Public resistance was driven by a lack of digital literacy and distrust in the asset's volatility. Furthermore, the IMF highlighted fiscal risks, noting that the government's Bitcoin holdings suffered substantial losses during the 2022 market downturn, which contributed to a widening spread in El Salvador's government bonds.31 By early 2025, El Salvador was forced to amend the law to make Bitcoin acceptance voluntary for the private sector as a condition for an IMF loan.33",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "a45c6590e1c8",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "74f61d01badb",
+          "_type": "span",
+          "text": "Top Crypto-Adopting Countries (2024-2025 Index)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "939cc84bcdab",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "029f11295d2a",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "bf106eb087f2",
+              "plainText": "Rank (2025)",
+              "content": [
+                {
+                  "_key": "7e2bbe9421f1",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "3c590b4a056c",
+                      "_type": "span",
+                      "text": "Rank (2025)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "20b2de1ce47c",
+              "plainText": "Country",
+              "content": [
+                {
+                  "_key": "7fb6d8a48911",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "31f18eb72021",
+                      "_type": "span",
+                      "text": "Country",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "b75e828f506e",
+              "plainText": "Primary Use Case",
+              "content": [
+                {
+                  "_key": "0bb26358ebe7",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "1635d7abdcf8",
+                      "_type": "span",
+                      "text": "Primary Use Case",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "a965d93db4d4",
+              "plainText": "Regional Driver",
+              "content": [
+                {
+                  "_key": "9139aaca5e10",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "83e16f35c964",
+                      "_type": "span",
+                      "text": "Regional Driver",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "4129d98779d4",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "5f25fd75682c",
+              "plainText": "1",
+              "content": [
+                {
+                  "_key": "f8820643089f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "7f01adc7c559",
+                      "_type": "span",
+                      "text": "1",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "80d01f36b059",
+              "plainText": "India",
+              "content": [
+                {
+                  "_key": "dabd164b4d34",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2e09ddff103a",
+                      "_type": "span",
+                      "text": "India",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "a8d198eb5787",
+              "plainText": "Trading/Investment",
+              "content": [
+                {
+                  "_key": "9197aa07fa39",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "c96c3dcdef61",
+                      "_type": "span",
+                      "text": "Trading/Investment",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "2407e14227d3",
+              "plainText": "CSAO region hub 25",
+              "content": [
+                {
+                  "_key": "759e77816b41",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "3546947bdfdd",
+                      "_type": "span",
+                      "text": "CSAO region hub 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "ddd020c67d6a",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "bdeb03acd2fd",
+              "plainText": "2",
+              "content": [
+                {
+                  "_key": "b2b19f01f388",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2ac855b82595",
+                      "_type": "span",
+                      "text": "2",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "c7ec378ff4f1",
+              "plainText": "United States",
+              "content": [
+                {
+                  "_key": "73f15e4f97b6",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "80ac22ea1bcb",
+                      "_type": "span",
+                      "text": "United States",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "55838a8b2d16",
+              "plainText": "Institutional/ETF",
+              "content": [
+                {
+                  "_key": "3e5dc0d86366",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "964b9786dc21",
+                      "_type": "span",
+                      "text": "Institutional/ETF",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "0216a86081a3",
+              "plainText": "Regulatory clarity/ETF launch 25",
+              "content": [
+                {
+                  "_key": "29b28f6df73f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "805f5547970a",
+                      "_type": "span",
+                      "text": "Regulatory clarity/ETF launch 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "ae27da8599c5",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "0dd726f33348",
+              "plainText": "3",
+              "content": [
+                {
+                  "_key": "e50fcc865d4c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "01a33264d31b",
+                      "_type": "span",
+                      "text": "3",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "62f6741ff381",
+              "plainText": "Pakistan",
+              "content": [
+                {
+                  "_key": "7eea7d22be6d",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "5178f7b2455f",
+                      "_type": "span",
+                      "text": "Pakistan",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "d2501d09e0f2",
+              "plainText": "Savings/Remittances",
+              "content": [
+                {
+                  "_key": "5c037ac4b72f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "d8cd13cc4475",
+                      "_type": "span",
+                      "text": "Savings/Remittances",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "38da1ad55853",
+              "plainText": "Inflation/Devaluation 25",
+              "content": [
+                {
+                  "_key": "22dae33cfde3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "33c60686aa50",
+                      "_type": "span",
+                      "text": "Inflation/Devaluation 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "e2decfdec8e7",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "376b41955bd2",
+              "plainText": "4",
+              "content": [
+                {
+                  "_key": "677789cfef74",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "80c1171a9e94",
+                      "_type": "span",
+                      "text": "4",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "721d47f70335",
+              "plainText": "Philippines",
+              "content": [
+                {
+                  "_key": "e4e708266e6c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2db7ada9f2b5",
+                      "_type": "span",
+                      "text": "Philippines",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f1d858bde20b",
+              "plainText": "Gaming/Payments",
+              "content": [
+                {
+                  "_key": "f1b54cc956d1",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b42250151e0a",
+                      "_type": "span",
+                      "text": "Gaming/Payments",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e6b4a75aab06",
+              "plainText": "Digital-native population 25",
+              "content": [
+                {
+                  "_key": "db0ba7b5d73b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "652657a67dff",
+                      "_type": "span",
+                      "text": "Digital-native population 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "8a593198f07e",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "b53309358261",
+              "plainText": "12",
+              "content": [
+                {
+                  "_key": "e5371d0734d3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "dcb892d81094",
+                      "_type": "span",
+                      "text": "12",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3b810d1c2c88",
+              "plainText": "Nigeria",
+              "content": [
+                {
+                  "_key": "484708aaa629",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "97af3f6aa7d6",
+                      "_type": "span",
+                      "text": "Nigeria",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "2dfb86e8cc39",
+              "plainText": "Inflation Hedge",
+              "content": [
+                {
+                  "_key": "157551afc722",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "1e3e9dff848c",
+                      "_type": "span",
+                      "text": "Inflation Hedge",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e843b8dd3fd2",
+              "plainText": "Currency crisis/P2P usage 25",
+              "content": [
+                {
+                  "_key": "3b3de7318f76",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "18d26ef908dd",
+                      "_type": "span",
+                      "text": "Currency crisis/P2P usage 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "7ff67b0075fd",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "0894609f3d74",
+              "plainText": "16",
+              "content": [
+                {
+                  "_key": "0ce888e5aa92",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f492e8c03808",
+                      "_type": "span",
+                      "text": "16",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e507898a4d2c",
+              "plainText": "Turkey",
+              "content": [
+                {
+                  "_key": "b5059090b967",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "526f3eda2895",
+                      "_type": "span",
+                      "text": "Turkey",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3c69275ed9cd",
+              "plainText": "Savings/Investment",
+              "content": [
+                {
+                  "_key": "c02cfaa49642",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "c2ac7b08dbd0",
+                      "_type": "span",
+                      "text": "Savings/Investment",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "68a3e5c45aab",
+              "plainText": "High inflation/MENA leader 25",
+              "content": [
+                {
+                  "_key": "63ffc80cfeb3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f27d67f660b3",
+                      "_type": "span",
+                      "text": "High inflation/MENA leader 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "22cb7d5834dd",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "696c4c29983a",
+              "plainText": "18",
+              "content": [
+                {
+                  "_key": "2b840d4bb90f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "c9519d255f29",
+                      "_type": "span",
+                      "text": "18",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f52d0a3c0bb9",
+              "plainText": "Argentina",
+              "content": [
+                {
+                  "_key": "1a07a4863fd8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b8e12a8250ce",
+                      "_type": "span",
+                      "text": "Argentina",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "940964f7a933",
+              "plainText": "Inflation Hedge",
+              "content": [
+                {
+                  "_key": "f9099f8373a9",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "5255c01d5e0f",
+                      "_type": "span",
+                      "text": "Inflation Hedge",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "124b8dcbd431",
+              "plainText": "172% Inflation rate 25",
+              "content": [
+                {
+                  "_key": "24570ba706b8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "031615d324b3",
+                      "_type": "span",
+                      "text": "172% Inflation rate 25",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "f9f49cf8d150",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "9ecd0508583d",
+          "_type": "span",
+          "text": "The divergence between the U.S. (#2) and India (#1) highlights two different paths to adoption: institutional integration in developed markets versus grassroots, utility-driven adoption in emerging ones. While the U.S. volume is driven by high-value institutional transfers (45% of transactions are >$10 million), emerging markets are characterized by a higher frequency of retail and P2P transfers.16",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "05756c495ed4",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "2f91a18a9ef7",
+          "_type": "span",
+          "text": "Bitcoin in the Global Financial System: A Quantitative Comparison",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "0d199694be42",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "1423a6ab7482",
+          "_type": "span",
+          "text": "To evaluate Bitcoin's potential as a global store of value, its market capitalization must be contextualized within the broader framework of global wealth. As of 2025, the total global M2 money supply is estimated at approximately $180 trillion, while the physical gold market is valued at roughly $36.8 trillion.34",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "7254f53edb22",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "eb5230c68cc1",
+          "_type": "span",
+          "text": "Comparative Market Sizes (2025 Estimates)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "def0fceeddca",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "ceae539dbe1b",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "05bea401c61a",
+              "plainText": "Asset / Metric",
+              "content": [
+                {
+                  "_key": "2ba9dd0e4271",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "17deb4e446f3",
+                      "_type": "span",
+                      "text": "Asset / Metric",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "9e1dc75586d8",
+              "plainText": "Market Capitalization (USD)",
+              "content": [
+                {
+                  "_key": "97767920f139",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "faa3545a4dfc",
+                      "_type": "span",
+                      "text": "Market Capitalization (USD)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "0f5b5a5c7e85",
+              "plainText": "Bitcoin as % of Asset",
+              "content": [
+                {
+                  "_key": "21ff00b18b12",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2c70f64ffea5",
+                      "_type": "span",
+                      "text": "Bitcoin as % of Asset",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "61c2305fc9fa",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "402e804ca504",
+              "plainText": "Global Real Estate",
+              "content": [
+                {
+                  "_key": "ee914392f26d",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "0cc4caefbf1a",
+                      "_type": "span",
+                      "text": "Global Real Estate",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "de1557fe419c",
+              "plainText": "~$281.0 Trillion",
+              "content": [
+                {
+                  "_key": "66546f59f90a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "ced208c32b62",
+                      "_type": "span",
+                      "text": "~$281.0 Trillion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "052aa3e275de",
+              "plainText": "~0.75%",
+              "content": [
+                {
+                  "_key": "6ab95271d393",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "980576c5c9d7",
+                      "_type": "span",
+                      "text": "~0.75%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "9709213b61a2",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "6863ab53ff1c",
+              "plainText": "Global Debt",
+              "content": [
+                {
+                  "_key": "e905e3be44ce",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "333363c671fb",
+                      "_type": "span",
+                      "text": "Global Debt",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "53207c815194",
+              "plainText": "~$253.0 Trillion",
+              "content": [
+                {
+                  "_key": "3ced12a58e9d",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "13fc60ed15f7",
+                      "_type": "span",
+                      "text": "~$253.0 Trillion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "7264b9ac2a24",
+              "plainText": "~0.83%",
+              "content": [
+                {
+                  "_key": "dd2f598814ad",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "41f260da0c31",
+                      "_type": "span",
+                      "text": "~0.83%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "0af5ead5df4e",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "fb5d73692d71",
+              "plainText": "Global Equity Markets",
+              "content": [
+                {
+                  "_key": "10efe2aeac86",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "65ce4576eff4",
+                      "_type": "span",
+                      "text": "Global Equity Markets",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "5c47a991fd34",
+              "plainText": "~$120.0 Trillion",
+              "content": [
+                {
+                  "_key": "f2f605c1195b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "caf5f132f44b",
+                      "_type": "span",
+                      "text": "~$120.0 Trillion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "712ef7d48eda",
+              "plainText": "~1.75%",
+              "content": [
+                {
+                  "_key": "75c658351a79",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "1a22ca384f70",
+                      "_type": "span",
+                      "text": "~1.75%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "6cc82ad4fe9b",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "9860715e7fb0",
+              "plainText": "Global M2 Money Supply",
+              "content": [
+                {
+                  "_key": "50c472087084",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "56b578e02da6",
+                      "_type": "span",
+                      "text": "Global M2 Money Supply",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "efe6339db29b",
+              "plainText": "~$180.0 Trillion",
+              "content": [
+                {
+                  "_key": "fe78d60b62db",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "96e58f4e16d9",
+                      "_type": "span",
+                      "text": "~$180.0 Trillion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3521c21a974f",
+              "plainText": "~1.17%",
+              "content": [
+                {
+                  "_key": "f924b44c709b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b53992671969",
+                      "_type": "span",
+                      "text": "~1.17%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "8128451e0551",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "53e43a63d570",
+              "plainText": "Above-Ground Gold",
+              "content": [
+                {
+                  "_key": "faac338e947e",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "25655712515a",
+                      "_type": "span",
+                      "text": "Above-Ground Gold",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "81c89f49d29f",
+              "plainText": "~$36.8 Trillion",
+              "content": [
+                {
+                  "_key": "fc12efb6201b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "4b3c65ea0725",
+                      "_type": "span",
+                      "text": "~$36.8 Trillion",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "10579497b32f",
+              "plainText": "~5.70%",
+              "content": [
+                {
+                  "_key": "c450cc34cd8a",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "fcf46858a9f2",
+                      "_type": "span",
+                      "text": "~5.70%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "e14219caea9e",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "f31425b79062",
+              "plainText": "Bitcoin",
+              "content": [
+                {
+                  "_key": "8ad8f65301bc",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "0e8b0e4a8a9b",
+                      "_type": "span",
+                      "text": "Bitcoin",
+                      "marks": [
+                        "strong"
+                      ]
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "67f7af38d9ae",
+              "plainText": "~$2.1 Trillion",
+              "content": [
+                {
+                  "_key": "5b03488643bd",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b97251496174",
+                      "_type": "span",
+                      "text": "~$2.1 Trillion",
+                      "marks": [
+                        "strong"
+                      ]
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "767efa0613fd",
+              "plainText": "100.00%",
+              "content": [
+                {
+                  "_key": "a7658a9ba225",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "75bea8c9a5dd",
+                      "_type": "span",
+                      "text": "100.00%",
+                      "marks": [
+                        "strong"
+                      ]
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "4d244bc823fa",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "46f0b6d0a138",
+          "_type": "span",
+          "text": "Note: Bitcoin market value is calculated based on a ~$110,000 price point.10",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "0ba2c7994934",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "796a6a180903",
+          "_type": "span",
+          "text": "Despite its rapid growth, Bitcoin remains a nascent asset class. Its current share of global wealth is less than 1%, suggesting significant potential for asymmetric upside if it continues to capture a portion of the value currently stored in gold, bonds, or real estate.5 A key metric used by institutional analysts is the \"Hard Money Basket,\" which combines the value of gold and Bitcoin. In 2015, Bitcoin comprised less than 0.1% of this basket. By 2025, its share had grown to approximately 8%, representing a massive structural shift in how investors define \"hard assets\".10",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "e96188d73f33",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "b838e75908c5",
+          "_type": "span",
+          "text": "The Impact of Monetary Expansion on Bitcoin Valuation",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "5df588494860",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "b0881596ea13",
+          "_type": "span",
+          "text": "There is a documented correlation between the growth of the global money supply and the price of Bitcoin. Research indicates that Bitcoin acts as a \"liquidity barometer,\" often outperforming the growth of M2 during periods of easing.37 WisdomTree’s valuation framework utilizes the following relationship:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "316301485676",
+      "_type": "formulaBlock",
+      "formulaId": "image1",
+      "alt": "",
+      "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-1.webp",
+      "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-1",
+      "dimensions": {
+        "width": 620,
+        "height": 60
+      },
+      "sha256": "7f47a27861ac074065b468b24b2a65821999accf2a70bfc51232a6c0ea0767b4",
+      "originalPngSha256": "8f1b71240186857661a433d42f94273402917838be057d17a8ddca64d51c337c"
+    },
+    {
+      "_key": "f63038f475ca",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "66a97fb6e7b4",
+          "_type": "span",
+          "text": "Where:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "0b9a15337779",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "496cb39e8723",
+          "_type": "inlineFormula",
+          "formulaId": "image2",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-2.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-2",
+          "dimensions": {
+            "width": 21,
+            "height": 25
+          },
+          "sha256": "80995c79a501b495082db7896b5791702b3eb9a495e1a2418be78b787e81fd44",
+          "originalPngSha256": "cd84eb4e9a96a5cc65ec778ee88850b472b53539c608615fd14414514810cc35"
+        },
+        {
+          "_key": "f74ef3c24649",
+          "_type": "span",
+          "text": " = Global M2 Money Supply",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "22fe51d6b2c0",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "76085c43c32b",
+          "_type": "inlineFormula",
+          "formulaId": "image3",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-3.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-3",
+          "dimensions": {
+            "width": 18,
+            "height": 25
+          },
+          "sha256": "7e1cdb25534caefb1733bd0731ce5ebcfc0e436aed36d7a84617dc7f748dfc9c",
+          "originalPngSha256": "7cf335911942fba9eccb2d317f7872ee5f324cfc8edbde32d36a80e670a9becc"
+        },
+        {
+          "_key": "1b87a2e0f638",
+          "_type": "span",
+          "text": " = Hard-asset share of money supply (historically 10-40%)",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "9dbd6900fb89",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "641e231680c8",
+          "_type": "inlineFormula",
+          "formulaId": "image4",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-4.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-4",
+          "dimensions": {
+            "width": 16,
+            "height": 24
+          },
+          "sha256": "3ea8ba037a31fb576af7be12d2fb3377de5546ab074b5d967ae7b9deacf327bd",
+          "originalPngSha256": "114278846248e6b5c1f5e7df28efc76757060df4484ed8571c4810a2702bd000"
+        },
+        {
+          "_key": "1410fdafe53e",
+          "_type": "span",
+          "text": " = Bitcoin’s share of the hard-asset pool",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "fc0cdf7a1639",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_key": "06695d36e8f7",
+          "_type": "inlineFormula",
+          "formulaId": "image5",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-5.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-5",
+          "dimensions": {
+            "width": 13,
+            "height": 25
+          },
+          "sha256": "517b51d9eb20c5c7c100638c62c550ce2727758fcdb400ec5c3b275900d1ec77",
+          "originalPngSha256": "3631796bc5f1ca04f24f8ccd586c90cbf0905ba42062df446925a8df924dfbac"
+        },
+        {
+          "_key": "c063450ed7a9",
+          "_type": "span",
+          "text": " = Circulating supply of Bitcoin 10",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "2ff022022a2a",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "f5282bce19cb",
+          "_type": "span",
+          "text": "As of early 2025, the global \"hard money\" share (",
+          "marks": []
+        },
+        {
+          "_key": "000e6b16d7dd",
+          "_type": "inlineFormula",
+          "formulaId": "image3",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-3.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-3",
+          "dimensions": {
+            "width": 18,
+            "height": 25
+          },
+          "sha256": "7e1cdb25534caefb1733bd0731ce5ebcfc0e436aed36d7a84617dc7f748dfc9c",
+          "originalPngSha256": "7cf335911942fba9eccb2d317f7872ee5f324cfc8edbde32d36a80e670a9becc"
+        },
+        {
+          "_key": "1db393d4f4fe",
+          "_type": "span",
+          "text": ") stood at an elevated 29% ($30 trillion), reflecting broad distrust in fiat systems following the post-pandemic inflationary surge.10 If ",
+          "marks": []
+        },
+        {
+          "_key": "3ec24037ce8f",
+          "_type": "inlineFormula",
+          "formulaId": "image4",
+          "alt": "",
+          "assetPath": "/images/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-4.webp",
+          "manifestRef": "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset/formula-4",
+          "dimensions": {
+            "width": 16,
+            "height": 24
+          },
+          "sha256": "3ea8ba037a31fb576af7be12d2fb3377de5546ab074b5d967ae7b9deacf327bd",
+          "originalPngSha256": "114278846248e6b5c1f5e7df28efc76757060df4484ed8571c4810a2702bd000"
+        },
+        {
+          "_key": "bd7ce1a8c6dc",
+          "_type": "span",
+          "text": " (Bitcoin's share) continues to grow from its current 8% toward a level comparable to gold (the remaining 92%), the price implications are substantial.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "c953dbd65d6b",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "23d642b74826",
+          "_type": "span",
+          "text": "Bitcoin as Digital Gold: Scarcity, Portability, and Trust",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "2b653bed67fb",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "f818f494f08d",
+          "_type": "span",
+          "text": "The comparison between Bitcoin and gold is rooted in their shared monetary properties, yet they differ significantly in their implementation. Both assets are physically or mathematically durable, fungible, and scarce. However, Bitcoin introduces improvements in portability and verifiability that gold cannot match.6",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "215bc1cc3399",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "5d8209cf9ba4",
+          "_type": "span",
+          "text": "Comparison of Monetary Properties",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "8192fc0d2551",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "796388e707f4",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "5ddf114ccf02",
+              "plainText": "Property",
+              "content": [
+                {
+                  "_key": "5520c9022c9e",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "eb9b3857f339",
+                      "_type": "span",
+                      "text": "Property",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "c7ef1edf8d7f",
+              "plainText": "Physical Gold",
+              "content": [
+                {
+                  "_key": "1870880c4264",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "66f4438d8759",
+                      "_type": "span",
+                      "text": "Physical Gold",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ad60aee406c3",
+              "plainText": "Bitcoin",
+              "content": [
+                {
+                  "_key": "e3d0cce97819",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "9878d8ce7c9a",
+                      "_type": "span",
+                      "text": "Bitcoin",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "40791c09a621",
+              "plainText": "Fiat Currency",
+              "content": [
+                {
+                  "_key": "ca2cd1f6e5dd",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "475ef62287c9",
+                      "_type": "span",
+                      "text": "Fiat Currency",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "b1a7b337261a",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "a037d7612551",
+              "plainText": "Scarcity",
+              "content": [
+                {
+                  "_key": "a60c9837bb42",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "fdbb06dfe465",
+                      "_type": "span",
+                      "text": "Scarcity",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "383f5f26a9c5",
+              "plainText": "Relative (1.6% inflation)",
+              "content": [
+                {
+                  "_key": "b82270d0974b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "5f9770a54421",
+                      "_type": "span",
+                      "text": "Relative (1.6% inflation)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "8c01cd6ebddc",
+              "plainText": "Finite (21M total)",
+              "content": [
+                {
+                  "_key": "250fe6c11859",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b07418f5dca4",
+                      "_type": "span",
+                      "text": "Finite (21M total)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "679c9ed1568e",
+              "plainText": "Infinite (Discretionary)",
+              "content": [
+                {
+                  "_key": "f7a4d3aa2b19",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "9d7a5f64238f",
+                      "_type": "span",
+                      "text": "Infinite (Discretionary)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "b50ac3597393",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "6a05e6e3002c",
+              "plainText": "Portability",
+              "content": [
+                {
+                  "_key": "f64b338eeff2",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "af84a619e969",
+                      "_type": "span",
+                      "text": "Portability",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e490ad18339d",
+              "plainText": "Low (Heavy/Bulky)",
+              "content": [
+                {
+                  "_key": "6ca09f1e06e7",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "28a85c31daec",
+                      "_type": "span",
+                      "text": "Low (Heavy/Bulky)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "7c896bad4bde",
+              "plainText": "High (Digital/Instant)",
+              "content": [
+                {
+                  "_key": "f8b8d8744fce",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "a8c30008967c",
+                      "_type": "span",
+                      "text": "High (Digital/Instant)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "23abaada1037",
+              "plainText": "High (Digital/Physical)",
+              "content": [
+                {
+                  "_key": "ab9abc853a7c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "642f272f838c",
+                      "_type": "span",
+                      "text": "High (Digital/Physical)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "ba04aac6e358",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "501f32dab103",
+              "plainText": "Divisibility",
+              "content": [
+                {
+                  "_key": "d9c3e4f24b75",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "54a95deae739",
+                      "_type": "span",
+                      "text": "Divisibility",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "e7e2ab903871",
+              "plainText": "Moderate (Low utility)",
+              "content": [
+                {
+                  "_key": "160626aed2d8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2b279f569321",
+                      "_type": "span",
+                      "text": "Moderate (Low utility)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f3693fe3b253",
+              "plainText": "High (8 decimals)",
+              "content": [
+                {
+                  "_key": "fdf9d48d106b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "e44f378c4b3c",
+                      "_type": "span",
+                      "text": "High (8 decimals)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "30e9da7f4dfd",
+              "plainText": "High (2 decimals)",
+              "content": [
+                {
+                  "_key": "9f70993211b7",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "a5347ca7e568",
+                      "_type": "span",
+                      "text": "High (2 decimals)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "c9ebf1bcd396",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "7fd314f6548a",
+              "plainText": "Verifiability",
+              "content": [
+                {
+                  "_key": "704ad13235e4",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "21ebb4dfdd2c",
+                      "_type": "span",
+                      "text": "Verifiability",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "6d302994b816",
+              "plainText": "Difficult (Assay needed)",
+              "content": [
+                {
+                  "_key": "f09e8e932823",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b80bbe39a5a4",
+                      "_type": "span",
+                      "text": "Difficult (Assay needed)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ac7efd3f80c1",
+              "plainText": "Instant (Blockchain)",
+              "content": [
+                {
+                  "_key": "371ecbc1d16f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "48ce5067b0fe",
+                      "_type": "span",
+                      "text": "Instant (Blockchain)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "c1964ef726cd",
+              "plainText": "Moderate (Security features)",
+              "content": [
+                {
+                  "_key": "1722c3b10b73",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "84d36e122243",
+                      "_type": "span",
+                      "text": "Moderate (Security features)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "d22be9c83067",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "46cc6e45e58a",
+              "plainText": "Security",
+              "content": [
+                {
+                  "_key": "7c7f8ef85c9b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "fa8d11ad6ccd",
+                      "_type": "span",
+                      "text": "Security",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "16fb1610437d",
+              "plainText": "Physical (Theft/Siege)",
+              "content": [
+                {
+                  "_key": "426a7a2e44f3",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b23294265b82",
+                      "_type": "span",
+                      "text": "Physical (Theft/Siege)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ee2b0371cdfd",
+              "plainText": "Cryptographic (Keys)",
+              "content": [
+                {
+                  "_key": "76abac1c6e57",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "481695d65ed6",
+                      "_type": "span",
+                      "text": "Cryptographic (Keys)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3d69e5d5184f",
+              "plainText": "Institutional (Insurance)",
+              "content": [
+                {
+                  "_key": "da0297e9df6b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "fda7b29c5f6b",
+                      "_type": "span",
+                      "text": "Institutional (Insurance)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "bddc68865adb",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "3f3842ea4bed",
+              "plainText": "Historical Trust",
+              "content": [
+                {
+                  "_key": "ab60f99ac8c0",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "93776d8db6bb",
+                      "_type": "span",
+                      "text": "Historical Trust",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "885891f1fa44",
+              "plainText": "5,000+ Years",
+              "content": [
+                {
+                  "_key": "5af1ce8acb72",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "780fa42100fc",
+                      "_type": "span",
+                      "text": "5,000+ Years",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3b63ae7e2bf2",
+              "plainText": "~16 Years",
+              "content": [
+                {
+                  "_key": "18fb854a9fe2",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "d228541f8d0d",
+                      "_type": "span",
+                      "text": "~16 Years",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "1564ec64057e",
+              "plainText": "Decades (Varies by state)",
+              "content": [
+                {
+                  "_key": "d9530bd0091b",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "17a2cd752984",
+                      "_type": "span",
+                      "text": "Decades (Varies by state)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "5e3885b20cba",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "2c4bc2d3f97e",
+          "_type": "span",
+          "text": "Bitcoin’s absolute scarcity—enforced by code—is its most significant advantage over gold. While an increase in the price of gold can incentivize more mining (supply is elastic to price), an increase in Bitcoin’s price only increases the network’s hash rate and security; the issuance rate remains fixed by the protocol.5 This \"perfect inelasticity\" makes Bitcoin a unique instrument for preserving purchasing power over long horizons.17",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "7edaef99e471",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "ab558a0b2504",
+          "_type": "span",
+          "text": "Furthermore, the portability of Bitcoin allows for the transfer of billions of dollars across borders in minutes with a smartphone, whereas moving the same amount of gold requires armored transports, insurance, and complex logistics.3 This \"digital portability\" is particularly valuable in the current geopolitical environment, where the risk of asset seizure or capital controls has become a concern for both individuals and sovereign entities.7",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "0015e84930f5",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "ee229004393c",
+          "_type": "span",
+          "text": "The Volatility Debate: Risk or Price Discovery?",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "fe73ad67a185",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "9130cb4542ec",
+          "_type": "span",
+          "text": "Critics often cite Bitcoin's high volatility as proof that it cannot be a store of value. However, institutional analysts at Fidelity argue that volatility is the natural price of a nascent asset undergoing a multi-decade price discovery process.5 Bitcoin's volatility is a direct result of its perfectly inelastic supply; because the supply cannot expand to meet demand shocks, the entire adjustment must occur through price.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "5806789db135",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "e1b66c18ddaf",
+          "_type": "span",
+          "text": "Historical data shows that as Bitcoin's market cap increases, its volatility tends to decline. In 2024-2025, Bitcoin's daily volatility fell to 1.8%, down from 4.2% in the 2020-2023 period.22 Interestingly, during the period of 2020-2024, Bitcoin's Sharpe ratio (a measure of risk-adjusted return) was 0.96, significantly higher than the S&P 500's 0.65, meaning investors were more than compensated for the \"risk\" of its volatility.17",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "6d62b369f53d",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "94097e8b32fa",
+          "_type": "span",
+          "text": "Institutional and Government Behavior: Regulation and Sovereignty",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "7522d912be9f",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "60c0d7375b37",
+          "_type": "span",
+          "text": "The rapid growth of Bitcoin has forced governments and central banks to develop comprehensive regulatory frameworks. While some countries view digital assets as a tool for economic growth, others see them as a threat to \"monetary sovereignty\"—the state's exclusive right to control the money supply and implement monetary policy.39",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ca50091927cf",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "9e3eb74eee32",
+          "_type": "span",
+          "text": "Regulatory Milestones: MiCA and the GENIUS Act",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "deb01a7edd1b",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "d3ef50348250",
+          "_type": "span",
+          "text": "The year 2025 represented a watershed moment for regulatory clarity. In the European Union, the Markets in Crypto-Assets (MiCA) regulation became fully enforceable, providing a unified licensing regime across the 27-member bloc.41 MiCA has successfully provided institutional investors with the legal certainty needed to integrate digital assets into their portfolios, leading to a surge in MiCA-compliant stablecoins like EURC, which saw 2,727% growth in late 2024.41",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "31e8c8f2a021",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "0b90e3525338",
+          "_type": "span",
+          "text": "In the United States, the passage of the GENIUS Act (Guiding and Establishing National Innovation for U.S. Stablecoins Act) in 2025 offered similar clarity for dollar-backed digital assets.43 This legislative movement has been accompanied by a shift in the Basel Committee’s stance on banking exposure to crypto. By late 2025, regulators were moving toward softening capital deduction requirements for banks holding stablecoins on public blockchains, signaling a \"softening of regulatory attitudes\" that is expected to drive further institutional momentum into 2026.44",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "4c200af70029",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "a035d864f852",
+          "_type": "span",
+          "text": "The Threat to Central Bank Power and the Rise of CBDCs",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "861c616461ef",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "365cec3ce1f4",
+          "_type": "span",
+          "text": "Central banks are primarily concerned that the widespread adoption of decentralized digital assets could lead to \"cryptoization,\" where the national fiat currency is replaced by Bitcoin or a foreign-issued stablecoin.45 This would strip central banks of their primary tools: interest rate manipulation and quantitative easing. The BIS has specifically highlighted that Bitcoin fails on the \"singleness\" property—the idea that all forms of money should trade at par with sovereign money.47",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "f544495f569f",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "43403973aa50",
+          "_type": "span",
+          "text": "In response, 94% of the world’s central banks are now researching or piloting Central Bank Digital Currencies (CBDCs).48 These are viewed as a \"defensive measure\" to preserve the role of public money in a digital economy. However, the success of CBDCs is far from guaranteed. Unlike Bitcoin, which is permissionless and censorship-resistant, CBDCs are centralized instruments that grant the state total visibility into all financial flows, raising significant privacy concerns that may hinder public adoption.39",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "2b51a2727d6a",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "150c2f1b0cfe",
+          "_type": "span",
+          "text": "Risks and Critical Evaluation: Volatility, Security, and Manipulation",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "49a9897ba190",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "e8956caaab87",
+          "_type": "span",
+          "text": "Despite the institutional momentum, Bitcoin remains a high-risk asset with several structural vulnerabilities that could undermine the \"digital gold\" thesis.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "6846a278348f",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "01be139775b9",
+          "_type": "span",
+          "text": "Wealth Concentration and the Gini Coefficient",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "d39de95f3f97",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "eeb4f83a1851",
+          "_type": "span",
+          "text": "While Bitcoin’s protocol is decentralized, its wealth distribution is extremely concentrated. Academic research utilizing on-chain data from 2020-2025 shows that the Gini coefficient for Bitcoin ownership remains consistently above 0.92.49 For context, this is significantly higher than the wealth inequality found in most traditional nations. A tiny subset of \"whales\" and institutional custodians (like Coinbase, which holds 85% of all ETF Bitcoin) exert massive influence over the market.22 This concentration creates a systemic risk, as a significant sell-off by a few large entities could trigger a liquidity cascade.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "53f762e2e65f",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "300e68fda155",
+          "_type": "span",
+          "text": "Security Vulnerabilities and Exchange Hacks",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ca38d28be9e9",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "3a39212390ed",
+          "_type": "span",
+          "text": "The security of the Bitcoin network is maintained by its massive hash rate, yet the service providers sitting on top of the network are often the \"weakest link.\" In 2025, the industry witnessed a record-breaking year for theft, with over $3.4 billion stolen from services.50 The hack of the Bybit exchange in February 2025 resulted in a $1.5 billion loss, the largest single hack in cryptocurrency history.51 Furthermore, while a 51% attack on the Bitcoin network is estimated to cost $6 billion per week—making it prohibitively expensive for most actors—it remains a theoretical possibility if a state-level actor were motivated to disrupt the network for geopolitical reasons.52",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "69c4686ba8f5",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "c53815b53d9b",
+          "_type": "span",
+          "text": "Market Manipulation and Integrity Concerns",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "b87845b775c4",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "1a1a7262d6e0",
+          "_type": "span",
+          "text": "Concerns about \"fake volume\" and price manipulation continue to persist. Research into the transaction logs of major exchanges has uncovered evidence of \"wash trading\"—a type of manipulation where traders buy and sell to themselves to create an illusion of liquidity.13 Some studies suggest that on unregulated exchanges, upwards of 70-90% of trading volume may be manipulated.13 Additionally, the historical role of Tether (USDT) in potentially inflating the 2017 price rally remains a topic of academic study, with researchers using agent-based models to demonstrate that fraudulent trading was likely essential to the price reaching its late-2017 peaks.14",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "bdda91f2f8c3",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "a3d40f62cbee",
+          "_type": "span",
+          "text": "Environmental Impact and Energy Usage",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "074bbb18daf0",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "1a1a1e2eb35b",
+          "_type": "span",
+          "text": "Bitcoin’s energy consumption remains a major barrier to its \"ESG\" (Environmental, Social, and Governance) adoption. In 2025, the network consumed an estimated 173-240 TWh annually, exceeding the electricity usage of countries like Poland.55 Each Bitcoin transaction is estimated to consume approximately 1,444 kWh, enough to power 954,244 VISA transactions.57 While over 52% of the energy now comes from sustainable sources, the sheer scale of the power draw—roughly 0.5% of global electricity demand—continues to invite regulatory scrutiny and carbon tax proposals in the U.S. and Europe.56",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "22e094c27f6c",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "a531605573b3",
+          "_type": "span",
+          "text": "Future Trajectory: Scenarios for the Next 10–30 Years",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "c4b2aa241dfc",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "2c305f9670fe",
+          "_type": "span",
+          "text": "The long-term outlook for Bitcoin depends on its continued institutionalization and its role in a world of increasing fiscal instability. Based on current trends and macroeconomic modeling, three realistic scenarios emerge for the period through 2050.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "3d4cdb1126d2",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "ba692a41e7fe",
+          "_type": "span",
+          "text": "1. Conservative Adoption Scenario (The \"Alternative Asset\" Case)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "be13b333cd05",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "e1d82e30efcc",
+          "_type": "span",
+          "text": "In this scenario, Bitcoin remains a niche alternative asset class with a permanent 1-2% allocation in diversified portfolios. Institutional inflows stabilize, and volatility remains higher than equities. Under this model (assuming 3% M2 growth), the price is projected to reach approximately $150,000 by 2030 and $266,000 by 2050.10 In this case, Bitcoin fails to displace gold but succeeds as a \"digital collectible\" with limited macro influence.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "d0e1e52e3b25",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "aefc0f55b682",
+          "_type": "span",
+          "text": "2. Moderate Institutional Adoption Scenario (The \"Digital Gold\" Case)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "5f9560a8fbda",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "1ed5e7c754de",
+          "_type": "span",
+          "text": "In the base case scenario, Bitcoin is widely accepted as a legitimate competitor to gold. Corporate treasuries routinely allocate 5-10% of their cash to Bitcoin, and it becomes a standard feature in pension funds and 401ks. With 5% M2 growth, the price is projected to reach $275,000 by 2030 and $710,000 by 2050.10 In this scenario, Bitcoin’s market cap would approach $10-15 trillion, rivaling the current value of the gold market.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "92538708b16c",
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_key": "9af786c8c866",
+          "_type": "span",
+          "text": "3. Global Reserve Asset Scenario (The \"Hyper-Bitcoinization\" Case)",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "15c23e241557",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "7e7c32601af3",
+          "_type": "span",
+          "text": "In the most bullish scenario, a \"sovereign debt crisis\" in major economies leads to a loss of trust in fiat bonds. Central banks begin to hold Bitcoin in their official reserves as a non-sovereign hedge. With 7% M2 growth and Bitcoin capturing 15% of the \"hard money\" basket, the price is projected to reach $475,000 by 2030 and $1,800,000 by 2050.10 This would represent a total market cap exceeding $35 trillion, making Bitcoin a central pillar of the global financial architecture.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "ed68bf1620ed",
+      "_type": "tableBlock",
+      "rows": [
+        {
+          "_key": "dff95f4ebc72",
+          "isHeader": true,
+          "cells": [
+            {
+              "_key": "fe8f50399c63",
+              "plainText": "Scenario",
+              "content": [
+                {
+                  "_key": "e85244f4be1f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "2eb0b0eca997",
+                      "_type": "span",
+                      "text": "Scenario",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "db813dadcef2",
+              "plainText": "2030 Price Target",
+              "content": [
+                {
+                  "_key": "9a99f9a5655c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "02cb67b2ccbf",
+                      "_type": "span",
+                      "text": "2030 Price Target",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "cf19a00d2be8",
+              "plainText": "2050 Price Target",
+              "content": [
+                {
+                  "_key": "40129c4cf5ea",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "6c4e4a63593f",
+                      "_type": "span",
+                      "text": "2050 Price Target",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f90a10b21514",
+              "plainText": "Implied CAGR (from 2025)",
+              "content": [
+                {
+                  "_key": "053d93563cbf",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "98a3c8d4b34b",
+                      "_type": "span",
+                      "text": "Implied CAGR (from 2025)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "81aa3dac05c6",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "e8b5db15509b",
+              "plainText": "Deflationary/Conservative",
+              "content": [
+                {
+                  "_key": "ae84da783687",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "861e7f8c5dd5",
+                      "_type": "span",
+                      "text": "Deflationary/Conservative",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "4b35fce76c51",
+              "plainText": "$150,000",
+              "content": [
+                {
+                  "_key": "8798f3576561",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "dd76a9edba8c",
+                      "_type": "span",
+                      "text": "$150,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "57034b77680a",
+              "plainText": "$266,000",
+              "content": [
+                {
+                  "_key": "48755db91503",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "4d75eed05bbd",
+                      "_type": "span",
+                      "text": "$266,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "484579404cd1",
+              "plainText": "3.6% - 6.4%",
+              "content": [
+                {
+                  "_key": "a88e0778ae17",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "42b7c94067a4",
+                      "_type": "span",
+                      "text": "3.6% - 6.4%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "0b865d6bb29d",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "f6704b4a825a",
+              "plainText": "Base Case (Digital Gold)",
+              "content": [
+                {
+                  "_key": "14db2cd54ea8",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "3c2680345cac",
+                      "_type": "span",
+                      "text": "Base Case (Digital Gold)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "a1db2ff59fe7",
+              "plainText": "$275,000",
+              "content": [
+                {
+                  "_key": "49d9c051941f",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "c15ef022d44d",
+                      "_type": "span",
+                      "text": "$275,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "95821e097732",
+              "plainText": "$710,000",
+              "content": [
+                {
+                  "_key": "88577447725c",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "8052aff00da9",
+                      "_type": "span",
+                      "text": "$710,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "02e046006bb5",
+              "plainText": "7.7% - 20.0%",
+              "content": [
+                {
+                  "_key": "03ee84116c94",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "5c418a4b7188",
+                      "_type": "span",
+                      "text": "7.7% - 20.0%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_key": "f3c53c927159",
+          "isHeader": false,
+          "cells": [
+            {
+              "_key": "959afeb02a76",
+              "plainText": "Inflationary (Reserve Asset)",
+              "content": [
+                {
+                  "_key": "bac34b198a90",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "b329c6a750bf",
+                      "_type": "span",
+                      "text": "Inflationary (Reserve Asset)",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "3e3fbba4720f",
+              "plainText": "$475,000",
+              "content": [
+                {
+                  "_key": "573a50ecf7b6",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "f7c6f92442a2",
+                      "_type": "span",
+                      "text": "$475,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "f8dafd3cae74",
+              "plainText": "$1,800,000",
+              "content": [
+                {
+                  "_key": "570a98a5f749",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "81e48b7fd024",
+                      "_type": "span",
+                      "text": "$1,800,000",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            },
+            {
+              "_key": "ba3070777f19",
+              "plainText": "12.0% - 34.0%",
+              "content": [
+                {
+                  "_key": "72101d9989f6",
+                  "_type": "block",
+                  "style": "normal",
+                  "children": [
+                    {
+                      "_key": "c2dbc84754b5",
+                      "_type": "span",
+                      "text": "12.0% - 34.0%",
+                      "marks": []
+                    }
+                  ],
+                  "markDefs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_key": "60149ff76d17",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "9c84d06b4e6b",
+          "_type": "span",
+          "text": "Source: WisdomTree Model Forecasts 2025-2050.10",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "b17336f1c201",
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_key": "b87a0104159b",
+          "_type": "span",
+          "text": "Evidence-Based Conclusion: Is Bitcoin the New Global Reserve?",
+          "marks": [
+            "strong"
+          ]
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "b9ff76ae5f96",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "112bde230131",
+          "_type": "span",
+          "text": "The evidence gathered from institutional reports, on-chain data, and macroeconomic analysis indicates that Bitcoin is undeniably evolving from a peer-to-peer payment experiment into a significant global store-of-value asset. The shift is supported by several key data points:",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "7ff6e8cf7588",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_key": "8a5a2bfeea21",
+          "_type": "span",
+          "text": "Institutional Maturation:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "a4fdef7eee70",
+          "_type": "span",
+          "text": " The launch of spot ETFs and the entry of $2.2 trillion in North American crypto transaction value signify that Bitcoin has left the \"fringe\" and entered the \"mainstream\" financial infrastructure.16",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "eab85ba73bb1",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_key": "8e6414bbb741",
+          "_type": "span",
+          "text": "Scarcity Superiority:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "d3c5e6d9b924",
+          "_type": "span",
+          "text": " Bitcoin’s 0.9% inflation rate is now lower than gold's 1.6%, and its supply is perfectly inelastic to price, a property no other asset possesses.5",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "228722ad6116",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_key": "b15d3f98ad9f",
+          "_type": "span",
+          "text": "Macroeconomic Hedging:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "35e1b2b51f9c",
+          "_type": "span",
+          "text": " During the 2023-2025 period of high uncertainty, Bitcoin surged 260%, demonstrating a strong correlation with increased demand for \"safe-haven\" assets like gold and cash.38",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "b7380cde389f",
+      "_type": "block",
+      "style": "normal",
+      "listItem": "number",
+      "level": 1,
+      "children": [
+        {
+          "_key": "f7947a7ac3d0",
+          "_type": "span",
+          "text": "Grassroots Utility:",
+          "marks": [
+            "strong"
+          ]
+        },
+        {
+          "_key": "2ce800cb8f51",
+          "_type": "span",
+          "text": " In high-inflation economies like Nigeria and Argentina, Bitcoin is actively performing the role of a monetary hedge, providing the \"unbanked\" with access to global purchasing power.26",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "cf1b1653f3eb",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "be1c104e322d",
+          "_type": "span",
+          "text": "However, for Bitcoin to succeed as a global monetary hedge, it must overcome its significant structural hurdles. The extreme wealth concentration (Gini > 0.92), the persistent threat of large-scale service hacks (e.g., Bybit), and the substantial environmental footprint continue to provide valid grounds for skepticism.49",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "f0233a931ada",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "ffa98bfb79cc",
+          "_type": "span",
+          "text": "The ultimate condition for Bitcoin's success is the continued erosion of trust in centralized monetary systems. Under conditions of high fiscal expansion and currency debasement, the market’s demand for a \"trustless,\" mathematically scarce asset will likely continue to grow. Conversely, if central banks successfully implement \"singleness\" through stable CBDCs and re-establish price stability, Bitcoin may remain relegated to a niche alternative asset class. Based on current data, the \"digital gold\" thesis appears robust, with Bitcoin increasingly acting as an asymmetric complement to gold in a modern, digital-first economy.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    }
+  ],
+  "sourceArchive": {
+    "v1GitCommit": "71ef2c7c5c6a8995cc6901d350cc29c35d427423",
+    "v1RelativePath": "content/research/the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset.mdx",
+    "sourceSha256": "3d7bbaf9774a93e4482eae0e83653cd0f1898e52384fc24e11576996ba2b7da8",
+    "rawMdxBytes": 63839,
+    "archiveVersion": "v1.0.0-baseline"
+  }
+}

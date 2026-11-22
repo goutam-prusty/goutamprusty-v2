@@ -1,0 +1,223 @@
+{
+  "contractVersion": "1.0.0",
+  "milestone": "2B",
+  "title": "Sanity Serialization Contract Specification",
+  "description": "Deterministic, offline-verified serialization and normalization rules bridging MDX parser output to Sanity Content Lake ingestion formats.",
+  "generatedAt": "2026-11-21T23:58:00.000Z",
+  "sourceBaseline": {
+    "v1GitCommit": "71ef2c7c5c6a8995cc6901d350cc29c35d427423",
+    "corpusCount": 45,
+    "researchCount": 21,
+    "writingCount": 21,
+    "projectCount": 3,
+    "holdCount": 5,
+    "passCount": 40
+  },
+  "auditResolutions": {
+    "F-01": {
+      "finding": "Missing _type in Array Object Members",
+      "severity": "BLOCKER",
+      "status": "RESOLVED",
+      "resolution": "Explicit _type injected into all serialized array members (sourceMaterialEntry, bibliographyEntry, tableRow, tableCell) alongside deterministic, unique _key values."
+    },
+    "F-02": {
+      "finding": "Unresolved Reference Fields Emitted as Raw Slugs",
+      "severity": "BLOCKER",
+      "status": "RESOLVED",
+      "resolution": "Deterministic slug-to-document-ID reference normalization engine converting string slugs to Sanity reference objects {_type: 'reference', _ref, _sourceSlug}, failing closed on unresolved or ambiguous slugs."
+    },
+    "F-03": {
+      "finding": "Validation Blindspot for Disk Asset Existence",
+      "severity": "WARNING",
+      "status": "RESOLVED",
+      "resolution": "Mandatory migration eligibility gate operating independently of schema validator, reading full-corpus-compatibility.json and strictly failing closed on HOLD, missing, or malformed statuses."
+    },
+    "F-04": {
+      "finding": "Cover Image Type Discrepancy",
+      "severity": "WARNING",
+      "status": "RESOLVED",
+      "resolution": "Standardized coverImage as an anonymous object { assetPath, alt } preserving local WebP paths without misleading _type: 'image' or fabricated Sanity asset IDs."
+    },
+    "F-05": {
+      "finding": "Implicit Reference Integrity Dependency",
+      "severity": "WARNING",
+      "status": "RESOLVED",
+      "resolution": "Authoritative 45-entry slug-to-ID lookup table validated with zero collisions; missing reference lookups trigger ReferenceResolutionError."
+    },
+    "F-06": {
+      "finding": "Project Frontmatter 'featured: true' Overrides Initial Value",
+      "severity": "WARNING",
+      "status": "RESOLVED",
+      "resolution": "V1 frontmatter value preserved as readOnly 'legacyFeatured: true' on project documents, while editorial 'featured' is strictly set to false by default."
+    },
+    "F-07": {
+      "finding": "Taxonomy & Author Reference Contracts",
+      "severity": "INFO",
+      "status": "DOCUMENTED",
+      "resolution": "Formal mapping specifications defined for content/_meta/authors.yml and Content_Inventory.xlsx topic sheets; ingestion decoupled to a future milestone."
+    }
+  },
+  "arrayMemberTyping": {
+    "sourceMaterial": {
+      "targetType": "sourceMaterialEntry",
+      "keyPrefix": "<workbookId>:sm:<index>:",
+      "fields": ["_key", "_type", "title", "url"]
+    },
+    "bibliography": {
+      "targetType": "bibliographyEntry",
+      "keyPrefix": "<workbookId>:bib:<order>:<index>",
+      "fields": ["_key", "_type", "order", "rawText", "title", "url"]
+    },
+    "tableRows": {
+      "targetType": "tableRow",
+      "keyPrefix": "<workbookId>:table:<blockIndex>:row:<rowIndex>",
+      "fields": ["_key", "_type", "isHeader", "cells"]
+    },
+    "tableCells": {
+      "targetType": "tableCell",
+      "keyPrefix": "<workbookId>:table:<blockIndex>:row:<rowIndex>:cell:<cellIndex>",
+      "fields": ["_key", "_type", "plainText", "content"]
+    }
+  },
+  "referenceNormalization": {
+    "scheme": "<type>-<workbookId>",
+    "format": {
+      "_type": "reference",
+      "_ref": "string",
+      "_sourceSlug": "string"
+    },
+    "arrayItemFormat": {
+      "_key": "string",
+      "_type": "reference",
+      "_ref": "string",
+      "_sourceSlug": "string"
+    },
+    "fieldsCovered": [
+      "research.derivedPosts",
+      "writing.sourceReport",
+      "project.relatedResearch",
+      "project.relatedWriting"
+    ],
+    "failureMode": "Closed. Missing or ambiguous slugs throw ReferenceResolutionError."
+  },
+  "objectTyping": {
+    "coverImage": {
+      "_type": null,
+      "fields": ["assetPath", "alt"],
+      "policy": "Preserves local relative path. Native Sanity asset IDs must not be synthesized offline."
+    },
+    "seo": {
+      "_type": "seo",
+      "fields": ["_type", "metaTitle", "metaDescription"]
+    },
+    "sourceArchive": {
+      "_type": "sourceArchive",
+      "fields": ["_type", "v1GitCommit", "v1RelativePath", "sourceSha256", "rawMdxBytes", "archiveVersion"]
+    }
+  },
+  "editorialPolicies": {
+    "featured": {
+      "default": false,
+      "description": "Strictly false across all document types. Human editorial approval required before featuring."
+    },
+    "legacyFeatured": {
+      "appliesTo": "project",
+      "type": "boolean",
+      "readOnly": true,
+      "description": "Preserves historical V1 MDX frontmatter featured value for provenance."
+    },
+    "editorialStatus": {
+      "default": "draft",
+      "allowed": ["draft", "in_review", "approved"],
+      "description": "Content review state. Never automatically set to approved during migration."
+    }
+  },
+  "eligibilityGate": {
+    "authoritativeSource": "migration/full-corpus-compatibility.json",
+    "passCriteria": "status === 'PASS'",
+    "holdAction": "Throws MigrationEligibilityError; completely blocks document serialization.",
+    "holdDocuments": [
+      { "id": "BLG-012", "slug": "structure-not-conspiracy", "reason": "3 broken route-relative figure asset paths" },
+      { "id": "BLG-013", "slug": "the-billionaire-raj", "reason": "3 broken route-relative figure asset paths" },
+      { "id": "BLG-014", "slug": "the-asset-trap", "reason": "1 broken route-relative figure asset path" },
+      { "id": "BLG-015", "slug": "the-jobs-that-arent-jobs", "reason": "1 broken route-relative figure asset path" },
+      { "id": "BLG-021", "slug": "why-your-central-bank-wants-some-inflation", "reason": "1 broken route-relative figure asset path" }
+    ]
+  },
+  "referenceMap": {
+    "empirical-evaluation-of-indias-economic-structure": "research-RES-001",
+    "empirical-evaluation-of-indias-healthcare-system": "research-RES-002",
+    "environmental-sustainability-and-environmental-economic-outcomes-in-india-an-empirical-synthesis": "research-RES-003",
+    "indias-digital-governance-ecosystem-evaluation": "research-RES-004",
+    "indias-education-system-an-empirical-evaluation": "research-RES-005",
+    "institutional-analysis-of-indias-governance-architecture": "research-RES-006",
+    "institutional-analysis-of-indias-information-ecosystem": "research-RES-007",
+    "institutional-analysis-of-indias-public-administration-and-state-capacity": "research-RES-008",
+    "judicial-effectiveness-accessibility-and-economic-impact-in-india-an-institutional-analysis": "research-RES-009",
+    "mapping-the-current-state-of-ai-and-frontier-technologies-2015-2026": "research-RES-010",
+    "multidimensional-empirical-evaluation-of-indias-infrastructure-systems": "research-RES-011",
+    "multidimensional-empirical-evaluation-of-inequality-and-social-mobility-in-india": "research-RES-012",
+    "multidimensional-empirical-evaluation-of-social-trust-civic-norms-cooperative-behavior-and-institutional-confidence-in-india": "research-RES-013",
+    "political-economy-macroeconomic-outcomes-india-global-markets": "research-RES-014",
+    "political-economy-of-work-wealth-debt-and-power-in-india-since-1991": "research-RES-015",
+    "real-utility-vs-socially-agreed-value-in-modern-economies": "research-RES-016",
+    "strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026": "research-RES-018",
+    "system-architecture-and-reverse-engineering-specification-modern-resume-builder-platform": "research-RES-019",
+    "the-architecture-of-value-analyzing-the-intersection-of-real-utility-and-symbolic-constructs-in-human-economic-activity": "research-RES-020",
+    "the-convergence-divergence-paradox-a-structural-analysis-of-the-indian-and-chinese-political-economic-systems-2000-2025": "research-RES-021",
+    "the-macroeconomic-evolution-of-bitcoin-from-peer-to-peer-electronic-cash-to-a-global-digital-reserve-asset": "research-RES-022",
+    "agentic-inflection-point": "writing-BLG-001",
+    "ai-physical-limits": "writing-BLG-002",
+    "baliyatra-arithmetic-disappearing-craft": "writing-BLG-003",
+    "billionaire-raj-india-inequality-costs": "writing-BLG-004",
+    "bitcoin-didnt-change-the-world-caught-up": "writing-BLG-005",
+    "i-used-ai-to-find-the-ceiling": "writing-BLG-006",
+    "india-is-borrowing-chinas-playbook": "writing-BLG-007",
+    "machine-native-economy-explained": "writing-BLG-008",
+    "money-is-a-story": "writing-BLG-009",
+    "six-months-twelve-domains-one-uncomfortable-conclusion": "writing-BLG-011",
+    "structure-not-conspiracy": "writing-BLG-012",
+    "the-asset-trap": "writing-BLG-013",
+    "the-billionaire-raj": "writing-BLG-014",
+    "the-jobs-that-arent-jobs": "writing-BLG-015",
+    "the-question-that-explains-everything-about-modern-economies": "writing-BLG-016",
+    "trust-as-infrastructure-india-social-capital": "writing-BLG-017",
+    "wasted-months-before-figuring-out-what-i-was-building": "writing-BLG-018",
+    "what-i-actually-think-about-indias-next-decade": "writing-BLG-019",
+    "why-compute-isnt-a-commodity-yet": "writing-BLG-020",
+    "why-your-central-bank-wants-some-inflation": "writing-BLG-021",
+    "wordpress-theme-read-by-machines": "writing-BLG-022",
+    "inkline": "project-PRJ-001",
+    "vitaliq": "project-PRJ-002",
+    "wharf": "project-PRJ-003"
+  },
+  "futureContracts": {
+    "authors": {
+      "source": "content/_meta/authors.yml",
+      "targetType": "author",
+      "idScheme": "author-<authorId>",
+      "status": "DEFERRED_TO_INGESTION",
+      "mappingRules": {
+        "_id": "author-<authorId>",
+        "name": "author.name",
+        "slug": { "_type": "slug", "current": "author.slug || authorId" },
+        "bio": "author.bio",
+        "avatar": { "assetPath": "author.avatar", "alt": "author.name" }
+      }
+    },
+    "topics": {
+      "source": "Content_Inventory.xlsx (Topics Sheet)",
+      "targetType": "topic",
+      "idScheme": "topic-<slug>",
+      "status": "DEFERRED_TO_INGESTION",
+      "mappingRules": {
+        "_id": "topic-<slug>",
+        "title": "topic.title",
+        "slug": { "_type": "slug", "current": "topic.slug" },
+        "domain": "topic.domain",
+        "description": "topic.description",
+        "featured": "topic.featured || false"
+      }
+    }
+  }
+}
