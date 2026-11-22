@@ -48,7 +48,7 @@ const blg001 = docs.find(d => d._id === 'writing-BLG-001');
 const blg002 = docs.find(d => d._id === 'writing-BLG-002');
 
 // 3. Document types, slugs, titles and publication statuses are correct
-const check3_pass = 
+const check3_pass =
   res018?._type === 'research' &&
   res018?.slug?.current === 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026' &&
   res018?.title === 'Strategic Intelligence Report: The State of Artificial Intelligence and Frontier Technologies in 2026' &&
