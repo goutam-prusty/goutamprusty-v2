@@ -1,0 +1,220 @@
+import { defineType, defineField, defineArrayMember } from '../types';
+import { standardBlock } from '../objects/portableText';
+
+export const writing = defineType({
+  name: 'writing',
+  title: 'Writing / Essay',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'workbookId',
+      title: 'Workbook ID',
+      type: 'string',
+      readOnly: true,
+      validation: (Rule) => Rule.required(),
+      description: 'Authoritative inventory ID (e.g. BLG-001).',
+    }),
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      description: 'Headline or article title.',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      description: 'URL-safe slug matching original V1 blog path.',
+    }),
+    defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      rows: 3,
+      validation: (Rule) => Rule.required(),
+      description: 'Brief standfirst or summary for listings and previews.',
+    }),
+    defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'draft',
+      options: {
+        list: [
+          { title: 'Published', value: 'Published' },
+          { title: 'Draft', value: 'Draft' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Publication Date',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
+      description: 'Original publication date.',
+    }),
+    defineField({
+      name: 'updatedAt',
+      title: 'Last Updated Date',
+      type: 'datetime',
+      description: 'Date of subsequent revision.',
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      description: 'Primary writing category (e.g. technology, business-strategy).',
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      options: {
+        layout: 'tags',
+      },
+      description: 'Article keywords.',
+    }),
+    defineField({
+      name: 'sourceReport',
+      title: 'Derived From Research Report',
+      type: 'reference',
+      to: [{ type: 'research' }],
+      description: 'Canonical research report this essay adapts or explains.',
+    }),
+    defineField({
+      name: 'relatedProjects',
+      title: 'Related Projects',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'project' }] })],
+      description: 'Case studies or software implementations referenced in this piece.',
+    }),
+    defineField({
+      name: 'topics',
+      title: 'Taxonomy Topics',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'topic' }] })],
+      description: 'Curated topics associated with this writing.',
+    }),
+    defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: [{ type: 'author' }],
+      description: 'Author attribution record.',
+    }),
+    defineField({
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'object',
+      fields: [
+        defineField({ name: 'assetPath', title: 'Asset Path', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'alt', title: 'Alternative Text', type: 'string' }),
+      ],
+      description: 'Lead illustration or header image.',
+    }),
+    defineField({
+      name: 'readingTimeOverride',
+      title: 'Reading Time Override (Minutes)',
+      type: 'number',
+      description: 'Manual reading time in minutes if overriding automatic word calculation.',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO Metadata',
+      type: 'seo',
+      description: 'Search engine metadata overrides.',
+    }),
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
+      description: 'Canonical URL if first published elsewhere or syndicated.',
+    }),
+    defineField({
+      name: 'bibliographyHeading',
+      title: 'Bibliography Heading',
+      type: 'string',
+      description: 'Heading for reference section if present.',
+    }),
+    defineField({
+      name: 'bibliography',
+      title: 'Bibliography & References',
+      type: 'array',
+      of: [defineArrayMember({ type: 'bibliographyEntry' })],
+      description: 'Citations or external links accompanying this essay.',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Body Content',
+      type: 'array',
+      validation: (Rule) => Rule.required(),
+      of: [
+        standardBlock,
+        defineArrayMember({ type: 'imageBlock' }),
+        defineArrayMember({ type: 'tableBlock' }),
+        defineArrayMember({ type: 'dividerBlock' }),
+        defineArrayMember({ type: 'codeBlock' }),
+      ],
+      description: 'Editorial article body.',
+    }),
+    defineField({
+      name: 'sourceArchive',
+      title: 'Source Archive Provenance',
+      type: 'sourceArchive',
+      readOnly: true,
+      validation: (Rule) => Rule.required(),
+      description: 'Immutable V1 repository baseline metadata.',
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
+      validation: (Rule) => Rule.required(),
+      description: 'Editorial flag for homepage or selected showcase. Defaults strictly to false.',
+    }),
+    defineField({
+      name: 'editorialStatus',
+      title: 'Editorial Lifecycle Status',
+      type: 'string',
+      initialValue: 'draft',
+      options: {
+        list: [
+          { title: 'Draft', value: 'draft' },
+          { title: 'In Review', value: 'in_review' },
+          { title: 'Approved', value: 'approved' },
+        ],
+        layout: 'radio',
+      },
+      description: 'Content review state. Content is never automatically marked approved.',
+    }),
+    defineField({
+      name: 'editorialNotes',
+      title: 'Editorial Notes',
+      type: 'text',
+      description: 'Audit annotations, anomaly registers (e.g. HOLD status), or editorial review remarks.',
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      workbookId: 'workbookId',
+      category: 'category',
+    },
+    prepare({ title, workbookId, category }) {
+      return {
+        title: title || 'Untitled Essay',
+        subtitle: `[${workbookId || 'NO-ID'}] ${category || 'Uncategorized'}`,
+      };
+    },
+  },
+});

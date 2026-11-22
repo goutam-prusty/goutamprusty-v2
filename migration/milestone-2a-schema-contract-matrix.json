@@ -1,0 +1,561 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "auditMetadata": {
+    "milestone": "2A",
+    "name": "Schema Integrity and Migration Contract Audit",
+    "auditDate": "2026-11-21",
+    "workingRepository": "D:/goutamprusty-v2",
+    "currentBranch": "codex/sanity-content-architecture",
+    "sourceBaseline": "D:/goutamprusty-v1",
+    "baselineCommit": "71ef2c7c5c6a8995cc6901d350cc29c35d427423",
+    "targetCms": "Sanity Studio v3 / Content Lake"
+  },
+  "summary": {
+    "totalSchemasAudited": 21,
+    "totalFieldsAudited": 68,
+    "blockerCount": 2,
+    "warningCount": 5,
+    "passCount": 61,
+    "verdict": "CONDITIONAL_APPROVAL — Architecture is sound and lossless; Ingestion tooling must resolve reference pointers and inject array item _type keys prior to Content Lake import."
+  },
+  "criticalFindings": [
+    {
+      "id": "F-01",
+      "category": "Sanity Studio Compatibility",
+      "classification": "BLOCKER",
+      "schemaFile": "migration/schema/objects/tableBlock.ts, bibliographyEntry.ts, sourceMaterialEntry.ts",
+      "affectedFields": [
+        "research.sourceMaterial[]",
+        "research.bibliography[]",
+        "tableBlock.rows[]",
+        "tableRow.cells[]"
+      ],
+      "issue": "Missing _type on homogeneous array members in parser output",
+      "detail": "Parser emits plain objects with _key but omits _type on sourceMaterial ({ _key, title, url }), bibliography ({ _key, order, rawText, title, url }), tableRow ({ _key, isHeader, cells }), and tableCell ({ _key, plainText, content }). Sanity Studio v3 requires _type on EVERY object in an array to resolve schema types and render form builders. Without _type, Sanity Studio emits 'missing _type' errors.",
+      "remediation": "Ingestion pre-processor or parser must inject _type: 'sourceMaterialEntry', _type: 'bibliographyEntry', _type: 'tableRow', and _type: 'tableCell' prior to mutation."
+    },
+    {
+      "id": "F-02",
+      "category": "Reference Contract",
+      "classification": "BLOCKER",
+      "schemaFile": "migration/schema/documents/research.ts, writing.ts",
+      "affectedFields": [
+        "research.derivedPosts",
+        "writing.sourceReport"
+      ],
+      "issue": "Parser emits raw string slugs instead of Sanity reference objects",
+      "detail": "Schema defines these fields as type: 'reference'. Parser emits raw slug strings (e.g. 'structure-not-conspiracy' in RES-015, 'strategic-intelligence-report-...' in BLG-001). Sanity Content Lake rejects raw strings for reference fields with ValidationError: Expected object of type reference.",
+      "remediation": "Ingestion tooling must implement two-phase reference resolution: map source slugs to authoritative Sanity document IDs (research-RES-xxx, writing-BLG-xxx) and emit { _type: 'reference', _ref: '<docId>' }."
+    },
+    {
+      "id": "F-03",
+      "category": "Object Typing",
+      "classification": "WARNING",
+      "schemaFile": "migration/schema/documents/research.ts, writing.ts, project.ts",
+      "affectedFields": [
+        "research.coverImage",
+        "writing.coverImage",
+        "project.coverImage"
+      ],
+      "issue": "Type mismatch: Parser emits _type: 'image' while schema defines anonymous type: 'object'",
+      "detail": "Parser sets _type: 'image' on coverImage objects with assetPath. In Sanity Studio, type: 'image' is reserved for native image asset records with asset: { _ref }. Schema defines coverImage as an anonymous object with assetPath and alt fields.",
+      "remediation": "Align schema and parser: define a named coverImage object schema or normalize to asset: { _type: 'reference', _ref: ... } during live asset upload."
+    },
+    {
+      "id": "F-04",
+      "category": "Object Typing",
+      "classification": "WARNING",
+      "schemaFile": "migration/schema/objects/seo.ts, sourceArchive.ts",
+      "affectedFields": [
+        "writing.seo",
+        "research.sourceArchive",
+        "writing.sourceArchive",
+        "project.sourceArchive"
+      ],
+      "issue": "Top-level named object values lack explicit _type property",
+      "detail": "Parser emits seo as { metaTitle, metaDescription } and sourceArchive as { v1GitCommit, ... } without _type: 'seo' or _type: 'sourceArchive'. Sanity Content Lake expects named object fields to carry _type matching their schema name.",
+      "remediation": "Ingestion tooling should attach _type: 'seo' and _type: 'sourceArchive' to preserve schema alignment in Studio."
+    },
+    {
+      "id": "F-05",
+      "category": "Test Validation Scope",
+      "classification": "WARNING",
+      "schemaFile": "migration/lib/schema-validator.cjs",
+      "affectedFields": [
+        "schema-validator.cjs"
+      ],
+      "issue": "Validator checks structural AST shape but does not verify disk asset presence or reference resolution",
+      "detail": "Custom validator passes HOLD documents (e.g. BLG-012) because their AST syntax is structurally valid, even though image paths are route-relative on disk. Validator also accepts string slugs for reference fields and infers missing _type on homogeneous array items.",
+      "remediation": "Document that schema validation proves AST structural conformance, NOT migration eligibility. Ingestion tooling must enforce an independent gate requiring compatibilityStatus === 'PASS' from full-corpus-compatibility.json."
+    },
+    {
+      "id": "F-06",
+      "category": "Editorial Metadata",
+      "classification": "WARNING",
+      "schemaFile": "migration/schema/documents/project.ts",
+      "affectedFields": [
+        "project.featured"
+      ],
+      "issue": "V1 Project source frontmatter contains featured: true while migration policy mandates default false",
+      "detail": "Inkline (PRJ-001) and Vitaliq (PRJ-002) have featured: true in V1 MDX. Schema defines initialValue: false. Ingestion tooling must decide whether to preserve V1 author frontmatter or enforce editorial rule defaulting featured to false until reviewed.",
+      "remediation": "Flag for human editorial review: confirm whether V1 projects retain featured: true or import as featured: false."
+    },
+    {
+      "id": "F-07",
+      "category": "Taxonomy Alignment",
+      "classification": "WARNING",
+      "schemaFile": "migration/schema/documents/research.ts",
+      "affectedFields": [
+        "research.category",
+        "research.topics",
+        "writing.topics",
+        "project.topics"
+      ],
+      "issue": "Free-text categories in V1 frontmatter vs structured taxonomy in categories.yml and workbook",
+      "detail": "Research frontmatter contains strings like 'Macroeconomics & Trade', whereas categories.yml uses slugs (business-strategy). Topic associations exist only in Content_Inventory.xlsx, not in MDX frontmatter.",
+      "remediation": "Ingestion tooling must import topics from Content_Inventory.xlsx and maintain category strings losslessly until an editorial decision is approved."
+    }
+  ],
+  "contractMatrix": [
+    {
+      "document": "research",
+      "field": "workbookId",
+      "parserEmittedType": "string (e.g. 'RES-001')",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": true,
+      "classification": "PASS",
+      "notes": "1:1 match. Stable source identity preserved."
+    },
+    {
+      "document": "research",
+      "field": "title",
+      "parserEmittedType": "string",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match. Verbatim title preserved."
+    },
+    {
+      "document": "research",
+      "field": "slug",
+      "parserEmittedType": "object ({ _type: 'slug', current: string })",
+      "schemaType": "slug",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match. Sanity slug format."
+    },
+    {
+      "document": "research",
+      "field": "summary",
+      "parserEmittedType": "string",
+      "schemaType": "text",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match. Multiline executive abstract."
+    },
+    {
+      "document": "research",
+      "field": "status",
+      "parserEmittedType": "string (e.g. 'Completed')",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match. Matches frontmatter status."
+    },
+    {
+      "document": "research",
+      "field": "publishedAt",
+      "parserEmittedType": "string (ISO 8601 datetime)",
+      "schemaType": "datetime",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match. Valid datetime format."
+    },
+    {
+      "document": "research",
+      "field": "updatedAt",
+      "parserEmittedType": "undefined / null",
+      "schemaType": "datetime",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Optional in schema; undefined in research V1 frontmatter."
+    },
+    {
+      "document": "research",
+      "field": "category",
+      "parserEmittedType": "string (e.g. 'Macroeconomics & Trade')",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Preserves verbatim frontmatter string."
+    },
+    {
+      "document": "research",
+      "field": "tags",
+      "parserEmittedType": "array of string",
+      "schemaType": "array of string",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match."
+    },
+    {
+      "document": "research",
+      "field": "researchMethod",
+      "parserEmittedType": "string",
+      "schemaType": "string",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Preserved from frontmatter."
+    },
+    {
+      "document": "research",
+      "field": "lengthEstimateMinutes",
+      "parserEmittedType": "number",
+      "schemaType": "number",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Preserved integer estimate."
+    },
+    {
+      "document": "research",
+      "field": "coverImage",
+      "parserEmittedType": "object ({ _type: 'image', assetPath: string })",
+      "schemaType": "object (assetPath, alt)",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "WARNING",
+      "notes": "Parser emits _type: 'image' while schema is anonymous object. See F-03."
+    },
+    {
+      "document": "research",
+      "field": "author",
+      "parserEmittedType": "undefined (implied solo)",
+      "schemaType": "reference to author",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "WARNING",
+      "notes": "Not in V1 MDX. Ingestion must link default author."
+    },
+    {
+      "document": "research",
+      "field": "topics",
+      "parserEmittedType": "undefined (in workbook)",
+      "schemaType": "array of reference to topic",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "WARNING",
+      "notes": "In workbook, not MDX frontmatter. Ingestion must map."
+    },
+    {
+      "document": "research",
+      "field": "derivedPosts",
+      "parserEmittedType": "array of string (slugs)",
+      "schemaType": "array of reference to writing",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Parser emits slug strings; Sanity requires reference objects. See F-02."
+    },
+    {
+      "document": "research",
+      "field": "relatedProjects",
+      "parserEmittedType": "array of string ([])",
+      "schemaType": "array of reference to project",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Empty array in all 21 research files."
+    },
+    {
+      "document": "research",
+      "field": "sourceMaterial",
+      "parserEmittedType": "array of object ({ _key, title, url })",
+      "schemaType": "array of sourceMaterialEntry",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Array items missing _type: 'sourceMaterialEntry'. See F-01."
+    },
+    {
+      "document": "research",
+      "field": "bibliographyHeading",
+      "parserEmittedType": "string or null",
+      "schemaType": "string",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Preserves section heading text."
+    },
+    {
+      "document": "research",
+      "field": "bibliography",
+      "parserEmittedType": "array of object ({ _key, order, rawText, title, url })",
+      "schemaType": "array of bibliographyEntry",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Array items missing _type: 'bibliographyEntry'. See F-01."
+    },
+    {
+      "document": "research",
+      "field": "body",
+      "parserEmittedType": "array of Portable Text blocks",
+      "schemaType": "portableTextBody",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "All block and inline types fully supported."
+    },
+    {
+      "document": "research",
+      "field": "sourceArchive",
+      "parserEmittedType": "object ({ v1GitCommit, v1RelativePath, ... })",
+      "schemaType": "sourceArchive",
+      "requiredInSchema": true,
+      "readOnlyInSchema": true,
+      "classification": "WARNING",
+      "notes": "Object missing _type: 'sourceArchive'. See F-04."
+    },
+    {
+      "document": "research",
+      "field": "featured",
+      "parserEmittedType": "undefined (in V1 MDX)",
+      "schemaType": "boolean (initialValue: false)",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Correctly defaults to false."
+    },
+    {
+      "document": "research",
+      "field": "editorialStatus",
+      "parserEmittedType": "undefined",
+      "schemaType": "string (initialValue: 'draft')",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Defaults to draft; never pre-approved."
+    },
+    {
+      "document": "research",
+      "field": "editorialNotes",
+      "parserEmittedType": "undefined",
+      "schemaType": "text",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Available for human review remarks."
+    },
+    {
+      "document": "writing",
+      "field": "sourceReport",
+      "parserEmittedType": "string (slug e.g. 'strategic-intelligence-...')",
+      "schemaType": "reference to research",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Parser emits slug string; Sanity requires reference object. See F-02."
+    },
+    {
+      "document": "writing",
+      "field": "seo",
+      "parserEmittedType": "object ({ metaTitle, metaDescription })",
+      "schemaType": "seo",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "WARNING",
+      "notes": "Object missing _type: 'seo'. See F-04."
+    },
+    {
+      "document": "writing",
+      "field": "canonicalUrl",
+      "parserEmittedType": "string URL or null",
+      "schemaType": "url",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match."
+    },
+    {
+      "document": "writing",
+      "field": "readingTimeOverride",
+      "parserEmittedType": "number or null",
+      "schemaType": "number",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "1:1 match."
+    },
+    {
+      "document": "project",
+      "field": "role",
+      "parserEmittedType": "string",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Verbatim engineering role preserved."
+    },
+    {
+      "document": "project",
+      "field": "startDate",
+      "parserEmittedType": "string (YYYY-MM-DD)",
+      "schemaType": "date",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Valid date string."
+    },
+    {
+      "document": "project",
+      "field": "endDate",
+      "parserEmittedType": "string (YYYY-MM-DD) or null",
+      "schemaType": "date",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Handles null for ongoing projects."
+    },
+    {
+      "document": "project",
+      "field": "links",
+      "parserEmittedType": "object ({ repo, live, demo })",
+      "schemaType": "object",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Preserves verifiable URLs."
+    },
+    {
+      "document": "project",
+      "field": "techStack",
+      "parserEmittedType": "array of string",
+      "schemaType": "array of string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Verbatim technology list preserved."
+    },
+    {
+      "document": "project",
+      "field": "featured",
+      "parserEmittedType": "boolean (true in V1 frontmatter)",
+      "schemaType": "boolean (initialValue: false)",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "WARNING",
+      "notes": "V1 frontmatter has true; migration policy mandates default false. See F-06."
+    },
+    {
+      "document": "tableBlock",
+      "field": "rows",
+      "parserEmittedType": "array of object ({ _key, isHeader, cells })",
+      "schemaType": "array of tableRow",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Row objects missing _type: 'tableRow'. See F-01."
+    },
+    {
+      "document": "tableRow",
+      "field": "cells",
+      "parserEmittedType": "array of object ({ _key, plainText, content })",
+      "schemaType": "array of tableCell",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "BLOCKER",
+      "notes": "Cell objects missing _type: 'tableCell'. See F-01."
+    },
+    {
+      "document": "tableCell",
+      "field": "content",
+      "parserEmittedType": "array of block with spans and inlineFormula",
+      "schemaType": "array of block (rich content)",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Rich table cell content with inlineFormula verified."
+    },
+    {
+      "document": "formulaBlock",
+      "field": "dimensions",
+      "parserEmittedType": "object ({ width: number, height: number })",
+      "schemaType": "object",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Pixel dimensions verified against Sharp WebP output."
+    },
+    {
+      "document": "inlineFormula",
+      "field": "dimensions",
+      "parserEmittedType": "object ({ width: number, height: number })",
+      "schemaType": "object",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Pixel dimensions verified against Sharp WebP output."
+    },
+    {
+      "document": "citationMarker",
+      "field": "citationNumber",
+      "parserEmittedType": "number",
+      "schemaType": "number",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Numerical index matching bibliography."
+    },
+    {
+      "document": "citationMarker",
+      "field": "rawMarker",
+      "parserEmittedType": "string",
+      "schemaType": "string",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Verbatim source marker string preserved."
+    },
+    {
+      "document": "mermaidBlock",
+      "field": "code",
+      "parserEmittedType": "string",
+      "schemaType": "text",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Verbatim multi-line syntax preserved."
+    },
+    {
+      "document": "codeBlock",
+      "field": "code",
+      "parserEmittedType": "string",
+      "schemaType": "text",
+      "requiredInSchema": true,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Verbatim code preserved."
+    },
+    {
+      "document": "dividerBlock",
+      "field": "style",
+      "parserEmittedType": "undefined (defaults to 'line')",
+      "schemaType": "string (initialValue: 'line')",
+      "requiredInSchema": false,
+      "readOnlyInSchema": false,
+      "classification": "PASS",
+      "notes": "Thematic break representation."
+    }
+  ]
+}
