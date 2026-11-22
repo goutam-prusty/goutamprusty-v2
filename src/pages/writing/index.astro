@@ -1,5 +1,94 @@
 ---
-import ListingLayout from '../../layouts/ListingLayout.astro';
-import { works } from '../../data/fixtures';
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import { getAllWritingArticles } from '../../lib/sanityClient';
+import { getArticleReadingTime } from '../../lib/readingTime';
+
+const articles = await getAllWritingArticles();
+
+function formatPublicationDate(dateStr?: string): string | undefined {
+  if (!dateStr) return undefined;
+  const parts = dateStr.split('T')[0].split('-');
+  if (parts.length === 3) {
+    const [year, month, day] = parts.map(Number);
+    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      });
+    }
+  }
+  const date = new Date(dateStr);
+  return isNaN(date.getTime())
+    ? undefined
+    : date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      });
+}
+
+const getSlug = (item: any): string => {
+  if (typeof item.slug === 'string') return item.slug;
+  if (item.slug?.current) return item.slug.current;
+  return item._id || 'sample-article';
+};
 ---
-<ListingLayout title="Writing" summary="Articles and essays template using development fixtures." entries={works.filter((work) => work.type === 'Writing')} />
+
+<ProductionPaperSignalLayout
+  title="Writing — goutamprusty.com"
+  description="A personal collection of analytical writing, essays, and strategic notes on artificial intelligence and computing by Goutam Prusty."
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Writing · Essays &amp; Analysis</p>
+    <h1>Writing</h1>
+    <p class="ps-lede">
+      Essays, strategic notes, and practical analyses examining technology inflection points, physical constraints, and systems design.
+    </p>
+  </header>
+
+  <section class="ps-section" aria-label="Articles and essays">
+    <div class="ps-project-grid">
+      {articles.map((article: any, idx: number) => {
+        const slug = getSlug(article);
+        const hasReadingTimeSource =
+          article.readingTimeOverride ||
+          article.readingTimeMinutes ||
+          (Array.isArray(article.body) && article.body.length > 0);
+        const readingTime = hasReadingTimeSource
+          ? getArticleReadingTime(article)
+          : undefined;
+        const pubDate = formatPublicationDate(article.publishedAt);
+        const metaParts = [readingTime, pubDate].filter(Boolean);
+
+        return (
+          <a
+            class="ps-project-card ps-card-editorial ps-card-writing"
+            href={`/writing/${slug}/`}
+          >
+            <div class="ps-card-top">
+              <span class="ps-card-mark" aria-hidden="true">
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+              <span class="ps-card-badge">{article.category || 'Strategic essay'}</span>
+            </div>
+            {article.workbookId ? (
+              <p class="ps-kicker">Writing · {article.workbookId}</p>
+            ) : (
+              <p class="ps-kicker">Writing</p>
+            )}
+            <h3>{article.title}</h3>
+            {article.summary && <p>{article.summary}</p>}
+            <span class="ps-card-foot">
+              <span>{metaParts.join(' · ')}</span>
+              <span aria-hidden="true">Read article ↗</span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

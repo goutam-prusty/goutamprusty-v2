@@ -38,7 +38,8 @@
 .ps-nav-menu nav a { display: flex; min-height: 2.75rem; align-items: center; padding: .5rem .75rem; text-decoration: none; }
 .ps-nav-menu nav a:hover { background: var(--color-sunken); }
 .ps-header nav a, .ps-contact-link, .ps-footer a:last-child { font-size: .9rem; font-weight: 600; text-decoration: none; }
-.ps-header nav a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--color-ink); text-decoration-thickness: 2px; text-underline-offset: .45rem; }
+.ps-header nav a[aria-current="page"] { font-weight: 700; text-decoration: underline; text-decoration-color: var(--color-ink); text-decoration-thickness: 2px; text-underline-offset: .45rem; }
+.ps-nav-menu nav a[aria-current="page"] { background: var(--color-sunken); }
 .ps-contact-link { padding: .65rem .9rem; background: var(--color-signal); border: 1px solid var(--color-ink); }
 .ps-contact-link span { padding-left: .25rem; }
 .ps-footer { display: flex; min-height: 6.5rem; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 4rem; border-top: 1px solid var(--color-line); }

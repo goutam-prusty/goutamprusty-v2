@@ -206,3 +206,114 @@ export async function getAllWritingSlugs(): Promise<string[]> {
     .filter((d) => d._type === 'writing' && d.slug?.current)
     .map((d) => d.slug.current);
 }
+
+/**
+ * Retrieve all research reports for listings.
+ */
+export async function getAllResearchReports() {
+  if (sanityClient) {
+    try {
+      const query = `*[_type == "research" && defined(slug.current)] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        summary,
+        publishedAt,
+        lengthEstimateMinutes,
+        readingTimeMinutes,
+        category,
+        workbookId
+      }`;
+      const reports = await sanityClient.fetch(query);
+      if (Array.isArray(reports) && reports.length > 0) {
+        return reports;
+      }
+      if (requireLiveSanity) {
+        throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but no research reports returned from remote Content Lake.');
+      }
+    } catch (err: any) {
+      if (requireLiveSanity) {
+        throw new Error(`[LIVE SANITY ERROR] ${err.message || err}`);
+      }
+      console.warn(`[Sanity Warning] Remote fetch for research reports failed (${err.message}). Using local fallback.`);
+    }
+  }
+
+  if (requireLiveSanity) {
+    throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured.');
+  }
+
+  const localItems = (localVerticalSliceDocs as any[]).filter(
+    (d) => d._type === 'research' && d.slug?.current
+  );
+  if (localItems.length > 0) {
+    return localItems;
+  }
+
+  return [
+    {
+      _id: 'sample-report',
+      title: 'Sample research report',
+      slug: { current: 'sample-report' },
+      summary: 'Placeholder summary for reviewing a long-form research listing.',
+      lengthEstimateMinutes: 15,
+      category: 'General Research',
+    },
+  ];
+}
+
+/**
+ * Retrieve all writing articles for listings.
+ */
+export async function getAllWritingArticles() {
+  if (sanityClient) {
+    try {
+      const query = `*[_type == "writing" && defined(slug.current)] | order(publishedAt desc) {
+        _id,
+        title,
+        slug,
+        summary,
+        publishedAt,
+        readingTimeOverride,
+        readingTimeMinutes,
+        body,
+        category,
+        workbookId
+      }`;
+      const articles = await sanityClient.fetch(query);
+      if (Array.isArray(articles) && articles.length > 0) {
+        return articles;
+      }
+      if (requireLiveSanity) {
+        throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but no writing articles returned from remote Content Lake.');
+      }
+    } catch (err: any) {
+      if (requireLiveSanity) {
+        throw new Error(`[LIVE SANITY ERROR] ${err.message || err}`);
+      }
+      console.warn(`[Sanity Warning] Remote fetch for writing articles failed (${err.message}). Using local fallback.`);
+    }
+  }
+
+  if (requireLiveSanity) {
+    throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured.');
+  }
+
+  const localItems = (localVerticalSliceDocs as any[]).filter(
+    (d) => d._type === 'writing' && d.slug?.current
+  );
+  if (localItems.length > 0) {
+    return localItems;
+  }
+
+  return [
+    {
+      _id: 'sample-article',
+      title: 'Sample article',
+      slug: { current: 'sample-article' },
+      summary: 'Placeholder summary for reviewing an editorial writing listing.',
+      readingTimeMinutes: 5,
+      category: 'General Writing',
+    },
+  ];
+}

@@ -1,5 +1,89 @@
 ---
-import ListingLayout from '../../layouts/ListingLayout.astro';
-import { works } from '../../data/fixtures';
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import { getAllResearchReports } from '../../lib/sanityClient';
+
+const reports = await getAllResearchReports();
+
+function formatPublicationDate(dateStr?: string): string | undefined {
+  if (!dateStr) return undefined;
+  const parts = dateStr.split('T')[0].split('-');
+  if (parts.length === 3) {
+    const [year, month, day] = parts.map(Number);
+    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+      const date = new Date(Date.UTC(year, month - 1, day));
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      });
+    }
+  }
+  const date = new Date(dateStr);
+  return isNaN(date.getTime())
+    ? undefined
+    : date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      });
+}
+
+const getSlug = (item: any): string => {
+  if (typeof item.slug === 'string') return item.slug;
+  if (item.slug?.current) return item.slug.current;
+  return item._id || 'sample-report';
+};
 ---
-<ListingLayout title="Research" summary="Long-form research template using development fixtures." entries={works.filter((work) => work.type === 'Research')} />
+
+<ProductionPaperSignalLayout
+  title="Research — goutamprusty.com"
+  description="A personal library of long-form research briefings, systems evaluations, and strategic intelligence by Goutam Prusty."
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Research · Library</p>
+    <h1>Research</h1>
+    <p class="ps-lede">
+      Long-form intelligence briefings, systems analysis, and technical evaluations anchored in empirical evidence and primary sources.
+    </p>
+  </header>
+
+  <section class="ps-section" aria-label="Research reports">
+    <div class="ps-project-grid">
+      {reports.map((report: any, idx: number) => {
+        const slug = getSlug(report);
+        const readingTime = report.lengthEstimateMinutes
+          ? `${report.lengthEstimateMinutes} min read`
+          : undefined;
+        const pubDate = formatPublicationDate(report.publishedAt);
+        const metaParts = [readingTime, pubDate].filter(Boolean);
+
+        return (
+          <a
+            class="ps-project-card ps-card-editorial ps-card-research"
+            href={`/research/${slug}/`}
+          >
+            <div class="ps-card-top">
+              <span class="ps-card-mark" aria-hidden="true">
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+              <span class="ps-card-badge">{report.category || 'Research report'}</span>
+            </div>
+            {report.workbookId ? (
+              <p class="ps-kicker">Research · {report.workbookId}</p>
+            ) : (
+              <p class="ps-kicker">Research</p>
+            )}
+            <h3>{report.title}</h3>
+            {report.summary && <p>{report.summary}</p>}
+            <span class="ps-card-foot">
+              <span>{metaParts.join(' · ')}</span>
+              <span aria-hidden="true">Read report ↗</span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

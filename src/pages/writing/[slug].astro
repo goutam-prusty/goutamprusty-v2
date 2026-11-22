@@ -1,5 +1,5 @@
 ---
-import PaperSignalLayout from '../../layouts/PaperSignalLayout.astro';
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import { getAllWritingSlugs, getWritingArticleBySlug, requireLiveSanity } from '../../lib/sanityClient';
 import { getArticleReadingTime } from '../../lib/readingTime';
@@ -28,7 +28,7 @@ const sourceReport = article?.sourceReport;
 const coverImage = article?.coverImage;
 ---
 
-<PaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
+<ProductionPaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
   <header class="ps-page-head">
     <p class="ps-eyebrow">Writing · {category}</p>
     <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>
@@ -70,4 +70,4 @@ const coverImage = article?.coverImage;
       )}
     </article>
   </div>
-</PaperSignalLayout>
+</ProductionPaperSignalLayout>
