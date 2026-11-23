@@ -25,7 +25,10 @@ const publishedAt = report ? new Date(report.publishedAt).toLocaleDateString('en
 const readingTime = (report?.lengthEstimateMinutes || report?.readingTimeMinutes) ? `${report.lengthEstimateMinutes || report.readingTimeMinutes} min read` : '15 min read';
 const bodyBlocks = report?.body || [];
 const bibliography = report?.bibliography || [];
-const derivedPosts = report?.derivedPosts || [];
+const rawDerivedPosts = report?.derivedPosts || [];
+const derivedPosts = Array.isArray(rawDerivedPosts)
+  ? rawDerivedPosts.filter((post: any) => Boolean(post && (post.slug?.current || (typeof post.slug === 'string' && post.slug.trim().length > 0))))
+  : [];
 const coverImage = report?.coverImage;
 ---
 
@@ -63,12 +66,16 @@ const coverImage = report?.coverImage;
           <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Derived Writing</p>
           <h2 class="text-2xl font-serif font-bold text-stone-900 mb-4">Articles Derived from this Research</h2>
           <div class="grid gap-4 sm:grid-cols-2">
-            {derivedPosts.map((post: any) => (
-              <a href={`/writing/${post.slug?.current || post.slug}/`} class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors">
-                <h3 class="font-serif font-semibold text-stone-900 mb-1">{post.title}</h3>
-                {post.summary && <p class="text-xs text-stone-600 line-clamp-2">{post.summary}</p>}
-              </a>
-            ))}
+            {derivedPosts.map((post: any) => {
+              const postSlug = post?.slug?.current || (typeof post?.slug === 'string' ? post.slug.trim() : '');
+              if (!postSlug) return null;
+              return (
+                <a href={`/writing/${postSlug}/`} class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors">
+                  <h3 class="font-serif font-semibold text-stone-900 mb-1">{post?.title || postSlug}</h3>
+                  {post?.summary && <p class="text-xs text-stone-600 line-clamp-2">{post.summary}</p>}
+                </a>
+              );
+            })}
           </div>
         </section>
       )}
