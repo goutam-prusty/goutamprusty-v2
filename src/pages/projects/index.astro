@@ -1,5 +1,47 @@
 ---
-import ListingLayout from '../../layouts/ListingLayout.astro';
-import { works } from '../../data/fixtures';
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import { works, fixtureNotice } from '../../data/fixtures';
+
+const projects = works.filter((work) => work.type === 'Project');
+const title = 'Projects';
+const summary = 'Practical work template using development fixtures.';
 ---
-<ListingLayout title="Projects" summary="Practical work template using development fixtures." entries={works.filter((work) => work.type === 'Project')} />
+
+<ProductionPaperSignalLayout
+  title="Projects — goutamprusty.com"
+  description={summary}
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Portfolio · Development template</p>
+    <h1>{title}</h1>
+    <p class="ps-lede">{summary}</p>
+  </header>
+
+  <section class="ps-section" aria-label="Projects">
+    <p class="ps-shelf-note" style="margin-top: 0 !important; margin-bottom: 2rem;">
+      {fixtureNotice}
+    </p>
+    <div class:list={['ps-project-grid', { 'ps-project-grid--single': projects.length === 1 }]}>
+      {projects.map((project, idx) => (
+        <a
+          class="ps-project-card ps-card-editorial"
+          href={project.href}
+        >
+          <div class="ps-card-top">
+            <span class="ps-card-mark" aria-hidden="true">
+              {String(idx + 1).padStart(2, '0')}
+            </span>
+            <span class="ps-card-badge">{project.type}</span>
+          </div>
+          <p class="ps-kicker">Project · Case study</p>
+          <h3>{project.title}</h3>
+          {project.summary && <p>{project.summary}</p>}
+          <span class="ps-card-foot">
+            <span>Development fixture</span>
+            <span aria-hidden="true">View project ↗</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

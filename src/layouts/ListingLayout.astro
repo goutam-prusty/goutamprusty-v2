@@ -1,8 +1,0 @@
----
-import SiteLayout from './SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
-import ContentList from '../components/ContentList.astro';
-import { fixtureNotice } from '../data/fixtures';
-const { title, summary, entries = [] } = Astro.props;
----
-<SiteLayout title={`${title} | goutamprusty.com`}><PageIntro eyebrow="Development template" title={title} summary={summary} /><p class="fixture-note">{fixtureNotice}</p><ContentList entries={entries} /></SiteLayout>

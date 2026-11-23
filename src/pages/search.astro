@@ -1,5 +1,98 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
+import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
+
+const title = 'Search';
+const summary = 'Search structure preview. Search functionality will be implemented in a later phase.';
 ---
-<SiteLayout title="Search | goutamprusty.com"><PageIntro eyebrow="Development template" title="Search" summary="Search structure preview. Search functionality will be implemented in a later phase." /><form role="search"><label for="site-search">Search published work</label><div><input id="site-search" type="search" placeholder="Search titles and topics" disabled /><button type="submit" disabled>Search</button></div><p>Search is not available in this preview.</p></form></SiteLayout>
+
+<ProductionPaperSignalLayout
+  title="Search — goutamprusty.com"
+  description={summary}
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Development template</p>
+    <h1>{title}</h1>
+    <p class="ps-lede">{summary}</p>
+  </header>
+
+  <section class="ps-section" aria-label="Search work">
+    <form role="search" class="ps-search-form" style="max-width: var(--reading);">
+      <label for="site-search" class="ps-search-label">Search published work</label>
+      <div class="ps-search-input-group">
+        <input
+          id="site-search"
+          type="search"
+          placeholder="Search titles and topics"
+          disabled
+          class="ps-search-input"
+        />
+        <button type="submit" disabled class="ps-search-button">
+          Search
+        </button>
+      </div>
+      <p class="ps-shelf-note" style="margin-top: 1rem !important;">
+        Search is not available in this preview.
+      </p>
+    </form>
+  </section>
+</ProductionPaperSignalLayout>
+
+<style>
+  .ps-search-label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+  }
+
+  .ps-search-input-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .ps-search-input {
+    flex: 1 1 16rem;
+    min-height: 3rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .ps-search-input:disabled {
+    background: var(--color-sunken);
+    color: var(--color-secondary);
+    cursor: not-allowed;
+    border-color: var(--color-line);
+    opacity: 0.85;
+  }
+
+  .ps-search-button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-signal);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .ps-search-button:disabled {
+    background: var(--color-sunken);
+    color: var(--color-secondary);
+    border-color: var(--color-line);
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+</style>

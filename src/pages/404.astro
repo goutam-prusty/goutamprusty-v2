@@ -1,5 +1,35 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
+import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
+
+const title = 'Page not found';
+const summary = 'The address may be incorrect or the page may have moved.';
 ---
-<SiteLayout title="Page not found | goutamprusty.com"><PageIntro eyebrow="404" title="This page could not be found." summary="The address may be incorrect or the page may have moved." /><p><a href="/">Return to the homepage</a> · <a href="/research/">Browse research</a></p></SiteLayout>
+
+<ProductionPaperSignalLayout
+  title={`${title} — goutamprusty.com`}
+  description={summary}
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">404 · Error</p>
+    <h1>This page could not be found.</h1>
+    <p class="ps-lede">{summary}</p>
+  </header>
+
+  <section class="ps-section" aria-label="Recovery navigation">
+    <div class="ps-note" style="max-width: var(--reading); margin-bottom: 2rem;">
+      <p style="margin: 0;">
+        <a href="/" class="ps-text-link">Return to the homepage</a>
+        <span style="padding-inline: 0.5rem; color: var(--color-line);">·</span>
+        <a href="/research/" class="ps-text-link">Browse research</a>
+      </p>
+    </div>
+    <div class="ps-actions">
+      <a href="/" class="ps-button">
+        Return to the homepage <span aria-hidden="true">→</span>
+      </a>
+      <a href="/research/" class="ps-text-link">
+        Browse research <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

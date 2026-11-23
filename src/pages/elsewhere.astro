@@ -1,5 +1,23 @@
 ---
-import SiteLayout from '../layouts/SiteLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
+import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
+
+const title = 'Elsewhere';
+const summary = 'A structure for verified profiles and publication destinations.';
 ---
-<SiteLayout title="Elsewhere | goutamprusty.com"><PageIntro eyebrow="Development template" title="Elsewhere" summary="A structure for verified profiles and publication destinations." /><p>External destinations will be added only after their URLs are verified.</p></SiteLayout>
+
+<ProductionPaperSignalLayout
+  title="Elsewhere — goutamprusty.com"
+  description={summary}
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">Development template</p>
+    <h1>{title}</h1>
+    <p class="ps-lede">{summary}</p>
+  </header>
+
+  <section class="ps-section" aria-label="Elsewhere profiles">
+    <div class="ps-note" style="max-width: var(--reading);">
+      <p style="margin: 0;">External destinations will be added only after their URLs are verified.</p>
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

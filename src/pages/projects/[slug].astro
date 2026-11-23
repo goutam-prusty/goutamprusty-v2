@@ -1,8 +1,97 @@
 ---
-import DetailLayout from '../../layouts/DetailLayout.astro';
-import { works } from '../../data/fixtures';
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import { works, fixtureNotice } from '../../data/fixtures';
 import VisualFigure from '../../components/VisualFigure.astro';
-export function getStaticPaths() { return works.filter((work) => work.type === 'Project').map((work) => ({ params: { slug: 'sample-project' }, props: { work } })); }
+
+export function getStaticPaths() {
+  return works
+    .filter((work) => work.type === 'Project')
+    .map((work) => ({ params: { slug: 'sample-project' }, props: { work } }));
+}
+
 const { work } = Astro.props;
+const title = work.title;
+const summary = work.summary;
+const type = 'Project';
+const sections = [
+  {
+    id: 'problem',
+    title: 'Problem',
+    body: 'Placeholder problem statement.',
+  },
+  {
+    id: 'approach',
+    title: 'Approach',
+    body: 'Placeholder approach.',
+  },
+  {
+    id: 'evidence',
+    title: 'Evidence and contribution',
+    body: 'Verified evidence and contribution details will be added later.',
+  },
+];
 ---
-<DetailLayout title={work.title} summary={work.summary} type="Project" sections={[{id:'problem',title:'Problem',body:'Placeholder problem statement.'},{id:'approach',title:'Approach',body:'Placeholder approach.'},{id:'evidence',title:'Evidence and contribution',body:'Verified evidence and contribution details will be added later.'}]}><VisualFigure slot="visual" label="Project visual area" caption="Optional slot for verified screenshots or project imagery." /></DetailLayout>
+
+<ProductionPaperSignalLayout
+  title={`${title} — goutamprusty.com`}
+  description={summary}
+>
+  <header class="ps-page-head">
+    <p class="ps-eyebrow">{type} · Case study · Development template</p>
+    <h1>{title}</h1>
+    <p class="ps-lede">{summary}</p>
+    <div class="ps-meta">
+      <span><strong>Type</strong> {type}</span>
+      <span><strong>Status</strong> {fixtureNotice}</span>
+    </div>
+  </header>
+
+  <figure class="ps-feature-visual" aria-label="Abstract project visual placeholder">
+    <span class="ps-visual-label">Project visual<br />placeholder</span>
+  </figure>
+
+  <div class="ps-visual-slot-container" style="margin-bottom: 2rem;">
+    <VisualFigure
+      label="Project visual area"
+      caption="Optional slot for verified screenshots or project imagery."
+    />
+  </div>
+
+  <div class="ps-body-grid">
+    <article class="ps-article">
+      <div class="ps-note" style="margin-bottom: 2rem;">
+        {fixtureNotice}
+      </div>
+      {sections.map((section, idx) => (
+        <section id={section.id}>
+          <p class="ps-eyebrow">0{idx + 1} · Section</p>
+          <h2>{section.title}</h2>
+          <p class="ps-placeholder">{section.body}</p>
+        </section>
+      ))}
+      <section id="browse" style="margin-top: 1.5rem;">
+        <p class="ps-eyebrow">Navigation</p>
+        <p>
+          <a href="/projects/" class="ps-text-link">← Return to all projects</a>
+        </p>
+      </section>
+    </article>
+    <aside class="ps-aside" aria-label="Project page sections">
+      <h2>On this page</h2>
+      <ol>
+        {sections.map((section) => (
+          <li><a href={`#${section.id}`}>{section.title}</a></li>
+        ))}
+      </ol>
+    </aside>
+  </div>
+</ProductionPaperSignalLayout>
+
+<style>
+  .ps-visual-slot-container {
+    max-width: var(--reading);
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    padding: 1rem;
+  }
+</style>

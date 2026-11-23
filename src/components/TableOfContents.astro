@@ -1,5 +1,0 @@
----
-interface Entry { label: string; href: string; }
-const { entries } = Astro.props as { entries: Entry[] };
----
-<nav aria-label="On this page" class="toc"><h2>On this page</h2><ol>{entries.map((entry) => <li><a href={entry.href}>{entry.label}</a></li>)}</ol></nav>
