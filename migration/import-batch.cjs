@@ -27,6 +27,7 @@ const { validateDocument } = require('./lib/schema-validator.cjs');
 const { research: researchSchema, writing: writingSchema } = require('./schema/index.cjs');
 const { makeKey } = require('./lib/key-generator.cjs');
 const { buildAuthoritativeReferenceMap } = require('./lib/serialization-contract.cjs');
+const { normalizeAssetPath } = require('./lib/path-normalizer.cjs');
 
 const V1_ROOT = 'D:/goutamprusty-v1';
 const DRY_RUN_DIR = path.join(__dirname, 'dry-run');
@@ -61,11 +62,16 @@ if (requestedIds.length === 0) {
   process.exit(1);
 }
 
-// Strict safety check: Never permit HOLD documents or dependent documents
-const HOLD_IDS = ['BLG-012', 'BLG-013', 'BLG-014', 'BLG-015', 'BLG-021', 'RES-014', 'RES-015'];
-const forbiddenFound = requestedIds.filter((id) => HOLD_IDS.includes(id));
-if (forbiddenFound.length > 0) {
-  console.error(`ERROR: Requested document list contains forbidden HOLD/dependent IDs: ${forbiddenFound.join(', ')}`);
+// Strict safety gate:
+// Owner authorization is explicit ONLY for the 7 specified documents:
+// BLG-012, BLG-013, BLG-014, BLG-015, BLG-021, RES-014, RES-015.
+// Any other document is strictly rejected by this gate.
+const AUTHORIZED_HOLD_IDS = new Set(['BLG-012', 'BLG-013', 'BLG-014', 'BLG-015', 'BLG-021', 'RES-014', 'RES-015']);
+
+const unauthorizedFound = requestedIds.filter((id) => !AUTHORIZED_HOLD_IDS.has(id));
+if (unauthorizedFound.length > 0) {
+  console.error(`ERROR: Requested document list contains unauthorized ID(s): ${unauthorizedFound.join(', ')}`);
+  console.error(`This import execution is strictly authorized ONLY for: ${Array.from(AUTHORIZED_HOLD_IDS).join(', ')}`);
   process.exit(1);
 }
 
@@ -213,6 +219,25 @@ for (const target of targets) {
   // Cover image normalization
   if (doc.coverImage && typeof doc.coverImage === 'object') {
     delete doc.coverImage._type;
+    if (doc.coverImage.assetPath) {
+      doc.coverImage.assetPath = normalizeAssetPath(doc.coverImage.assetPath);
+    }
+  }
+
+  // Normalize body image presentation paths
+  if (Array.isArray(doc.body)) {
+    for (const block of doc.body) {
+      if (block._type === 'imageBlock' && block.assetPath) {
+        block.assetPath = normalizeAssetPath(block.assetPath);
+      }
+      if (Array.isArray(block.children)) {
+        for (const child of block.children) {
+          if ((child._type === 'inlineImage' || child._type === 'imageBlock') && child.assetPath) {
+            child.assetPath = normalizeAssetPath(child.assetPath);
+          }
+        }
+      }
+    }
   }
 
   // Editorial defaults

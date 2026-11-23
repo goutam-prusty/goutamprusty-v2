@@ -1,6 +1,7 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import { normalizeAssetPath } from '../../lib/pathNormalizer';
 import { getAllResearchSlugs, getResearchReportBySlug, requireLiveSanity } from '../../lib/sanityClient';
 
 export async function getStaticPaths() {
@@ -44,7 +45,7 @@ const coverImage = report?.coverImage;
     <article class="ps-article">
       {coverImage?.assetPath && (
         <div class="my-8 rounded overflow-hidden border border-stone-200">
-          <img src={coverImage.assetPath} alt={coverImage.alt || title} class="w-full h-auto" loading="eager" />
+          <img src={normalizeAssetPath(coverImage.assetPath)} alt={coverImage.alt || title} class="w-full h-auto" loading="eager" />
           {coverImage.caption && <p class="text-xs text-stone-500 p-2 italic">{coverImage.caption}</p>}
         </div>
       )}

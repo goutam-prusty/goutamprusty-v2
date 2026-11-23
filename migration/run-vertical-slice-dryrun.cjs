@@ -18,6 +18,7 @@ const { validateDocument } = require('./lib/schema-validator.cjs');
 const { research: researchSchema, writing: writingSchema } = require('./schema/index.cjs');
 const { makeKey } = require('./lib/key-generator.cjs');
 const { buildAuthoritativeReferenceMap } = require('./lib/serialization-contract.cjs');
+const { normalizeAssetPath } = require('./lib/path-normalizer.cjs');
 
 const V1_ROOT = 'D:/goutamprusty-v1';
 const DRY_RUN_DIR = path.join(__dirname, 'dry-run');
@@ -198,6 +199,25 @@ for (const target of targets) {
   // Cover image normalization
   if (doc.coverImage && typeof doc.coverImage === 'object') {
     delete doc.coverImage._type;
+    if (doc.coverImage.assetPath) {
+      doc.coverImage.assetPath = normalizeAssetPath(doc.coverImage.assetPath);
+    }
+  }
+
+  // Normalize body image presentation paths
+  if (Array.isArray(doc.body)) {
+    for (const block of doc.body) {
+      if (block._type === 'imageBlock' && block.assetPath) {
+        block.assetPath = normalizeAssetPath(block.assetPath);
+      }
+      if (Array.isArray(block.children)) {
+        for (const child of block.children) {
+          if ((child._type === 'inlineImage' || child._type === 'imageBlock') && child.assetPath) {
+            child.assetPath = normalizeAssetPath(child.assetPath);
+          }
+        }
+      }
+    }
   }
 
   // Editorial defaults

@@ -1,4 +1,6 @@
 ---
+import { normalizeAssetPath } from '../lib/pathNormalizer';
+
 export interface Props {
   blocks: any[];
 }
@@ -65,7 +67,7 @@ function slugify(text: string): string {
         if (child._type === 'inlineImage') {
           return (
             <img
-              src={child.assetPath}
+              src={normalizeAssetPath(child.assetPath)}
               alt={child.alt || ""}
               class="inline-block max-w-full h-auto align-middle"
               loading="lazy"
@@ -176,7 +178,7 @@ function slugify(text: string): string {
                                   if (child._type === 'inlineImage') {
                                     return (
                                       <img
-                                        src={child.assetPath}
+                                        src={normalizeAssetPath(child.assetPath)}
                                         alt={child.alt || ""}
                                         class="inline-block max-w-full h-auto align-middle"
                                         loading="lazy"
@@ -229,7 +231,7 @@ function slugify(text: string): string {
       return (
         <figure class="my-8 ps-figure">
           <img
-            src={block.assetPath}
+            src={normalizeAssetPath(block.assetPath)}
             alt={block.alt || ""}
             width={block.width}
             height={block.height}

@@ -11,6 +11,11 @@
 const fs = require('fs');
 const path = require('path');
 const { makeKey } = require('./key-generator.cjs');
+const {
+  EXPLICIT_IMAGE_PATH_MAP,
+  normalizeAssetPath,
+  normalizeDocumentAssetPaths,
+} = require('./path-normalizer.cjs');
 
 /**
  * Custom Error classes for closed-failure modes.
@@ -380,12 +385,28 @@ function serializeObjects(doc) {
   if (!doc || typeof doc !== 'object') return doc;
   const cloned = JSON.parse(JSON.stringify(doc));
 
-  // 1. coverImage: standardizes object representation for local WebP path
+  // 1. coverImage: standardizes object representation for local WebP path with normalized assetPath
   if (cloned.coverImage && typeof cloned.coverImage === 'object') {
     cloned.coverImage = {
-      assetPath: cloned.coverImage.assetPath,
+      assetPath: normalizeAssetPath(cloned.coverImage.assetPath),
       alt: cloned.coverImage.alt || ''
     };
+  }
+
+  // 2. body image blocks & inline images: normalize presentation asset paths
+  if (Array.isArray(cloned.body)) {
+    for (const block of cloned.body) {
+      if (block._type === 'imageBlock' && block.assetPath) {
+        block.assetPath = normalizeAssetPath(block.assetPath);
+      }
+      if (Array.isArray(block.children)) {
+        for (const child of block.children) {
+          if ((child._type === 'inlineImage' || child._type === 'imageBlock') && child.assetPath) {
+            child.assetPath = normalizeAssetPath(child.assetPath);
+          }
+        }
+      }
+    }
   }
 
   // 2. seo: attach _type: 'seo'
@@ -484,5 +505,8 @@ module.exports = {
   buildAuthoritativeReferenceMap,
   getSanityDocumentId,
   ReferenceResolutionError,
-  MigrationEligibilityError
+  MigrationEligibilityError,
+  normalizeAssetPath,
+  normalizeDocumentAssetPaths,
+  EXPLICIT_IMAGE_PATH_MAP
 };
