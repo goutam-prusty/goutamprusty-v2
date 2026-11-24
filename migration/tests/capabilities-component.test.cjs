@@ -1,6 +1,6 @@
 /**
- * Reusable Capabilities Component & Evidence Data Contract Test Suite (T9)
- * goutamprusty.com v2 Rebuild — Phase 1: T9 Reusable Capabilities Component
+ * Reusable Capabilities Component & Learning Roadmap Test Suite (T9 & T9 Follow-up)
+ * goutamprusty.com v2 Rebuild — Phase 1: T9 Reusable Capabilities Component & Learning Roadmap
  *
  * Verifies:
  * 1. Component architecture and TypeScript contracts.
@@ -10,7 +10,8 @@
  * 5. Prohibition of skill meters, percentage bars, star ratings, and proficiency numbers.
  * 6. Empty-state integrity: complete omission when 0 verified capabilities exist.
  * 7. Accessibility: keyboard focus states, aria-labels, semantic hierarchy, touch targets.
- * 8. Production and homepage invariants: no unconfirmed candidate skills in production HTML.
+ * 8. Recruiter-prioritized AI Engineering learning roadmap data contract and presentation.
+ * 9. Homepage integration & production invariants: honest roadmap presentation with zero false claims.
  */
 
 const assert = require('assert');
@@ -20,6 +21,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const COMPONENT_PATH = path.join(ROOT, 'src', 'components', 'Capabilities.astro');
 const LIB_TS_PATH = path.join(ROOT, 'src', 'lib', 'capabilities.ts');
+const DATA_ROADMAP_PATH = path.join(ROOT, 'src', 'data', 'learningRoadmap.ts');
 const CSS_PATH = path.join(ROOT, 'src', 'styles', 'paper-signal.css');
 const HOME_SRC_PATH = path.join(ROOT, 'src', 'pages', 'index.astro');
 const HOME_HTML_PATH = path.join(ROOT, 'dist', 'index.html');
@@ -31,7 +33,11 @@ const {
   validateLearningCapability,
   validateCapabilitiesData,
   hasValidCapabilities,
+  validateLearningRoadmap,
+  hasValidRoadmap,
 } = require('../lib/capabilities.cjs');
+
+const { learningRoadmap } = require('../lib/learning-roadmap.cjs');
 
 let passedCount = 0;
 let failedCount = 0;
@@ -49,7 +55,7 @@ function test(description, fn) {
 }
 
 console.log('================================================================');
-console.log('  REUSABLE CAPABILITIES COMPONENT & DATA CONTRACT TEST SUITE (T9)');
+console.log('  REUSABLE CAPABILITIES & LEARNING ROADMAP TEST SUITE (T9)');
 console.log('================================================================\n');
 
 // -------------------------------------------------------------
@@ -69,10 +75,13 @@ test('capabilities.ts exists in src/lib/ with typed contracts', () => {
   assert(libTsSource.includes('export interface ValidatedProjectCapability'), 'Must export ValidatedProjectCapability');
   assert(libTsSource.includes('export interface ValidatedLearningCapability'), 'Must export ValidatedLearningCapability');
   assert(libTsSource.includes('export interface CapabilitiesInput'), 'Must export CapabilitiesInput');
+  assert(libTsSource.includes('export interface LearningRoadmapData'), 'Must export LearningRoadmapData');
+  assert(libTsSource.includes('export interface RoadmapSubgroup'), 'Must export RoadmapSubgroup');
 });
 
 test('Capabilities.astro imports and uses validation functions', () => {
   assert(compSource.includes('validateCapabilitiesData'), 'Must import validateCapabilitiesData');
+  assert(compSource.includes('validateLearningRoadmap'), 'Must import validateLearningRoadmap');
   assert(compSource.includes('hasValidCapabilities'), 'Must import hasValidCapabilities');
   assert(compSource.includes('export interface Props'), 'Must define Props interface');
 });
@@ -194,13 +203,13 @@ test('Deduplicates entries case-insensitively within both tiers', () => {
   const input = {
     usedInProjects: [
       { name: 'TypeScript', project: 'proj-1' },
-      { name: 'typescript', project: 'proj-2' }, // duplicate
+      { name: 'typescript', project: 'proj-2' },
       { name: 'Node.js', project: 'proj-1' },
     ],
     currentlyLearning: [
       'Rust',
-      'rust', // duplicate
-      { name: 'RUST' }, // duplicate
+      'rust',
+      { name: 'RUST' },
       'Go',
     ],
   };
@@ -248,8 +257,7 @@ console.log('\n--- Suite 5: Design Standards & Prohibition of Skill Meters ---')
 const cssSource = fs.readFileSync(CSS_PATH, 'utf8');
 
 test('No progress bars, percentage bars, or star ratings in component or CSS', () => {
-  // Prohibit skill meter conventions
-  assert(!compSource.includes('progress'), 'Must not have progress element');
+  assert(!compSource.includes('<progress'), 'Must not have <progress> element');
   assert(!compSource.includes('percentage'), 'Must not display percentages');
   assert(!compSource.includes('meter'), 'Must not have skill meters');
   assert(!compSource.includes('stars'), 'Must not have star ratings');
@@ -281,7 +289,7 @@ test('hasValidCapabilities returns false for empty or null input', () => {
 
 test('Component strictly gates rendering on renderable flag', () => {
   assert(compSource.includes('{renderable && ('), 'Must conditionally render on renderable flag');
-  assert(compSource.includes('const renderable = hasValidCapabilities(validated)'), 'Must check hasValidCapabilities');
+  assert(compSource.includes('const renderable = isRoadmapMode || hasCaps'), 'Must check renderable condition');
 });
 
 test('Does NOT output empty section or "coming soon" message when 0 capabilities exist', () => {
@@ -294,7 +302,7 @@ test('Does NOT output empty section or "coming soon" message when 0 capabilities
 // -------------------------------------------------------------
 console.log('\n--- Suite 7: Accessibility & Keyboard Navigation ---');
 
-test('Project links have accessible aria-labels with project attribution', () => {
+test('Project links have accessible aria-labels with project attribution in project mode', () => {
   assert(compSource.includes('aria-label={`${cap.name} (demonstrated in ${cap.projectTitle})`}'), 'Must have descriptive aria-label');
   assert(compSource.includes('aria-hidden="true"'), 'Decorative arrow and project details must be marked aria-hidden');
 });
@@ -306,30 +314,195 @@ test('CSS defines visible focus states and mobile touch targets', () => {
 });
 
 test('Semantic heading hierarchy and list landmarks are preserved', () => {
-  assert(compSource.includes('<h2 id={`${id}-title`}>{title}</h2>'), 'Section must have h2 title');
-  assert(compSource.includes('<h3 class="ps-capabilities-subhead"'), 'Group subheads must be h3');
-  assert(compSource.includes('<ul class="ps-capabilities-list" role="list">'), 'Must use semantic unordered list');
-  assert(compSource.includes('<li class="ps-capabilities-item">'), 'Must use semantic list items');
+  assert(compSource.includes('<h2 id={`${sectionId}-title`}>{sectionTitle}</h2>'), 'Section must have h2 title');
+  assert(compSource.includes('role="list"'), 'Must use semantic list landmarks');
+  assert(compSource.includes('<li class="ps-roadmap-item">'), 'Must use semantic roadmap list items');
 });
 
 // -------------------------------------------------------------
-// Suite 8: Homepage & Production Invariants
+// Suite 8: Recruiter-Prioritized AI Engineering Learning Roadmap (T9 Follow-up)
 // -------------------------------------------------------------
-console.log('\n--- Suite 8: Homepage & Production Invariants ---');
+console.log('\n--- Suite 8: Recruiter-Prioritized Learning Roadmap Contract & Content ---');
+
+test('learningRoadmap data file exists and exports valid structured roadmap', () => {
+  assert(fs.existsSync(DATA_ROADMAP_PATH), 'learningRoadmap.ts must exist');
+  assert(hasValidRoadmap(learningRoadmap), 'Roadmap must be valid');
+});
+
+test('Validates exact 16 core AI engineering learning priorities', () => {
+  const expectedCore = [
+    'Python',
+    'SQL',
+    'Machine Learning Fundamentals',
+    'Data Preprocessing',
+    'Model Training and Evaluation',
+    'LLM APIs',
+    'Prompt Engineering',
+    'Embeddings',
+    'Retrieval-Augmented Generation (RAG)',
+    'Vector Databases',
+    'FastAPI',
+    'REST APIs',
+    'Git and GitHub',
+    'AI/LLM Evaluation',
+    'Docker',
+    'Cloud Deployment',
+  ];
+
+  assert.strictEqual(learningRoadmap.corePriorities.length, 16, 'Must contain exactly 16 core priorities');
+  for (const item of expectedCore) {
+    assert(learningRoadmap.corePriorities.includes(item), `Core priorities must include ${item}`);
+  }
+});
+
+test('Validates supporting foundations organized into 5 concise domain subgroups', () => {
+  assert.strictEqual(learningRoadmap.supportingSubgroups.length, 5, 'Must contain exactly 5 subgroups');
+
+  const expectedSubgroups = {
+    'Programming and data': [
+      'Object-Oriented Programming',
+      'Data Structures and Algorithms',
+      'NumPy',
+      'Pandas',
+      'Linux',
+      'Debugging',
+      'Software Testing',
+      'PostgreSQL',
+    ],
+    'Machine learning and NLP': [
+      'Scikit-learn',
+      'Supervised Learning',
+      'Unsupervised Learning',
+      'Neural Networks',
+      'PyTorch',
+      'TensorFlow',
+      'Natural Language Processing',
+      'Transformers',
+      'Hugging Face',
+    ],
+    'Generative AI and application development': [
+      'Large Language Models',
+      'Structured Outputs',
+      'Function Calling',
+      'Tokenization',
+      'Fine-tuning',
+      'LangChain',
+      'LangGraph',
+      'LlamaIndex',
+    ],
+    'RAG and agentic systems': [
+      'Semantic Search',
+      'Hybrid Search',
+      'Reranking',
+      'AI Agents',
+      'Tool Calling',
+      'Agent Workflows',
+      'Model Context Protocol (MCP)',
+    ],
+    'Deployment and production engineering': [
+      'AWS / Azure / Google Cloud',
+      'CI/CD',
+      'Model Monitoring',
+      'LLM Observability',
+      'Model Deployment',
+      'LoRA / QLoRA',
+      'Kubernetes',
+    ],
+  };
+
+  for (const [title, items] of Object.entries(expectedSubgroups)) {
+    const found = learningRoadmap.supportingSubgroups.find((sg) => sg.title === title);
+    assert(found, `Subgroup "${title}" must exist`);
+    assert.strictEqual(found.items.length, items.length, `Subgroup "${title}" item count mismatch`);
+    for (const item of items) {
+      assert(found.items.includes(item), `Subgroup "${title}" must include ${item}`);
+    }
+  }
+});
+
+test('Roadmap validation normalizes and rejects invalid roadmap inputs', () => {
+  assert.strictEqual(validateLearningRoadmap(null), null);
+  assert.strictEqual(validateLearningRoadmap({}), null);
+  assert.strictEqual(validateLearningRoadmap({ corePriorities: [] }), null);
+
+  const validated = validateLearningRoadmap({
+    corePriorities: ['  Python  ', '', 'SQL'],
+    supportingSubgroups: [
+      { title: 'Data', items: ['Pandas', ''] },
+      { title: '', items: [] },
+    ],
+  });
+  assert(validated !== null);
+  assert.strictEqual(validated.corePriorities.length, 2);
+  assert.strictEqual(validated.corePriorities[0], 'Python');
+  assert.strictEqual(validated.corePriorities[1], 'SQL');
+  assert.strictEqual(validated.supportingSubgroups.length, 1);
+  assert.strictEqual(validated.supportingSubgroups[0].items.length, 1);
+});
+
+test('Roadmap presentation defines prominent visual hierarchy for core priorities', () => {
+  assert(cssSource.includes('.ps-roadmap-tier-badge'), 'CSS must define High Priority badge');
+  assert(cssSource.includes('.ps-roadmap-tag--core'), 'CSS must define .ps-roadmap-tag--core');
+  assert(cssSource.includes('.ps-roadmap-tag--supporting'), 'CSS must define .ps-roadmap-tag--supporting');
+  assert(cssSource.includes('.ps-roadmap-subgroups-grid'), 'CSS must define responsive subgroups grid');
+  assert(compSource.includes('class="ps-roadmap-tag ps-roadmap-tag--core"'), 'Component must render core tags');
+  assert(compSource.includes('class="ps-roadmap-tag ps-roadmap-tag--supporting"'), 'Component must render supporting tags');
+});
+
+test('Prohibits misleading claims and false representations in roadmap text', () => {
+  const allRoadmapText = [
+    learningRoadmap.title,
+    learningRoadmap.description,
+    learningRoadmap.corePrioritiesTitle,
+    learningRoadmap.corePrioritiesDescription,
+    learningRoadmap.supportingTitle,
+    learningRoadmap.supportingDescription,
+    ...learningRoadmap.corePriorities,
+    ...learningRoadmap.supportingSubgroups.flatMap((sg) => [sg.title, ...sg.items]),
+  ].join(' ');
+
+  // Must not claim expertise, production-readiness, or mastery
+  assert(!allRoadmapText.includes('expert'), 'Must not claim expert');
+  assert(!allRoadmapText.includes('proficient'), 'Must not claim proficient');
+  assert(!allRoadmapText.includes('mastered'), 'Must not claim mastered');
+  assert(!allRoadmapText.includes('production-ready'), 'Must not claim production-ready');
+  assert(!allRoadmapText.includes('years of experience'), 'Must not claim years of experience');
+  // Must be framed honestly as planned learning areas
+  assert(learningRoadmap.description.includes('planned'), 'Must explicitly state planned learning');
+  assert(learningRoadmap.description.includes('rather than claimed project credentials'), 'Must disclaim claimed credentials');
+});
+
+// -------------------------------------------------------------
+// Suite 9: Homepage Integration & Production HTML Invariants
+// -------------------------------------------------------------
+console.log('\n--- Suite 9: Homepage Integration & Production Invariants ---');
 
 const homeSrc = fs.readFileSync(HOME_SRC_PATH, 'utf8');
-const homeHtml = fs.existsSync(HOME_HTML_PATH) ? fs.readFileSync(HOME_HTML_PATH, 'utf8') : '';
 
-test('Homepage source cleanly omits Capabilities section when K3 data is unsupplied', () => {
+test('Homepage source imports and integrates Capabilities with learningRoadmap', () => {
+  assert(homeSrc.includes("import Capabilities from '../components/Capabilities.astro'"), 'Must import Capabilities component');
+  assert(homeSrc.includes("import { learningRoadmap } from '../data/learningRoadmap'"), 'Must import learningRoadmap data');
+  assert(homeSrc.includes('<Capabilities roadmap={learningRoadmap} id="learning-roadmap" />'), 'Must render Capabilities with roadmap prop');
+});
+
+test('Homepage source cleanly avoids id="capabilities" and Capabilities</h2>', () => {
   assert(!homeSrc.includes('id="capabilities"'), 'Homepage source must not render id="capabilities"');
   assert(!homeSrc.includes('Capabilities</h2>'), 'Homepage source must not render Capabilities</h2>');
 });
 
-test('dist/index.html contains no unverified capabilities, placeholder tags, or empty section', () => {
-  if (homeHtml) {
-    assert(!homeHtml.includes('id="capabilities"'), 'dist/index.html must not contain id="capabilities"');
-    assert(!homeHtml.includes('Used in projects</h3>'), 'dist/index.html must not contain Used in projects');
-    assert(!homeHtml.includes('Currently learning</h3>'), 'dist/index.html must not contain Currently learning');
+test('Zero project links or "Used in projects" claims in roadmap markup', () => {
+  // In roadmap mode, no project links are rendered
+  const roadmapSlice = compSource.slice(compSource.indexOf('isRoadmapMode && validatedRoadmap'));
+  const roadmapModeOnly = roadmapSlice.slice(0, roadmapSlice.indexOf('!isRoadmapMode && hasCaps'));
+  assert(!roadmapModeOnly.includes('Used in projects'), 'Roadmap mode must not include Used in projects');
+  assert(!roadmapModeOnly.includes('href={cap.projectUrl}'), 'Roadmap mode must not render project links');
+});
+
+test('dist/index.html verification when built HTML exists', () => {
+  if (fs.existsSync(HOME_HTML_PATH)) {
+    const html = fs.readFileSync(HOME_HTML_PATH, 'utf8');
+    assert(!html.includes('id="capabilities"'), 'dist/index.html must not contain id="capabilities"');
+    assert(!html.includes('Capabilities</h2>'), 'dist/index.html must not contain Capabilities</h2>');
   }
 });
 

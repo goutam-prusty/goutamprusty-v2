@@ -658,4 +658,151 @@
   }
 }
 
+/* ==========================================================================
+   AI Engineering Learning Roadmap Styles (T9 Follow-up)
+   ========================================================================== */
+.ps-roadmap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.ps-roadmap-intro {
+  margin: 0;
+  max-width: 65ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.ps-roadmap-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ps-roadmap-tier-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ps-roadmap-tier-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.2rem 0.55rem;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font: 700 0.68rem/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-ink);
+  border-radius: 2px;
+}
+
+.ps-roadmap-tier-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.ps-roadmap-tier-desc {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  line-height: 1.5;
+}
+
+.ps-roadmap-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ps-roadmap-item {
+  display: inline-flex;
+  min-width: 0;
+}
+
+/* Core Priorities: Strongest Visual Emphasis */
+.ps-roadmap-tag--core {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  min-height: 2.35rem;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: 600 0.88rem/1.3 var(--font-body);
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.ps-roadmap-bullet {
+  font-size: 0.55rem;
+  color: var(--color-ink);
+  transform: translateY(-0.05rem);
+}
+
+/* Supporting Foundations: 5 Subgroups in Responsive Grid */
+.ps-roadmap-subgroups-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem 2rem;
+}
+
+@media (min-width: 44rem) {
+  .ps-roadmap-subgroups-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 68rem) {
+  .ps-roadmap-subgroups-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ps-roadmap-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 2px;
+}
+
+.ps-roadmap-subgroup-title {
+  margin: 0;
+  font: 700 0.74rem/1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.ps-roadmap-tag--supporting {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  min-height: 2rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font: 500 0.82rem/1.3 var(--font-body);
+  border-radius: 2px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 @media (prefers-reduced-motion: reduce) { .ps, .ps * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }

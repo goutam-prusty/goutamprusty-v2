@@ -263,3 +263,78 @@ export function hasValidCapabilities(data?: ValidatedCapabilities | null): boole
   if (!data) return false;
   return (data.usedInProjects && data.usedInProjects.length > 0) || (data.currentlyLearning && data.currentlyLearning.length > 0);
 }
+
+// --------------------------------------------------------------------------
+// AI Engineering Learning Roadmap Contracts & Normalization (T9 Follow-up)
+// --------------------------------------------------------------------------
+
+export interface RoadmapSubgroup {
+  title: string;
+  items: string[];
+}
+
+export interface LearningRoadmapData {
+  title?: string;
+  eyebrow?: string;
+  description?: string;
+  corePrioritiesTitle?: string;
+  corePrioritiesDescription?: string;
+  corePriorities: string[];
+  supportingTitle?: string;
+  supportingDescription?: string;
+  supportingSubgroups: RoadmapSubgroup[];
+}
+
+/**
+ * Validates and normalizes learning roadmap data.
+ * Rejects entries with empty core priorities.
+ */
+export function validateLearningRoadmap(data: unknown): LearningRoadmapData | null {
+  if (!data || typeof data !== 'object') return null;
+  const raw = data as Partial<LearningRoadmapData>;
+
+  if (!Array.isArray(raw.corePriorities) || raw.corePriorities.length === 0) {
+    return null;
+  }
+
+  const corePriorities = raw.corePriorities
+    .map((item) => (typeof item === 'string' ? item.trim() : ''))
+    .filter((s) => s.length > 0);
+
+  if (corePriorities.length === 0) {
+    return null;
+  }
+
+  const supportingSubgroups: RoadmapSubgroup[] = [];
+  if (Array.isArray(raw.supportingSubgroups)) {
+    for (const sg of raw.supportingSubgroups) {
+      if (sg && typeof sg.title === 'string' && Array.isArray(sg.items)) {
+        const cleanItems = sg.items
+          .map((i) => (typeof i === 'string' ? i.trim() : ''))
+          .filter((s) => s.length > 0);
+        if (cleanItems.length > 0) {
+          supportingSubgroups.push({
+            title: sg.title.trim(),
+            items: cleanItems,
+          });
+        }
+      }
+    }
+  }
+
+  return {
+    title: raw.title?.trim() || 'AI Engineering Learning Roadmap',
+    eyebrow: raw.eyebrow?.trim() || 'Planned Learning · Structured Progression',
+    description: raw.description?.trim() || '',
+    corePrioritiesTitle: raw.corePrioritiesTitle?.trim() || 'Core AI Engineering learning priorities',
+    corePrioritiesDescription: raw.corePrioritiesDescription?.trim() || '',
+    corePriorities,
+    supportingTitle: raw.supportingTitle?.trim() || 'Supporting foundations and advanced learning areas',
+    supportingDescription: raw.supportingDescription?.trim() || '',
+    supportingSubgroups,
+  };
+}
+
+export function hasValidRoadmap(data?: LearningRoadmapData | null): boolean {
+  return Boolean(data && Array.isArray(data.corePriorities) && data.corePriorities.length > 0);
+}

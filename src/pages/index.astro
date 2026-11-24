@@ -7,6 +7,8 @@ import {
 } from '../lib/sanityClient';
 import { getArticleReadingTime } from '../lib/readingTime';
 import ProjectCard from '../components/ProjectCard.astro';
+import Capabilities from '../components/Capabilities.astro';
+import { learningRoadmap } from '../data/learningRoadmap';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -83,7 +85,8 @@ const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '
     </section>
   )}
 
-  {/* 3. Capabilities: Omitted (no verified capabilities/skills data exists in codebase) */}
+  {/* 3. AI Engineering Learning Roadmap (Owner-approved planned learning priorities) */}
+  <Capabilities roadmap={learningRoadmap} id="learning-roadmap" />
 
   {/* 4. Research & Writing */}
   <section class="ps-section" id="research-writing" aria-labelledby="research-writing-title">

@@ -165,6 +165,56 @@ function hasValidCapabilities(data) {
          (Array.isArray(data.currentlyLearning) && data.currentlyLearning.length > 0);
 }
 
+function validateLearningRoadmap(data) {
+  if (!data || typeof data !== 'object') return null;
+  const raw = data;
+
+  if (!Array.isArray(raw.corePriorities) || raw.corePriorities.length === 0) {
+    return null;
+  }
+
+  const corePriorities = raw.corePriorities
+    .map((item) => (typeof item === 'string' ? item.trim() : ''))
+    .filter((s) => s.length > 0);
+
+  if (corePriorities.length === 0) {
+    return null;
+  }
+
+  const supportingSubgroups = [];
+  if (Array.isArray(raw.supportingSubgroups)) {
+    for (const sg of raw.supportingSubgroups) {
+      if (sg && typeof sg.title === 'string' && Array.isArray(sg.items)) {
+        const cleanItems = sg.items
+          .map((i) => (typeof i === 'string' ? i.trim() : ''))
+          .filter((s) => s.length > 0);
+        if (cleanItems.length > 0) {
+          supportingSubgroups.push({
+            title: sg.title.trim(),
+            items: cleanItems,
+          });
+        }
+      }
+    }
+  }
+
+  return {
+    title: (raw.title && raw.title.trim()) || 'AI Engineering Learning Roadmap',
+    eyebrow: (raw.eyebrow && raw.eyebrow.trim()) || 'Planned Learning · Structured Progression',
+    description: (raw.description && raw.description.trim()) || '',
+    corePrioritiesTitle: (raw.corePrioritiesTitle && raw.corePrioritiesTitle.trim()) || 'Core AI Engineering learning priorities',
+    corePrioritiesDescription: (raw.corePrioritiesDescription && raw.corePrioritiesDescription.trim()) || '',
+    corePriorities,
+    supportingTitle: (raw.supportingTitle && raw.supportingTitle.trim()) || 'Supporting foundations and advanced learning areas',
+    supportingDescription: (raw.supportingDescription && raw.supportingDescription.trim()) || '',
+    supportingSubgroups,
+  };
+}
+
+function hasValidRoadmap(data) {
+  return Boolean(data && Array.isArray(data.corePriorities) && data.corePriorities.length > 0);
+}
+
 module.exports = {
   formatProjectUrl,
   extractSlug,
@@ -172,4 +222,6 @@ module.exports = {
   validateLearningCapability,
   validateCapabilitiesData,
   hasValidCapabilities,
+  validateLearningRoadmap,
+  hasValidRoadmap,
 };
