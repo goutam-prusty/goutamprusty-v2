@@ -1,16 +1,22 @@
 /**
- * About Page Factual Profile Test Suite (T10)
+ * About Page Factual Profile Test Suite (T10 & T10 Follow-up)
  * goutamprusty.com v2 Rebuild — Phase 1: T10 Understated About Page
  *
  * Verifies:
- * 1. Factual education: New Horizon College of Engineering, BBA in Finance, Sept 2021 – Sept 2024.
- * 2. Factual work history: DirectorIn, Intugine, Brand Compass with verbatim responsibilities.
- * 3. Concise personal project summaries: Therapist tracker, Instagram behavioral analysis,
- *    Doomscrolling tracker, Hinglish fine-tuned LM.
- * 4. Negative constraints: Zero DataMites enrollment claims, zero promotional adjectives/self-praise,
- *    zero invented metrics, zero broken links.
- * 5. Layout and accessibility: Paper & Signal shell, semantic landmarks, TOC aside with anchor targets.
- * 6. Built HTML verification.
+ * 1. Source file & layout integration: Paper & Signal shell, title, metadata description.
+ * 2. Background section refinement: "AI engineer" identity, Bengaluru location, no subjective self-praise.
+ * 3. Current training: DataMites AI Engineer Program, enrolled / in progress, 23 Nov 2026, 20-week training phase,
+ *    curriculum summary, explicit in-progress disclaimer, no claims of completion or certification.
+ * 4. Learning workspace: AI Engineer Command Center, live link, repo link, Vite/React/TS/Tailwind/Firebase stack,
+ *    disclaimer that it is an operational tracker, not an AI model or LLM application.
+ * 5. Factual education: New Horizon College of Engineering, BBA in Finance, Sept 2021 – Sept 2024, secondary schooling.
+ * 6. Factual work history: DirectorIn, Intugine, Brand Compass with verbatim responsibilities.
+ * 7. Concise personal project summaries: Therapist tracker, Instagram behavioral analysis,
+ *    Doomscrolling tracker, Hinglish fine-tuned LM, linked to /projects/ library.
+ * 8. Negative constraints & task limits: Zero unverified projects (Inkline, Vitaliq, Wharf),
+ *    zero promotional puffery, zero resume download links, zero dead links.
+ * 9. Semantic structure & TOC: Labeled TOC aside with all 7 section anchors.
+ * 10. Built HTML verification.
  */
 
 const assert = require('assert');
@@ -38,7 +44,7 @@ function test(description, fn) {
 }
 
 console.log('================================================================');
-console.log('  FACTUAL UNDERSTATED ABOUT PAGE TEST SUITE (T10)');
+console.log('  FACTUAL UNDERSTATED ABOUT PAGE TEST SUITE (T10 & FOLLOW-UP)');
 console.log('================================================================\n');
 
 // -------------------------------------------------------------
@@ -64,9 +70,82 @@ test('Defines honest title and metadata description', () => {
 });
 
 // -------------------------------------------------------------
-// Suite 2: Factual Education Verification
+// Suite 2: Refined Background Section
 // -------------------------------------------------------------
-console.log('\n--- Suite 2: Factual Education Verification ---');
+console.log('\n--- Suite 2: Refined Background Section ---');
+
+test('Contains owner-approved AI engineer identity and Bengaluru location', () => {
+  assert(src.includes('AI engineer'), 'Must state AI engineer');
+  assert(src.includes('Bengaluru, Karnataka, India'), 'Must include location');
+});
+
+test('Does NOT include subjective self-praise or abstract claims in background', () => {
+  assert(!src.includes('deliberate and evidence-based'), 'Must remove deliberate and evidence-based');
+  assert(!src.includes('chasing transient software trends'), 'Must remove transient software trends claim');
+});
+
+// -------------------------------------------------------------
+// Suite 3: Current AI Engineering Training Verification
+// -------------------------------------------------------------
+console.log('\n--- Suite 3: Current Training Verification ---');
+
+test('Contains DataMites AI Engineer Program with enrolled / in progress status', () => {
+  assert(src.includes('DataMites AI Engineer Program'), 'Must include programme name');
+  assert(src.includes('Enrolled · In progress') || (src.includes('Enrolled') && src.includes('In progress')), 'Must state enrolled and in progress');
+  assert(src.includes('23 November 2026'), 'Must include start date 23 November 2026');
+});
+
+test('Accurately describes programme structure and published curriculum', () => {
+  assert(src.includes('20-week'), 'Must note 20-week training phase');
+  assert(src.includes('eight-month'), 'Must note eight-month programme');
+  assert(src.includes('three-month internship and projects phase'), 'Must note three-month internship/projects phase');
+  assert(src.includes('Python'), 'Curriculum includes Python');
+  assert(src.includes('statistics'), 'Curriculum includes statistics');
+  assert(src.includes('machine learning'), 'Curriculum includes machine learning');
+  assert(src.includes('databases'), 'Curriculum includes databases');
+  assert(src.includes('version control'), 'Curriculum includes version control');
+  assert(src.includes('big data'), 'Curriculum includes big data');
+  assert(src.includes('business intelligence') || src.includes('BI'), 'Curriculum includes BI');
+  assert(src.includes('AI foundations'), 'Curriculum includes AI foundations');
+  assert(src.includes('deep learning'), 'Curriculum includes deep learning');
+  assert(src.includes('computer vision'), 'Curriculum includes computer vision');
+  assert(src.includes('natural language processing') || src.includes('NLP'), 'Curriculum includes NLP');
+  assert(src.includes('LLM application engineering'), 'Curriculum includes LLM application engineering');
+  assert(src.includes('retrieval-augmented generation') || src.includes('RAG'), 'Curriculum includes RAG');
+  assert(src.includes('agentic workflows'), 'Curriculum includes agentic workflows');
+});
+
+test('Explicitly disclaims completed coursework, certifications, or internship experience', () => {
+  assert(src.includes('training is currently in progress'), 'Must state training in progress');
+  assert(src.includes('internship and project phase takes place later in the programme'), 'Must state internship/project later');
+  assert(src.includes('rather than completed coursework, certifications, internship experience, or project completion'), 'Must disclaim completion');
+});
+
+// -------------------------------------------------------------
+// Suite 4: Learning Workspace (AI Engineer Command Center)
+// -------------------------------------------------------------
+console.log('\n--- Suite 4: Learning Workspace Verification ---');
+
+test('Contains AI Engineer Command Center with live and repository links', () => {
+  assert(src.includes('AI Engineer Command Center'), 'Must include workspace name');
+  assert(src.includes('https://ai-engineer-command-center-seven.vercel.app/'), 'Must include live link');
+  assert(src.includes('https://github.com/goutam-prusty/ai-engineer-command-center'), 'Must include source link');
+});
+
+test('Accurately describes workspace purpose and documented tech stack', () => {
+  assert(src.includes('personal learning tracker'), 'Must describe as personal learning tracker');
+  assert(src.includes('curriculum planning'), 'Must mention curriculum planning');
+  assert(src.includes('Vite') && src.includes('React') && src.includes('TypeScript') && src.includes('Tailwind') && src.includes('Firebase'), 'Must state full tech stack');
+});
+
+test('Explicitly disclaims being an AI model, LLM product, or AI-powered app', () => {
+  assert(src.includes('not an AI model, LLM product, or AI-powered application') || src.includes('not an AI model'), 'Must disclaim being an AI model');
+});
+
+// -------------------------------------------------------------
+// Suite 5: Factual Education Verification
+// -------------------------------------------------------------
+console.log('\n--- Suite 5: Factual Education Verification ---');
 
 test('Contains New Horizon College of Engineering BBA degree', () => {
   assert(src.includes('New Horizon College of Engineering'), 'Must include college name');
@@ -81,9 +160,9 @@ test('Secondary education matches source records', () => {
 });
 
 // -------------------------------------------------------------
-// Suite 3: Factual Work History Verification
+// Suite 6: Factual Work History Verification
 // -------------------------------------------------------------
-console.log('\n--- Suite 3: Factual Work History Verification ---');
+console.log('\n--- Suite 6: Factual Work History Verification ---');
 
 test('Contains DirectorIn with accurate trainee role and dates', () => {
   assert(src.includes('DirectorIn'), 'Must include DirectorIn');
@@ -110,9 +189,9 @@ test('Contains Brand Compass with accurate junior web developer role and dates',
 });
 
 // -------------------------------------------------------------
-// Suite 4: Personal Project Explorations Verification
+// Suite 7: Personal Project Explorations Verification
 // -------------------------------------------------------------
-console.log('\n--- Suite 4: Personal Project Explorations ---');
+console.log('\n--- Suite 7: Personal Project Explorations ---');
 
 test('Contains therapist session-tracking tool summary', () => {
   assert(src.includes('Session-tracking tool for therapists'), 'Must include therapist project title');
@@ -137,14 +216,24 @@ test('Explicitly references the Projects library without pretending summaries ar
 });
 
 // -------------------------------------------------------------
-// Suite 5: Negative Constraints & Deliberately Omitted Facts
+// Suite 8: Negative Constraints & Deliberately Omitted Facts
 // -------------------------------------------------------------
-console.log('\n--- Suite 5: Negative Constraints & Deliberately Omitted Facts ---');
+console.log('\n--- Suite 8: Negative Constraints & Deliberately Omitted Facts ---');
 
-test('Does NOT claim DataMites enrollment, completion, or certification', () => {
-  assert(!src.includes('DataMites'), 'Must not claim DataMites enrollment or certification');
+test('Does NOT claim unverified DataMites certification or completed credentials', () => {
   assert(!src.includes('Certified AI Engineer'), 'Must not claim unverified certificate');
   assert(!src.includes('IABAC'), 'Must not claim unverified IABAC credential');
+});
+
+test('Does NOT claim completed internship or finished projects from DataMites', () => {
+  assert(!src.includes('completed the DataMites internship'), 'Must not claim completed internship');
+  assert(!src.includes('DataMites certified'), 'Must not claim certified');
+});
+
+test('Does NOT add Inkline, Vitaliq, Wharf, or private repos to this milestone', () => {
+  assert(!src.includes('Inkline'), 'Must not mention Inkline');
+  assert(!src.includes('Vitaliq'), 'Must not mention Vitaliq');
+  assert(!src.includes('Wharf'), 'Must not mention Wharf');
 });
 
 test('Does NOT include self-praise or promotional puffery from original LinkedIn profile', () => {
@@ -164,18 +253,21 @@ test('Does NOT invent employment status or current employee claims', () => {
 test('Does NOT include broken resume link or placeholder links', () => {
   assert(!src.includes('href="#"'), 'Must not have dead anchor links');
   assert(!src.includes('resume.pdf'), 'Must not link to unverified resume');
+  assert(!src.includes('Profile.pdf'), 'Must not link to Profile.pdf');
 });
 
 // -------------------------------------------------------------
-// Suite 6: Semantic Structure, Accessibility & Styling
+// Suite 9: Semantic Structure, Accessibility & Styling
 // -------------------------------------------------------------
-console.log('\n--- Suite 6: Semantic Structure, Accessibility & Styling ---');
+console.log('\n--- Suite 9: Semantic Structure, Accessibility & Styling ---');
 
 const cssSource = fs.readFileSync(CSS_PATH, 'utf8');
 
-test('Page defines table of contents aside navigation with matching anchor IDs', () => {
+test('Page defines table of contents aside navigation with all matching anchor IDs', () => {
   assert(src.includes('<aside class="ps-aside" aria-label="About page sections">'), 'Must have labeled TOC aside');
   assert(src.includes('id="background"'), 'Must have #background section');
+  assert(src.includes('id="training"'), 'Must have #training section');
+  assert(src.includes('id="workspace"'), 'Must have #workspace section');
   assert(src.includes('id="education"'), 'Must have #education section');
   assert(src.includes('id="experience"'), 'Must have #experience section');
   assert(src.includes('id="projects"'), 'Must have #projects section');
@@ -190,9 +282,9 @@ test('CSS defines profile entry layout rules in Paper & Signal design tokens', (
 });
 
 // -------------------------------------------------------------
-// Suite 7: Built HTML Invariants
+// Suite 10: Built HTML Invariants
 // -------------------------------------------------------------
-console.log('\n--- Suite 7: Built HTML Invariants ---');
+console.log('\n--- Suite 10: Built HTML Invariants ---');
 
 test('Built dist/about/index.html renders verified facts when build exists', () => {
   if (fs.existsSync(ABOUT_HTML_PATH)) {
@@ -202,7 +294,11 @@ test('Built dist/about/index.html renders verified facts when build exists', () 
     assert(html.includes('Intugine'), 'Built HTML contains Intugine');
     assert(html.includes('Brand Compass'), 'Built HTML contains Brand Compass');
     assert(html.includes('Session-tracking tool for therapists'), 'Built HTML contains project');
-    assert(!html.includes('DataMites'), 'Built HTML does not claim DataMites');
+    assert(html.includes('DataMites AI Engineer Program'), 'Built HTML contains DataMites training');
+    assert(html.includes('AI Engineer Command Center'), 'Built HTML contains workspace');
+    assert(html.includes('https://ai-engineer-command-center-seven.vercel.app/'), 'Built HTML contains workspace live link');
+    assert(!html.includes('deliberate and evidence-based'), 'Built HTML does not contain deliberate and evidence-based');
+    assert(!html.includes('Certified AI Engineer'), 'Built HTML does not claim certificate');
   }
 });
 

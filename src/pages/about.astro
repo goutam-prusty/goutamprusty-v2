@@ -2,10 +2,12 @@
 import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
 
 const pageTitle = 'About — Goutam Prusty';
-const pageDescription = 'Factual professional background, education, work history, independent project summaries, and library ethos.';
+const pageDescription = 'Factual professional background, current AI engineering training, learning workspace, education, work history, and project summaries.';
 
 const tocSections = [
   { id: 'background', title: 'Background' },
+  { id: 'training', title: 'Current training' },
+  { id: 'workspace', title: 'Learning workspace' },
   { id: 'education', title: 'Education' },
   { id: 'experience', title: 'Work history' },
   { id: 'projects', title: 'Project explorations' },
@@ -100,7 +102,7 @@ const projectSummaries = [
     <p class="ps-eyebrow">Professional Profile · Background</p>
     <h1>About</h1>
     <p class="ps-lede">
-      Factual background, education, work experience, and independent project explorations. Based in Bengaluru, India.
+      Factual background, current training, learning workspace, education, work experience, and independent project explorations. Based in Bengaluru, India.
     </p>
   </header>
 
@@ -111,14 +113,56 @@ const projectSummaries = [
         <p class="ps-eyebrow">Profile</p>
         <h2>Background & focus</h2>
         <p>
-          I am based in Bengaluru, Karnataka, India. With an academic background in finance and business administration, my work centers on exploring how modern computing systems, artificial intelligence, and human behavioral dynamics intersect.
+          I am an AI engineer based in Bengaluru, Karnataka, India. With an academic background in finance and business administration, my work centers on exploring how computing systems, artificial intelligence, and human behavioral dynamics intersect.
         </p>
         <p>
-          My approach to building and inquiry is deliberate and evidence-based. Rather than adopting unverified claims or chasing transient software trends, I focus on understanding underlying system mechanics, where physical and cognitive constraints bind computational models, and how complex ideas can be translated into calm, dependable utilities.
+          I focus on systems analysis, structural modeling, and understanding how data and computational models operate under physical and organizational constraints.
         </p>
       </section>
 
-      {/* 2. Education */}
+      {/* 2. Current Training */}
+      <section id="training">
+        <p class="ps-eyebrow">Professional Development</p>
+        <h2>Current training</h2>
+        <div class="ps-profile-entry">
+          <div class="ps-profile-entry-header">
+            <h3 class="ps-profile-entry-title">DataMites AI Engineer Program</h3>
+            <span class="ps-profile-entry-meta">Enrolled · In progress</span>
+          </div>
+          <p class="ps-profile-entry-org">DataMites · Commenced 23 November 2026</p>
+          <p class="ps-profile-entry-desc">
+            Enrolled in an eight-month structured programme featuring a 20-week training phase, followed by a three-month internship and projects phase. The published curriculum covers Python, statistics, machine learning, databases, version control, big data, business intelligence (BI), AI foundations, deep learning, computer vision, natural language processing (NLP), LLM application engineering, retrieval-augmented generation (RAG), and agentic workflows.
+          </p>
+          <p class="ps-profile-entry-desc" style="margin-top: 0.75rem;">
+            This training is currently in progress. The internship and project phase takes place later in the programme. These curriculum subjects represent an active course of study rather than completed coursework, certifications, internship experience, or project completion.
+          </p>
+        </div>
+      </section>
+
+      {/* 3. Learning Workspace */}
+      <section id="workspace">
+        <p class="ps-eyebrow">Learning Tools & Systems</p>
+        <h2>Learning workspace</h2>
+        <div class="ps-profile-entry">
+          <div class="ps-profile-entry-header">
+            <h3 class="ps-profile-entry-title">AI Engineer Command Center</h3>
+            <span class="ps-profile-entry-meta">Active Utility</span>
+          </div>
+          <p class="ps-profile-entry-org">Personal Learning & Progress Tracker</p>
+          <p class="ps-profile-entry-desc">
+            A personal learning tracker designed for curriculum planning, progress tracking, coding practice, project management, revision scheduling, resource indexing, journaling, and learning analytics.
+          </p>
+          <p class="ps-profile-entry-desc" style="margin-top: 0.75rem;">
+            Built with Vite, React, TypeScript, Tailwind CSS, and Firebase. This utility is an operational tracking workspace, not an AI model, LLM product, or AI-powered application.
+          </p>
+          <div style="margin-top: 0.75rem; display: flex; gap: 1.25rem; font-size: 0.88rem;">
+            <a class="ps-text-link" href="https://ai-engineer-command-center-seven.vercel.app/" target="_blank" rel="noopener noreferrer">Live workspace ↗</a>
+            <a class="ps-text-link" href="https://github.com/goutam-prusty/ai-engineer-command-center" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Education */}
       <section id="education">
         <p class="ps-eyebrow">Qualifications</p>
         <h2>Education</h2>
@@ -136,7 +180,7 @@ const projectSummaries = [
         </div>
       </section>
 
-      {/* 3. Work History */}
+      {/* 5. Work History */}
       <section id="experience">
         <p class="ps-eyebrow">Career</p>
         <h2>Work history</h2>
@@ -161,7 +205,7 @@ const projectSummaries = [
         </div>
       </section>
 
-      {/* 4. Personal Projects */}
+      {/* 6. Personal Projects */}
       <section id="projects">
         <p class="ps-eyebrow">Explorations</p>
         <h2>Project explorations</h2>
@@ -181,7 +225,7 @@ const projectSummaries = [
         </p>
       </section>
 
-      {/* 5. Library Ethos */}
+      {/* 7. Library Ethos */}
       <section id="ethos">
         <p class="ps-eyebrow">Methodology</p>
         <h2>Library ethos</h2>
