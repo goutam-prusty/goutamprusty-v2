@@ -1,0 +1,166 @@
+---
+export interface SocialContactLinks {
+  github?: string | null;
+  linkedin?: string | null;
+  email?: string | null;
+  resume?: string | null;
+}
+
+export interface Props {
+  socialLinks?: SocialContactLinks;
+  aiDisclosure?: string | null;
+  class?: string;
+}
+
+const {
+  socialLinks = {},
+  aiDisclosure = null,
+  class: className = '',
+} = Astro.props;
+
+// Primary nav links per master plan sections 6.1 and 6.3
+const primaryLinks = [
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Research', href: '/research/' },
+  { label: 'Writing', href: '/writing/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
+
+// Reconcile and strictly validate external links: only non-empty, non-whitespace strings
+const rawGithub = socialLinks?.github;
+const githubUrl = typeof rawGithub === 'string' && rawGithub.trim().length > 0
+  ? rawGithub.trim()
+  : undefined;
+
+const rawLinkedin = socialLinks?.linkedin;
+const linkedinUrl = typeof rawLinkedin === 'string' && rawLinkedin.trim().length > 0
+  ? rawLinkedin.trim()
+  : undefined;
+
+const rawEmail = socialLinks?.email;
+const cleanEmail = typeof rawEmail === 'string' && rawEmail.trim().length > 0
+  ? rawEmail.trim()
+  : undefined;
+const emailUrl = cleanEmail ? (cleanEmail.startsWith('mailto:') ? cleanEmail : `mailto:${cleanEmail}`) : undefined;
+const emailDisplay = cleanEmail ? cleanEmail.replace(/^mailto:/, '') : undefined;
+
+const rawResume = socialLinks?.resume;
+const resumeUrl = typeof rawResume === 'string' && rawResume.trim().length > 0
+  ? rawResume.trim()
+  : undefined;
+
+const hasSocialLinks = Boolean(githubUrl || linkedinUrl || emailUrl || resumeUrl);
+
+// AI-Assistance disclosure: strictly owner-approved wording only
+const disclosureText = typeof aiDisclosure === 'string' && aiDisclosure.trim().length > 0
+  ? aiDisclosure.trim()
+  : undefined;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class:list={['ps-footer', className]} aria-label="Site footer">
+  <div class="ps-footer-grid">
+    {/* 1. Identity & Wordmark */}
+    <div class="ps-footer-col ps-footer-brand">
+      <a class="ps-wordmark" href="/" aria-label="goutamprusty.com home">
+        g<span>.</span>
+      </a>
+      <p class="ps-footer-brand-title">Goutam Prusty</p>
+      <p class="ps-footer-tagline">
+        A personal library of strategic intelligence, analytical writing, and practical systems.
+      </p>
+    </div>
+
+    {/* 2. Primary Navigation */}
+    <div class="ps-footer-col ps-footer-nav-col">
+      <h2 class="ps-footer-heading">Navigation</h2>
+      <ul class="ps-footer-list" aria-label="Footer navigation links">
+        {primaryLinks.map((link) => (
+          <li>
+            <a href={link.href} class="ps-footer-link">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* 3. Connect / Social Links (Conditional: rendered only if verified links exist) */}
+    {hasSocialLinks && (
+      <div class="ps-footer-col ps-footer-social-col">
+        <h2 class="ps-footer-heading">Connect</h2>
+        <ul class="ps-footer-list" aria-label="Social and contact links">
+          {githubUrl && (
+            <li>
+              <a
+                href={githubUrl}
+                class="ps-footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Goutam Prusty on GitHub (opens in new tab)"
+              >
+                GitHub <span class="ps-footer-ext" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          )}
+          {linkedinUrl && (
+            <li>
+              <a
+                href={linkedinUrl}
+                class="ps-footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Goutam Prusty on LinkedIn (opens in new tab)"
+              >
+                LinkedIn <span class="ps-footer-ext" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          )}
+          {emailUrl && (
+            <li>
+              <a
+                href={emailUrl}
+                class="ps-footer-link"
+                aria-label={`Send email to ${emailDisplay}`}
+              >
+                {emailDisplay}
+              </a>
+            </li>
+          )}
+          {resumeUrl && (
+            <li>
+              <a
+                href={resumeUrl}
+                class="ps-footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Resume (PDF opens in new tab)"
+              >
+                Resume <span class="ps-footer-ext" aria-hidden="true">(PDF) ↗</span>
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+    )}
+
+    {/* 4. Back to top */}
+    <div class="ps-footer-col ps-footer-top-col">
+      <a href="#top" class="ps-footer-back-to-top" aria-label="Back to top of page">
+        Back to top <span aria-hidden="true">↑</span>
+      </a>
+    </div>
+  </div>
+
+  {/* Footer bottom meta / copyright */}
+  <div class="ps-footer-bottom">
+    <p class="ps-footer-copy">
+      © {currentYear} Goutam Prusty <span>·</span> goutamprusty.com
+    </p>
+    {disclosureText && (
+      <p class="ps-footer-disclosure">{disclosureText}</p>
+    )}
+  </div>
+</footer>

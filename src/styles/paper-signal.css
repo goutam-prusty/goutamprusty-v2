@@ -37,13 +37,14 @@
 .ps-nav-menu nav { position: absolute; z-index: 3; top: calc(100% + .4rem); right: 0; display: grid; width: max-content; min-width: 13rem; gap: .15rem; padding: .5rem; border: 1px solid var(--color-line); background: var(--color-surface); }
 .ps-nav-menu nav a { display: flex; min-height: 2.75rem; align-items: center; padding: .5rem .75rem; text-decoration: none; }
 .ps-nav-menu nav a:hover { background: var(--color-sunken); }
-.ps-header nav a, .ps-contact-link, .ps-footer a:last-child { font-size: .9rem; font-weight: 600; text-decoration: none; }
+.ps-header nav a, .ps-contact-link, .ps-footer:not(:has(.ps-footer-grid)) a:last-child { font-size: .9rem; font-weight: 600; text-decoration: none; }
 .ps-header nav a[aria-current="page"] { font-weight: 700; text-decoration: underline; text-decoration-color: var(--color-ink); text-decoration-thickness: 2px; text-underline-offset: .45rem; }
 .ps-nav-menu nav a[aria-current="page"] { background: var(--color-sunken); }
 .ps-contact-link { padding: .65rem .9rem; background: var(--color-signal); border: 1px solid var(--color-ink); }
 .ps-contact-link span { padding-left: .25rem; }
-.ps-footer { display: flex; min-height: 6.5rem; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 4rem; border-top: 1px solid var(--color-line); }
-.ps-footer p { margin: 0; color: var(--color-secondary); font-size: .85rem; }
+.ps-footer { margin-top: clamp(3.5rem, 8vw, 5.5rem); border-top: 1px solid var(--color-line); }
+.ps-footer:not(:has(.ps-footer-grid)) { display: flex; min-height: 6.5rem; align-items: center; justify-content: space-between; gap: 1rem; }
+.ps-footer:not(:has(.ps-footer-grid)) p { margin: 0; color: var(--color-secondary); font-size: .85rem; }
 .ps-footer p span { padding-inline: .35rem; }
 .ps-eyebrow, .ps-kicker { margin: 0 0 .8rem; color: var(--color-secondary); font: 700 .72rem/1.4 var(--font-mono); letter-spacing: .09em; text-transform: uppercase; }
 .ps h1, .ps h2, .ps h3 { color: var(--color-ink); font-family: var(--font-display); font-weight: 500; line-height: 1.08; text-wrap: balance; }
@@ -142,8 +143,8 @@
   .ps h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
   .ps-section-head, .ps-contact { align-items: flex-start; flex-direction: column; }
   .ps-contact .ps-button { align-self: flex-start; }
-  .ps-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 1rem; }
-  .ps-footer p { order: 3; width: 100%; }
+  .ps-footer:not(:has(.ps-footer-grid)) { flex-wrap: wrap; justify-content: space-between; padding-block: 1rem; }
+  .ps-footer:not(:has(.ps-footer-grid)) p { order: 3; width: 100%; }
   .ps-figure-art { grid-template-columns: 1fr; }
   .ps-arrow { transform: rotate(90deg); justify-self: center; }
 }
@@ -368,6 +369,169 @@
 .ps-arrow-link {
   font-size: 1.25rem;
   flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Production Footer Component & Responsive Multi-Column Layout (T2)
+   ========================================================================== */
+.ps-footer {
+  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.ps-footer-grid {
+  display: grid;
+  gap: 2.5rem 2rem;
+  align-items: start;
+}
+
+/* Mobile (< 37.5rem / 600px): Stacked single column */
+@media (max-width: 37.49rem) {
+  .ps-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Tablet (37.5rem - 56.25rem / 600px - 900px): Two columns */
+@media (min-width: 37.5rem) and (max-width: 56.24rem) {
+  .ps-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 2.5rem;
+  }
+  .ps-footer-top-col {
+    grid-column: span 2;
+  }
+}
+
+/* Desktop (> 56.25rem / 900px): Multi-column row */
+@media (min-width: 56.25rem) {
+  .ps-footer-grid {
+    grid-template-columns: minmax(14rem, 1.4fr) repeat(auto-fit, minmax(9rem, 1fr)) auto;
+    gap: 2.5rem 3.5rem;
+  }
+}
+
+.ps-footer-col {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.ps-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ps-footer-brand-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+.ps-footer-tagline {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-secondary);
+  max-width: 32ch;
+}
+
+.ps-footer-heading {
+  margin: 0 0 0.85rem;
+  font: 700 0.72rem/1.4 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+.ps-footer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.ps-footer-link {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.22em;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.ps-footer-link:hover {
+  text-decoration-thickness: 0.14em;
+  color: var(--color-ink);
+}
+
+.ps-footer-ext {
+  font-size: 0.82rem;
+  color: var(--color-secondary);
+}
+
+.ps-footer-back-to-top {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.ps-footer-back-to-top:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.25em;
+}
+
+.ps-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.85rem 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-line);
+  font: 0.82rem/1.5 var(--font-mono);
+  color: var(--color-secondary);
+}
+
+.ps-footer-copy {
+  margin: 0;
+}
+
+.ps-footer-copy span {
+  padding-inline: 0.35rem;
+}
+
+.ps-footer-disclosure {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--color-secondary);
+  max-width: 55ch;
+}
+
+@media (max-width: 37.49rem) {
+  .ps-footer-link {
+    min-height: 2.75rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) { .ps, .ps * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }

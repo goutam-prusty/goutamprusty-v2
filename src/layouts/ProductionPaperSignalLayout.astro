@@ -1,12 +1,15 @@
 ---
 import '../styles/paper-signal.css';
+import SiteFooter, { type SocialContactLinks } from '../components/SiteFooter.astro';
 
 interface Props {
   title: string;
   description: string;
+  socialLinks?: SocialContactLinks;
+  aiDisclosure?: string | null;
 }
 
-const { title, description } = Astro.props;
+const { title, description, socialLinks, aiDisclosure } = Astro.props;
 
 const nav = [
   { label: 'Projects', href: '/projects/' },
@@ -75,11 +78,7 @@ const isActive = (href: string) => {
         <slot />
       </main>
 
-      <footer class="ps-footer">
-        <a class="ps-wordmark" href="/" aria-label="Back to home">g<span>.</span></a>
-        <p>goutamprusty.com <span>·</span> A personal research and writing library</p>
-        <a href="#top">Back to top ↑</a>
-      </footer>
+      <SiteFooter socialLinks={socialLinks} aiDisclosure={aiDisclosure} />
     </div>
   </body>
 </html>
