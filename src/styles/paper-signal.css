@@ -57,6 +57,7 @@
 .ps-hero { display: grid; min-height: 34rem; grid-template-columns: minmax(0, 1.1fr) minmax(17rem, .9fr); align-items: center; gap: clamp(2rem, 7vw, 6rem); padding-block: clamp(3rem, 8vw, 6.8rem); }
 .ps-hero-copy { position: relative; z-index: 1; }
 .ps-hero h1 em { font-weight: 400; }
+.ps-hero-hook { margin: 0 0 .85rem; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 500; line-height: 1.28; letter-spacing: -.02em; }
 .ps-lede { max-width: 37rem !important; color: var(--color-secondary); font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
 .ps-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1.5rem; margin-top: 1.75rem; }
 .ps-button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .65rem; padding: .7rem 1rem; border: 1px solid var(--color-ink); background: var(--color-signal); color: var(--color-ink); font-weight: 700; text-decoration: none; }
