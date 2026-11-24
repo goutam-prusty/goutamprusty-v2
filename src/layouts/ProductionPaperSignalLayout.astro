@@ -9,10 +9,9 @@ interface Props {
 const { title, description } = Astro.props;
 
 const nav = [
+  { label: 'Projects', href: '/projects/' },
   { label: 'Research', href: '/research/' },
   { label: 'Writing', href: '/writing/' },
-  { label: 'Topics', href: '/topics/' },
-  { label: 'Projects', href: '/projects/' },
   { label: 'About', href: '/about/' },
 ];
 
@@ -54,16 +53,22 @@ const isActive = (href: string) => {
         <details class="ps-nav-menu ps-mobile-nav">
           <summary><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
           <nav aria-label="Mobile navigation">
-            <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
             {nav.map((item) => (
               <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
               </a>
             ))}
+            <a href="/contact/" aria-current={isActive('/contact/') ? 'page' : undefined}>
+              Get in touch <span aria-hidden="true">↗</span>
+            </a>
           </nav>
         </details>
 
-        <a class="ps-contact-link" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
+        <a
+          class="ps-contact-link"
+          href="/contact/"
+          aria-current={isActive('/contact/') ? 'page' : undefined}
+        >Get in touch <span aria-hidden="true">↗</span></a>
       </header>
 
       <main id="main">
