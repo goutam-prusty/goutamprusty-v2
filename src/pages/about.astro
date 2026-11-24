@@ -1,46 +1,204 @@
 ---
 import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
 
-const title = 'About';
-const summary = 'Background, library ethos, and analytical approach.';
-const sections = [
+const pageTitle = 'About — Goutam Prusty';
+const pageDescription = 'Factual professional background, education, work history, independent project summaries, and library ethos.';
+
+const tocSections = [
+  { id: 'background', title: 'Background' },
+  { id: 'education', title: 'Education' },
+  { id: 'experience', title: 'Work history' },
+  { id: 'projects', title: 'Project explorations' },
+  { id: 'ethos', title: 'Library ethos' },
+];
+
+const education = [
   {
-    id: 'ethos',
-    title: 'Library ethos',
-    body: 'This site serves as an open personal library for long-form research, strategic analysis, and systems inquiry. Every document is anchored in primary source evidence, clear methodologies, and transparent citations.',
+    institution: 'New Horizon College of Engineering',
+    location: 'Bengaluru, Karnataka, India',
+    degree: 'Bachelor of Business Administration (BBA) — Finance, General',
+    dates: 'September 2021 – September 2024',
+    details: 'Undergraduate business curriculum focused on financial analysis, markets, and quantitative evaluation.',
   },
   {
-    id: 'approach',
-    title: 'Analytical approach',
-    body: 'Rather than chasing brief commentary or ephemeral news, the focus here is on questions with lasting consequences: how artificial intelligence reshapes computing and institutions, where physical constraints bind digital ambitions, and how complex ideas become dependable systems.',
+    institution: 'Christ College, Cuttack',
+    location: 'Cuttack, Odisha, India',
+    degree: 'Higher Secondary Certification — Business and Commerce',
+    dates: 'August 2019 – June 2021',
+    details: 'Foundational coursework in commerce, accountancy, and economics.',
+  },
+  {
+    institution: 'S.C.B. Medical Public School',
+    location: 'Cuttack, Odisha, India',
+    degree: 'Matriculation — General Studies',
+    dates: 'March 2007 – March 2019',
+    details: 'Secondary schooling and foundational general education.',
+  },
+];
+
+const workHistory = [
+  {
+    company: 'DirectorIn',
+    role: 'Business Consultant Trainee',
+    dates: 'September 2023 – November 2023 (3 months)',
+    location: 'Bangalore Urban, Karnataka, India',
+    responsibilities: [
+      'Supported senior consultants with appointment scheduling and client outreach.',
+      'Helped revamp the company website and set up initial social media presence.',
+      'First exposure to how small consulting businesses acquire and retain clients.',
+    ],
+  },
+  {
+    company: 'Intugine - Logistics through Innovation',
+    role: 'Bills Accounting Assistant',
+    dates: 'May 2023 – August 2023 (4 months)',
+    location: 'Bengaluru, Karnataka, India',
+    responsibilities: [
+      'Processed and validated expense reports and bills in a logistics-tech company.',
+      'Coordinated between sales and finance teams on reimbursements.',
+      'Learned how finance operations work inside a fast-moving startup.',
+    ],
+  },
+  {
+    company: 'Brand Compass',
+    role: 'Jr. Web Developer',
+    dates: 'December 2021 – December 2021 (1 month)',
+    location: 'Bangalore Urban, Karnataka, India',
+    responsibilities: [
+      'Improved page load performance and mobile responsiveness for client websites.',
+      'Worked on SEO basics and image optimization.',
+      'First hands-on experience with frontend development and web performance.',
+    ],
+  },
+];
+
+const projectSummaries = [
+  {
+    title: 'Session-tracking tool for therapists',
+    scope: 'A dedicated tracking utility designed to assist practitioners with session scheduling, continuity notes, and client progress documentation.',
+  },
+  {
+    title: 'Behavioural analysis platform using Instagram data',
+    scope: 'An exploratory analytical platform examining public interaction data, engagement patterns, and content consumption frequency.',
+  },
+  {
+    title: 'Doomscrolling pattern tracker',
+    scope: 'A behavioral observation tool investigating digital habit loops, passive media consumption triggers, and active screen-time duration.',
+  },
+  {
+    title: 'Language model fine-tuned on Hinglish forum conversations',
+    scope: 'An applied natural language processing project exploring domain adaptation and fine-tuning on conversational, code-switched Hindi-English online discourse.',
   },
 ];
 ---
 
 <ProductionPaperSignalLayout
-  title="About — goutamprusty.com"
-  description={summary}
+  title={pageTitle}
+  description={pageDescription}
 >
   <header class="ps-page-head">
-    <p class="ps-eyebrow">Information · Library Ethos</p>
-    <h1>{title}</h1>
-    <p class="ps-lede">{summary}</p>
+    <p class="ps-eyebrow">Professional Profile · Background</p>
+    <h1>About</h1>
+    <p class="ps-lede">
+      Factual background, education, work experience, and independent project explorations. Based in Bengaluru, India.
+    </p>
   </header>
 
   <div class="ps-body-grid" style="padding-top: 2rem;">
     <article class="ps-article">
-      {sections.map((section) => (
-        <section id={section.id}>
-          <p class="ps-eyebrow">Section</p>
-          <h2>{section.title}</h2>
-          <p>{section.body}</p>
-        </section>
-      ))}
+      {/* 1. Background */}
+      <section id="background">
+        <p class="ps-eyebrow">Profile</p>
+        <h2>Background & focus</h2>
+        <p>
+          I am based in Bengaluru, Karnataka, India. With an academic background in finance and business administration, my work centers on exploring how modern computing systems, artificial intelligence, and human behavioral dynamics intersect.
+        </p>
+        <p>
+          My approach to building and inquiry is deliberate and evidence-based. Rather than adopting unverified claims or chasing transient software trends, I focus on understanding underlying system mechanics, where physical and cognitive constraints bind computational models, and how complex ideas can be translated into calm, dependable utilities.
+        </p>
+      </section>
+
+      {/* 2. Education */}
+      <section id="education">
+        <p class="ps-eyebrow">Qualifications</p>
+        <h2>Education</h2>
+        <div class="ps-profile-entries">
+          {education.map((edu) => (
+            <div class="ps-profile-entry">
+              <div class="ps-profile-entry-header">
+                <h3 class="ps-profile-entry-title">{edu.degree}</h3>
+                <span class="ps-profile-entry-meta">{edu.dates}</span>
+              </div>
+              <p class="ps-profile-entry-org">{edu.institution} · {edu.location}</p>
+              <p class="ps-profile-entry-desc">{edu.details}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. Work History */}
+      <section id="experience">
+        <p class="ps-eyebrow">Career</p>
+        <h2>Work history</h2>
+        <p class="ps-profile-intro">
+          Professional roles and responsibilities documented directly from source employment records:
+        </p>
+        <div class="ps-profile-entries">
+          {workHistory.map((job) => (
+            <div class="ps-profile-entry">
+              <div class="ps-profile-entry-header">
+                <h3 class="ps-profile-entry-title">{job.role}</h3>
+                <span class="ps-profile-entry-meta">{job.dates}</span>
+              </div>
+              <p class="ps-profile-entry-org">{job.company} · {job.location}</p>
+              <ul class="ps-profile-list">
+                {job.responsibilities.map((resp) => (
+                  <li>{resp}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. Personal Projects */}
+      <section id="projects">
+        <p class="ps-eyebrow">Explorations</p>
+        <h2>Project explorations</h2>
+        <p class="ps-profile-intro">
+          Concise summaries of personal project explorations recorded in source documentation. These represent targeted software and data experiments rather than complete production case studies:
+        </p>
+        <div class="ps-profile-entries">
+          {projectSummaries.map((proj) => (
+            <div class="ps-profile-entry">
+              <h3 class="ps-profile-entry-title">{proj.title}</h3>
+              <p class="ps-profile-entry-desc">{proj.scope}</p>
+            </div>
+          ))}
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.92rem; color: var(--color-secondary);">
+          Structured case studies are published in the <a class="ps-text-link" href="/projects/">Projects library</a> as eligible projects meet verified documentation standards.
+        </p>
+      </section>
+
+      {/* 5. Library Ethos */}
+      <section id="ethos">
+        <p class="ps-eyebrow">Methodology</p>
+        <h2>Library ethos</h2>
+        <p>
+          This website serves as an open, personal library for long-form research, strategic analysis, and systems inquiry. Every research paper and analytical essay is anchored in primary source citations, empirical data, and clear structural reasoning.
+        </p>
+        <p>
+          A strict boundary is maintained between verified credentials and planned learning areas. Inquiries and thoughtful discussions are always welcome via the <a class="ps-text-link" href="/contact/">contact page</a>.
+        </p>
+      </section>
     </article>
+
+    {/* Table of Contents Sticky Aside */}
     <aside class="ps-aside" aria-label="About page sections">
       <h2>On this page</h2>
       <ol>
-        {sections.map((section) => (
+        {tocSections.map((section) => (
           <li><a href={`#${section.id}`}>{section.title}</a></li>
         ))}
       </ol>
