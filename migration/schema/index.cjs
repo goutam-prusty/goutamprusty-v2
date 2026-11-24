@@ -904,6 +904,20 @@ const project = {
       validation: (Rule) => Rule.required()
     },
     {
+      name: 'provenance',
+      title: 'Project Provenance',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Independent', value: 'Independent' },
+          { title: 'Built during training', value: 'Built during training' },
+          { title: 'Guided exercise', value: 'Guided exercise' },
+          { title: 'Collaborative', value: 'Collaborative' }
+        ]
+      },
+      description: 'Public-facing project provenance categorization.'
+    },
+    {
       name: 'status',
       title: 'Project Status',
       type: 'string',
@@ -911,8 +925,10 @@ const project = {
       initialValue: 'draft',
       options: {
         list: [
+          { title: 'Completed', value: 'completed' },
           { title: 'Published', value: 'published' },
-          { title: 'In Progress', value: 'in-progress' },
+          { title: 'In Progress', value: 'in_progress' },
+          { title: 'In Progress (Legacy)', value: 'in-progress' },
           { title: 'Archived', value: 'archived' },
           { title: 'Draft', value: 'draft' }
         ]
@@ -928,6 +944,12 @@ const project = {
       name: 'endDate',
       title: 'End Date / Completion Date',
       type: 'date'
+    },
+    {
+      name: 'completedDate',
+      title: 'Completion Date (Legacy)',
+      type: 'date',
+      description: 'Legacy completion date field preserved for backward compatibility.'
     },
     {
       name: 'category',
@@ -966,6 +988,20 @@ const project = {
       validation: (Rule) => Rule.required()
     },
     {
+      name: 'aiAttribution',
+      title: 'AI-Assistance Attribution',
+      type: 'text',
+      rows: 3,
+      description: 'Optional attribution detailing what was AI-assisted versus personally implemented.'
+    },
+    {
+      name: 'evaluationNotes',
+      title: 'Project Evaluation Notes',
+      type: 'text',
+      rows: 3,
+      description: 'Technical evaluation notes, assessment observations, or verification findings.'
+    },
+    {
       name: 'coverImage',
       title: 'Cover Image',
       type: 'object',
@@ -1001,6 +1037,7 @@ const project = {
         standardBlock,
         { type: 'imageBlock' },
         { type: 'tableBlock' },
+        { type: 'formulaBlock' },
         { type: 'mermaidBlock' },
         { type: 'codeBlock' },
         { type: 'dividerBlock' }

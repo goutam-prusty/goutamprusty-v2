@@ -40,6 +40,20 @@ export const project = defineType({
       description: 'Concise engineering problem statement and solution summary.',
     }),
     defineField({
+      name: 'provenance',
+      title: 'Project Provenance',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Independent', value: 'Independent' },
+          { title: 'Built during training', value: 'Built during training' },
+          { title: 'Guided exercise', value: 'Guided exercise' },
+          { title: 'Collaborative', value: 'Collaborative' },
+        ],
+      },
+      description: 'Public-facing project provenance categorization.',
+    }),
+    defineField({
       name: 'status',
       title: 'Project Status',
       type: 'string',
@@ -47,8 +61,10 @@ export const project = defineType({
       initialValue: 'draft',
       options: {
         list: [
+          { title: 'Completed', value: 'completed' },
           { title: 'Published', value: 'published' },
-          { title: 'In Progress', value: 'in-progress' },
+          { title: 'In Progress', value: 'in_progress' },
+          { title: 'In Progress (Legacy)', value: 'in-progress' },
           { title: 'Archived', value: 'archived' },
           { title: 'Draft', value: 'draft' },
         ],
@@ -66,6 +82,12 @@ export const project = defineType({
       title: 'End Date / Completion Date',
       type: 'date',
       description: 'Completion date, or leave empty if ongoing.',
+    }),
+    defineField({
+      name: 'completedDate',
+      title: 'Completion Date (Legacy)',
+      type: 'date',
+      description: 'Legacy completion date field preserved for backward compatibility.',
     }),
     defineField({
       name: 'category',
@@ -111,6 +133,20 @@ export const project = defineType({
       description: 'Specific libraries, frameworks, languages, and testing tools.',
     }),
     defineField({
+      name: 'aiAttribution',
+      title: 'AI-Assistance Attribution',
+      type: 'text',
+      rows: 3,
+      description: 'Optional attribution detailing what was AI-assisted versus personally implemented.',
+    }),
+    defineField({
+      name: 'evaluationNotes',
+      title: 'Project Evaluation Notes',
+      type: 'text',
+      rows: 3,
+      description: 'Technical evaluation notes, assessment observations, or verification findings.',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'object',
@@ -150,6 +186,7 @@ export const project = defineType({
         standardBlock,
         defineArrayMember({ type: 'imageBlock' }),
         defineArrayMember({ type: 'tableBlock' }),
+        defineArrayMember({ type: 'formulaBlock' }),
         defineArrayMember({ type: 'mermaidBlock' }),
         defineArrayMember({ type: 'codeBlock' }),
         defineArrayMember({ type: 'dividerBlock' }),

@@ -237,16 +237,20 @@ export interface ProjectDocument {
     current: string;
   };
   summary: string;
+  provenance?: 'Independent' | 'Built during training' | 'Guided exercise' | 'Collaborative' | string;
   status: string;
   legacyFeatured?: boolean;
   featured: boolean;
   startDate: string;
   endDate: string | null;
+  completedDate?: string | null;
   category: string;
   tags: string[];
   role: string;
   links: ProjectLinks;
   techStack: string[];
+  aiAttribution?: string;
+  evaluationNotes?: string;
   coverImage: {
     _type?: string;
     assetPath: string;

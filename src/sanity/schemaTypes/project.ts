@@ -1,5 +1,21 @@
 import { defineType, defineField, defineArrayMember } from 'sanity';
 
+export const PROVENANCE_OPTIONS = [
+  { title: 'Independent', value: 'Independent' },
+  { title: 'Built during training', value: 'Built during training' },
+  { title: 'Guided exercise', value: 'Guided exercise' },
+  { title: 'Collaborative', value: 'Collaborative' },
+] as const;
+
+export const PROJECT_STATUS_OPTIONS = [
+  { title: 'Completed', value: 'completed' },
+  { title: 'Published', value: 'published' },
+  { title: 'In Progress', value: 'in_progress' },
+  { title: 'In Progress (Legacy)', value: 'in-progress' },
+  { title: 'Archived', value: 'archived' },
+  { title: 'Draft', value: 'draft' },
+] as const;
+
 export const project = defineType({
   name: 'project',
   title: 'Engineering Project',
@@ -40,24 +56,54 @@ export const project = defineType({
       description: 'Clear statement of problem solved, architecture, and engineering results.',
     }),
     defineField({
+      name: 'provenance',
+      title: 'Project Provenance',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Independent', value: 'Independent' },
+          { title: 'Built during training', value: 'Built during training' },
+          { title: 'Guided exercise', value: 'Guided exercise' },
+          { title: 'Collaborative', value: 'Collaborative' },
+        ],
+      },
+      description: 'Public-facing project provenance categorization.',
+    }),
+    defineField({
       name: 'status',
       title: 'Project Status',
       type: 'string',
-      initialValue: 'completed',
+      initialValue: 'draft',
       options: {
         list: [
           { title: 'Completed', value: 'completed' },
+          { title: 'Published', value: 'published' },
           { title: 'In Progress', value: 'in_progress' },
+          { title: 'In Progress (Legacy)', value: 'in-progress' },
           { title: 'Archived', value: 'archived' },
+          { title: 'Draft', value: 'draft' },
         ],
       },
       validation: (Rule) => Rule.required(),
+      description: 'Project delivery and publication status.',
+    }),
+    defineField({
+      name: 'startDate',
+      title: 'Start Date',
+      type: 'date',
+      description: 'Project inception date (YYYY-MM-DD).',
+    }),
+    defineField({
+      name: 'endDate',
+      title: 'End Date / Completion Date',
+      type: 'date',
+      description: 'Completion date, or leave empty if ongoing.',
     }),
     defineField({
       name: 'completedDate',
-      title: 'Completion Date',
+      title: 'Completion Date (Legacy)',
       type: 'date',
-      description: 'Verified project completion or deployment date.',
+      description: 'Legacy completion date field preserved for backward compatibility.',
     }),
     defineField({
       name: 'category',
@@ -103,6 +149,20 @@ export const project = defineType({
       description: 'Specific libraries, frameworks, languages, and testing tools.',
     }),
     defineField({
+      name: 'aiAttribution',
+      title: 'AI-Assistance Attribution',
+      type: 'text',
+      rows: 3,
+      description: 'Optional attribution detailing what was AI-assisted versus personally implemented.',
+    }),
+    defineField({
+      name: 'evaluationNotes',
+      title: 'Project Evaluation Notes',
+      type: 'text',
+      rows: 3,
+      description: 'Technical evaluation notes, assessment observations, or verification findings.',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'object',
@@ -145,6 +205,13 @@ export const project = defineType({
       type: 'sourceArchive',
       readOnly: true,
       description: 'Immutable V1 repository baseline metadata.',
+    }),
+    defineField({
+      name: 'legacyFeatured',
+      title: 'Legacy V1 Featured Flag',
+      type: 'boolean',
+      readOnly: true,
+      description: 'Historical frontmatter flag from V1 archive. Preserved for provenance.',
     }),
     defineField({
       name: 'featured',

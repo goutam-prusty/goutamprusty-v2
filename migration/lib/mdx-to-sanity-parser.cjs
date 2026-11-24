@@ -180,12 +180,15 @@ function processList(listNode, docId, listPath, level = 1) {
 
   for (const item of listNode.children) {
     const itemPath = `${listPath}.i${itemIdx++}`;
+    let pIdx = 0;
     for (const child of item.children) {
       if (child.type === 'paragraph') {
+        const pSuffix = pIdx === 0 ? ':p' : `:p${pIdx}`;
+        pIdx++;
         const markDefs = [];
-        const spans = processInlineChildren(child.children, docId, `${itemPath}:p`, [], markDefs);
+        const spans = processInlineChildren(child.children, docId, `${itemPath}${pSuffix}`, [], markDefs);
         blocks.push({
-          _key: makeKey(`${docId}:${itemPath}:p`),
+          _key: makeKey(`${docId}:${itemPath}${pSuffix}`),
           _type: 'block',
           style: 'normal',
           listItem: listNode.ordered ? 'number' : 'bullet',
@@ -554,7 +557,7 @@ function transformMdxToSanity(docId, relativePath, options = {}) {
   }
 
   if (docType === 'project') {
-    return {
+    const projectDoc = {
       _id: `project-${docId}`,
       _type: 'project',
       workbookId: docId,
@@ -583,6 +586,11 @@ function transformMdxToSanity(docId, relativePath, options = {}) {
       body,
       sourceArchive
     };
+    if (fm.provenance !== undefined) projectDoc.provenance = fm.provenance;
+    if (fm.aiAttribution !== undefined) projectDoc.aiAttribution = fm.aiAttribution;
+    if (fm.evaluationNotes !== undefined) projectDoc.evaluationNotes = fm.evaluationNotes;
+    if (fm.completedDate !== undefined) projectDoc.completedDate = fm.completedDate;
+    return projectDoc;
   }
 
   // Default: Research document
