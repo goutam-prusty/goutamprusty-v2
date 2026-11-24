@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import localVerticalSliceDocs from '../data/verticalSliceData.json' with { type: 'json' };
+import { isProjectEligible } from './projectCompatibility.ts';
 
 const proc = (globalThis as any).process;
 const env = typeof import.meta !== 'undefined' && (import.meta as any).env ? (import.meta as any).env : {};
@@ -417,4 +418,132 @@ export async function getAllWritingArticles() {
       category: 'General Writing',
     },
   ];
+}
+
+/**
+ * Retrieve all eligible project documents for public listing.
+ * Strict eligibility: must be published or completed; draft/archived/in-progress are excluded.
+ * Returns empty array when zero eligible projects exist (never falls back to fixtures).
+ */
+export async function getAllProjects(): Promise<any[]> {
+  if (sanityClient) {
+    try {
+      const query = `*[_type == "project" && defined(slug.current) && (status == "published" || status == "completed")] | order(coalesce(endDate, completedDate, startDate) desc) {
+        _id,
+        workbookId,
+        title,
+        slug,
+        summary,
+        provenance,
+        status,
+        startDate,
+        endDate,
+        completedDate,
+        category,
+        tags,
+        role,
+        links,
+        techStack,
+        coverImage,
+        aiAttribution,
+        evaluationNotes,
+        featured,
+        legacyFeatured
+      }`;
+      const projects = await sanityClient.fetch(query);
+      if (Array.isArray(projects)) {
+        return projects.filter(isProjectEligible);
+      }
+    } catch (err: any) {
+      if (requireLiveSanity) {
+        throw new Error(`[LIVE SANITY ERROR] ${err.message || err}`);
+      }
+      console.warn(`[Sanity Warning] Remote fetch for projects failed (${err.message}). Using local fallback.`);
+    }
+  }
+
+  if (requireLiveSanity) {
+    throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured.');
+  }
+
+  // Local fallback: filter local documents strictly with isProjectEligible. Zero fallback to fixtures.
+  return (localVerticalSliceDocs as any[]).filter(isProjectEligible);
+}
+
+/**
+ * Retrieve all eligible project slugs for Astro getStaticPaths().
+ * Returns empty array when zero eligible projects exist.
+ */
+export async function getAllProjectSlugs(): Promise<string[]> {
+  if (sanityClient) {
+    try {
+      const slugs = await sanityClient.fetch(
+        `*[_type == "project" && defined(slug.current) && (status == "published" || status == "completed")][].slug.current`
+      );
+      if (Array.isArray(slugs)) {
+        return slugs.filter((s: any) => typeof s === 'string' && s.trim().length > 0);
+      }
+    } catch (err: any) {
+      if (requireLiveSanity) {
+        throw new Error(`[LIVE SANITY ERROR] ${err.message || err}`);
+      }
+      console.warn(`[Sanity Warning] Remote fetch for project slugs failed (${err.message}). Using local fallback.`);
+    }
+  }
+
+  if (requireLiveSanity) {
+    throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured.');
+  }
+
+  return (localVerticalSliceDocs as any[])
+    .filter(isProjectEligible)
+    .map((d: any) => (typeof d.slug === 'string' ? d.slug : d.slug.current));
+}
+
+/**
+ * Fetch an eligible Project case study by slug using GROQ.
+ * Dereferences relatedResearch and relatedWriting.
+ * Returns null if not found or ineligible.
+ */
+export async function getProjectBySlug(slug: string): Promise<any | null> {
+  if (!slug || typeof slug !== 'string') return null;
+
+  if (sanityClient) {
+    try {
+      const query = `*[_type == "project" && slug.current == $slug && (status == "published" || status == "completed")][0]{
+        ...,
+        "relatedResearch": relatedResearch[]->{
+          _id,
+          title,
+          slug,
+          summary
+        },
+        "relatedWriting": relatedWriting[]->{
+          _id,
+          title,
+          slug,
+          summary
+        }
+      }`;
+      const result = await sanityClient.fetch(query, { slug });
+      if (result && isProjectEligible(result)) return result;
+      return null;
+    } catch (err: any) {
+      if (requireLiveSanity) {
+        throw new Error(`[LIVE SANITY ERROR] ${err.message || err}`);
+      }
+      console.warn(`[Sanity Warning] Remote fetch for project slug '${slug}' failed (${err.message}). Using local fallback.`);
+    }
+  }
+
+  if (requireLiveSanity) {
+    throw new Error('[LIVE SANITY ERROR] SANITY_REQUIRE_LIVE is enabled but Sanity Content Lake client is not configured.');
+  }
+
+  const doc = (localVerticalSliceDocs as any[]).find(
+    (d: any) => isProjectEligible(d) && ((typeof d.slug === 'string' ? d.slug : d.slug?.current) === slug)
+  );
+  if (!doc) return null;
+
+  return JSON.parse(JSON.stringify(doc));
 }

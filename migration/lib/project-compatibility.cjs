@@ -62,10 +62,22 @@ function getProjectCompletionDate(doc) {
   return doc.endDate || doc.completedDate || null;
 }
 
+function isProjectEligible(doc) {
+  if (!doc || typeof doc !== 'object') return false;
+  if (doc._type !== 'project') return false;
+  const slug = typeof doc.slug === 'string' ? doc.slug.trim() : doc.slug?.current?.trim();
+  if (!slug) return false;
+  if (!doc.title || typeof doc.title !== 'string' || doc.title.trim().length === 0) return false;
+
+  const status = typeof doc.status === 'string' ? doc.status.trim().toLowerCase() : '';
+  return status === 'published' || status === 'completed';
+}
+
 module.exports = {
   APPROVED_PROVENANCE_LABELS,
   APPROVED_PROJECT_STATUSES,
   normalizeProvenanceLabel,
   normalizeProjectStatus,
-  getProjectCompletionDate
+  getProjectCompletionDate,
+  isProjectEligible
 };

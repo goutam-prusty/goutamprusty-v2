@@ -1,10 +1,11 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
-import { works, fixtureNotice } from '../../data/fixtures';
+import { getAllProjects } from '../../lib/sanityClient';
+import { getProjectCompletionDate } from '../../lib/projectCompatibility';
 
-const projects = works.filter((work) => work.type === 'Project');
+const projects = await getAllProjects();
 const title = 'Projects';
-const summary = 'Practical work template using development fixtures.';
+const summary = 'Case studies, systems architecture, and engineering projects.';
 ---
 
 <ProductionPaperSignalLayout
@@ -12,36 +13,56 @@ const summary = 'Practical work template using development fixtures.';
   description={summary}
 >
   <header class="ps-page-head">
-    <p class="ps-eyebrow">Portfolio · Development template</p>
+    <p class="ps-eyebrow">Projects · Systems & Engineering</p>
     <h1>{title}</h1>
     <p class="ps-lede">{summary}</p>
   </header>
 
   <section class="ps-section" aria-label="Projects">
-    <p class="ps-shelf-note" style="margin-top: 0 !important; margin-bottom: 2rem;">
-      {fixtureNotice}
-    </p>
-    <div class:list={['ps-project-grid', { 'ps-project-grid--single': projects.length === 1 }]}>
-      {projects.map((project, idx) => (
-        <a
-          class="ps-project-card ps-card-editorial"
-          href={project.href}
-        >
-          <div class="ps-card-top">
-            <span class="ps-card-mark" aria-hidden="true">
-              {String(idx + 1).padStart(2, '0')}
-            </span>
-            <span class="ps-card-badge">{project.type}</span>
-          </div>
-          <p class="ps-kicker">Project · Case study</p>
-          <h3>{project.title}</h3>
-          {project.summary && <p>{project.summary}</p>}
-          <span class="ps-card-foot">
-            <span>Development fixture</span>
-            <span aria-hidden="true">View project ↗</span>
-          </span>
-        </a>
-      ))}
-    </div>
+    {projects.length === 0 ? (
+      <div class="ps-empty-state border border-stone-200 bg-stone-50 p-8 rounded text-center my-8">
+        <p class="text-stone-700 font-serif text-lg mb-2">No projects are currently published.</p>
+        <p class="text-stone-500 text-sm font-sans">Verified case studies and engineering documentation will appear here once published.</p>
+      </div>
+    ) : (
+      <div class:list={['ps-project-grid', { 'ps-project-grid--single': projects.length === 1 }]}>
+        {projects.map((project: any, idx: number) => {
+          const slug = typeof project.slug === 'string' ? project.slug : project.slug?.current || project._id;
+          const completionDate = getProjectCompletionDate(project);
+          const metaParts = [
+            project.role,
+            completionDate ? completionDate : undefined,
+          ].filter(Boolean);
+          const footText = metaParts.length > 0
+            ? metaParts.join(' · ')
+            : (Array.isArray(project.techStack) && project.techStack.length > 0 ? project.techStack.slice(0, 3).join(', ') : 'Case study');
+
+          return (
+            <a
+              class="ps-project-card ps-card-editorial ps-card-project"
+              href={`/projects/${slug}/`}
+            >
+              <div class="ps-card-top">
+                <span class="ps-card-mark" aria-hidden="true">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <span class="ps-card-badge">{project.provenance || project.category || 'Project'}</span>
+              </div>
+              {project.workbookId ? (
+                <p class="ps-kicker">Project · {project.workbookId}</p>
+              ) : (
+                <p class="ps-kicker">Project · Case study</p>
+              )}
+              <h3>{project.title}</h3>
+              {project.summary && <p>{project.summary}</p>}
+              <span class="ps-card-foot">
+                <span>{footText}</span>
+                <span aria-hidden="true">View case study ↗</span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    )}
   </section>
 </ProductionPaperSignalLayout>

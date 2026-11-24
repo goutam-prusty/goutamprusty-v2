@@ -1,97 +1,194 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
-import { works, fixtureNotice } from '../../data/fixtures';
-import VisualFigure from '../../components/VisualFigure.astro';
+import PortableText from '../../components/PortableText.astro';
+import { normalizeAssetPath } from '../../lib/pathNormalizer';
+import { getAllProjectSlugs, getProjectBySlug } from '../../lib/sanityClient';
 
-export function getStaticPaths() {
-  return works
-    .filter((work) => work.type === 'Project')
-    .map((work) => ({ params: { slug: 'sample-project' }, props: { work } }));
+export async function getStaticPaths() {
+  const slugs = await getAllProjectSlugs();
+  return slugs.map((slug) => ({ params: { slug } }));
 }
 
-const { work } = Astro.props;
-const title = work.title;
-const summary = work.summary;
-const type = 'Project';
-const sections = [
-  {
-    id: 'problem',
-    title: 'Problem',
-    body: 'Placeholder problem statement.',
-  },
-  {
-    id: 'approach',
-    title: 'Approach',
-    body: 'Placeholder approach.',
-  },
-  {
-    id: 'evidence',
-    title: 'Evidence and contribution',
-    body: 'Verified evidence and contribution details will be added later.',
-  },
-];
+const { slug } = Astro.params;
+const project = await getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect('/404');
+}
+
+const title = project.title;
+const summary = project.summary;
+const category = project.category || 'Technology';
+const provenance = project.provenance;
+const role = project.role;
+const startDate = project.startDate;
+const endDate = project.endDate;
+const completedDate = project.completedDate;
+const dateDisplay = [startDate, endDate || completedDate].filter(Boolean).join(' → ') || completedDate || startDate;
+const techStack = Array.isArray(project.techStack) ? project.techStack : [];
+const links = project.links || {};
+const hasLinks = Boolean(links.repo || links.live || links.demo);
+const coverImage = project.coverImage;
+const aiAttribution = project.aiAttribution;
+const evaluationNotes = project.evaluationNotes;
+const bodyBlocks = Array.isArray(project.body) ? project.body : [];
+const relatedResearch = Array.isArray(project.relatedResearch)
+  ? project.relatedResearch.filter((item: any) => Boolean(item && (item.slug?.current || item.slug)))
+  : [];
+const relatedWriting = Array.isArray(project.relatedWriting)
+  ? project.relatedWriting.filter((item: any) => Boolean(item && (item.slug?.current || item.slug)))
+  : [];
 ---
 
 <ProductionPaperSignalLayout
   title={`${title} — goutamprusty.com`}
   description={summary}
 >
-  <header class="ps-page-head">
-    <p class="ps-eyebrow">{type} · Case study · Development template</p>
-    <h1>{title}</h1>
-    <p class="ps-lede">{summary}</p>
-    <div class="ps-meta">
-      <span><strong>Type</strong> {type}</span>
-      <span><strong>Status</strong> {fixtureNotice}</span>
+  <header class="ps-page-head ps-article-head">
+    <p class="ps-eyebrow">Project · {provenance || category}</p>
+    <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">
+      {title}
+    </h1>
+    {summary && (
+      <p class="ps-lede text-lg md:text-xl text-stone-700 leading-relaxed font-serif max-w-3xl mb-6">
+        {summary}
+      </p>
+    )}
+    <div class="ps-meta flex flex-wrap gap-4 text-xs font-mono text-stone-500 border-t border-stone-200 pt-3">
+      {role && <span><strong>Role</strong> {role}</span>}
+      {provenance && <span><strong>Provenance</strong> {provenance}</span>}
+      {dateDisplay && <span><strong>Timeline</strong> {dateDisplay}</span>}
+      {project.workbookId && <span><strong>ID</strong> {project.workbookId}</span>}
     </div>
   </header>
 
-  <figure class="ps-feature-visual" aria-label="Abstract project visual placeholder">
-    <span class="ps-visual-label">Project visual<br />placeholder</span>
-  </figure>
-
-  <div class="ps-visual-slot-container" style="margin-bottom: 2rem;">
-    <VisualFigure
-      label="Project visual area"
-      caption="Optional slot for verified screenshots or project imagery."
-    />
-  </div>
-
-  <div class="ps-body-grid">
+  <div class="ps-body-grid max-w-4xl mx-auto my-8">
     <article class="ps-article">
-      <div class="ps-note" style="margin-bottom: 2rem;">
-        {fixtureNotice}
-      </div>
-      {sections.map((section, idx) => (
-        <section id={section.id}>
-          <p class="ps-eyebrow">0{idx + 1} · Section</p>
-          <h2>{section.title}</h2>
-          <p class="ps-placeholder">{section.body}</p>
+      {coverImage?.assetPath && (
+        <div class="my-8 rounded overflow-hidden border border-stone-200">
+          <img
+            src={normalizeAssetPath(coverImage.assetPath)}
+            alt={coverImage.alt || title}
+            class="w-full h-auto"
+            loading="eager"
+          />
+        </div>
+      )}
+
+      {hasLinks && (
+        <div class="my-6 p-4 bg-stone-50 border border-stone-200 rounded flex flex-wrap gap-3 items-center">
+          <span class="text-xs font-mono uppercase tracking-widest text-stone-500 mr-2">Links:</span>
+          {links.live && (
+            <a
+              href={links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-stone-900 text-stone-50 rounded hover:bg-stone-800 transition-colors"
+            >
+              Live Deployment ↗
+            </a>
+          )}
+          {links.repo && (
+            <a
+              href={links.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-white text-stone-800 border border-stone-300 rounded hover:bg-stone-100 transition-colors"
+            >
+              Repository ↗
+            </a>
+          )}
+          {links.demo && (
+            <a
+              href={links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-white text-stone-800 border border-stone-300 rounded hover:bg-stone-100 transition-colors"
+            >
+              Demo ↗
+            </a>
+          )}
+        </div>
+      )}
+
+      {techStack.length > 0 && (
+        <section class="my-6" aria-label="Technology stack">
+          <p class="text-xs font-mono uppercase tracking-widest text-stone-500 mb-2">Technology Stack</p>
+          <div class="flex flex-wrap gap-2">
+            {techStack.map((tech: string) => (
+              <span class="text-xs font-mono px-2.5 py-1 bg-stone-100 text-stone-800 rounded border border-stone-200">
+                {tech}
+              </span>
+            ))}
+          </div>
         </section>
-      ))}
-      <section id="browse" style="margin-top: 1.5rem;">
-        <p class="ps-eyebrow">Navigation</p>
-        <p>
-          <a href="/projects/" class="ps-text-link">← Return to all projects</a>
-        </p>
-      </section>
+      )}
+
+      {aiAttribution && (
+        <section class="my-8 p-4 bg-stone-50 border-l-4 border-stone-400 rounded-r text-stone-800">
+          <p class="text-xs font-mono uppercase tracking-widest text-stone-500 mb-1">AI-Assistance Disclosure</p>
+          <p class="text-sm font-sans leading-relaxed">{aiAttribution}</p>
+        </section>
+      )}
+
+      {evaluationNotes && (
+        <section class="my-8 p-4 bg-stone-50 border border-stone-200 rounded text-stone-800">
+          <p class="text-xs font-mono uppercase tracking-widest text-stone-500 mb-1">Evaluation &amp; Observations</p>
+          <p class="text-sm font-sans leading-relaxed">{evaluationNotes}</p>
+        </section>
+      )}
+
+      {bodyBlocks.length > 0 && (
+        <section class="my-8" aria-label="Case study body">
+          <PortableText blocks={bodyBlocks} />
+        </section>
+      )}
+
+      {relatedResearch.length > 0 && (
+        <section class="mt-12 pt-8 border-t border-stone-200" aria-label="Related research">
+          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Related Research</p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {relatedResearch.map((item: any) => {
+              const itemSlug = item.slug?.current || item.slug;
+              return (
+                <a
+                  href={`/research/${itemSlug}/`}
+                  class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors"
+                >
+                  <h3 class="font-serif font-semibold text-stone-900 mb-1">{item.title}</h3>
+                  {item.summary && <p class="text-xs text-stone-600 line-clamp-2">{item.summary}</p>}
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {relatedWriting.length > 0 && (
+        <section class="mt-12 pt-8 border-t border-stone-200" aria-label="Related writing">
+          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Related Writing</p>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {relatedWriting.map((item: any) => {
+              const itemSlug = item.slug?.current || item.slug;
+              return (
+                <a
+                  href={`/writing/${itemSlug}/`}
+                  class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors"
+                >
+                  <h3 class="font-serif font-semibold text-stone-900 mb-1">{item.title}</h3>
+                  {item.summary && <p class="text-xs text-stone-600 line-clamp-2">{item.summary}</p>}
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      <nav class="mt-12 pt-6 border-t border-stone-200" aria-label="Project navigation">
+        <a href="/projects/" class="ps-text-link text-sm font-mono hover:underline">
+          ← Return to all projects
+        </a>
+      </nav>
     </article>
-    <aside class="ps-aside" aria-label="Project page sections">
-      <h2>On this page</h2>
-      <ol>
-        {sections.map((section) => (
-          <li><a href={`#${section.id}`}>{section.title}</a></li>
-        ))}
-      </ol>
-    </aside>
   </div>
 </ProductionPaperSignalLayout>
-
-<style>
-  .ps-visual-slot-container {
-    max-width: var(--reading);
-    border: 1px solid var(--color-line);
-    background: var(--color-surface);
-    padding: 1rem;
-  }
-</style>

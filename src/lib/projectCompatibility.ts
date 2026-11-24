@@ -84,3 +84,22 @@ export function getProjectCompletionDate(doc?: {
   if (!doc) return null;
   return doc.endDate || doc.completedDate || null;
 }
+
+/**
+ * Evaluates whether a project document meets all criteria for public display:
+ * 1. Has _type === 'project'
+ * 2. Has a non-empty slug (slug.current or string)
+ * 3. Has a non-empty title
+ * 4. Status is explicitly 'published' or 'completed'
+ * Excludes drafts, archived projects, in-progress items, and untyped records.
+ */
+export function isProjectEligible(doc?: any): boolean {
+  if (!doc || typeof doc !== 'object') return false;
+  if (doc._type !== 'project') return false;
+  const slug = typeof doc.slug === 'string' ? doc.slug.trim() : doc.slug?.current?.trim();
+  if (!slug) return false;
+  if (!doc.title || typeof doc.title !== 'string' || doc.title.trim().length === 0) return false;
+
+  const status = typeof doc.status === 'string' ? doc.status.trim().toLowerCase() : '';
+  return status === 'published' || status === 'completed';
+}
