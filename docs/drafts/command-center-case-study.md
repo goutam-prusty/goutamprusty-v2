@@ -1,9 +1,10 @@
-# Project Case Study Draft: AI Engineer Command Center
+﻿# Project Case Study Draft: AI Engineer Command Center
 
-> **Status:** Private Review Draft — Owner Confirmation Required
+> **Status:** Private Review Draft â€” Owner Attribution Confirmed & Sanity Proposal Prepared
 > **Storage Location:** `docs/drafts/command-center-case-study.md` (Internal only; strictly excluded from public site build and deployment)
 > **Source Repository:** [github.com/goutam-prusty/ai-engineer-command-center](https://github.com/goutam-prusty/ai-engineer-command-center)
 > **Live Deployment:** [ai-engineer-command-center-seven.vercel.app](https://ai-engineer-command-center-seven.vercel.app/) (Verified HTTP 200 OK)
+> **Target Sanity Dataset:** `development` (Project: `l94q5yx8`) â€” Proposed Document ID: `project-PRJ-004`
 > **Inspection Date:** 24 November 2026
 
 ---
@@ -22,7 +23,7 @@ The AI Engineer Command Center is a personal, single-page web dashboard designed
 
 Based strictly on repository documentation, curriculum schema structures, and code layout:
 
-1. **Curriculum Fragmentation:** Rigorous AI engineering programmes combine disparate learning formats—instructor-led lectures, self-directed reading, coding practice, and multi-week projects. The Command Center consolidates these parallel tracks into a unified interface.
+1. **Curriculum Fragmentation:** Rigorous AI engineering programmes combine disparate learning formatsâ€”instructor-led lectures, self-directed reading, coding practice, and multi-week projects. The Command Center consolidates these parallel tracks into a unified interface.
 2. **Progress Visibility:** Long-duration technical curricula (e.g., 20 weeks of instruction plus subsequent project phases) risk loss of momentum without clear pacing metrics. The tool provides visual tracking across weekly study targets and granular topic states.
 3. **Active Recall & Retention:** Retaining theoretical foundations (statistics, deep learning architectures, vector representations) alongside practical tooling requires regular spaced review. The workspace embeds module-aligned flashcards and self-assessment quizzes directly alongside topic modules.
 4. **Data Portability & Offline Capability:** Learners require continuous access to schedules and notes regardless of network connectivity. The workspace operates fully offline in the browser and synchronizes opportunistically when online.
@@ -84,8 +85,6 @@ Verified directly against `package.json`, `vite.config.ts`, and source imports:
 
 ## 5. Data Handling: Local-First vs. Cloud Sync
 
-Inkline's sibling project, the Command Center, implements a distinct hybrid local-first architecture:
-
 1. **Default Local-First Operation:**
    - All state mutations are written immediately to browser `localStorage`.
    - Without Firebase credentials or user sign-in, the application functions completely offline with zero degradation of core tracking features.
@@ -137,27 +136,86 @@ Verified against `firestore.rules` (25,745 bytes) and `docs/security-spec.md`:
 
 ---
 
-## 9. Omitted & Unverified Claims
+## 9. Development History & AI-Assistance Attribution (Owner-Confirmed)
 
-To maintain strict adherence to project standards:
-- **Zero AI Inference Claims:** No claims of embedded AI models, LLM APIs, agents, or RAG functionality.
-- **Zero User Metrics:** No user adoption figures, time-saving percentages, or learning outcome statistics are claimed.
-- **Zero Commercial Claims:** The tool is documented purely as an individual learning workspace.
+The owner has provided clear, candid confirmation regarding the project's inception, evolution, and technical authorship:
+
+### A. Origin & Evolution
+- **Independent Project Inception:** The AI Engineer Command Center originated purely as the owner's own idea. It was neither an assigned classroom project nor an enterprise assignment.
+- **Initial Scope:** It was initially designed and set up strictly for the owner's personal learning workflow during the DataMites AI Engineer training programme.
+- **Expansion for Peers:** After using the dashboard personally, the owner expanded the project with multi-device cloud synchronization (Firebase) and user-profile settings so that fellow student peers and friends could also track their coursework.
+
+### B. Technical Implementation & AI Tooling
+- **AI Coding Tooling:** Development was conducted primarily using **ChatGPT**, **Claude**, and the **Antigravity IDE**.
+- **Generative Contribution:** These AI tools generated the application code, suggested the technical architecture (React 19 + Vite + Tailwind CSS v4 + Cloud Firestore), proposed the folder structure, and formulated the development plan.
+- **Owner Hands-On Scope:** The owner candidly describes their personal hands-on contribution as specifying the learning workflow, formulating prompts, copying and applying the generated code into the project tree, and running local builds and environment setup. The owner did **not** independently engineer, manually design, or write the underlying application code from scratch.
+- **Provenance Categorization:** In accordance with Sanity schema definitions, the project provenance is classified as **`Independent`** because it originated as the owner's own initiative and project concept. AI assistance is disclosed openly as technical code generation rather than classified as human co-authorship.
 
 ---
 
-## 10. Owner Confirmation Required (Decisions Needed)
+## 10. Proposed Sanity CMS Document Payload (`development` dataset)
 
-Before presenting the Command Center in any public-facing case study or portfolio context, the owner must confirm:
+Below is the complete, schema-compliant document payload prepared for owner review. It maps directly to `src/sanity/schemaTypes/project.ts`:
 
-1. **Project Provenance:**
-   - [ ] Independent personal workspace
-   - [ ] Built during training / coursework
-   - [ ] Guided exercise / tutorial adaptation
-   - [ ] Collaborative project
-2. **Personal Design & Implementation Ownership:**
-   - Clarification of which views, state architecture, and sync codecs the owner personally authored.
-3. **AI Assistance Disclosure:**
-   - Whether and how AI coding tools (e.g., Cursor, Claude, ChatGPT, Copilot) assisted with component construction, styling, or test generation.
-4. **Public Portfolio Visibility:**
-   - Whether this workspace should remain a private utility or be published as a featured portfolio project once case-study text is approved.
+```json
+{
+  "_id": "project-PRJ-004",
+  "_type": "project",
+  "workbookId": "PRJ-004",
+  "title": "AI Engineer Command Center",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-engineer-command-center"
+  },
+  "summary": "A personal learning workspace and progress dashboard designed for an intensive AI engineering curriculum, organizing weekly lecture schedules, topic progress, study sessions, milestone projects, flashcards, quizzes, and learning analytics.",
+  "provenance": "Independent",
+  "status": "draft",
+  "editorialStatus": "draft",
+  "category": "web-application",
+  "role": "Project conception, learning workflow specification, prompt formulation, and AI-assisted implementation (applying and testing generated code).",
+  "techStack": [
+    "Vite",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS v4",
+    "Firebase Authentication",
+    "Cloud Firestore",
+    "Motion",
+    "Recharts"
+  ],
+  "tags": [
+    "learning-management",
+    "productivity-tools",
+    "local-first",
+    "cloud-firestore",
+    "dashboard"
+  ],
+  "links": {
+    "_type": "object",
+    "repo": "https://github.com/goutam-prusty/ai-engineer-command-center",
+    "live": "https://ai-engineer-command-center-seven.vercel.app/"
+  },
+  "aiAttribution": "Developed using ChatGPT, Claude, and Antigravity IDE. AI tools generated the application code, recommended the technology stack and architecture, and structured the development plan. The owner directed the concept and workflow, applying generated code rather than writing application logic independently.",
+  "featured": false,
+  "legacyFeatured": false,
+  "evaluationNotes": "Personal learning tracker verified via source inspection. Operates local-first with optional Firestore sync. Contains zero machine learning models or AI inference runtimes.",
+  "editorialNotes": "Owner attribution confirmed 24 Nov 2026. Staged as private draft payload; held back from live publication."
+}
+```
+
+### Document Identification Notes
+- **Distinction from Existing Documents:** `project-PRJ-004` is a **proposed new document ID**. The Sanity `development` dataset currently contains **zero** project documents.
+- **Convention Alignment:** Follows the established historical naming sequence (`PRJ-001` Inkline, `PRJ-002` Vitaliq, `PRJ-003` Wharf -> `PRJ-004` Command Center).
+- **Publication Safety:** The document sets `status: "draft"` and `editorialStatus: "draft"`. Even after creation in Sanity, it will remain strictly excluded from public site rendering until explicitly published.
+
+---
+
+## 11. Owner Authorization & Sanity Write Checklist
+
+Before any future write operation can take place in Sanity, the owner must provide explicit authorization for the following exact parameters:
+
+- [ ] **Target Dataset:** Confirm write is authorized exclusively for the `development` dataset (Project ID: `l94q5yx8`).
+- [ ] **Document ID & Workbook ID:** Confirm proposed IDs `project-PRJ-004` and `PRJ-004`.
+- [ ] **Proposed Status:** Confirm status is held at `draft` (not visible on the public website).
+- [ ] **Attribution Wording:** Approve the exact text for `role` and `aiAttribution` as drafted in Section 10.
+- [ ] **Write Authorization:** Explicit owner instruction to invoke the Sanity create mutation.
