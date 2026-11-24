@@ -1,9 +1,8 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
-import { topics, topicSlug, fixtureNotice } from '../../data/fixtures';
 
 const title = 'Topics';
-const summary = 'A subject index structure for browsing related work.';
+const summary = 'Subject index and thematic taxonomy for research and writing.';
 ---
 
 <ProductionPaperSignalLayout
@@ -11,35 +10,15 @@ const summary = 'A subject index structure for browsing related work.';
   description={summary}
 >
   <header class="ps-page-head">
-    <p class="ps-eyebrow">Taxonomy · Development template</p>
+    <p class="ps-eyebrow">Taxonomy · Research &amp; Writing</p>
     <h1>{title}</h1>
     <p class="ps-lede">{summary}</p>
   </header>
 
   <section class="ps-section" aria-label="Topics">
-    <p class="ps-shelf-note" style="margin-top: 0 !important; margin-bottom: 2rem;">
-      {fixtureNotice}
-    </p>
-    <div class="ps-project-grid">
-      {topics.map((topic, index) => (
-        <a
-          class="ps-project-card ps-card-editorial"
-          href={`/topics/${topicSlug(topic)}/`}
-        >
-          <div class="ps-card-top">
-            <span class="ps-card-mark" aria-hidden="true">
-              {String(index + 1).padStart(2, '0')}
-            </span>
-            <span class="ps-card-badge">Topic</span>
-          </div>
-          <p class="ps-kicker">Subject index · 0{index + 1}</p>
-          <h3>{topic}</h3>
-          <span class="ps-card-foot">
-            <span>Subject index</span>
-            <span aria-hidden="true">Explore topic ↗</span>
-          </span>
-        </a>
-      ))}
+    <div class="ps-empty-state border border-stone-200 bg-stone-50 p-8 rounded text-center my-8">
+      <p class="text-stone-700 font-serif text-lg mb-2">Topic taxonomy is currently being structured.</p>
+      <p class="text-stone-500 text-sm font-sans">Verified subject taxonomy and linked research dossiers will appear here once published.</p>
     </div>
   </section>
 </ProductionPaperSignalLayout>

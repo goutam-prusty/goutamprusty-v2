@@ -2,27 +2,21 @@
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
-import { getAllResearchSlugs, getResearchReportBySlug, requireLiveSanity } from '../../lib/sanityClient';
+import { getAllResearchSlugs, getResearchReportBySlug } from '../../lib/sanityClient';
 
 export async function getStaticPaths() {
   const slugs = await getAllResearchSlugs();
-  // In normal development, include sample-report for baseline prototype compatibility.
-  // In live-only mode, strictly build real documents from Sanity Content Lake.
-  const allSlugs = requireLiveSanity
-    ? slugs
-    : Array.from(new Set(['sample-report', ...slugs]));
-  return allSlugs.map((slug) => ({ params: { slug } }));
+  return slugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
 const report = await getResearchReportBySlug(slug as string);
 
-// Fallback for sample-report route
-const title = report ? report.title : 'Sample Research Report';
-const summary = report ? report.summary : 'Placeholder abstract for a research article.';
-const category = report ? report.category : 'General Research';
-const publishedAt = report ? new Date(report.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Unpublished';
-const readingTime = (report?.lengthEstimateMinutes || report?.readingTimeMinutes) ? `${report.lengthEstimateMinutes || report.readingTimeMinutes} min read` : '15 min read';
+const title = report ? report.title : 'Research Report';
+const summary = report ? report.summary : '';
+const category = report ? report.category : 'Research';
+const publishedAt = report?.publishedAt ? new Date(report.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+const readingTime = (report?.lengthEstimateMinutes || report?.readingTimeMinutes) ? `${report.lengthEstimateMinutes || report.readingTimeMinutes} min read` : '';
 const bodyBlocks = report?.body || [];
 const bibliography = report?.bibliography || [];
 const rawDerivedPosts = report?.derivedPosts || [];
@@ -53,12 +47,8 @@ const coverImage = report?.coverImage;
         </div>
       )}
 
-      {bodyBlocks.length > 0 ? (
+      {bodyBlocks.length > 0 && (
         <PortableText blocks={bodyBlocks} />
-      ) : (
-        <div class="my-8 p-6 bg-stone-50 border border-stone-200 rounded">
-          <p class="text-stone-600 italic">Sample research report placeholder content.</p>
-        </div>
       )}
 
       {derivedPosts.length > 0 && (

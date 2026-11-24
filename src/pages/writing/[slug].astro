@@ -1,28 +1,22 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
-import { getAllWritingSlugs, getWritingArticleBySlug, requireLiveSanity } from '../../lib/sanityClient';
+import { getAllWritingSlugs, getWritingArticleBySlug } from '../../lib/sanityClient';
 import { getArticleReadingTime } from '../../lib/readingTime';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
 
 export async function getStaticPaths() {
   const slugs = await getAllWritingSlugs();
-  // In normal development, include sample-article for baseline prototype compatibility.
-  // In live-only mode, strictly build real documents from Sanity Content Lake.
-  const allSlugs = requireLiveSanity
-    ? slugs
-    : Array.from(new Set(['sample-article', ...slugs]));
-  return allSlugs.map((slug) => ({ params: { slug } }));
+  return slugs.map((slug) => ({ params: { slug } }));
 }
 
 const { slug } = Astro.params;
 const article = await getWritingArticleBySlug(slug as string);
 
-// Fallback for sample-article route
-const title = article ? article.title : 'Sample Article';
-const summary = article ? article.summary : 'Placeholder summary for a writing article.';
-const category = article ? article.category : 'General Writing';
-const publishedAt = article ? new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'Unpublished';
+const title = article ? article.title : 'Article';
+const summary = article ? article.summary : '';
+const category = article ? article.category : 'Writing';
+const publishedAt = article?.publishedAt ? new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 const readingTime = getArticleReadingTime(article);
 const bodyBlocks = article?.body || [];
 const sourceReport = article?.sourceReport;
@@ -63,12 +57,8 @@ const coverImage = article?.coverImage;
         </div>
       )}
 
-      {bodyBlocks.length > 0 ? (
+      {bodyBlocks.length > 0 && (
         <PortableText blocks={bodyBlocks} />
-      ) : (
-        <div class="my-8 p-6 bg-stone-50 border border-stone-200 rounded">
-          <p class="text-stone-600 italic">Sample article placeholder content.</p>
-        </div>
       )}
     </article>
   </div>

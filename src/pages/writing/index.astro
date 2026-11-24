@@ -34,7 +34,7 @@ function formatPublicationDate(dateStr?: string): string | undefined {
 const getSlug = (item: any): string => {
   if (typeof item.slug === 'string') return item.slug;
   if (item.slug?.current) return item.slug.current;
-  return item._id || 'sample-article';
+  return item._id || '';
 };
 ---
 

@@ -1,20 +1,18 @@
 ---
 import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
-import { fixtureNotice } from '../data/fixtures';
 
 const title = 'About';
-const summary = 'A page template for verified background and approach.';
-const type = 'Page';
+const summary = 'Background, library ethos, and analytical approach.';
 const sections = [
   {
-    id: 'overview',
-    title: 'Overview',
-    body: 'Development placeholder. Replace with author-approved, verified copy.',
+    id: 'ethos',
+    title: 'Library ethos',
+    body: 'This site serves as an open personal library for long-form research, strategic analysis, and systems inquiry. Every document is anchored in primary source evidence, clear methodologies, and transparent citations.',
   },
   {
     id: 'approach',
-    title: 'Approach',
-    body: 'Development placeholder. No personal claims are supplied in this fixture.',
+    title: 'Analytical approach',
+    body: 'Rather than chasing brief commentary or ephemeral news, the focus here is on questions with lasting consequences: how artificial intelligence reshapes computing and institutions, where physical constraints bind digital ambitions, and how complex ideas become dependable systems.',
   },
 ];
 ---
@@ -24,25 +22,18 @@ const sections = [
   description={summary}
 >
   <header class="ps-page-head">
-    <p class="ps-eyebrow">{type} · Development template</p>
+    <p class="ps-eyebrow">Information · Library Ethos</p>
     <h1>{title}</h1>
     <p class="ps-lede">{summary}</p>
-    <div class="ps-meta">
-      <span><strong>Type</strong> {type}</span>
-      <span><strong>Status</strong> {fixtureNotice}</span>
-    </div>
   </header>
 
   <div class="ps-body-grid" style="padding-top: 2rem;">
     <article class="ps-article">
-      <div class="ps-note" style="margin-bottom: 2rem;">
-        {fixtureNotice}
-      </div>
       {sections.map((section) => (
         <section id={section.id}>
           <p class="ps-eyebrow">Section</p>
           <h2>{section.title}</h2>
-          <p class="ps-placeholder">{section.body}</p>
+          <p>{section.body}</p>
         </section>
       ))}
     </article>

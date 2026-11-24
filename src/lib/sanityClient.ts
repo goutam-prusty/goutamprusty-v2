@@ -348,20 +348,7 @@ export async function getAllResearchReports() {
   const localItems = (localVerticalSliceDocs as any[]).filter(
     (d) => d._type === 'research' && d.slug?.current
   );
-  if (localItems.length > 0) {
-    return localItems;
-  }
-
-  return [
-    {
-      _id: 'sample-report',
-      title: 'Sample research report',
-      slug: { current: 'sample-report' },
-      summary: 'Placeholder summary for reviewing a long-form research listing.',
-      lengthEstimateMinutes: 15,
-      category: 'General Research',
-    },
-  ];
+  return localItems;
 }
 
 /**
@@ -404,20 +391,7 @@ export async function getAllWritingArticles() {
   const localItems = (localVerticalSliceDocs as any[]).filter(
     (d) => d._type === 'writing' && d.slug?.current
   );
-  if (localItems.length > 0) {
-    return localItems;
-  }
-
-  return [
-    {
-      _id: 'sample-article',
-      title: 'Sample article',
-      slug: { current: 'sample-article' },
-      summary: 'Placeholder summary for reviewing an editorial writing listing.',
-      readingTimeMinutes: 5,
-      category: 'General Writing',
-    },
-  ];
+  return localItems;
 }
 
 /**
