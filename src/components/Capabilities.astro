@@ -1,0 +1,102 @@
+---
+import {
+  validateCapabilitiesData,
+  hasValidCapabilities,
+  type CapabilitiesInput,
+  type RawProjectCapability,
+  type RawLearningCapability,
+  type EligibleProjectSummary,
+} from '../lib/capabilities';
+
+export interface Props {
+  capabilities?: CapabilitiesInput;
+  usedInProjects?: (RawProjectCapability | null | undefined)[];
+  currentlyLearning?: (RawLearningCapability | string | null | undefined)[];
+  eligibleProjects?: EligibleProjectSummary[];
+  id?: string;
+  class?: string;
+  eyebrow?: string;
+  title?: string;
+}
+
+const {
+  capabilities: propCapabilities,
+  usedInProjects: propUsedInProjects,
+  currentlyLearning: propCurrentlyLearning,
+  eligibleProjects,
+  id = 'capabilities',
+  class: className = '',
+  eyebrow = 'Capabilities & Practice',
+  title = 'Working Knowledge',
+} = Astro.props;
+
+// Combine props into standard input
+const inputData: CapabilitiesInput = propCapabilities || {
+  usedInProjects: propUsedInProjects,
+  currentlyLearning: propCurrentlyLearning,
+};
+
+const validated = validateCapabilitiesData(inputData, eligibleProjects);
+const renderable = hasValidCapabilities(validated);
+---
+
+{renderable && (
+  <section class:list={['ps-section', 'ps-capabilities', className]} id={id} aria-labelledby={`${id}-title`}>
+    <div class="ps-section-head">
+      <div>
+        <p class="ps-eyebrow">{eyebrow}</p>
+        <h2 id={`${id}-title`}>{title}</h2>
+      </div>
+    </div>
+
+    <div class="ps-capabilities-grid">
+      {validated.usedInProjects.length > 0 && (
+        <div class="ps-capabilities-group" aria-labelledby={`${id}-projects-subhead`}>
+          <div class="ps-capabilities-group-head">
+            <h3 class="ps-capabilities-subhead" id={`${id}-projects-subhead`}>Used in projects</h3>
+            <p class="ps-capabilities-desc">Demonstrated through real, verifiable project implementations.</p>
+          </div>
+          <ul class="ps-capabilities-list" role="list">
+            {validated.usedInProjects.map((cap) => (
+              <li class="ps-capabilities-item">
+                <a
+                  class="ps-capability-tag ps-capability-tag--linked"
+                  href={cap.projectUrl}
+                  aria-label={`${cap.name} (demonstrated in ${cap.projectTitle})`}
+                >
+                  <span class="ps-capability-name">{cap.name}</span>
+                  <span class="ps-capability-project" aria-hidden="true">
+                    {cap.projectTitle} <span class="ps-capability-arrow">↗</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {validated.currentlyLearning.length > 0 && (
+        <div class="ps-capabilities-group" aria-labelledby={`${id}-learning-subhead`}>
+          <div class="ps-capabilities-group-head">
+            <h3 class="ps-capabilities-subhead" id={`${id}-learning-subhead`}>Currently learning</h3>
+            <p class="ps-capabilities-desc">Actively exploring and deepening understanding through structured study.</p>
+          </div>
+          <ul class="ps-capabilities-list" role="list">
+            {validated.currentlyLearning.map((cap) => (
+              <li class="ps-capabilities-item">
+                <span class="ps-capability-tag ps-capability-tag--learning">
+                  <span class="ps-capability-name">{cap.name}</span>
+                  {cap.status && (
+                    <span class="ps-capability-status" aria-hidden="true">
+                      · {cap.status}
+                    </span>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+)}
