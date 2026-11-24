@@ -178,6 +178,45 @@ for (const target of targets) {
     }
   }
 
+  // Clean Reference Normalization: research derivedPosts
+  if (target.type === 'research' && Array.isArray(doc.derivedPosts) && doc.derivedPosts.length > 0) {
+    const normalizedDerived = [];
+    const derivedSlugs = [];
+
+    doc.derivedPosts.forEach((slug, idx) => {
+      if (slug && typeof slug === 'object' && slug._ref) {
+        normalizedDerived.push({
+          _key: slug._key || makeKey(`${target.workbookId}:derivedPost:${idx}:${slug._ref}`),
+          _type: 'reference',
+          _ref: slug._ref,
+        });
+        return;
+      }
+      const rawSlug = typeof slug === 'string' ? slug : slug?._sourceSlug || slug?.slug;
+      if (rawSlug) {
+        const refId = referenceMap.get(rawSlug);
+        if (refId) {
+          normalizedDerived.push({
+            _key: makeKey(`${target.workbookId}:derivedPost:${idx}:${rawSlug}`),
+            _type: 'reference',
+            _ref: refId,
+          });
+          derivedSlugs.push(rawSlug);
+        } else {
+          throw new Error(
+            `Unresolved derivedPost reference in ${target.workbookId} at index ${idx}: slug '${rawSlug}' not found in reference map.`
+          );
+        }
+      }
+    });
+
+    if (normalizedDerived.length > 0) {
+      doc.derivedPosts = normalizedDerived;
+      if (!doc.sourceArchive) doc.sourceArchive = {};
+      doc.sourceArchive.referencedSlugs = JSON.stringify({ derivedPosts: derivedSlugs });
+    }
+  }
+
   // Normalize relatedProjects
   if (Array.isArray(doc.relatedProjects)) {
     const normalizedProjects = [];
