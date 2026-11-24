@@ -1,8 +1,19 @@
 ---
 import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.astro';
-import { getResearchReportBySlug, getWritingArticleBySlug } from '../lib/sanityClient';
+import {
+  getAllProjects,
+  getResearchReportBySlug,
+  getWritingArticleBySlug,
+} from '../lib/sanityClient';
+import { getProjectCompletionDate } from '../lib/projectCompatibility';
 import { getArticleReadingTime } from '../lib/readingTime';
 
+// 1. Projects Data (Sanity-backed T4 integration)
+const allProjects = await getAllProjects();
+// Only eligible featured projects for homepage display
+const featuredProjects = allProjects.filter((p: any) => p.featured || p.legacyFeatured);
+
+// 2. Verified Research and Writing selections (preserved from existing homepage)
 const res018Slug = 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026';
 const blg001Slug = 'agentic-inflection-point';
 const blg002Slug = 'ai-physical-limits';
@@ -24,12 +35,15 @@ const blg1Length = getArticleReadingTime(blg001);
 
 const blg2Title = blg002?.title || "AI's Physical Limits";
 const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy constraints, and water scarcity on the AI trajectory.';
+
+const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '#research-writing';
 ---
 
 <ProductionPaperSignalLayout
   title="Goutam Prusty — Research, writing, and practical systems"
   description="A personal library of strategic intelligence, analytical writing, and practical experiments by Goutam Prusty."
 >
+  {/* 1. Hero */}
   <section class="ps-hero" aria-labelledby="hero-title">
     <div class="ps-hero-copy">
       <p class="ps-eyebrow">Research · Writing · Systems</p>
@@ -38,7 +52,7 @@ const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy cons
         A personal library of strategic intelligence, analytical writing, and practical experiments. Exploring how complex technologies work, where their limits lie, and how ideas become dependable systems.
       </p>
       <div class="ps-actions">
-        <a class="ps-button" href="#selected-work">Explore selected work <span aria-hidden="true">↓</span></a>
+        <a class="ps-button" href={primaryWorkAnchor}>Explore selected work <span aria-hidden="true">↓</span></a>
         <a class="ps-text-link" href="/about/">About Goutam <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -51,13 +65,70 @@ const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy cons
     </div>
   </section>
 
-  <section class="ps-section" id="selected-work" aria-labelledby="selected-title">
+  {/* 2. Featured Projects (Conditional: rendered only when verified eligible projects exist) */}
+  {featuredProjects.length > 0 && (
+    <section class="ps-section" id="featured-projects" aria-labelledby="featured-projects-title">
+      <div class="ps-section-head">
+        <div>
+          <p class="ps-eyebrow">Engineering &amp; Systems</p>
+          <h2 id="featured-projects-title">Featured Projects</h2>
+        </div>
+        <a class="ps-text-link" href="/projects/">Explore all projects ↗</a>
+      </div>
+      <div class:list={['ps-project-grid', { 'ps-project-grid--single': featuredProjects.length === 1 }]}>
+        {featuredProjects.map((project: any, idx: number) => {
+          const slug = typeof project.slug === 'string' ? project.slug : project.slug?.current || project._id;
+          const completionDate = getProjectCompletionDate(project);
+          const metaParts = [
+            project.role,
+            completionDate ? completionDate : undefined,
+          ].filter(Boolean);
+          const footText = metaParts.length > 0
+            ? metaParts.join(' · ')
+            : (Array.isArray(project.techStack) && project.techStack.length > 0 ? project.techStack.slice(0, 3).join(', ') : 'Case study');
+
+          return (
+            <a
+              class="ps-project-card ps-card-editorial ps-card-project"
+              href={`/projects/${slug}/`}
+            >
+              <div class="ps-card-top">
+                <span class="ps-card-mark" aria-hidden="true">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                <span class="ps-card-badge">{project.provenance || project.category || 'Project'}</span>
+              </div>
+              {project.workbookId ? (
+                <p class="ps-kicker">Project · {project.workbookId}</p>
+              ) : (
+                <p class="ps-kicker">Project · Case study</p>
+              )}
+              <h3>{project.title}</h3>
+              {project.summary && <p>{project.summary}</p>}
+              <span class="ps-card-foot">
+                <span>{footText}</span>
+                <span aria-hidden="true">View case study ↗</span>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  {/* 3. Capabilities: Omitted (no verified capabilities/skills data exists in codebase) */}
+
+  {/* 4. Research & Writing */}
+  <section class="ps-section" id="research-writing" aria-labelledby="research-writing-title">
     <div class="ps-section-head">
       <div>
         <p class="ps-eyebrow">Curated briefings &amp; analysis</p>
-        <h2 id="selected-title">Selected work</h2>
+        <h2 id="research-writing-title">Research &amp; Writing</h2>
       </div>
-      <a class="ps-text-link" href="/research/">Explore all research ↗</a>
+      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <a class="ps-text-link" href="/research/">Explore all research ↗</a>
+        <a class="ps-text-link" href="/writing/">Browse all writing ↗</a>
+      </div>
     </div>
     <div class="ps-project-grid">
       <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res018Slug}/`}>
@@ -93,7 +164,7 @@ const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy cons
     </p>
   </section>
 
-  <section class="ps-section ps-discovery" id="analysis" aria-label="Research, writing and topics">
+  <section class="ps-section ps-discovery" id="analysis" aria-label="Connected analysis and topics">
     <div>
       <p class="ps-eyebrow">Keep following a thread</p>
       <h2>Connected analysis</h2>
@@ -134,6 +205,7 @@ const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy cons
     </div>
   </section>
 
+  {/* 5. About / Learning path */}
   <section class="ps-section" id="about" aria-labelledby="about-title">
     <p class="ps-eyebrow">A note about this place</p>
     <h2 id="about-title">Work worth understanding.</h2>
@@ -146,6 +218,7 @@ const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy cons
     <a class="ps-text-link" href="/about/">Read more about the library and ethos ↗</a>
   </section>
 
+  {/* 6. Contact strip */}
   <section class="ps-contact" id="contact" aria-labelledby="contact-title">
     <div>
       <p class="ps-eyebrow">Inquiries &amp; Exchange</p>
