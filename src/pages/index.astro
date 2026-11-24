@@ -5,8 +5,8 @@ import {
   getResearchReportBySlug,
   getWritingArticleBySlug,
 } from '../lib/sanityClient';
-import { getProjectCompletionDate } from '../lib/projectCompatibility';
 import { getArticleReadingTime } from '../lib/readingTime';
+import ProjectCard from '../components/ProjectCard.astro';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -76,42 +76,9 @@ const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '
         <a class="ps-text-link" href="/projects/">Explore all projects ↗</a>
       </div>
       <div class:list={['ps-project-grid', { 'ps-project-grid--single': featuredProjects.length === 1 }]}>
-        {featuredProjects.map((project: any, idx: number) => {
-          const slug = typeof project.slug === 'string' ? project.slug : project.slug?.current || project._id;
-          const completionDate = getProjectCompletionDate(project);
-          const metaParts = [
-            project.role,
-            completionDate ? completionDate : undefined,
-          ].filter(Boolean);
-          const footText = metaParts.length > 0
-            ? metaParts.join(' · ')
-            : (Array.isArray(project.techStack) && project.techStack.length > 0 ? project.techStack.slice(0, 3).join(', ') : 'Case study');
-
-          return (
-            <a
-              class="ps-project-card ps-card-editorial ps-card-project"
-              href={`/projects/${slug}/`}
-            >
-              <div class="ps-card-top">
-                <span class="ps-card-mark" aria-hidden="true">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-                <span class="ps-card-badge">{project.provenance || project.category || 'Project'}</span>
-              </div>
-              {project.workbookId ? (
-                <p class="ps-kicker">Project · {project.workbookId}</p>
-              ) : (
-                <p class="ps-kicker">Project · Case study</p>
-              )}
-              <h3>{project.title}</h3>
-              {project.summary && <p>{project.summary}</p>}
-              <span class="ps-card-foot">
-                <span>{footText}</span>
-                <span aria-hidden="true">View case study ↗</span>
-              </span>
-            </a>
-          );
-        })}
+        {featuredProjects.map((project: any, idx: number) => (
+          <ProjectCard project={project} index={idx} />
+        ))}
       </div>
     </section>
   )}

@@ -57,6 +57,23 @@ function normalizeProjectStatus(status) {
   return STATUS_ALIAS_MAP[trimmed] ?? trimmed;
 }
 
+const STATUS_DISPLAY_MAP = {
+  completed: 'Completed',
+  published: 'Published',
+  in_progress: 'In Progress',
+  'in-progress': 'In Progress',
+  archived: 'Archived',
+  draft: 'Draft',
+};
+
+function formatProjectStatus(status) {
+  if (!status || typeof status !== 'string') return undefined;
+  const trimmed = status.trim();
+  if (trimmed.length === 0) return undefined;
+  const lower = trimmed.toLowerCase();
+  return STATUS_DISPLAY_MAP[lower] ?? (trimmed.charAt(0).toUpperCase() + trimmed.slice(1));
+}
+
 function getProjectCompletionDate(doc) {
   if (!doc) return null;
   return doc.endDate || doc.completedDate || null;
@@ -78,6 +95,7 @@ module.exports = {
   APPROVED_PROJECT_STATUSES,
   normalizeProvenanceLabel,
   normalizeProjectStatus,
+  formatProjectStatus,
   getProjectCompletionDate,
   isProjectEligible
 };

@@ -1,0 +1,214 @@
+---
+import { normalizeProvenanceLabel, formatProjectStatus, type ProvenanceLabel } from '../lib/projectCompatibility';
+
+export interface ProjectCardData {
+  _id?: string;
+  workbookId?: string;
+  title: string;
+  slug: string | { current: string };
+  summary?: string;
+  problem?: string;
+  provenance?: string;
+  status?: string;
+  techStack?: string[];
+  links?: {
+    repo?: string | null;
+    demo?: string | null;
+    live?: string | null;
+  } | null;
+  metric?: string | null;
+  featured?: boolean;
+  category?: string;
+  role?: string;
+  endDate?: string | null;
+  completedDate?: string | null;
+}
+
+export interface Props {
+  project?: ProjectCardData;
+  title?: string;
+  slug?: string | { current: string };
+  summary?: string;
+  problem?: string;
+  provenance?: string;
+  status?: string;
+  techStack?: string[];
+  links?: {
+    repo?: string | null;
+    demo?: string | null;
+    live?: string | null;
+  } | null;
+  githubUrl?: string | null;
+  demoUrl?: string | null;
+  metric?: string | null;
+  index?: number;
+  featured?: boolean;
+  class?: string;
+}
+
+const {
+  project,
+  title: propTitle,
+  slug: propSlug,
+  summary: propSummary,
+  problem: propProblem,
+  provenance: propProvenance,
+  status: propStatus,
+  techStack: propTechStack,
+  links: propLinks,
+  githubUrl: propGithubUrl,
+  demoUrl: propDemoUrl,
+  metric: propMetric,
+  index: propIndex,
+  class: className = '',
+} = Astro.props;
+
+// Reconcile direct props vs project document fields
+const rawTitle = propTitle || project?.title || '';
+const title = typeof rawTitle === 'string' ? rawTitle.trim() : '';
+
+const rawSlug = propSlug || project?.slug || '';
+const slugString = typeof rawSlug === 'string' ? rawSlug.trim() : rawSlug?.current?.trim() || '';
+const caseStudyHref = slugString ? `/projects/${slugString}/` : undefined;
+
+const rawProblem = propProblem || propSummary || project?.problem || project?.summary || '';
+const problemStatement = typeof rawProblem === 'string' ? rawProblem.trim() : '';
+
+// Provenance: strictly validate against the 4 approved schema values
+const rawProvenance = propProvenance || project?.provenance;
+const provenanceLabel: ProvenanceLabel | undefined = normalizeProvenanceLabel(rawProvenance);
+
+// Status: normalize and resolve human-readable display label
+const rawStatus = propStatus || project?.status;
+const statusLabel = formatProjectStatus(rawStatus);
+const normalizedStatus = rawStatus ? rawStatus.trim().toLowerCase() : undefined;
+
+// Stack tags: filter empty / non-string elements
+const rawStack = propTechStack || project?.techStack;
+const stackTags = Array.isArray(rawStack)
+  ? rawStack.filter((t): t is string => typeof t === 'string' && t.trim().length > 0).map((t) => t.trim())
+  : [];
+
+// External links: omit when absent, empty, or undefined; never render dead links
+const rawGithub = propGithubUrl || propLinks?.repo || project?.links?.repo;
+const githubUrl = typeof rawGithub === 'string' && rawGithub.trim().length > 0 ? rawGithub.trim() : undefined;
+
+const rawDemo = propDemoUrl || propLinks?.demo || propLinks?.live || project?.links?.demo || project?.links?.live;
+const demoUrl = typeof rawDemo === 'string' && rawDemo.trim().length > 0 ? rawDemo.trim() : undefined;
+
+// Optional metric line
+const rawMetric = propMetric || project?.metric;
+const metricText = typeof rawMetric === 'string' && rawMetric.trim().length > 0 ? rawMetric.trim() : undefined;
+
+// Identifiers
+const workbookId = project?.workbookId;
+const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStart(2, '0') : undefined;
+---
+
+<article
+  class:list={[
+    'ps-project-card',
+    'ps-card-editorial',
+    'ps-card-project',
+    className,
+  ]}
+  data-project-card
+>
+  <div class="ps-card-top">
+    {markNumber ? (
+      <span class="ps-card-mark" aria-hidden="true">
+        {markNumber}
+      </span>
+    ) : (
+      <div class="ps-card-top-spacer" aria-hidden="true" />
+    )}
+    <div class="ps-card-badges">
+      {provenanceLabel && (
+        <span class="ps-card-badge ps-card-badge--provenance" data-provenance={provenanceLabel}>
+          {provenanceLabel}
+        </span>
+      )}
+      {statusLabel && (
+        <span class="ps-card-badge ps-card-badge--status" data-status={normalizedStatus}>
+          {statusLabel}
+        </span>
+      )}
+    </div>
+  </div>
+
+  {workbookId ? (
+    <p class="ps-kicker">Project · {workbookId}</p>
+  ) : (
+    <p class="ps-kicker">Project · Case study</p>
+  )}
+
+  <h3 class="ps-card-title">
+    {caseStudyHref ? (
+      <a
+        href={caseStudyHref}
+        class="ps-card-title-link"
+        aria-label={`Read case study: ${title}`}
+      >
+        {title}
+      </a>
+    ) : (
+      <span>{title}</span>
+    )}
+  </h3>
+
+  {problemStatement && (
+    <p class="ps-card-problem">{problemStatement}</p>
+  )}
+
+  {metricText && (
+    <div class="ps-card-metric" aria-label="Project metric">
+      <span class="ps-metric-label">Key Metric:</span>
+      <span class="ps-metric-value">{metricText}</span>
+    </div>
+  )}
+
+  {stackTags.length > 0 && (
+    <ul class="ps-card-stack" aria-label="Technologies used">
+      {stackTags.map((tech) => (
+        <li class="ps-card-stack-tag">{tech}</li>
+      ))}
+    </ul>
+  )}
+
+  <div class="ps-card-actions" aria-label={`Actions for ${title}`}>
+    {githubUrl && (
+      <a
+        href={githubUrl}
+        class="ps-card-action ps-card-action--github"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`GitHub repository for ${title}`}
+      >
+        <span>GitHub</span>
+        <span class="ps-action-icon" aria-hidden="true">↗</span>
+      </a>
+    )}
+    {demoUrl && (
+      <a
+        href={demoUrl}
+        class="ps-card-action ps-card-action--demo"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Live demo for ${title}`}
+      >
+        <span>Live Demo</span>
+        <span class="ps-action-icon" aria-hidden="true">↗</span>
+      </a>
+    )}
+    {caseStudyHref && (
+      <a
+        href={caseStudyHref}
+        class="ps-card-action ps-card-action--case-study"
+        aria-label={`View case study for ${title}`}
+      >
+        <span>Case Study</span>
+        <span class="ps-action-icon" aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+</article>

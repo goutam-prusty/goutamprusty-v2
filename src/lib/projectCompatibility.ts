@@ -73,6 +73,27 @@ export function normalizeProjectStatus(status?: string | null): string {
   return STATUS_ALIAS_MAP[trimmed] ?? trimmed;
 }
 
+const STATUS_DISPLAY_MAP: Record<string, string> = {
+  completed: 'Completed',
+  published: 'Published',
+  in_progress: 'In Progress',
+  'in-progress': 'In Progress',
+  archived: 'Archived',
+  draft: 'Draft',
+};
+
+/**
+ * Returns human-readable display label for project status.
+ * Returns undefined if status is missing or not a string.
+ */
+export function formatProjectStatus(status?: string | null): string | undefined {
+  if (!status || typeof status !== 'string') return undefined;
+  const trimmed = status.trim();
+  if (trimmed.length === 0) return undefined;
+  const lower = trimmed.toLowerCase();
+  return STATUS_DISPLAY_MAP[lower] ?? (trimmed.charAt(0).toUpperCase() + trimmed.slice(1));
+}
+
 /**
  * Resolves project completion date from available date fields with backward-compatible fallback.
  * Checks endDate first, then completedDate.
