@@ -140,22 +140,22 @@ Verified against `firestore.rules` (25,745 bytes) and `docs/security-spec.md`:
 
 The owner has provided clear, candid confirmation regarding the project's inception, evolution, and technical authorship:
 
-### A. Origin & Evolution
-- **Independent Project Inception:** The AI Engineer Command Center originated purely as the owner's own idea. It was neither an assigned classroom project nor an enterprise assignment.
-- **Initial Scope:** It was initially designed and set up strictly for the owner's personal learning workflow during the DataMites AI Engineer training programme.
-- **Expansion for Peers:** After using the dashboard personally, the owner expanded the project with multi-device cloud synchronization (Firebase) and user-profile settings so that fellow student peers and friends could also track their coursework.
+### A. Exact Owner-Confirmed Statements (Verbatim)
+- The idea was mine and I initially made the project for my own use.
+- I later expanded it so my friends could use it too.
+- ChatGPT, Claude and Antigravity IDE generated the code and suggested the architecture, technology stack, project structure and development plan.
+- My hands-on coding contribution was copying and applying the AI-generated code.
 
-### B. Technical Implementation & AI Tooling
-- **AI Coding Tooling:** Development was conducted primarily using **ChatGPT**, **Claude**, and the **Antigravity IDE**.
-- **Generative Contribution:** These AI tools generated the application code, suggested the technical architecture (React 19 + Vite + Tailwind CSS v4 + Cloud Firestore), proposed the folder structure, and formulated the development plan.
-- **Owner Hands-On Scope:** The owner candidly describes their personal hands-on contribution as specifying the learning workflow, formulating prompts, copying and applying the generated code into the project tree, and running local builds and environment setup. The owner did **not** independently engineer, manually design, or write the underlying application code from scratch.
-- **Provenance Categorization:** In accordance with Sanity schema definitions, the project provenance is classified as **`Independent`** because it originated as the owner's own initiative and project concept. AI assistance is disclosed openly as technical code generation rather than classified as human co-authorship.
+### B. Authorship & Technical Scope Boundaries
+- **No Independent Code Authorship:** The owner does not claim independent authorship of the application code, technical architecture, or stack decisions.
+- **Hands-On Scope:** Hands-on work was strictly confined to conceiving the learning tool, specifying curriculum requirements, prompt formulation, copying, applying, and locally validating the AI-generated code, and configuring the environment.
+- **Separation of Provenance from AI Disclosure:** In accordance with Sanity schema conventions, project provenance is categorized as **`Independent`** because the project idea and initiative originated independently with the owner for personal study (rather than an institutional assignment, guided course exercise, or collaborative group work). The generative role of AI tools is disclosed explicitly through the dedicated `aiAttribution` and `role` fields, rather than conflating AI tooling with human co-authorship.
 
 ---
 
 ## 10. Proposed Sanity CMS Document Payload (`development` dataset)
 
-Below is the complete, schema-compliant document payload prepared for owner review. It maps directly to `src/sanity/schemaTypes/project.ts`:
+Below is the complete, schema-compliant document payload prepared for owner review. It maps directly to `src/sanity/schemaTypes/project.ts` and `migration/schema/documents/project.ts`:
 
 ```json
 {
@@ -170,9 +170,21 @@ Below is the complete, schema-compliant document payload prepared for owner revi
   "summary": "A personal learning workspace and progress dashboard designed for an intensive AI engineering curriculum, organizing weekly lecture schedules, topic progress, study sessions, milestone projects, flashcards, quizzes, and learning analytics.",
   "provenance": "Independent",
   "status": "draft",
-  "editorialStatus": "draft",
+  "startDate": "2026-10-01",
   "category": "web-application",
-  "role": "Project conception, learning workflow specification, prompt formulation, and AI-assisted implementation (applying and testing generated code).",
+  "tags": [
+    "learning-management",
+    "productivity-tools",
+    "local-first",
+    "cloud-firestore",
+    "dashboard"
+  ],
+  "role": "Project conception, learning workflow specification, and prompt formulation; copying and applying AI-generated code.",
+  "links": {
+    "_type": "object",
+    "repo": "https://github.com/goutam-prusty/ai-engineer-command-center",
+    "live": "https://ai-engineer-command-center-seven.vercel.app/"
+  },
   "techStack": [
     "Vite",
     "React 19",
@@ -183,39 +195,77 @@ Below is the complete, schema-compliant document payload prepared for owner revi
     "Motion",
     "Recharts"
   ],
-  "tags": [
-    "learning-management",
-    "productivity-tools",
-    "local-first",
-    "cloud-firestore",
-    "dashboard"
+  "aiAttribution": "The idea was mine and I initially made the project for my own use. I later expanded it so my friends could use it too. ChatGPT, Claude and Antigravity IDE generated the code and suggested the architecture, technology stack, project structure and development plan. My hands-on coding contribution was copying and applying the AI-generated code.",
+  "evaluationNotes": "Operational learning tracker verified through read-only inspection of public repository. Runs local-first in browser with optional Firebase Cloud Firestore synchronization. Contains zero neural network models, LLM pipelines, or ML inference runtimes.",
+  "body": [
+    {
+      "_key": "cc-block-01",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "cc-span-01",
+          "_type": "span",
+          "text": "The AI Engineer Command Center is a personal learning workspace and single-page web dashboard created to organize, track, and support the daily coursework of an intensive AI Engineering curriculum. The application runs local-first in the browser, providing weekly schedule pacing, syllabus topic progression, study session logging, project milestone management, flashcard revision decks, self-assessment quizzes, and Recharts study analytics.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    },
+    {
+      "_key": "cc-block-02",
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_key": "cc-span-02",
+          "_type": "span",
+          "text": "The system operates strictly as an administrative and educational tracking tool. It does not train, fine-tune, host, or execute artificial intelligence models, LLM agents, or inference runtimes. Application code, technical architecture, and development planning were generated using AI tools (ChatGPT, Claude, and Antigravity IDE), with hands-on development focused on defining workflow requirements, prompt direction, copying, applying, and validating generated code locally.",
+          "marks": []
+        }
+      ],
+      "markDefs": []
+    }
   ],
-  "links": {
-    "_type": "object",
-    "repo": "https://github.com/goutam-prusty/ai-engineer-command-center",
-    "live": "https://ai-engineer-command-center-seven.vercel.app/"
-  },
-  "aiAttribution": "Developed using ChatGPT, Claude, and Antigravity IDE. AI tools generated the application code, recommended the technology stack and architecture, and structured the development plan. The owner directed the concept and workflow, applying generated code rather than writing application logic independently.",
   "featured": false,
   "legacyFeatured": false,
-  "evaluationNotes": "Personal learning tracker verified via source inspection. Operates local-first with optional Firestore sync. Contains zero machine learning models or AI inference runtimes.",
-  "editorialNotes": "Owner attribution confirmed 24 Nov 2026. Staged as private draft payload; held back from live publication."
+  "editorialStatus": "draft",
+  "editorialNotes": "Owner-confirmed attribution incorporated 24 November 2026. Staged as proposed draft payload for owner review; strictly unwritten in Sanity."
 }
 ```
 
-### Document Identification Notes
-- **Distinction from Existing Documents:** `project-PRJ-004` is a **proposed new document ID**. The Sanity `development` dataset currently contains **zero** project documents.
+### System-Generated Fields (Omitted by Design)
+The following fields are generated automatically by Sanity Content Lake and **must not** be supplied in client mutation payloads:
+1. `_createdAt`: ISO 8601 timestamp generated automatically by the Content Lake upon initial document creation. Supplying this field in a creation payload is redundant and can cause mutation conflicts.
+2. `_updatedAt`: ISO 8601 timestamp maintained and refreshed automatically by Sanity on every mutation.
+3. `_rev`: Revision identifier (cryptographic token) generated automatically for optimistic concurrency control. Supplying an arbitrary revision string on document creation causes optimistic concurrency rejections.
+
+### Document Identification & Read-Only Sanity Verification
+- **Proposed Document ID:** `project-PRJ-004` (PROPOSED, NOT EXISTING).
+- **Proposed Workbook ID:** `PRJ-004` (PROPOSED, NOT EXISTING).
+- **Proposed Route Slug:** `ai-engineer-command-center` (PROPOSED, NOT EXISTING).
+- **Read-Only Verification Results:** Live read-only query against the `development` dataset (Project `l94q5yx8`) on 24 November 2026 confirmed:
+  - Total existing project documents: **0**
+  - Matches for `_id in ["project-PRJ-004", "drafts.project-PRJ-004"]`: **0** (completely unused)
+  - Matches for `slug.current == "ai-engineer-command-center"` across all types: **0** (completely unused)
+  - Matches for `workbookId == "PRJ-004"` across all types: **0** (completely unused)
 - **Convention Alignment:** Follows the established historical naming sequence (`PRJ-001` Inkline, `PRJ-002` Vitaliq, `PRJ-003` Wharf -> `PRJ-004` Command Center).
 - **Publication Safety:** The document sets `status: "draft"` and `editorialStatus: "draft"`. Even after creation in Sanity, it will remain strictly excluded from public site rendering until explicitly published.
 
 ---
 
-## 11. Owner Authorization & Sanity Write Checklist
+## 11. Final Owner Approval Block
 
-Before any future write operation can take place in Sanity, the owner must provide explicit authorization for the following exact parameters:
+Before any future write operation can take place in Sanity, explicit owner sign-off is required:
 
-- [ ] **Target Dataset:** Confirm write is authorized exclusively for the `development` dataset (Project ID: `l94q5yx8`).
-- [ ] **Document ID & Workbook ID:** Confirm proposed IDs `project-PRJ-004` and `PRJ-004`.
-- [ ] **Proposed Status:** Confirm status is held at `draft` (not visible on the public website).
-- [ ] **Attribution Wording:** Approve the exact text for `role` and `aiAttribution` as drafted in Section 10.
-- [ ] **Write Authorization:** Explicit owner instruction to invoke the Sanity create mutation.
+| Parameter | Specification | Status |
+|---|---|---|
+| **Target Project ID** | `l94q5yx8` | Configured |
+| **Target Dataset** | `development` | Strictly non-production dataset |
+| **Proposed Document ID** | `project-PRJ-004` | Verified unused in Sanity (proposed, not existing) |
+| **Proposed Workbook ID** | `PRJ-004` | Verified unused in Sanity (proposed, not existing) |
+| **Proposed Slug** | `ai-engineer-command-center` | Verified unused in Sanity (proposed, not existing) |
+| **Document Status** | `draft` | Suppressed from public `/projects/` query |
+| **Editorial Status** | `draft` | Content review pending owner sign-off |
+| **Payload Storage Location** | `docs/drafts/command-center-case-study.md` (Section 10) | Private draft only (zero Sanity writes) |
+| **Owner Write Authorization** | **PENDING** | Awaiting explicit owner instruction |
