@@ -45,3 +45,6 @@ Desktop.ini
 *.key
 
 # Private cryptographic keys
+
+# Generated documentation context
+docs/_generated/

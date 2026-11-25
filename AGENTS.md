@@ -189,3 +189,11 @@ Do not add complexity for its own sake.
 ## Standing rules
 
 Standing rules: work only on the named feature branch; never touch main, never force-push; stage exact paths only; run `git diff --cached --check` after staging; never stage .env*, Content_Inventory.xlsx, research-webp-final/, migration/dry-run/*mutations.ndjson, tokens; V1 repo is read-only; never edit research/writing text; never invent biography or metrics; Sanity: development dataset only, writes only when the task states owner authorization, never print tokens; ask before adding dependencies; run checks synchronously; reports max 40 lines, mark anything unverified, and give per-suite test counts.
+
+## Documentation rules
+
+- All project documentation belongs inside the repository (`docs/`).
+- Read project documentation from `docs/`.
+- Never depend on externally stored project documents.
+- Regenerate and read `docs/_generated/context-pack.txt` before relying on repository paths.
+- Never overwrite authoritative documentation without checking its current contents.
