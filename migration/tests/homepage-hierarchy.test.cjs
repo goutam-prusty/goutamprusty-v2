@@ -79,7 +79,9 @@ test('Hero renders owner-approved AI engineering copy and hierarchy (T7)', () =>
   assert(homeSource.includes('<p class="ps-eyebrow">AI engineer.</p>'), 'Eyebrow must be "AI engineer."');
   assert(homeSource.includes('<h1 id="hero-title">Curiosity, made <em>useful.</em></h1>'), 'H1 must be "Curiosity, made useful."');
   assert(homeSource.includes('<p class="ps-hero-hook">Looking for signs of consciousness.</p>'), 'Hook must be "Looking for signs of consciousness."');
-  assert(homeSource.includes("Building with AI, exploring intelligence, and occasionally wondering what we've created."), 'Supporting sentence must match approved copy');
+  assert(homeSource.includes("I explore intelligence, computing, and the systems shaping emerging technology. Through research and hands-on software projects, I turn questions into things I can test, build, and improve. I believe there's always more to understand—and that's what keeps me curious."), 'Supporting copy must match approved T7-002 copy');
+  assert(homeSource.includes('href="/projects/"'), 'Primary hero CTA must point to /projects/');
+  assert(homeSource.includes('View projects'), 'Primary hero CTA label must be View projects');
   assert(homeSource.includes('href="/about/"'), 'Secondary hero CTA must point to /about/');
   assert(!homeSource.includes('.pdf'), 'Hero must not include unverified resume PDF');
 });
@@ -126,8 +128,9 @@ test('Rendered section hierarchy follows exact order', () => {
   assert(footerIdx > contactIdx, 'Footer must follow Contact strip');
 });
 
-test('Hero primary button dynamically targets research-writing anchor when zero projects exist', () => {
-  assert(html.includes('href="#research-writing"'), 'Hero button must point to #research-writing when 0 projects exist');
+test('Hero primary CTA targets /projects/ directly', () => {
+  assert(html.includes('href="/projects/"'), 'Hero primary CTA must point to /projects/');
+  assert(html.includes('View projects'), 'Hero primary CTA must read View projects');
 });
 
 test('Semantic heading hierarchy is valid', () => {
@@ -145,7 +148,7 @@ test('Semantic heading hierarchy is valid', () => {
 test('Built HTML contains approved hero copy elements', () => {
   assert(html.includes('AI engineer.'), 'Rendered HTML contains approved eyebrow');
   assert(html.includes('Looking for signs of consciousness.'), 'Rendered HTML contains supporting hook');
-  assert(html.includes("Building with AI, exploring intelligence, and occasionally wondering what we've created."), 'Rendered HTML contains supporting sentence');
+  assert(html.includes("I explore intelligence, computing, and the systems shaping emerging technology. Through research and hands-on software projects, I turn questions into things I can test, build, and improve. I believe there's always more to understand—and that's what keeps me curious."), 'Rendered HTML contains approved T7-002 supporting copy');
   assert(!html.includes('Research · Writing · Systems'), 'Rendered HTML does not contain obsolete eyebrow');
 });
 

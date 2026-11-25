@@ -33,8 +33,6 @@ const blg1Title = blg001?.title || 'The Agentic Inflection Point';
 const blg1Summary = blg001?.summary || 'A strategic analysis of where autonomous AI systems actually are, the capability gaps that remain, and what the trajectory implies for organizations.';
 const blg1Length = getArticleReadingTime(blg001);
 
-const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '#research-writing';
-
 const homeJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -68,10 +66,10 @@ const homeJsonLd = [
       <h1 id="hero-title">Curiosity, made <em>useful.</em></h1>
       <p class="ps-hero-hook">Looking for signs of consciousness.</p>
       <p class="ps-lede">
-        Building with AI, exploring intelligence, and occasionally wondering what we've created.
+        I explore intelligence, computing, and the systems shaping emerging technology. Through research and hands-on software projects, I turn questions into things I can test, build, and improve. I believe there's always more to understand—and that's what keeps me curious.
       </p>
       <div class="ps-actions">
-        <a class="ps-button" href={primaryWorkAnchor}>Explore selected work <span aria-hidden="true">↓</span></a>
+        <a class="ps-button" href="/projects/">View projects <span aria-hidden="true">→</span></a>
         <a class="ps-text-link" href="/about/">About Goutam <span aria-hidden="true">→</span></a>
       </div>
     </div>
