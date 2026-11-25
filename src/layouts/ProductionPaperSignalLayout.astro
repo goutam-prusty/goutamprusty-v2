@@ -9,7 +9,14 @@ interface Props {
   aiDisclosure?: string | null;
 }
 
-const { title, description, socialLinks, aiDisclosure } = Astro.props;
+const defaultSocialLinks: SocialContactLinks = {
+  email: 'hello@goutamprusty.com',
+  github: 'https://github.com/goutam-prusty',
+  linkedin: 'https://www.linkedin.com/in/goutam-prusty/',
+  medium: 'https://medium.com/@goutamprusty',
+};
+
+const { title, description, socialLinks = defaultSocialLinks, aiDisclosure } = Astro.props;
 
 const nav = [
   { label: 'Projects', href: '/projects/' },

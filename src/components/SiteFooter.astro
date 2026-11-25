@@ -2,6 +2,7 @@
 export interface SocialContactLinks {
   github?: string | null;
   linkedin?: string | null;
+  medium?: string | null;
   email?: string | null;
   resume?: string | null;
 }
@@ -38,6 +39,11 @@ const linkedinUrl = typeof rawLinkedin === 'string' && rawLinkedin.trim().length
   ? rawLinkedin.trim()
   : undefined;
 
+const rawMedium = socialLinks?.medium;
+const mediumUrl = typeof rawMedium === 'string' && rawMedium.trim().length > 0
+  ? rawMedium.trim()
+  : undefined;
+
 const rawEmail = socialLinks?.email;
 const cleanEmail = typeof rawEmail === 'string' && rawEmail.trim().length > 0
   ? rawEmail.trim()
@@ -50,7 +56,7 @@ const resumeUrl = typeof rawResume === 'string' && rawResume.trim().length > 0
   ? rawResume.trim()
   : undefined;
 
-const hasSocialLinks = Boolean(githubUrl || linkedinUrl || emailUrl || resumeUrl);
+const hasSocialLinks = Boolean(githubUrl || linkedinUrl || mediumUrl || emailUrl || resumeUrl);
 
 // AI-Assistance disclosure: strictly owner-approved wording only
 const disclosureText = typeof aiDisclosure === 'string' && aiDisclosure.trim().length > 0
@@ -115,6 +121,19 @@ const currentYear = new Date().getFullYear();
                 aria-label="Goutam Prusty on LinkedIn (opens in new tab)"
               >
                 LinkedIn <span class="ps-footer-ext" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          )}
+          {mediumUrl && (
+            <li>
+              <a
+                href={mediumUrl}
+                class="ps-footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Goutam Prusty on Medium (opens in new tab)"
+              >
+                Medium <span class="ps-footer-ext" aria-hidden="true">↗</span>
               </a>
             </li>
           )}

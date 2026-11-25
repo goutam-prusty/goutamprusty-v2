@@ -241,18 +241,19 @@ test('dist/index.html contains rendered footer with wordmark and primary links',
   }
 });
 
-test('dist/index.html contains zero unverified social links, dead links, or placeholders in footer', () => {
+test('dist/index.html contains approved social/contact links and zero unverified PDFs or placeholders in footer', () => {
   if (fs.existsSync(DIST_INDEX_HTML)) {
     const html = fs.readFileSync(DIST_INDEX_HTML, 'utf8');
     const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
     assert(footerMatch, 'Footer must exist in dist/index.html');
     const footerHtml = footerMatch[0];
 
-    // Connect column must be omitted since no links are verified
-    assert(!footerHtml.includes('class="ps-footer-social-col"'), 'Connect column must not render without verified links');
-    assert(!footerHtml.includes('github.com'), 'Must not render unverified GitHub link');
-    assert(!footerHtml.includes('linkedin.com'), 'Must not render unverified LinkedIn link');
-    assert(!footerHtml.includes('mailto:'), 'Must not render unverified email link');
+    // Connect column must render with owner-approved links
+    assert(footerHtml.includes('ps-footer-social-col'), 'Connect column must render with approved links');
+    assert(footerHtml.includes('https://github.com/goutam-prusty'), 'Must render approved GitHub link');
+    assert(footerHtml.includes('https://www.linkedin.com/in/goutam-prusty/'), 'Must render approved LinkedIn link');
+    assert(footerHtml.includes('https://medium.com/@goutamprusty'), 'Must render approved Medium link');
+    assert(footerHtml.includes('mailto:hello@goutamprusty.com'), 'Must render approved primary email link');
     assert(!footerHtml.includes('.pdf'), 'Must not render unverified PDF link');
     assert(!footerHtml.includes('placeholder'), 'Must not contain placeholder text');
     assert(!footerHtml.includes('TBD'), 'Must not contain TBD text');
