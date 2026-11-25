@@ -311,11 +311,13 @@ test('dist/projects/index.html renders published project cards or honest empty s
   }
 });
 
-test('dist/index.html omits featured projects section completely when zero projects exist', () => {
+test('dist/index.html renders featured project cards when featured projects exist (never sample fixtures)', () => {
   if (fs.existsSync(DIST_INDEX_HTML)) {
     const html = fs.readFileSync(DIST_INDEX_HTML, 'utf8');
-    assert(!html.includes('id="featured-projects"'), 'Homepage must omit featured projects section in HTML');
-    assert(!html.includes('data-project-card'), 'Homepage must omit project cards in HTML');
+    assert(!html.includes('Sample project'), 'Must not render sample project title');
+    assert(!html.includes('sample-project'), 'Must not render sample project slug');
+    assert(html.includes('id="featured-projects"'), 'Homepage must render featured projects section when featured project exists');
+    assert(html.includes('data-project-card'), 'Homepage must render ProjectCard inside featured projects');
   }
 });
 

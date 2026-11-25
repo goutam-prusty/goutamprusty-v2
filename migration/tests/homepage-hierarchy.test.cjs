@@ -99,9 +99,11 @@ console.log('\n--- Suite 2: Built HTML Artifacts (Zero-Project State) ---');
 
 const html = fs.readFileSync(HOME_HTML, 'utf8');
 
-test('Zero-project state: Featured Projects section is completely absent from rendered HTML', () => {
-  assert(!html.includes('id="featured-projects"'), 'Featured Projects must NOT appear in HTML when 0 eligible projects exist');
-  assert(!html.includes('Featured Projects</h2>'), 'Featured Projects heading must NOT appear in HTML');
+test('Featured Projects section renders featured Sanity projects when present (and never sample fixtures)', () => {
+  const hasFeatured = html.includes('id="featured-projects"');
+  assert(hasFeatured, 'Featured Projects must appear in HTML when a featured project exists');
+  assert(html.includes('Featured Projects</h2>'), 'Featured Projects heading must appear in HTML');
+  assert(!html.includes('Sample project'), 'Must never render sample project fixture');
 });
 
 test('Zero-project state: No fixture notice, sample cards, or placeholder content rendered', () => {
@@ -112,15 +114,18 @@ test('Zero-project state: No fixture notice, sample cards, or placeholder conten
 
 test('Rendered section hierarchy follows exact order', () => {
   const heroIdx = html.indexOf('class="ps-hero"');
-  const roadmapIdx = html.indexOf('id="learning-roadmap"');
+  const featuredIdx = html.indexOf('id="featured-projects"');
+  const techIdx = html.indexOf('id="technologies"');
   const researchIdx = html.indexOf('id="research-writing"');
   const aboutIdx = html.indexOf('id="about"');
   const contactIdx = html.indexOf('id="contact"');
   const footerIdx = html.indexOf('class="ps-footer"');
 
   assert(heroIdx > 0, 'Hero section must exist');
-  assert(roadmapIdx > heroIdx, 'Capabilities/Learning Roadmap must follow Hero');
-  assert(researchIdx > roadmapIdx, 'Research & Writing must follow Capabilities/Learning Roadmap');
+  assert(featuredIdx > heroIdx, 'Featured Projects must follow Hero');
+  assert(techIdx > featuredIdx, 'Technologies & Tools must follow Featured Projects');
+  assert(!html.includes('id="learning-roadmap"'), 'Obsolete Learning Roadmap section must not appear on homepage');
+  assert(researchIdx > techIdx, 'Research & Writing must follow Technologies & Tools');
   assert(!html.includes('id="analysis"'), 'Obsolete Connected analysis section must be removed');
   assert(!html.includes('href="/topics/"'), 'Withheld /topics/ link must not appear on homepage');
   assert(aboutIdx > researchIdx, 'About must follow Research & Writing');

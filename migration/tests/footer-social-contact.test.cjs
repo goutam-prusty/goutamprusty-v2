@@ -133,10 +133,10 @@ test('LinkedIn link is rendered conditionally with secure attributes and meaning
   assert(footerSource.includes('aria-label="Goutam Prusty on LinkedIn (opens in new tab)"'), 'LinkedIn must have meaningful aria-label');
 });
 
-test('Email link is rendered conditionally with mailto: prefix and clean display text', () => {
-  assert(footerSource.includes('{emailUrl && ('), 'Must conditionally render email link');
-  assert(footerSource.includes('cleanEmail.startsWith(\'mailto:\')'), 'Must normalize mailto: scheme');
-  assert(footerSource.includes('{emailDisplay}'), 'Must render clean email display text');
+test('Footer never renders a publicly exposed email or mailto: link', () => {
+  assert(!footerSource.includes('mailto:'), 'SiteFooter must not render mailto: links');
+  assert(!footerSource.includes('{emailDisplay}'), 'SiteFooter must not display raw email text');
+  assert(!layoutSource.includes("email: 'hello@goutamprusty.com'"), 'Layout must not pass exposed email to footer');
 });
 
 test('Resume link is rendered conditionally with PDF indicator', () => {
@@ -205,10 +205,14 @@ test('Footer responsive behavior: 2 columns on tablet (37.5rem - 56.25rem / 600p
   assert(cssSource.includes('grid-template-columns: repeat(2, minmax(0, 1fr))'), 'Must use 2 columns on tablet');
 });
 
-test('Footer responsive behavior: multi-column row on desktop (> 56.25rem / 900px)', () => {
+test('Footer responsive behavior: compact content-hugging multi-column row on desktop (>= 56.25rem / 900px)', () => {
   assert(cssSource.includes('@media (min-width: 56.25rem)'), 'Must define desktop breakpoint');
-  assert(cssSource.includes('grid-template-columns: minmax(14rem, 1.4fr) repeat(auto-fit, minmax(9rem, 1fr)) auto'),
-    'Must define multi-column desktop layout');
+  assert(cssSource.includes('grid-template-columns: minmax(15rem, 26rem) auto auto;'),
+    'Must define 3-column desktop fallback layout');
+  assert(cssSource.includes('.ps-footer-grid:has(.ps-footer-social-col)'),
+    'Must define explicit 4-column desktop layout when social column is present');
+  assert(cssSource.includes('grid-template-columns: minmax(15rem, 26rem) auto auto auto;'),
+    'Must keep all 4 columns compact and content-hugging on desktop');
 });
 
 test('Long URLs and text wrap to prevent page-level horizontal overflow', () => {
@@ -241,19 +245,21 @@ test('dist/index.html contains rendered footer with wordmark and primary links',
   }
 });
 
-test('dist/index.html contains approved social/contact links and zero unverified PDFs or placeholders in footer', () => {
+test('dist/index.html contains approved social links with icons and zero exposed email, PDFs, or placeholders in footer', () => {
   if (fs.existsSync(DIST_INDEX_HTML)) {
     const html = fs.readFileSync(DIST_INDEX_HTML, 'utf8');
     const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
     assert(footerMatch, 'Footer must exist in dist/index.html');
     const footerHtml = footerMatch[0];
 
-    // Connect column must render with owner-approved links
+    // Connect column must render with owner-approved links and icons
     assert(footerHtml.includes('ps-footer-social-col'), 'Connect column must render with approved links');
     assert(footerHtml.includes('https://github.com/goutam-prusty'), 'Must render approved GitHub link');
     assert(footerHtml.includes('https://www.linkedin.com/in/goutam-prusty/'), 'Must render approved LinkedIn link');
     assert(footerHtml.includes('https://medium.com/@goutamprusty'), 'Must render approved Medium link');
-    assert(footerHtml.includes('mailto:hello@goutamprusty.com'), 'Must render approved primary email link');
+    assert(footerHtml.includes('ps-footer-icon'), 'Social links must include SVG icons');
+    assert(!footerHtml.includes('mailto:'), 'Footer must not expose mailto: link');
+    assert(!footerHtml.includes('hello@goutamprusty.com'), 'Footer must not expose raw email address');
     assert(!footerHtml.includes('.pdf'), 'Must not render unverified PDF link');
     assert(!footerHtml.includes('placeholder'), 'Must not contain placeholder text');
     assert(!footerHtml.includes('TBD'), 'Must not contain TBD text');

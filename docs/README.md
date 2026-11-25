@@ -13,7 +13,7 @@ When decisions conflict, resolve them in the following order of precedence:
 1. [`PROJECT_HANDOVER_v6.md`](PROJECT_HANDOVER_v6.md) — Current project state, working procedures, and active milestones.
 2. [`FINAL_WEBSITE_REDESIGN_MASTER_PLAN.md`](FINAL_WEBSITE_REDESIGN_MASTER_PLAN.md) — Authoritative redesign decisions, architecture, and scope.
 3. [`WEBSITE_THEME_AND_UI_UX_DESIGN_SYSTEM.md`](WEBSITE_THEME_AND_UI_UX_DESIGN_SYSTEM.md) — Visual standards, typography, color, and layout tokens.
-4. [`WEBSITE_BUILD_SPEC_FOR_CODEX.md`](WEBSITE_BUILD_SPEC_FOR_CODEX.md) — Technical and product constraints (also retained at repository root).
+4. [`WEBSITE_BUILD_SPEC_FOR_CODEX.md`](specs/WEBSITE_BUILD_SPEC_FOR_CODEX.md) — Technical and product constraints (canonical location: `docs/specs/WEBSITE_BUILD_SPEC_FOR_CODEX.md`).
 5. [`../AGENTS.md`](../AGENTS.md) — Standing agent instructions, safety, and Git rules.
 
 ## Directory Structure

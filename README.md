@@ -14,7 +14,7 @@ library, and editorial publishing platform.
 
 ## Project specification
 
-Read `WEBSITE_BUILD_SPEC_FOR_CODEX.md` before making architectural
+Read `docs/specs/WEBSITE_BUILD_SPEC_FOR_CODEX.md` before making architectural
 or implementation decisions.
 
 ## Development principles

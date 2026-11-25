@@ -7,8 +7,8 @@ import {
 } from '../lib/sanityClient';
 import { getArticleReadingTime } from '../lib/readingTime';
 import ProjectCard from '../components/ProjectCard.astro';
-import Capabilities from '../components/Capabilities.astro';
-import { learningRoadmap } from '../data/learningRoadmap';
+import TechnologiesTools from '../components/TechnologiesTools.astro';
+import { verifiedTechnologies } from '../data/technologies';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -100,8 +100,8 @@ const homeJsonLd = [
     </section>
   )}
 
-  {/* 3. AI Engineering Learning Roadmap (Owner-approved planned learning priorities) */}
-  <Capabilities roadmap={learningRoadmap} id="learning-roadmap" />
+  {/* 3. Verified Technologies & Tools */}
+  <TechnologiesTools data={verifiedTechnologies} id="technologies" />
 
   {/* 4. Research & Writing */}
   <section class="ps-section" id="research-writing" aria-labelledby="research-writing-title">
@@ -149,17 +149,17 @@ const homeJsonLd = [
     </p>
   </section>
 
-  {/* 5. About / Learning path */}
+  {/* 5. About */}
   <section class="ps-section" id="about" aria-labelledby="about-title">
-    <p class="ps-eyebrow">Background &amp; current training</p>
+    <p class="ps-eyebrow">About the work</p>
     <h2 id="about-title">Work worth understanding.</h2>
     <p class="ps-lede">
-      Based in Bengaluru, India, with a Bachelor of Business Administration (BBA) in Finance from New Horizon College of Engineering (2021–2024). My work focuses on systems analysis, structural modeling, and how computing systems and artificial intelligence operate under real-world constraints.
+      This site brings together software projects, structured research briefings, and analytical writing focused on how computing systems and artificial intelligence operate under real-world constraints.
     </p>
     <p>
-      Currently enrolled in the DataMites AI Engineer Program (commenced 23 November 2026), an eight-month structured programme in progress covering Python, machine learning, deep learning, NLP, LLM application engineering, RAG, and agentic workflows.
+      Every project and report is documented with clear scope, source evidence, and practical evaluation.
     </p>
-    <a class="ps-text-link" href="/about/">Read full background &amp; training ↗</a>
+    <a class="ps-text-link" href="/about/">More on the About page ↗</a>
   </section>
 
   {/* 6. Contact strip */}

@@ -3,7 +3,7 @@
 ## 1. Project authority
 
 Before making changes, read:
-`WEBSITE_BUILD_SPEC_FOR_CODEX.md`
+`docs/specs/WEBSITE_BUILD_SPEC_FOR_CODEX.md`
 
 This specification is the primary product, design, content,
 architecture, migration, and quality reference.

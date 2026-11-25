@@ -376,12 +376,12 @@
    Production Footer Component & Responsive Multi-Column Layout (T2)
    ========================================================================== */
 .ps-footer {
-  padding-block: clamp(2.5rem, 5vw, 4rem) clamp(1.75rem, 4vw, 2.5rem);
+  padding-block: clamp(2rem, 4.5vw, 3rem) clamp(1.5rem, 3vw, 2rem);
 }
 
 .ps-footer-grid {
   display: grid;
-  gap: 2.5rem 2rem;
+  gap: 2rem;
   align-items: start;
 }
 
@@ -389,7 +389,7 @@
 @media (max-width: 37.49rem) {
   .ps-footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
   }
 }
 
@@ -397,18 +397,29 @@
 @media (min-width: 37.5rem) and (max-width: 56.24rem) {
   .ps-footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.25rem 2.5rem;
+    gap: 2rem 2.5rem;
   }
   .ps-footer-top-col {
     grid-column: span 2;
   }
 }
 
-/* Desktop (> 56.25rem / 900px): Multi-column row */
+/* Desktop (>= 56.25rem / 900px): Compact, content-hugging balanced row */
 @media (min-width: 56.25rem) {
   .ps-footer-grid {
-    grid-template-columns: minmax(14rem, 1.4fr) repeat(auto-fit, minmax(9rem, 1fr)) auto;
-    gap: 2.5rem 3.5rem;
+    grid-template-columns: minmax(15rem, 26rem) auto auto;
+    justify-content: space-between;
+    gap: 2rem 3rem;
+  }
+  .ps-footer-grid:has(.ps-footer-social-col) {
+    grid-template-columns: minmax(15rem, 26rem) auto auto auto;
+  }
+  .ps-footer-top-col {
+    justify-self: end;
+  }
+  .ps-footer-back-to-top {
+    min-height: 1.4rem;
+    line-height: 1.4;
   }
 }
 
@@ -455,14 +466,14 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.25rem;
 }
 
 .ps-footer-link {
   display: inline-flex;
-  min-height: 2.25rem;
+  min-height: 1.9rem;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.45rem;
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--color-ink);
@@ -471,16 +482,53 @@
   text-underline-offset: 0.22em;
   overflow-wrap: break-word;
   word-break: break-word;
+  transition: transform 160ms ease, color 160ms ease;
 }
 
-.ps-footer-link:hover {
+.ps-footer-link:hover,
+.ps-footer-link:focus-visible {
   text-decoration-thickness: 0.14em;
   color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.ps-footer-icon {
+  flex-shrink: 0;
+  color: var(--color-secondary);
+  transition: transform 160ms ease, color 160ms ease;
+}
+
+.ps-footer-link:hover .ps-footer-icon,
+.ps-footer-link:focus-visible .ps-footer-icon {
+  color: var(--color-ink);
+  transform: scale(1.06);
 }
 
 .ps-footer-ext {
   font-size: 0.82rem;
   color: var(--color-secondary);
+  transition: transform 160ms ease;
+}
+
+.ps-footer-link:hover .ps-footer-ext,
+.ps-footer-link:focus-visible .ps-footer-ext {
+  transform: translate(1.5px, -1.5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-footer-link,
+  .ps-footer-icon,
+  .ps-footer-ext {
+    transition: none;
+  }
+  .ps-footer-link:hover,
+  .ps-footer-link:focus-visible,
+  .ps-footer-link:hover .ps-footer-icon,
+  .ps-footer-link:focus-visible .ps-footer-icon,
+  .ps-footer-link:hover .ps-footer-ext,
+  .ps-footer-link:focus-visible .ps-footer-ext {
+    transform: none;
+  }
 }
 
 .ps-footer-back-to-top {
@@ -506,9 +554,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 0.85rem 1.5rem;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--color-line);
   font: 0.82rem/1.5 var(--font-mono);
   color: var(--color-secondary);
@@ -784,7 +832,7 @@
   border-radius: 2px;
 }
 
-.ps-roadmap-subgroup-title {
+.ps .ps-roadmap-subgroup-title {
   margin: 0;
   font: 700 0.74rem/1.4 var(--font-mono);
   letter-spacing: 0.08em;
@@ -804,6 +852,27 @@
   border-radius: 2px;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.ps .ps-tech-learning-note {
+  max-width: none;
+  width: 100%;
+  margin: 1.5rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 2px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-secondary);
+}
+
+.ps-tech-learning-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
 }
 
 /* ==========================================================================

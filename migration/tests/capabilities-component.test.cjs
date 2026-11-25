@@ -479,10 +479,11 @@ console.log('\n--- Suite 9: Homepage Integration & Production Invariants ---');
 
 const homeSrc = fs.readFileSync(HOME_SRC_PATH, 'utf8');
 
-test('Homepage source imports and integrates Capabilities with learningRoadmap', () => {
-  assert(homeSrc.includes("import Capabilities from '../components/Capabilities.astro'"), 'Must import Capabilities component');
-  assert(homeSrc.includes("import { learningRoadmap } from '../data/learningRoadmap'"), 'Must import learningRoadmap data');
-  assert(homeSrc.includes('<Capabilities roadmap={learningRoadmap} id="learning-roadmap" />'), 'Must render Capabilities with roadmap prop');
+test('Homepage source integrates TechnologiesTools with verifiedTechnologies instead of 55-item learningRoadmap', () => {
+  assert(homeSrc.includes("import TechnologiesTools from '../components/TechnologiesTools.astro'"), 'Must import TechnologiesTools component');
+  assert(homeSrc.includes("import { verifiedTechnologies } from '../data/technologies'"), 'Must import verifiedTechnologies data');
+  assert(homeSrc.includes('<TechnologiesTools data={verifiedTechnologies} id="technologies" />'), 'Must render TechnologiesTools');
+  assert(!homeSrc.includes('id="learning-roadmap"'), 'Homepage must not render obsolete learning-roadmap section');
 });
 
 test('Homepage source cleanly avoids id="capabilities" and Capabilities</h2>', () => {
@@ -501,6 +502,11 @@ test('Zero project links or "Used in projects" claims in roadmap markup', () => 
 test('dist/index.html verification when built HTML exists', () => {
   if (fs.existsSync(HOME_HTML_PATH)) {
     const html = fs.readFileSync(HOME_HTML_PATH, 'utf8');
+    assert(html.includes('id="technologies"'), 'dist/index.html must contain id="technologies"');
+    assert(html.includes('Technologies &amp; Tools') || html.includes('Technologies & Tools'), 'dist/index.html must render Technologies & Tools');
+    assert(!html.includes('id="learning-roadmap"'), 'dist/index.html must not contain obsolete id="learning-roadmap"');
+    assert(!html.includes('Currently learning'), 'dist/index.html must not contain Currently learning wording');
+    assert(!html.includes('DataMites'), 'dist/index.html must not mention DataMites on homepage');
     assert(!html.includes('id="capabilities"'), 'dist/index.html must not contain id="capabilities"');
     assert(!html.includes('Capabilities</h2>'), 'dist/index.html must not contain Capabilities</h2>');
   }

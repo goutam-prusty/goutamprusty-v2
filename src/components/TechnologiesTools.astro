@@ -1,0 +1,41 @@
+---
+import type { TechnologiesSectionData } from '../data/technologies';
+
+export interface Props {
+  data: TechnologiesSectionData;
+  id?: string;
+  class?: string;
+}
+
+const {
+  data,
+  id = 'technologies',
+  class: className = '',
+} = Astro.props;
+---
+
+<section class:list={['ps-section', 'ps-technologies', className]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="ps-section-head">
+    <div>
+      <p class="ps-eyebrow">{data.eyebrow}</p>
+      <h2 id={`${id}-title`}>{data.title}</h2>
+    </div>
+  </div>
+
+  <div class="ps-roadmap-subgroups-grid">
+    {data.groups.map((group, idx) => (
+      <div class="ps-roadmap-subgroup" aria-labelledby={`${id}-group-${idx}`}>
+        <h3 class="ps-roadmap-subgroup-title" id={`${id}-group-${idx}`}>
+          {group.title}
+        </h3>
+        <ul class="ps-roadmap-list" role="list">
+          {group.items.map((item) => (
+            <li class="ps-roadmap-item">
+              <span class="ps-roadmap-tag--supporting">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
