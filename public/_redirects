@@ -1,4 +1,55 @@
 # Approved Cloudflare Pages redirects (goutamprusty.com v2)
-# Unapproved V1 routes (/blog/*, /uses, /resume, V1 /projects/*) are withheld pending owner approval (Master Plan T15).
+# Exact-path rules only; no broad wildcards.
+# Unmatched (/blog/sample-blog-post) and withheld routes (/blog/tag/*, /uses, /resume, legacy /projects/*) remain 404.
+
+# Approved T3 / REDIRECT-001
 /elsewhere /contact/ 301
 /elsewhere/ /contact/ 301
+
+# Approved REDIRECT-003: Legacy /blog index -> /writing/
+/blog /writing/ 301
+/blog/ /writing/ 301
+
+# Approved REDIRECT-003: 21 verified V1 blog posts -> /writing/<slug>/
+/blog/agentic-inflection-point /writing/agentic-inflection-point/ 301
+/blog/agentic-inflection-point/ /writing/agentic-inflection-point/ 301
+/blog/ai-physical-limits /writing/ai-physical-limits/ 301
+/blog/ai-physical-limits/ /writing/ai-physical-limits/ 301
+/blog/baliyatra-arithmetic-disappearing-craft /writing/baliyatra-arithmetic-disappearing-craft/ 301
+/blog/baliyatra-arithmetic-disappearing-craft/ /writing/baliyatra-arithmetic-disappearing-craft/ 301
+/blog/billionaire-raj-india-inequality-costs /writing/billionaire-raj-india-inequality-costs/ 301
+/blog/billionaire-raj-india-inequality-costs/ /writing/billionaire-raj-india-inequality-costs/ 301
+/blog/bitcoin-didnt-change-the-world-caught-up /writing/bitcoin-didnt-change-the-world-caught-up/ 301
+/blog/bitcoin-didnt-change-the-world-caught-up/ /writing/bitcoin-didnt-change-the-world-caught-up/ 301
+/blog/i-used-ai-to-find-the-ceiling /writing/i-used-ai-to-find-the-ceiling/ 301
+/blog/i-used-ai-to-find-the-ceiling/ /writing/i-used-ai-to-find-the-ceiling/ 301
+/blog/india-is-borrowing-chinas-playbook /writing/india-is-borrowing-chinas-playbook/ 301
+/blog/india-is-borrowing-chinas-playbook/ /writing/india-is-borrowing-chinas-playbook/ 301
+/blog/machine-native-economy-explained /writing/machine-native-economy-explained/ 301
+/blog/machine-native-economy-explained/ /writing/machine-native-economy-explained/ 301
+/blog/money-is-a-story /writing/money-is-a-story/ 301
+/blog/money-is-a-story/ /writing/money-is-a-story/ 301
+/blog/six-months-twelve-domains-one-uncomfortable-conclusion /writing/six-months-twelve-domains-one-uncomfortable-conclusion/ 301
+/blog/six-months-twelve-domains-one-uncomfortable-conclusion/ /writing/six-months-twelve-domains-one-uncomfortable-conclusion/ 301
+/blog/structure-not-conspiracy /writing/structure-not-conspiracy/ 301
+/blog/structure-not-conspiracy/ /writing/structure-not-conspiracy/ 301
+/blog/the-asset-trap /writing/the-asset-trap/ 301
+/blog/the-asset-trap/ /writing/the-asset-trap/ 301
+/blog/the-billionaire-raj /writing/the-billionaire-raj/ 301
+/blog/the-billionaire-raj/ /writing/the-billionaire-raj/ 301
+/blog/the-jobs-that-arent-jobs /writing/the-jobs-that-arent-jobs/ 301
+/blog/the-jobs-that-arent-jobs/ /writing/the-jobs-that-arent-jobs/ 301
+/blog/the-question-that-explains-everything-about-modern-economies /writing/the-question-that-explains-everything-about-modern-economies/ 301
+/blog/the-question-that-explains-everything-about-modern-economies/ /writing/the-question-that-explains-everything-about-modern-economies/ 301
+/blog/trust-as-infrastructure-india-social-capital /writing/trust-as-infrastructure-india-social-capital/ 301
+/blog/trust-as-infrastructure-india-social-capital/ /writing/trust-as-infrastructure-india-social-capital/ 301
+/blog/wasted-months-before-figuring-out-what-i-was-building /writing/wasted-months-before-figuring-out-what-i-was-building/ 301
+/blog/wasted-months-before-figuring-out-what-i-was-building/ /writing/wasted-months-before-figuring-out-what-i-was-building/ 301
+/blog/what-i-actually-think-about-indias-next-decade /writing/what-i-actually-think-about-indias-next-decade/ 301
+/blog/what-i-actually-think-about-indias-next-decade/ /writing/what-i-actually-think-about-indias-next-decade/ 301
+/blog/why-compute-isnt-a-commodity-yet /writing/why-compute-isnt-a-commodity-yet/ 301
+/blog/why-compute-isnt-a-commodity-yet/ /writing/why-compute-isnt-a-commodity-yet/ 301
+/blog/why-your-central-bank-wants-some-inflation /writing/why-your-central-bank-wants-some-inflation/ 301
+/blog/why-your-central-bank-wants-some-inflation/ /writing/why-your-central-bank-wants-some-inflation/ 301
+/blog/wordpress-theme-read-by-machines /writing/wordpress-theme-read-by-machines/ 301
+/blog/wordpress-theme-read-by-machines/ /writing/wordpress-theme-read-by-machines/ 301

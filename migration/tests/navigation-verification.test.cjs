@@ -248,7 +248,46 @@ test('dist/topics/index.html: Topics page builds cleanly and is absent from prim
   const redirectsContent = fs.readFileSync(redirectsPath, 'utf8');
   assert(redirectsContent.includes('/elsewhere /contact/ 301'), 'Approved /elsewhere -> /contact/ 301 must exist');
   assert(redirectsContent.includes('/elsewhere/ /contact/ 301'), 'Approved /elsewhere/ -> /contact/ 301 must exist');
-  assert(!redirectsContent.match(/^\/blog\b/m), 'Unapproved /blog redirects must not be implemented');
+  assert(redirectsContent.includes('/blog /writing/ 301'), 'Approved /blog -> /writing/ 301 must exist');
+  assert(redirectsContent.includes('/blog/ /writing/ 301'), 'Approved /blog/ -> /writing/ 301 must exist');
+  const activeRedirectRules = redirectsContent
+    .split(/\r?\n/)
+    .map(l => l.trim())
+    .filter(l => l && !l.startsWith('#'))
+    .join('\n');
+  assert(!activeRedirectRules.includes('/blog/*'), 'Broad /blog/* wildcard must not exist');
+  assert(!activeRedirectRules.includes('/blog/tag/'), 'Withheld /blog/tag/ must not be redirected');
+  assert(!activeRedirectRules.includes('/blog/sample-blog-post'), 'Unmatched draft slug must not be redirected');
+  assert(!activeRedirectRules.match(/^\/(uses|resume|projects\/inkline|projects\/vitaliq|projects\/wharf|projects\/sample-project)\b/m), 'Withheld routes must not be redirected');
+
+  const expectedBlogSlugs = [
+    'agentic-inflection-point',
+    'ai-physical-limits',
+    'baliyatra-arithmetic-disappearing-craft',
+    'billionaire-raj-india-inequality-costs',
+    'bitcoin-didnt-change-the-world-caught-up',
+    'i-used-ai-to-find-the-ceiling',
+    'india-is-borrowing-chinas-playbook',
+    'machine-native-economy-explained',
+    'money-is-a-story',
+    'six-months-twelve-domains-one-uncomfortable-conclusion',
+    'structure-not-conspiracy',
+    'the-asset-trap',
+    'the-billionaire-raj',
+    'the-jobs-that-arent-jobs',
+    'the-question-that-explains-everything-about-modern-economies',
+    'trust-as-infrastructure-india-social-capital',
+    'wasted-months-before-figuring-out-what-i-was-building',
+    'what-i-actually-think-about-indias-next-decade',
+    'why-compute-isnt-a-commodity-yet',
+    'why-your-central-bank-wants-some-inflation',
+    'wordpress-theme-read-by-machines',
+  ];
+  for (const s of expectedBlogSlugs) {
+    assert(redirectsContent.includes(`/blog/${s} /writing/${s}/ 301`), `Missing redirect for /blog/${s}`);
+    assert(redirectsContent.includes(`/blog/${s}/ /writing/${s}/ 301`), `Missing redirect for /blog/${s}/`);
+    assert(fs.existsSync(path.join(ROOT, 'dist', 'writing', s, 'index.html')), `Destination missing for ${s}`);
+  }
 
   const elsewhereHtml = fs.readFileSync(path.join(ROOT, 'dist', 'elsewhere', 'index.html'), 'utf8');
   assert(elsewhereHtml.includes('/contact/'), 'dist/elsewhere/index.html must redirect to /contact/');
