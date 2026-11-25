@@ -169,3 +169,20 @@ The agent regenerates `context-pack.txt` (about 8.7 KB) at `$env:USERPROFILE\Dow
 ## Appendix B — Source facts the site may use
 
 BBA Finance, New Horizon College of Engineering, Sep 2021–Sep 2024. DirectorIn, Business Consultant Trainee, Sep–Nov 2023. Intugine, Bills Accounting Assistant, May–Aug 2023. Brand Compass, Jr. Web Developer, Dec 2021. DataMites AI Engineer Program, enrolled 23 Nov 2026, in progress. Command Center: https://ai-engineer-command-center-seven.vercel.app/ and https://github.com/goutam-prusty/ai-engineer-command-center (learning tracker; Vite, React, TypeScript, Tailwind, Firebase; **not** an AI app). Inkline (https://github.com/goutam-prusty/inkline): resume builder, OpenAI gpt-4o-mini writing assist with deterministic fallback, no verified live demo. Vitaliq (https://github.com/goutam-prusty/vitaliq, demo https://vitaliq.vercel.app returned HTTP 200): health-data tracker, not medical, not AI. Repo Janitor is private; keep off the public site.
+
+---
+
+## 9. Post-Launch Production State (25 Nov 2026)
+
+- **Status:** **V2 launched and live on custom domain.**
+- **Production URL:** `https://goutamprusty.com/` (canonical apex hostname, HTTPS `200 OK`, Cloudflare edge).
+- **Cloudflare Pages Preview URL:** `https://goutamprusty-v2.pages.dev/` (`200 OK`).
+- **Deployed Commit & Branch Alignment:** `cd6a29cd0b028fa6ebbbfcdbba7098559930f55a` (`main`, `origin/main`, and `codex/sanity-content-architecture` all aligned at `cd6a29c`).
+- **Cloudflare Deployment ID:** `c640105b-8642-4a92-94ac-5abbc6fa52a8`.
+- **Sanity `production` Dataset (`l94q5yx8`):** `43` approved documents (`project-PRJ-004`, `21` research, `21` writing, `0` drafts).
+- **Verified Checks:** All primary routes (`/`, `/projects/`, `/projects/ai-engineer-command-center/`, `/research/`, `/writing/`, `/about/`, `/contact/`), `/sitemap.xml` (`49` URLs using `https://goutamprusty.com/`), `/robots.txt`, and representative static image assets returned `200 OK` over HTTPS.
+- **`www` & Vercel Preservation:** `www.goutamprusty.com` still points to Vercel (`7a4176dc0a8f5a61.vercel-dns-017.com`) and returns a working `308` redirect to `https://goutamprusty.com/`. Existing Vercel hosting and project were not modified.
+- **Unresolved Status Discrepancy:** GitHub check-run `139359851016` (`Cloudflare Workers and Pages`) still reports `in_progress` in the GitHub API despite the live edge serving `cd6a29c`.
+- **Deferred / Follow-up Items:**
+  - Public resume publication (`docs/drafts/resume-draft.pdf`) remains deferred pending owner approval.
+  - Six local dry-run files (`M migration/dry-run/vertical-slice-documents.json`, `M migration/dry-run/vertical-slice-import.ndjson`, `M src/data/verticalSliceData.json`, `?? migration/dry-run/dryrun-documents.json`, `?? migration/dry-run/dryrun-import.ndjson`, `?? migration/dry-run/dryrun-mutations.ndjson`) remain preserved in the working tree and require a separately authorized cleanup decision.
