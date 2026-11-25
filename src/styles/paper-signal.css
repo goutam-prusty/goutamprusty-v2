@@ -87,7 +87,7 @@
 .ps-contact { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 5vw, 3rem); background: var(--color-ink); color: var(--color-surface); }
 .ps-contact h2 { max-width: 15ch; color: var(--color-surface); }
 .ps-contact p { color: #efede5; }
-.ps-contact .ps-button { flex: 0 0 auto; }
+.ps-contact .ps-button { flex: 0 0 auto; color: var(--color-ink); }
 .ps-page-head { padding-block: clamp(3rem, 7vw, 6rem) 2.5rem; border-bottom: 1px solid var(--color-line); }
 .ps-page-head h1 { max-width: 14ch; font-size: clamp(2.7rem, 6vw, 5.2rem); }
 .ps-page-head .ps-lede { max-width: 46rem !important; }
