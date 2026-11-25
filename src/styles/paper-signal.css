@@ -74,7 +74,7 @@
 .ps-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
 .ps-project-card, .ps-card-project { display: flex; min-height: 23rem; flex-direction: column; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--color-line); background: var(--color-project); text-decoration: none; box-shadow: none; position: relative; }
 .ps-card-mark { display: grid; width: 4.25rem; height: 4.25rem; place-items: center; margin-bottom: auto; border: 1px solid var(--color-ink); border-radius: 50%; font: 1.5rem var(--font-display); background: var(--color-surface); }
-.ps-project-card h3 { max-width: 32ch; margin-top: 1.5rem; }
+.ps-project-card h2, .ps-project-card h3 { max-width: 32ch; margin-top: 1.5rem; font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: 0; }
 .ps-project-card p { color: var(--color-secondary); }
 .ps-card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin-top: 1.4rem; padding-top: .8rem; border-top: 1px solid var(--color-line); font: .72rem var(--font-mono); text-transform: uppercase; }
 .ps-shelf-note { margin-top: 1rem !important; color: var(--color-secondary); font-size: .84rem; }
@@ -441,7 +441,7 @@
   max-width: 32ch;
 }
 
-.ps-footer-heading {
+.ps .ps-footer-heading {
   margin: 0 0 0.85rem;
   font: 700 0.72rem/1.4 var(--font-mono);
   letter-spacing: 0.09em;

@@ -65,6 +65,7 @@ function slugify(text: string): string {
         }
 
         if (child._type === 'inlineImage') {
+          if (!child.assetPath || String(child.assetPath).trim().length === 0) return null;
           return (
             <img
               src={normalizeAssetPath(child.assetPath)}
@@ -228,6 +229,7 @@ function slugify(text: string): string {
 
     // 4. Image Block (standalone)
     if (block._type === 'imageBlock') {
+      if (!block.assetPath || String(block.assetPath).trim().length === 0) return null;
       return (
         <figure class="my-8 ps-figure">
           <img

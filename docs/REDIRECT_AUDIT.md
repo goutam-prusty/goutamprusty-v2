@@ -1,6 +1,6 @@
 # V1-to-V2 Redirect Audit
 
-**Status:** Approved T3 redirects implemented; unapproved V1 redirects withheld for owner review (Master Plan T15).  
+**Status:** Approved T3 redirects implemented; unapproved V1 redirects withheld for owner review (Master Plan T15).
 **V1 Rollback Path:** Preserved (`D:\goutamprusty-v1` read-only at commit `71ef2c7`; `main` branch untouched).
 
 ## 1. Route Inventory Examined
