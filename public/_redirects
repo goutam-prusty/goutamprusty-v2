@@ -1,0 +1,4 @@
+# Approved Cloudflare Pages redirects (goutamprusty.com v2)
+# Unapproved V1 routes (/blog/*, /uses, /resume, V1 /projects/*) are withheld pending owner approval (Master Plan T15).
+/elsewhere /contact/ 301
+/elsewhere/ /contact/ 301

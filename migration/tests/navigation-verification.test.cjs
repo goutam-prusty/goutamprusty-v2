@@ -241,6 +241,21 @@ test('dist/topics/index.html: Topics page builds cleanly and is absent from prim
   assert(!desktopLinks.some(l => l.text === 'Topics' || l.href.includes('/topics/')));
   assert(!mobileLinks.some(l => l.text === 'Topics' || l.href.includes('/topics/')));
   assert(html.includes('<title>Topics'), 'Topics page content remains intact');
+
+  // Verify approved redirects in public/_redirects and built dist/ stubs
+  const redirectsPath = path.join(ROOT, 'dist', '_redirects');
+  assert(fs.existsSync(redirectsPath), 'dist/_redirects must be emitted from public/_redirects');
+  const redirectsContent = fs.readFileSync(redirectsPath, 'utf8');
+  assert(redirectsContent.includes('/elsewhere /contact/ 301'), 'Approved /elsewhere -> /contact/ 301 must exist');
+  assert(redirectsContent.includes('/elsewhere/ /contact/ 301'), 'Approved /elsewhere/ -> /contact/ 301 must exist');
+  assert(!redirectsContent.match(/^\/blog\b/m), 'Unapproved /blog redirects must not be implemented');
+
+  const elsewhereHtml = fs.readFileSync(path.join(ROOT, 'dist', 'elsewhere', 'index.html'), 'utf8');
+  assert(elsewhereHtml.includes('/contact/'), 'dist/elsewhere/index.html must redirect to /contact/');
+  for (const stub of ['now', 'search', 'collections']) {
+    const stubHtml = fs.readFileSync(path.join(ROOT, 'dist', stub, 'index.html'), 'utf8');
+    assert(stubHtml.includes('/404'), `dist/${stub}/index.html must redirect to /404`);
+  }
 });
 
 // -------------------------------------------------------------
