@@ -39,11 +39,32 @@ const blg2Title = blg002?.title || "AI's Physical Limits";
 const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy constraints, and water scarcity on the AI trajectory.';
 
 const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '#research-writing';
+
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'goutamprusty.com',
+    url: 'https://goutamprusty.com/',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Goutam Prusty',
+    url: 'https://goutamprusty.com/',
+    sameAs: [
+      'https://github.com/goutam-prusty',
+      'https://www.linkedin.com/in/goutam-prusty/',
+      'https://medium.com/@goutamprusty',
+    ],
+  },
+];
 ---
 
 <ProductionPaperSignalLayout
   title="Goutam Prusty — Research, writing, and practical systems"
   description="A personal library of strategic intelligence, analytical writing, and practical experiments by Goutam Prusty."
+  jsonLd={homeJsonLd}
 >
   {/* 1. Hero */}
   <section class="ps-hero" aria-labelledby="hero-title">

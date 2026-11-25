@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /design-exploration/
+Disallow: /404
+
+Sitemap: https://goutamprusty.com/sitemap.xml

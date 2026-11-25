@@ -24,9 +24,31 @@ const derivedPosts = Array.isArray(rawDerivedPosts)
   ? rawDerivedPosts.filter((post: any) => Boolean(post && (post.slug?.current || (typeof post.slug === 'string' && post.slug.trim().length > 0))))
   : [];
 const coverImage = report?.coverImage;
+const ogImage = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const researchJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: summary,
+  author: {
+    '@type': 'Person',
+    name: 'Goutam Prusty',
+    url: 'https://goutamprusty.com/',
+  },
+  mainEntityOfPage: `https://goutamprusty.com/research/${slug}/`,
+};
+if (report?.publishedAt) {
+  researchJsonLd.datePublished = String(report.publishedAt).split('T')[0];
+}
 ---
 
-<ProductionPaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
+<ProductionPaperSignalLayout
+  title={`${title} — goutamprusty.com`}
+  description={summary}
+  ogType="article"
+  ogImage={ogImage}
+  jsonLd={researchJsonLd}
+>
   <header class="ps-page-head ps-article-head">
     <p class="ps-eyebrow">Research · {category}</p>
     <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>

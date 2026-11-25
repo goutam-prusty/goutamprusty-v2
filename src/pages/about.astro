@@ -4,6 +4,22 @@ import ProductionPaperSignalLayout from '../layouts/ProductionPaperSignalLayout.
 const pageTitle = 'About — Goutam Prusty';
 const pageDescription = 'Factual professional background, current AI engineering training, learning workspace, education, work history, and project summaries.';
 
+const aboutJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Goutam Prusty',
+  url: 'https://goutamprusty.com/about/',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'New Horizon College of Engineering',
+  },
+  sameAs: [
+    'https://github.com/goutam-prusty',
+    'https://www.linkedin.com/in/goutam-prusty/',
+    'https://medium.com/@goutamprusty',
+  ],
+};
+
 const tocSections = [
   { id: 'background', title: 'Background' },
   { id: 'training', title: 'Current training' },
@@ -97,6 +113,7 @@ const projectSummaries = [
 <ProductionPaperSignalLayout
   title={pageTitle}
   description={pageDescription}
+  jsonLd={aboutJsonLd}
 >
   <header class="ps-page-head">
     <p class="ps-eyebrow">Professional Profile · Background</p>

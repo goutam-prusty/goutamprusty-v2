@@ -58,11 +58,31 @@ const relatedResearch = Array.isArray(project.relatedResearch)
 const relatedWriting = Array.isArray(project.relatedWriting)
   ? project.relatedWriting.filter((item: any) => Boolean(item && (item.slug?.current || item.slug)))
   : [];
+const ogImage = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description: summary,
+      author: {
+        '@type': 'Person',
+        name: 'Goutam Prusty',
+        url: 'https://goutamprusty.com/',
+      },
+      mainEntityOfPage: `https://goutamprusty.com/projects/${slug}/`,
+      ...(startDate ? { datePublished: startDate } : {}),
+    }
+  : undefined;
 ---
 
 <ProductionPaperSignalLayout
   title={`${title} — goutamprusty.com`}
   description={summary}
+  ogType="article"
+  ogImage={ogImage}
+  noindex={isLocalDraftPreview}
+  jsonLd={projectJsonLd}
 >
   <header class="ps-page-head ps-article-head">
     {isLocalDraftPreview && (

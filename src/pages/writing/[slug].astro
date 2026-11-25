@@ -22,9 +22,31 @@ const bodyBlocks = article?.body || [];
 const sourceReport = article?.sourceReport;
 const sourceReportSlug = sourceReport?.slug?.current || (typeof sourceReport?.slug === 'string' ? sourceReport.slug.trim() : null);
 const coverImage = article?.coverImage;
+const ogImage = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const writingJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: summary,
+  author: {
+    '@type': 'Person',
+    name: 'Goutam Prusty',
+    url: 'https://goutamprusty.com/',
+  },
+  mainEntityOfPage: `https://goutamprusty.com/writing/${slug}/`,
+};
+if (article?.publishedAt) {
+  writingJsonLd.datePublished = String(article.publishedAt).split('T')[0];
+}
 ---
 
-<ProductionPaperSignalLayout title={`${title} — goutamprusty.com`} description={summary}>
+<ProductionPaperSignalLayout
+  title={`${title} — goutamprusty.com`}
+  description={summary}
+  ogType="article"
+  ogImage={ogImage}
+  jsonLd={writingJsonLd}
+>
   <header class="ps-page-head ps-article-head">
     <p class="ps-eyebrow">Writing · {category}</p>
     <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>

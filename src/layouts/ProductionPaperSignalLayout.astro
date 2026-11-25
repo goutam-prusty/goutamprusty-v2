@@ -7,6 +7,10 @@ interface Props {
   description: string;
   socialLinks?: SocialContactLinks;
   aiDisclosure?: string | null;
+  ogType?: 'website' | 'article';
+  ogImage?: string | null;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const defaultSocialLinks: SocialContactLinks = {
@@ -16,7 +20,23 @@ const defaultSocialLinks: SocialContactLinks = {
   medium: 'https://medium.com/@goutamprusty',
 };
 
-const { title, description, socialLinks = defaultSocialLinks, aiDisclosure } = Astro.props;
+const {
+  title,
+  description,
+  socialLinks = defaultSocialLinks,
+  aiDisclosure,
+  ogType = 'website',
+  ogImage = null,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const siteBase = Astro.site?.toString() || 'https://goutamprusty.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteBase).toString();
+const ogImageUrl = ogImage && typeof ogImage === 'string' && ogImage.trim().length > 0
+  ? new URL(ogImage.trim(), siteBase).toString()
+  : null;
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 const nav = [
   { label: 'Projects', href: '/projects/' },
@@ -40,7 +60,25 @@ const isActive = (href: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f4ec" />
     <meta name="description" content={description} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <link rel="canonical" href={canonicalUrl} />
+    )}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="goutamprusty.com" />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <title>{title}</title>
+    {jsonLdItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
   </head>
   <body class="ps" id="top">
     <a class="ps-skip" href="#main">Skip to content</a>
