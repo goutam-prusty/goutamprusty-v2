@@ -110,16 +110,18 @@ test('Zero-project state: No fixture notice, sample cards, or placeholder conten
 
 test('Rendered section hierarchy follows exact order', () => {
   const heroIdx = html.indexOf('class="ps-hero"');
+  const roadmapIdx = html.indexOf('id="learning-roadmap"');
   const researchIdx = html.indexOf('id="research-writing"');
-  const analysisIdx = html.indexOf('id="analysis"');
   const aboutIdx = html.indexOf('id="about"');
   const contactIdx = html.indexOf('id="contact"');
   const footerIdx = html.indexOf('class="ps-footer"');
 
   assert(heroIdx > 0, 'Hero section must exist');
-  assert(researchIdx > heroIdx, 'Research & Writing must follow Hero');
-  assert(analysisIdx > researchIdx, 'Connected Analysis must follow Research & Writing');
-  assert(aboutIdx > analysisIdx, 'About must follow Analysis');
+  assert(roadmapIdx > heroIdx, 'Capabilities/Learning Roadmap must follow Hero');
+  assert(researchIdx > roadmapIdx, 'Research & Writing must follow Capabilities/Learning Roadmap');
+  assert(!html.includes('id="analysis"'), 'Obsolete Connected analysis section must be removed');
+  assert(!html.includes('href="/topics/"'), 'Withheld /topics/ link must not appear on homepage');
+  assert(aboutIdx > researchIdx, 'About must follow Research & Writing');
   assert(contactIdx > aboutIdx, 'Contact strip must follow About');
   assert(footerIdx > contactIdx, 'Footer must follow Contact strip');
 });
@@ -135,7 +137,7 @@ test('Semantic heading hierarchy is valid', () => {
 
   const h2Matches = [...html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map(m => m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim());
   assert(h2Matches.includes('Research & Writing'), 'h2 contains Research & Writing');
-  assert(h2Matches.includes('Connected analysis'), 'h2 contains Connected analysis');
+  assert(!h2Matches.includes('Connected analysis'), 'h2 must not contain obsolete Connected analysis');
   assert(h2Matches.includes('Work worth understanding.'), 'h2 contains About title');
   assert(h2Matches.includes('Have a thoughtful question or discussion?'), 'h2 contains Contact title');
 });

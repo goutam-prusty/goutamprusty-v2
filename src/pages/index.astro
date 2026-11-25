@@ -18,12 +18,10 @@ const featuredProjects = allProjects.filter((p: any) => p.featured || p.legacyFe
 // 2. Verified Research and Writing selections (preserved from existing homepage)
 const res018Slug = 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026';
 const blg001Slug = 'agentic-inflection-point';
-const blg002Slug = 'ai-physical-limits';
 
-const [res018, blg001, blg002] = await Promise.all([
+const [res018, blg001] = await Promise.all([
   getResearchReportBySlug(res018Slug),
   getWritingArticleBySlug(blg001Slug),
-  getWritingArticleBySlug(blg002Slug),
 ]);
 
 const resTitle = res018?.title || 'Strategic Intelligence Report: The State of Artificial Intelligence and Frontier Technologies in 2026';
@@ -34,9 +32,6 @@ const resCitations = Array.isArray(res018?.bibliography) ? `${res018.bibliograph
 const blg1Title = blg001?.title || 'The Agentic Inflection Point';
 const blg1Summary = blg001?.summary || 'A strategic analysis of where autonomous AI systems actually are, the capability gaps that remain, and what the trajectory implies for organizations.';
 const blg1Length = getArticleReadingTime(blg001);
-
-const blg2Title = blg002?.title || "AI's Physical Limits";
-const blg2Summary = blg002?.summary || 'Semiconductor concentration, energy constraints, and water scarcity on the AI trajectory.';
 
 const primaryWorkAnchor = featuredProjects.length > 0 ? '#featured-projects' : '#research-writing';
 
@@ -156,58 +151,17 @@ const homeJsonLd = [
     </p>
   </section>
 
-  <section class="ps-section ps-discovery" id="analysis" aria-label="Connected analysis and topics">
-    <div>
-      <p class="ps-eyebrow">Keep following a thread</p>
-      <h2>Connected analysis</h2>
-      <p class="ps-muted">
-        Long-form research briefings connect directly into focused essays examining specific bottlenecks, capabilities, and real-world implications.
-      </p>
-      <a class="ps-text-link" href="/writing/">Browse all writing ↗</a>
-    </div>
-    <div>
-      <p class="ps-eyebrow">Recent briefings &amp; articles</p>
-      <ul class="ps-link-list">
-        <li>
-          <a href={`/writing/${blg002Slug}/`}>
-            <span class="ps-link-item-text">
-              <strong class="ps-link-title">{blg2Title}</strong>
-              <span class="ps-link-desc">{blg2Summary}</span>
-            </span>
-            <span class="ps-arrow-link" aria-hidden="true">↗</span>
-          </a>
-        </li>
-        <li>
-          <a href={`/writing/${blg001Slug}/`}>
-            <span class="ps-link-item-text">
-              <strong class="ps-link-title">{blg1Title}</strong>
-              <span class="ps-link-desc">{blg1Summary}</span>
-            </span>
-            <span class="ps-arrow-link" aria-hidden="true">↗</span>
-          </a>
-        </li>
-      </ul>
-      <div class="ps-topic-row" aria-label="Research topics">
-        <span class="ps-topic">Artificial Intelligence</span>
-        <span class="ps-topic">Frontier Infrastructure</span>
-        <span class="ps-topic">Autonomous Systems</span>
-        <span class="ps-topic">Semiconductors &amp; Energy</span>
-        <a class="ps-topic" href="/topics/">All topics →</a>
-      </div>
-    </div>
-  </section>
-
   {/* 5. About / Learning path */}
   <section class="ps-section" id="about" aria-labelledby="about-title">
-    <p class="ps-eyebrow">A note about this place</p>
+    <p class="ps-eyebrow">Background &amp; current training</p>
     <h2 id="about-title">Work worth understanding.</h2>
     <p class="ps-lede">
-      This site serves as an open personal library for long-form research, strategic analysis, and systems inquiry. Every document is anchored in primary source evidence, clear methodologies, and transparent citations.
+      Based in Bengaluru, India, with a Bachelor of Business Administration (BBA) in Finance from New Horizon College of Engineering (2021–2024). My work focuses on systems analysis, structural modeling, and how computing systems and artificial intelligence operate under real-world constraints.
     </p>
     <p>
-      Rather than chasing brief commentary or ephemeral news, the focus here is on questions with lasting consequences: how artificial intelligence reshapes computing and institutions, where physical constraints bind digital ambitions, and how complex ideas become dependable systems.
+      Currently enrolled in the DataMites AI Engineer Program (commenced 23 November 2026), an eight-month structured programme in progress covering Python, machine learning, deep learning, NLP, LLM application engineering, RAG, and agentic workflows.
     </p>
-    <a class="ps-text-link" href="/about/">Read more about the library and ethos ↗</a>
+    <a class="ps-text-link" href="/about/">Read full background &amp; training ↗</a>
   </section>
 
   {/* 6. Contact strip */}
