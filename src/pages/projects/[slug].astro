@@ -2,6 +2,7 @@
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
+import { getImageDimensions } from '../../lib/imageDimensions';
 import {
   getAllProjectSlugs,
   getLocalDraftProjectPreview,
@@ -49,6 +50,8 @@ const techStack = Array.isArray(project.techStack) ? project.techStack : [];
 const links = project.links || {};
 const hasLinks = Boolean(links.repo || links.live || links.demo);
 const coverImage = project.coverImage;
+const coverSrc = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const coverDims = coverSrc ? getImageDimensions(coverSrc) : null;
 const aiAttribution = project.aiAttribution;
 const evaluationNotes = project.evaluationNotes;
 const bodyBlocks = Array.isArray(project.body) ? project.body : [];
@@ -109,11 +112,13 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
 
   <div class="ps-body-grid max-w-4xl mx-auto my-8">
     <article class="ps-article">
-      {coverImage?.assetPath && (
+      {coverSrc && (
         <div class="my-8 rounded overflow-hidden border border-stone-200">
           <img
-            src={normalizeAssetPath(coverImage.assetPath)}
+            src={coverSrc}
             alt={coverImage.alt || title}
+            width={coverDims?.width}
+            height={coverDims?.height}
             class="w-full h-auto"
             loading="eager"
           />

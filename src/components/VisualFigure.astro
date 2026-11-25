@@ -1,4 +1,6 @@
 ---
+import { getImageDimensions } from '../lib/imageDimensions';
+
 interface Props {
   label: string;
   kind?: 'image' | 'figure' | 'diagram' | 'chart';
@@ -9,10 +11,11 @@ interface Props {
 }
 
 const { label, kind = 'image', caption, ratio = 'landscape', src, alt = label } = Astro.props;
+const dims = src ? getImageDimensions(src) : null;
 ---
 
 <figure class={`visual-placeholder visual-placeholder--${ratio}`} aria-label={`${kind}: ${label}`}>
-  {src ? <img class="visual-image" src={src} alt={alt} loading="lazy" /> : <div class="placeholder-frame">
+  {src ? <img class="visual-image" src={src} alt={alt} width={dims?.width} height={dims?.height} loading="lazy" /> : <div class="placeholder-frame">
     <span class="placeholder-kind">{kind}</span>
     <span class="placeholder-label">{label}</span>
     <span class="placeholder-note">Development placeholder · verified asset required</span>

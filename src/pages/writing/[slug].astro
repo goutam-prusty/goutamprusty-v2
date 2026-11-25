@@ -4,6 +4,7 @@ import PortableText from '../../components/PortableText.astro';
 import { getAllWritingSlugs, getWritingArticleBySlug } from '../../lib/sanityClient';
 import { getArticleReadingTime } from '../../lib/readingTime';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
+import { getImageDimensions } from '../../lib/imageDimensions';
 
 export async function getStaticPaths() {
   const slugs = await getAllWritingSlugs();
@@ -22,7 +23,9 @@ const bodyBlocks = article?.body || [];
 const sourceReport = article?.sourceReport;
 const sourceReportSlug = sourceReport?.slug?.current || (typeof sourceReport?.slug === 'string' ? sourceReport.slug.trim() : null);
 const coverImage = article?.coverImage;
-const ogImage = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const coverSrc = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+const coverDims = coverSrc ? getImageDimensions(coverSrc) : null;
+const ogImage = coverSrc;
 const writingJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -60,9 +63,16 @@ if (article?.publishedAt) {
 
   <div class="ps-body-grid max-w-4xl mx-auto my-8">
     <article class="ps-article">
-      {coverImage?.assetPath && (
+      {coverSrc && (
         <div class="my-8 rounded overflow-hidden border border-stone-200">
-          <img src={normalizeAssetPath(coverImage.assetPath)} alt={coverImage.alt || title} class="w-full h-auto" loading="eager" />
+          <img
+            src={coverSrc}
+            alt={coverImage.alt || title}
+            width={coverDims?.width}
+            height={coverDims?.height}
+            class="w-full h-auto"
+            loading="eager"
+          />
           {coverImage.caption && <p class="text-xs text-stone-500 p-2 italic">{coverImage.caption}</p>}
         </div>
       )}

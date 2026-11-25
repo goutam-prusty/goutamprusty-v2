@@ -1,5 +1,6 @@
 ---
 import { normalizeAssetPath } from '../lib/pathNormalizer';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 export interface Props {
   blocks: any[];
@@ -52,12 +53,13 @@ function slugify(text: string): string {
         }
 
         if (child._type === 'inlineFormula') {
+          const dims = (!child.dimensions?.width || !child.dimensions?.height) ? getImageDimensions(child.assetPath) : null;
           return (
             <img
               src={child.assetPath}
               alt={child.alt || "Mathematical formula"}
-              width={child.dimensions?.width}
-              height={child.dimensions?.height}
+              width={child.dimensions?.width ?? dims?.width}
+              height={child.dimensions?.height ?? dims?.height}
               class="inline-block max-w-full h-auto align-middle my-0.5"
               loading="lazy"
             />
@@ -66,10 +68,14 @@ function slugify(text: string): string {
 
         if (child._type === 'inlineImage') {
           if (!child.assetPath || String(child.assetPath).trim().length === 0) return null;
+          const src = normalizeAssetPath(child.assetPath);
+          const dims = (!child.dimensions?.width || !child.dimensions?.height) ? getImageDimensions(src) : null;
           return (
             <img
-              src={normalizeAssetPath(child.assetPath)}
+              src={src}
               alt={child.alt || ""}
+              width={child.dimensions?.width ?? dims?.width}
+              height={child.dimensions?.height ?? dims?.height}
               class="inline-block max-w-full h-auto align-middle"
               loading="lazy"
             />
@@ -157,12 +163,13 @@ function slugify(text: string): string {
                               <span>
                                 {cellBlock.children?.map((child: any) => {
                                   if (child._type === 'inlineFormula') {
+                                    const dims = (!child.dimensions?.width || !child.dimensions?.height) ? getImageDimensions(child.assetPath) : null;
                                     return (
                                       <img
                                         src={child.assetPath}
                                         alt={child.alt || "Formula"}
-                                        width={child.dimensions?.width}
-                                        height={child.dimensions?.height}
+                                        width={child.dimensions?.width ?? dims?.width}
+                                        height={child.dimensions?.height ?? dims?.height}
                                         class="inline-block max-w-full h-auto align-middle my-0.5"
                                         loading="lazy"
                                       />
@@ -177,10 +184,15 @@ function slugify(text: string): string {
                                     );
                                   }
                                   if (child._type === 'inlineImage') {
+                                    if (!child.assetPath || String(child.assetPath).trim().length === 0) return null;
+                                    const src = normalizeAssetPath(child.assetPath);
+                                    const dims = (!child.dimensions?.width || !child.dimensions?.height) ? getImageDimensions(src) : null;
                                     return (
                                       <img
-                                        src={normalizeAssetPath(child.assetPath)}
+                                        src={src}
                                         alt={child.alt || ""}
+                                        width={child.dimensions?.width ?? dims?.width}
+                                        height={child.dimensions?.height ?? dims?.height}
                                         class="inline-block max-w-full h-auto align-middle"
                                         loading="lazy"
                                       />
@@ -212,13 +224,14 @@ function slugify(text: string): string {
 
     // 3. Formula Block (standalone)
     if (block._type === 'formulaBlock') {
+      const dims = (!block.width || !block.height) ? getImageDimensions(block.assetPath) : null;
       return (
         <figure class="my-8 text-center p-6 bg-stone-50 border border-stone-200 rounded ps-figure">
           <img
             src={block.assetPath}
             alt={block.label || "Mathematical formula"}
-            width={block.width}
-            height={block.height}
+            width={block.width ?? dims?.width}
+            height={block.height ?? dims?.height}
             class="inline-block max-w-full h-auto"
             loading="lazy"
           />
@@ -230,13 +243,15 @@ function slugify(text: string): string {
     // 4. Image Block (standalone)
     if (block._type === 'imageBlock') {
       if (!block.assetPath || String(block.assetPath).trim().length === 0) return null;
+      const src = normalizeAssetPath(block.assetPath);
+      const dims = (!block.width || !block.height) ? getImageDimensions(src) : null;
       return (
         <figure class="my-8 ps-figure">
           <img
-            src={normalizeAssetPath(block.assetPath)}
+            src={src}
             alt={block.alt || ""}
-            width={block.width}
-            height={block.height}
+            width={block.width ?? dims?.width}
+            height={block.height ?? dims?.height}
             class="w-full h-auto rounded border border-stone-200"
             loading="lazy"
           />
