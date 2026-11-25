@@ -521,3 +521,55 @@ export async function getProjectBySlug(slug: string): Promise<any | null> {
 
   return JSON.parse(JSON.stringify(doc));
 }
+
+const LOCAL_DRAFT_PREVIEW_ID = 'project-PRJ-004';
+const LOCAL_DRAFT_PREVIEW_SLUG = 'ai-engineer-command-center';
+
+/**
+ * Explicit local-development-only gate for previewing the single authorized draft project.
+ * Always returns false in production builds (import.meta.env.DEV === false).
+ */
+export function isLocalDraftPreviewEnabled(): boolean {
+  if (!env.DEV) return false;
+  if (dataset !== 'development') return false;
+  return (
+    proc?.env?.SANITY_LOCAL_DRAFT_PREVIEW === 'true' ||
+    env.SANITY_LOCAL_DRAFT_PREVIEW === 'true'
+  );
+}
+
+/**
+ * Fetch ONLY the authorized local draft project (project-PRJ-004) in development mode.
+ * Never exposes other drafts and never runs in production builds.
+ */
+export async function getLocalDraftProjectPreview(slug: string): Promise<any | null> {
+  if (!isLocalDraftPreviewEnabled()) return null;
+  if (slug !== LOCAL_DRAFT_PREVIEW_SLUG) return null;
+  if (!sanityClient) return null;
+
+  try {
+    const query = `*[_id == $id && _type == "project" && slug.current == $slug && status == "draft"][0]{
+      ...,
+      "relatedResearch": relatedResearch[]->{
+        _id,
+        title,
+        slug,
+        summary
+      },
+      "relatedWriting": relatedWriting[]->{
+        _id,
+        title,
+        slug,
+        summary
+      }
+    }`;
+    const result = await sanityClient.fetch(query, {
+      id: LOCAL_DRAFT_PREVIEW_ID,
+      slug: LOCAL_DRAFT_PREVIEW_SLUG,
+    });
+    return result || null;
+  } catch (err: any) {
+    console.warn(`[Sanity Warning] Local draft preview fetch failed (${err.message}).`);
+    return null;
+  }
+}
