@@ -300,13 +300,14 @@ test('src/pages/index.astro imports and integrates ProjectCard component in feat
     'Featured projects section must remain strictly conditional');
 });
 
-test('dist/projects/index.html retains honest empty state without sample project cards', () => {
+test('dist/projects/index.html renders published project cards or honest empty state without sample fixtures', () => {
   if (fs.existsSync(DIST_PROJECTS_HTML)) {
     const html = fs.readFileSync(DIST_PROJECTS_HTML, 'utf8');
-    assert(html.includes('No projects are currently published'), 'Must render honest empty state message');
     assert(!html.includes('Sample project'), 'Must not render sample project title');
     assert(!html.includes('sample-project'), 'Must not render sample project slug');
-    assert(!html.includes('data-project-card'), 'Must not render project card element when 0 projects exist');
+    const hasCard = html.includes('data-project-card');
+    const hasEmptyState = html.includes('No projects are currently published');
+    assert(hasCard !== hasEmptyState, 'Must render either project cards or honest empty state, never both or neither');
   }
 });
 

@@ -149,11 +149,18 @@ test('Topics index page contains honest empty state without fixture notices', ()
   assert(html.includes('Topic taxonomy is currently being structured'), 'Topics page must have honest holding note');
 });
 
-test('Projects index page has no sample project cards', () => {
+test('Projects index page has no sample project cards and renders published cards or honest empty state', () => {
   const html = fs.readFileSync(path.join(DIST, 'projects', 'index.html'), 'utf8');
   assert(!html.includes('Sample project'), 'Projects page must not contain "Sample project"');
   assert(!html.includes('sample-project'), 'Projects page must not contain sample project slug');
-  assert(html.includes('No projects are currently published'), 'Must have honest empty state');
+  assert(!html.includes('Development fixture'), 'Projects page must not contain "Development fixture"');
+  assert(!html.includes('Development template'), 'Projects page must not contain "Development template"');
+  const hasProjectCard = html.includes('data-project-card');
+  const hasEmptyState = html.includes('No projects are currently published');
+  assert(hasProjectCard !== hasEmptyState, 'Projects page must render either published project cards or honest empty state, never both or neither');
+  if (hasProjectCard) {
+    assert(html.includes('/projects/'), 'Published project card must link to a project case study');
+  }
 });
 
 test('Full dist directory scan for forbidden fixture strings (excluding design-exploration)', () => {

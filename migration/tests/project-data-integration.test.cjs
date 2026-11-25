@@ -304,6 +304,16 @@ async function testLiveSanityIntegration() {
     assert.strictEqual(hasFixture, false, 'Must never return sample-project fixture');
   });
 
+  await runAsyncTest('getAllProjects() preserves _type and returns all eligible slugs without dropping published projects', async () => {
+    const [projects, slugs] = await Promise.all([getAllProjects(), getAllProjectSlugs()]);
+    assert.strictEqual(projects.length, slugs.length, 'getAllProjects() count must match getAllProjectSlugs() count');
+    for (const p of projects) {
+      assert.strictEqual(p._type, 'project', 'Returned project must preserve _type === "project"');
+      const pSlug = typeof p.slug === 'string' ? p.slug : p.slug?.current;
+      assert(slugs.includes(pSlug), `Project slug ${pSlug} must be in getAllProjectSlugs()`);
+    }
+  });
+
   await runAsyncTest('getAllProjectSlugs() returns array without sample-project fixture', async () => {
     const slugs = await getAllProjectSlugs();
     assert(Array.isArray(slugs), 'Must return an array');

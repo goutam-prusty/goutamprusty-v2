@@ -3,6 +3,7 @@ import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayo
 import PortableText from '../../components/PortableText.astro';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
 import { getImageDimensions } from '../../lib/imageDimensions';
+import { formatProjectStatus } from '../../lib/projectCompatibility';
 import {
   getAllProjectSlugs,
   getLocalDraftProjectPreview,
@@ -39,7 +40,9 @@ if (!project) {
 
 const title = project.title;
 const summary = project.summary;
-const category = project.category || 'Technology';
+const rawCategory = typeof project.category === 'string' ? project.category.trim() : '';
+const category = rawCategory || 'Technology';
+const statusLabel = formatProjectStatus(project.status);
 const provenance = project.provenance;
 const role = project.role;
 const startDate = project.startDate;
@@ -103,6 +106,8 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       </p>
     )}
     <div class="ps-meta flex flex-wrap gap-4 text-xs font-mono text-stone-500 border-t border-stone-200 pt-3">
+      {statusLabel && <span><strong>Status</strong> {statusLabel}</span>}
+      {rawCategory && <span><strong>Category</strong> {rawCategory}</span>}
       {role && <span><strong>Role</strong> {role}</span>}
       {provenance && <span><strong>Provenance</strong> {provenance}</span>}
       {dateDisplay && <span><strong>Timeline</strong> {dateDisplay}</span>}

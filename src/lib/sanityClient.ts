@@ -404,6 +404,7 @@ export async function getAllProjects(): Promise<any[]> {
     try {
       const query = `*[_type == "project" && defined(slug.current) && (status == "published" || status == "completed")] | order(coalesce(endDate, completedDate, startDate) desc) {
         _id,
+        _type,
         workbookId,
         title,
         slug,
