@@ -36,7 +36,7 @@ async function run() {
   console.log('  SANITY AUTHENTICATION & CLOUDFLARE COMPATIBILITY TEST SUITE');
   console.log('================================================================\n');
 
-  const { resolveSanityAuth, resolveSanityToken } = await import('../../src/lib/sanityClient.ts');
+  const { resolveSanityAuth, resolveSanityToken, resolveSanityDataset } = await import('../../src/lib/sanityClient.ts');
 
   // Group 1: Environment Variable Hierarchy & Precedence
   console.log('--- 1. Dedicated & Alias Environment Variable Hierarchy ---');
@@ -202,6 +202,185 @@ async function run() {
   test('resolveSanityToken wrapper returns string token or undefined', () => {
     assert.strictEqual(typeof resolveSanityToken({ env: { SANITY_API_READ_TOKEN: 'abc' } }), 'string');
     assert.strictEqual(resolveSanityToken({ env: {}, allowLocalConfigFallback: false }), undefined);
+  });
+
+  // Group 6: Four-Tier Sanity Dataset Precedence & Resolution
+  console.log('\n--- 6. Four-Tier Sanity Dataset Precedence & Resolution ---');
+
+  test('Explicit SANITY_DATASET=production selects production', () => {
+    const res = resolveSanityDataset({ env: { SANITY_DATASET: 'production' } });
+    assert.strictEqual(res, 'production');
+  });
+
+  test('Explicit PUBLIC_SANITY_DATASET=production selects production', () => {
+    const res = resolveSanityDataset({ env: { PUBLIC_SANITY_DATASET: 'production' } });
+    assert.strictEqual(res, 'production');
+  });
+
+  test('Explicit development configuration selects development', () => {
+    const res = resolveSanityDataset({ env: { SANITY_DATASET: 'development' } });
+    assert.strictEqual(res, 'development');
+  });
+
+  test('Tier 1: import.meta.env.PUBLIC_SANITY_DATASET wins over all lower tiers', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {
+        PUBLIC_SANITY_DATASET: 'tier1-astro-public',
+        SANITY_DATASET: 'tier2-astro-server',
+      },
+      env: {
+        PUBLIC_SANITY_DATASET: 'tier3-proc-public',
+        SANITY_DATASET: 'tier4-proc-server',
+      },
+    });
+    assert.strictEqual(res, 'tier1-astro-public');
+  });
+
+  test('Tier 2: import.meta.env.SANITY_DATASET wins over process public and server (Astro server beats process public)', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {
+        PUBLIC_SANITY_DATASET: '',
+        SANITY_DATASET: 'tier2-astro-server',
+      },
+      env: {
+        PUBLIC_SANITY_DATASET: 'tier3-proc-public',
+        SANITY_DATASET: 'tier4-proc-server',
+      },
+    });
+    assert.strictEqual(res, 'tier2-astro-server');
+  });
+
+  test('Tier 1: import.meta.env.PUBLIC_SANITY_DATASET wins over process-level server', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {
+        PUBLIC_SANITY_DATASET: 'tier1-astro-public',
+      },
+      env: {
+        SANITY_DATASET: 'tier4-proc-server',
+      },
+    });
+    assert.strictEqual(res, 'tier1-astro-public');
+  });
+
+  test('Within process source, PUBLIC_SANITY_DATASET wins over server SANITY_DATASET', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {},
+      env: {
+        PUBLIC_SANITY_DATASET: 'tier3-proc-public',
+        SANITY_DATASET: 'tier4-proc-server',
+      },
+    });
+    assert.strictEqual(res, 'tier3-proc-public');
+  });
+
+  test('Tier 4: process.env.SANITY_DATASET is selected when Tiers 1-3 are absent', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {},
+      env: {
+        SANITY_DATASET: 'tier4-proc-server',
+      },
+    });
+    assert.strictEqual(res, 'tier4-proc-server');
+  });
+
+  test('Whitespace-only and empty strings fall through to the next candidate tier', () => {
+    const res = resolveSanityDataset({
+      metaEnv: {
+        PUBLIC_SANITY_DATASET: '   ',
+        SANITY_DATASET: '',
+      },
+      env: {
+        PUBLIC_SANITY_DATASET: '  \t\n  ',
+        SANITY_DATASET: '  valid-dataset-candidate  ',
+      },
+    });
+    assert.strictEqual(res, 'valid-dataset-candidate');
+  });
+
+  // Group 7: Production Precedence & Fail-Closed Guard
+  console.log('\n--- 7. Production Precedence & Fail-Closed Guard ---');
+
+  test('Missing dataset in genuine local development (isDev: true) defaults to development', () => {
+    const res = resolveSanityDataset({ env: {}, isDev: true });
+    assert.strictEqual(res, 'development');
+  });
+
+  test('Missing dataset in genuine local development (NODE_ENV=development) defaults to development', () => {
+    const res = resolveSanityDataset({ env: { NODE_ENV: 'development' } });
+    assert.strictEqual(res, 'development');
+  });
+
+  test('Missing dataset in genuine local development (import.meta.env.DEV=true) defaults to development', () => {
+    const res = resolveSanityDataset({ metaEnv: { DEV: true } });
+    assert.strictEqual(res, 'development');
+  });
+
+  test('Missing dataset in production build (NODE_ENV=production) throws configuration error', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { NODE_ENV: 'production' }, isDev: false }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Production build signal (npm_lifecycle_event=build) + NODE_ENV=development still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { npm_lifecycle_event: 'build', NODE_ENV: 'development' } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Production build signal (isProd: true) + NODE_ENV=development still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { NODE_ENV: 'development' }, isProd: true }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Production build signal (PROD: true in metaEnv) + NODE_ENV=development still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ metaEnv: { PROD: true }, env: { NODE_ENV: 'development' } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Production build signal (MODE=production in metaEnv) + NODE_ENV=development still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ metaEnv: { MODE: 'production' }, env: { NODE_ENV: 'development' } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Cloudflare Pages deployment (CF_PAGES=1) throws configuration error when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { CF_PAGES: '1' } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Cloudflare Pages (CF_PAGES=1) + NODE_ENV=development still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { CF_PAGES: '1', NODE_ENV: 'development' } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Cloudflare Pages (CF_PAGES=1) + isDev=true still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ env: { CF_PAGES: '1' }, isDev: true }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Cloudflare Pages (CF_PAGES=1 in metaEnv) + DEV=true still throws when dataset is absent', () => {
+    assert.throws(
+      () => resolveSanityDataset({ metaEnv: { CF_PAGES: '1', DEV: true } }),
+      /\[CONFIGURATION ERROR\] A Sanity dataset must be explicitly configured for production builds\. Set SANITY_DATASET or PUBLIC_SANITY_DATASET\./
+    );
+  });
+
+  test('Generic CI/test execution (CI=true) without deployment signals retains local fallback', () => {
+    const res = resolveSanityDataset({ env: { CI: 'true' }, isDev: false });
+    assert.strictEqual(res, 'development');
   });
 
   console.log('\n================================================================');
