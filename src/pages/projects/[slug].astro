@@ -77,6 +77,7 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
         url: 'https://goutamprusty.com/',
       },
       mainEntityOfPage: `https://goutamprusty.com/projects/${slug}/`,
+      ...(ogImage ? { image: new URL(ogImage, 'https://goutamprusty.com').toString() } : {}),
       ...(startDate ? { datePublished: startDate } : {}),
     }
   : undefined;

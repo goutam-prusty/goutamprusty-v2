@@ -40,6 +40,9 @@ const researchJsonLd: Record<string, unknown> = {
   },
   mainEntityOfPage: `https://goutamprusty.com/research/${slug}/`,
 };
+if (ogImage) {
+  researchJsonLd.image = new URL(ogImage, 'https://goutamprusty.com').toString();
+}
 if (report?.publishedAt) {
   researchJsonLd.datePublished = String(report.publishedAt).split('T')[0];
 }
