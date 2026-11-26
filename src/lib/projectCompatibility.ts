@@ -82,15 +82,45 @@ const STATUS_DISPLAY_MAP: Record<string, string> = {
   draft: 'Draft',
 };
 
+const IN_DEVELOPMENT_PROJECT_IDS = new Set(['project-PRJ-005', 'PRJ-005']);
+const IN_DEVELOPMENT_PROJECT_SLUGS = new Set(['grounded-technical-docs-rag-assistant']);
+
 /**
  * Returns human-readable display label for project status.
- * Returns undefined if status is missing or not a string.
+ * Preserves underlying Sanity status/eligibility while displaying PRJ-005 as "In Development"
+ * only when its underlying normalized status is "published".
+ * Returns undefined if status is missing or not a non-empty string.
  */
-export function formatProjectStatus(status?: string | null): string | undefined {
+export function formatProjectStatus(
+  status?: string | null,
+  context?: {
+    _id?: string | null;
+    workbookId?: string | null;
+    slug?: string | { current?: string | null } | null;
+  } | null
+): string | undefined {
   if (!status || typeof status !== 'string') return undefined;
   const trimmed = status.trim();
   if (trimmed.length === 0) return undefined;
   const lower = trimmed.toLowerCase();
+
+  if (lower === 'published' && context) {
+    const id = typeof context._id === 'string' ? context._id.trim() : '';
+    const workbookId = typeof context.workbookId === 'string' ? context.workbookId.trim() : '';
+    const slug =
+      typeof context.slug === 'string'
+        ? context.slug.trim()
+        : context.slug?.current?.trim() || '';
+
+    if (
+      IN_DEVELOPMENT_PROJECT_IDS.has(id) ||
+      IN_DEVELOPMENT_PROJECT_IDS.has(workbookId) ||
+      IN_DEVELOPMENT_PROJECT_SLUGS.has(slug)
+    ) {
+      return 'In Development';
+    }
+  }
+
   return STATUS_DISPLAY_MAP[lower] ?? (trimmed.charAt(0).toUpperCase() + trimmed.slice(1));
 }
 

@@ -22,11 +22,11 @@ const aboutJsonLd = {
 
 const tocSections = [
   { id: 'background', title: 'Background' },
-  { id: 'training', title: 'Current training' },
   { id: 'workspace', title: 'Learning workspace' },
+  { id: 'projects', title: 'Project explorations' },
+  { id: 'training', title: 'Current training' },
   { id: 'education', title: 'Education' },
   { id: 'experience', title: 'Work history' },
-  { id: 'projects', title: 'Project explorations' },
   { id: 'ethos', title: 'Library ethos' },
 ];
 
@@ -90,22 +90,37 @@ const workHistory = [
   },
 ];
 
-const projectSummaries = [
+const explorationGroups = [
   {
-    title: 'Session-tracking tool for therapists',
-    scope: 'A dedicated tracking utility designed to assist practitioners with session scheduling, continuity notes, and client progress documentation.',
+    category: 'Natural Language Processing',
+    items: [
+      {
+        title: 'Language model fine-tuned on Hinglish forum conversations',
+        scope: 'An applied natural language processing project exploring domain adaptation and fine-tuning on conversational, code-switched Hindi-English online discourse.',
+      },
+    ],
   },
   {
-    title: 'Behavioural analysis platform using Instagram data',
-    scope: 'An exploratory analytical platform examining public interaction data, engagement patterns, and content consumption frequency.',
+    category: 'Behavioral & Interaction Systems',
+    items: [
+      {
+        title: 'Behavioural analysis platform using Instagram data',
+        scope: 'An exploratory analytical platform examining public interaction data, engagement patterns, and content consumption frequency.',
+      },
+      {
+        title: 'Doomscrolling pattern tracker',
+        scope: 'A behavioral observation tool investigating digital habit loops, passive media consumption triggers, and active screen-time duration.',
+      },
+    ],
   },
   {
-    title: 'Doomscrolling pattern tracker',
-    scope: 'A behavioral observation tool investigating digital habit loops, passive media consumption triggers, and active screen-time duration.',
-  },
-  {
-    title: 'Language model fine-tuned on Hinglish forum conversations',
-    scope: 'An applied natural language processing project exploring domain adaptation and fine-tuning on conversational, code-switched Hindi-English online discourse.',
+    category: 'Workflow Utilities',
+    items: [
+      {
+        title: 'Session-tracking tool for therapists',
+        scope: 'A dedicated tracking utility designed to assist practitioners with session scheduling, continuity notes, and client progress documentation.',
+      },
+    ],
   },
 ];
 ---
@@ -123,7 +138,7 @@ const projectSummaries = [
     </p>
   </div>
 
-  <div class="ps-body-grid" style="padding-top: 2rem;">
+  <div class="ps-body-grid ps-body-grid--about" style="padding-top: 2rem;">
     <article class="ps-article">
       {/* 1. Background */}
       <section id="background">
@@ -137,7 +152,95 @@ const projectSummaries = [
         </p>
       </section>
 
-      {/* 2. Current Training */}
+      {/* Mobile Table of Contents Disclosure (rendered after the beginning of the article on mobile) */}
+      <nav class="ps-toc-mobile" aria-label="Table of contents">
+        <details class="ps-toc-disclosure">
+          <summary class="ps-toc-summary">
+            <span>On this page</span>
+            <span class="ps-toc-summary-badge">7 sections</span>
+            <span class="ps-toc-summary-icon" aria-hidden="true">▾</span>
+          </summary>
+          <ol class="ps-toc-list">
+            {tocSections.map((section) => (
+              <li><a class="ps-touch-link" href={`#${section.id}`}>{section.title}</a></li>
+            ))}
+          </ol>
+        </details>
+      </nav>
+
+      {/* 2. Learning Workspace / Active Engineering Work */}
+      <section id="workspace">
+        <p class="ps-eyebrow">Learning Tools & Systems</p>
+        <h2>Learning workspace</h2>
+        <div class="ps-profile-entries">
+          <div class="ps-profile-entry">
+            <div class="ps-profile-entry-header">
+              <h3 class="ps-profile-entry-title">AI Engineer Command Center</h3>
+              <span class="ps-profile-entry-meta">Active Utility</span>
+            </div>
+            <p class="ps-profile-entry-org">Personal Learning & Progress Tracker</p>
+            <p class="ps-profile-entry-desc">
+              A personal learning tracker designed for curriculum planning, progress tracking, coding practice, project management, revision scheduling, resource indexing, journaling, and learning analytics.
+            </p>
+            <p class="ps-profile-entry-desc" style="margin-top: 0.75rem;">
+              Built with Vite, React, TypeScript, Tailwind CSS, and Firebase. This utility is an operational tracking workspace, not an AI model, LLM product, or AI-powered application.
+            </p>
+            <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: 0.88rem;">
+              <a class="ps-text-link ps-touch-link" href="/projects/ai-engineer-command-center/">View case study →</a>
+              <a class="ps-text-link ps-touch-link" href="https://ai-engineer-command-center-seven.vercel.app/" target="_blank" rel="noopener noreferrer">Live workspace ↗</a>
+              <a class="ps-text-link ps-touch-link" href="https://github.com/goutam-prusty/ai-engineer-command-center" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+            </div>
+          </div>
+
+          <div class="ps-profile-entry">
+            <div class="ps-profile-entry-header">
+              <h3 class="ps-profile-entry-title">Grounded Technical Docs RAG Assistant</h3>
+              <span class="ps-profile-entry-meta">In Development</span>
+            </div>
+            <p class="ps-profile-entry-org">Independent Engineering Project</p>
+            <p class="ps-profile-entry-desc">
+              An in-development retrieval-augmented generation (RAG) assistant designed to answer technical questions strictly from a controlled, version-pinned documentation corpus with source citations and explicit abstention when evidence is insufficient.
+            </p>
+            <p class="ps-profile-entry-desc" style="margin-top: 0.75rem;">
+              Currently at the Python/FastAPI service foundation stage. Retrieval, generation, citation validation, and evaluation components remain planned work and are not yet completed features. This application is actively in development and is not deployed or publicly available.
+            </p>
+            <div style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: 0.88rem;">
+              <a class="ps-text-link ps-touch-link" href="/projects/grounded-technical-docs-rag-assistant/">View case study →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Project Explorations */}
+      <section id="projects">
+        <p class="ps-eyebrow">Explorations</p>
+        <h2>Project explorations</h2>
+        <p class="ps-profile-intro">
+          Concise summaries of personal project explorations recorded in source documentation. These represent targeted software and data experiments rather than complete production case studies:
+        </p>
+        <div class="ps-exploration-groups">
+          {explorationGroups.map((group) => (
+            <div class="ps-exploration-group" style="margin-bottom: 1.5rem;">
+              <h3 class="ps-exploration-group-title" style="margin: 0 0 0.75rem; font-size: 1.05rem; font-weight: 600; color: var(--color-ink);">
+                {group.category}
+              </h3>
+              <div class="ps-profile-entries">
+                {group.items.map((proj) => (
+                  <div class="ps-profile-entry">
+                    <h4 class="ps-profile-entry-title" style="font-size: 1rem;">{proj.title}</h4>
+                    <p class="ps-profile-entry-desc">{proj.scope}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.92rem; color: var(--color-secondary);">
+          Structured case studies are published in the <a class="ps-text-link" href="/projects/">Projects library</a> as eligible projects meet verified documentation standards.
+        </p>
+      </section>
+
+      {/* 4. Current Training */}
       <section id="training">
         <p class="ps-eyebrow">Professional Development</p>
         <h2>Current training</h2>
@@ -156,30 +259,7 @@ const projectSummaries = [
         </div>
       </section>
 
-      {/* 3. Learning Workspace */}
-      <section id="workspace">
-        <p class="ps-eyebrow">Learning Tools & Systems</p>
-        <h2>Learning workspace</h2>
-        <div class="ps-profile-entry">
-          <div class="ps-profile-entry-header">
-            <h3 class="ps-profile-entry-title">AI Engineer Command Center</h3>
-            <span class="ps-profile-entry-meta">Active Utility</span>
-          </div>
-          <p class="ps-profile-entry-org">Personal Learning & Progress Tracker</p>
-          <p class="ps-profile-entry-desc">
-            A personal learning tracker designed for curriculum planning, progress tracking, coding practice, project management, revision scheduling, resource indexing, journaling, and learning analytics.
-          </p>
-          <p class="ps-profile-entry-desc" style="margin-top: 0.75rem;">
-            Built with Vite, React, TypeScript, Tailwind CSS, and Firebase. This utility is an operational tracking workspace, not an AI model, LLM product, or AI-powered application.
-          </p>
-          <div style="margin-top: 0.75rem; display: flex; gap: 1.25rem; font-size: 0.88rem;">
-            <a class="ps-text-link" href="https://ai-engineer-command-center-seven.vercel.app/" target="_blank" rel="noopener noreferrer">Live workspace ↗</a>
-            <a class="ps-text-link" href="https://github.com/goutam-prusty/ai-engineer-command-center" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Education */}
+      {/* 5. Education */}
       <section id="education">
         <p class="ps-eyebrow">Qualifications</p>
         <h2>Education</h2>
@@ -197,7 +277,7 @@ const projectSummaries = [
         </div>
       </section>
 
-      {/* 5. Work History */}
+      {/* 6. Work History */}
       <section id="experience">
         <p class="ps-eyebrow">Career</p>
         <h2>Work history</h2>
@@ -222,32 +302,12 @@ const projectSummaries = [
         </div>
       </section>
 
-      {/* 6. Personal Projects */}
-      <section id="projects">
-        <p class="ps-eyebrow">Explorations</p>
-        <h2>Project explorations</h2>
-        <p class="ps-profile-intro">
-          Concise summaries of personal project explorations recorded in source documentation. These represent targeted software and data experiments rather than complete production case studies:
-        </p>
-        <div class="ps-profile-entries">
-          {projectSummaries.map((proj) => (
-            <div class="ps-profile-entry">
-              <h3 class="ps-profile-entry-title">{proj.title}</h3>
-              <p class="ps-profile-entry-desc">{proj.scope}</p>
-            </div>
-          ))}
-        </div>
-        <p style="margin-top: 1.5rem; font-size: 0.92rem; color: var(--color-secondary);">
-          Structured case studies are published in the <a class="ps-text-link" href="/projects/">Projects library</a> as eligible projects meet verified documentation standards.
-        </p>
-      </section>
-
       {/* 7. Library Ethos */}
       <section id="ethos">
         <p class="ps-eyebrow">Methodology</p>
         <h2>Library ethos</h2>
         <p>
-          This website serves as an open, personal library for long-form research, strategic analysis, and systems inquiry. Every research paper and analytical essay is anchored in primary source citations, empirical data, and clear structural reasoning.
+          This website serves as an open, personal library for long-form research, strategic analysis, and systems inquiry. Alongside software and engineering projects, the site publishes long-form <a class="ps-text-link" href="/research/">research reports</a> and analytical <a class="ps-text-link" href="/writing/">writing</a> on artificial intelligence, computing systems, and physical constraints. Every document is anchored in primary source citations, empirical data, and clear structural reasoning.
         </p>
         <p>
           A strict boundary is maintained between verified credentials and planned learning areas. Inquiries and thoughtful discussions are always welcome via the <a class="ps-text-link" href="/contact/">contact page</a>.
@@ -255,7 +315,7 @@ const projectSummaries = [
       </section>
     </article>
 
-    {/* Table of Contents Sticky Aside */}
+    {/* Table of Contents Sticky Aside (Desktop) */}
     <aside class="ps-aside" aria-label="About page sections">
       <h2>On this page</h2>
       <ol>
