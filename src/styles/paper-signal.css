@@ -23,11 +23,12 @@
 .ps a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .22em; }
 .ps a:hover { text-decoration-thickness: .14em; }
 .ps :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; box-shadow: 0 0 0 7px var(--color-signal); }
+.ps main:focus:not(:focus-visible) { outline: none; box-shadow: none; }
 .ps-shell { width: min(calc(100% - 2 * var(--gutter)), var(--wide)); margin-inline: auto; }
 .ps-skip { position: absolute; z-index: 5; top: .5rem; left: .5rem; transform: translateY(-180%); padding: .65rem 1rem; background: var(--color-signal); color: var(--color-ink); }
 .ps-skip:focus { transform: translateY(0); }
 .ps-header { display: flex; min-height: 5.5rem; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--color-line); }
-.ps-wordmark { display: inline-grid; width: 2.5rem; height: 2.5rem; place-items: center; background: var(--color-ink); color: var(--color-surface) !important; font: 600 1.45rem/1 var(--font-display); text-decoration: none; }
+.ps-wordmark { display: inline-flex; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; padding-bottom: .22rem; background: var(--color-ink); color: var(--color-surface) !important; font: 600 1.45rem/1 var(--font-display); text-decoration: none; }
 .ps-wordmark span { color: var(--color-signal); }
 .ps-nav-menu { position: relative; }
 .ps-nav-menu summary { display: flex; min-height: 2.75rem; align-items: center; gap: .5rem; padding: .5rem .7rem; border: 1px solid var(--color-line); cursor: pointer; list-style: none; font-size: .9rem; font-weight: 650; }
@@ -103,6 +104,7 @@
 .ps-article { min-width: 0; max-width: var(--reading); }
 .ps-article > section { padding-block: 1.8rem; border-bottom: 1px solid var(--color-line); }
 .ps-article h2 { margin-top: .2rem; font-size: clamp(1.8rem, 3.5vw, 2.45rem); }
+.ps-article h2.ps-section-label { margin: 0 0 .5rem; color: var(--color-secondary); font: 700 .75rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
 .ps-article h3 { margin-top: 1.5rem; }
 .ps-article p, .ps-article li { color: #272b29; }
 .ps-article ul { padding-left: 1.25rem; }

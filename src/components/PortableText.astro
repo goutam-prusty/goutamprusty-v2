@@ -8,6 +8,11 @@ export interface Props {
 
 const { blocks = [] } = Astro.props;
 
+const formulaAltFallbacks: Record<string, string> = {
+  '/images/research/strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026/formula-1.webp':
+    'GRPO relative advantage and clipped surrogate objective formula',
+};
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -54,10 +59,11 @@ function slugify(text: string): string {
 
         if (child._type === 'inlineFormula') {
           const dims = (!child.dimensions?.width || !child.dimensions?.height) ? getImageDimensions(child.assetPath) : null;
+          const formulaAlt = child.alt || formulaAltFallbacks[child.assetPath] || "Mathematical formula";
           return (
             <img
               src={child.assetPath}
-              alt={child.alt || "Mathematical formula"}
+              alt={formulaAlt}
               width={child.dimensions?.width ?? dims?.width}
               height={child.dimensions?.height ?? dims?.height}
               class="inline-block max-w-full h-auto align-middle my-0.5"
@@ -225,11 +231,12 @@ function slugify(text: string): string {
     // 3. Formula Block (standalone)
     if (block._type === 'formulaBlock') {
       const dims = (!block.width || !block.height) ? getImageDimensions(block.assetPath) : null;
+      const formulaAlt = block.alt || block.label || formulaAltFallbacks[block.assetPath] || "Mathematical formula";
       return (
         <figure class="my-8 text-center p-6 bg-stone-50 border border-stone-200 rounded ps-figure">
           <img
             src={block.assetPath}
-            alt={block.label || "Mathematical formula"}
+            alt={formulaAlt}
             width={block.width ?? dims?.width}
             height={block.height ?? dims?.height}
             class="inline-block max-w-full h-auto"

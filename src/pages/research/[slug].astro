@@ -52,7 +52,7 @@ if (report?.publishedAt) {
   ogImage={ogImage}
   jsonLd={researchJsonLd}
 >
-  <header class="ps-page-head ps-article-head">
+  <div class="ps-page-head ps-article-head">
     <p class="ps-eyebrow">Research · {category}</p>
     <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">{title}</h1>
     <p class="ps-lede text-lg md:text-xl text-stone-700 leading-relaxed font-serif max-w-3xl mb-6">{summary}</p>
@@ -61,7 +61,7 @@ if (report?.publishedAt) {
       <span><strong>Reading time</strong> {readingTime}</span>
       <span><strong>ID</strong> {report?.workbookId || 'SAMPLE'}</span>
     </div>
-  </header>
+  </div>
 
   <div class="ps-body-grid max-w-4xl mx-auto my-8">
     <article class="ps-article">

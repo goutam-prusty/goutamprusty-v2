@@ -43,6 +43,7 @@ export interface Props {
   metric?: string | null;
   index?: number;
   featured?: boolean;
+  headingLevel?: 2 | 3;
   class?: string;
 }
 
@@ -60,6 +61,7 @@ const {
   demoUrl: propDemoUrl,
   metric: propMetric,
   index: propIndex,
+  headingLevel = 3,
   class: className = '',
 } = Astro.props;
 
@@ -142,19 +144,35 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     <p class="ps-kicker">Project · Case study</p>
   )}
 
-  <h3 class="ps-card-title">
-    {caseStudyHref ? (
-      <a
-        href={caseStudyHref}
-        class="ps-card-title-link"
-        aria-label={`Read case study: ${title}`}
-      >
-        {title}
-      </a>
-    ) : (
-      <span>{title}</span>
-    )}
-  </h3>
+  {headingLevel === 2 ? (
+    <h2 class="ps-card-title">
+      {caseStudyHref ? (
+        <a
+          href={caseStudyHref}
+          class="ps-card-title-link"
+          aria-label={`Read case study: ${title}`}
+        >
+          {title}
+        </a>
+      ) : (
+        <span>{title}</span>
+      )}
+    </h2>
+  ) : (
+    <h3 class="ps-card-title">
+      {caseStudyHref ? (
+        <a
+          href={caseStudyHref}
+          class="ps-card-title-link"
+          aria-label={`Read case study: ${title}`}
+        >
+          {title}
+        </a>
+      ) : (
+        <span>{title}</span>
+      )}
+    </h3>
+  )}
 
   {problemStatement && (
     <p class="ps-card-problem">{problemStatement}</p>

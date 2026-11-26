@@ -284,7 +284,7 @@ test('src/pages/projects/index.astro imports and integrates ProjectCard componen
   const source = fs.readFileSync(PROJECTS_INDEX_PATH, 'utf8');
   assert(source.includes("import ProjectCard from '../../components/ProjectCard.astro'"),
     'Projects page must import ProjectCard');
-  assert(source.includes('<ProjectCard project={project} index={idx} />'),
+  assert(source.includes('<ProjectCard project={project} index={idx}'),
     'Projects page must map data to ProjectCard');
   assert(source.includes('projects.length === 0 ?'),
     'Projects page must retain honest empty state condition');

@@ -12,11 +12,11 @@ const summary = 'Case studies, systems architecture, and engineering projects.';
   title="Projects — goutamprusty.com"
   description={summary}
 >
-  <header class="ps-page-head">
+  <div class="ps-page-head">
     <p class="ps-eyebrow">Projects · Systems & Engineering</p>
     <h1>{title}</h1>
     <p class="ps-lede">{summary}</p>
-  </header>
+  </div>
 
   <section class="ps-section" aria-label="Projects">
     {projects.length === 0 ? (
@@ -27,7 +27,7 @@ const summary = 'Case studies, systems architecture, and engineering projects.';
     ) : (
       <div class:list={['ps-project-grid', { 'ps-project-grid--single': projects.length === 1 }]}>
         {projects.map((project: any, idx: number) => (
-          <ProjectCard project={project} index={idx} />
+          <ProjectCard project={project} index={idx} headingLevel={2} />
         ))}
       </div>
     )}
