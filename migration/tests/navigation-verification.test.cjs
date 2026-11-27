@@ -106,12 +106,11 @@ test('Mobile navigation disclosure uses native <details>/<summary> structure', (
   assert(layoutSource.includes('<summary><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>'), 'Must use native <summary>');
 });
 
-test('Mobile menu contains Contact CTA inside <nav aria-label="Mobile navigation">', () => {
+test('Mobile menu avoids duplicate Contact CTA inside <nav aria-label="Mobile navigation">', () => {
   const mobileNavMatch = layoutSource.match(/<nav aria-label="Mobile navigation">([\s\S]*?)<\/nav>/);
   assert(mobileNavMatch, 'Mobile nav element must exist');
   const mobileNavContent = mobileNavMatch[1];
-  assert(mobileNavContent.includes('href="/contact/"'), 'Contact link must be inside mobile nav');
-  assert(mobileNavContent.includes('Get in touch <span aria-hidden="true">↗</span>'), 'Contact wording in mobile nav');
+  assert(!mobileNavContent.includes('href="/contact/"'), 'Contact link must not be duplicated inside mobile nav');
 });
 
 // -------------------------------------------------------------
@@ -158,9 +157,9 @@ test('dist/index.html: Correct link order, no active link for sub-pages, wordmar
   assert.deepStrictEqual(desktopLinks.map(l => l.href), ['/projects/', '/research/', '/writing/', '/about/']);
   assert(desktopLinks.every(l => l.ariaCurrent === null), 'No desktop link active on home');
 
-  // Mobile links: Projects, Research, Writing, About, Get in touch ↗
-  assert.deepStrictEqual(mobileLinks.map(l => l.text), ['Projects', 'Research', 'Writing', 'About', 'Get in touch ↗']);
-  assert.deepStrictEqual(mobileLinks.map(l => l.href), ['/projects/', '/research/', '/writing/', '/about/', '/contact/']);
+  // Mobile links: Projects, Research, Writing, About (Contact CTA is preserved in header)
+  assert.deepStrictEqual(mobileLinks.map(l => l.text), ['Projects', 'Research', 'Writing', 'About']);
+  assert.deepStrictEqual(mobileLinks.map(l => l.href), ['/projects/', '/research/', '/writing/', '/about/']);
   assert(mobileLinks.every(l => l.ariaCurrent === null), 'No mobile link active on home');
 });
 
@@ -228,10 +227,8 @@ test('dist/contact/index.html: Contact link has aria-current="page"', () => {
   assert(contactBtnMatch, 'Contact button exists in header');
   assert(contactBtnMatch[0].includes('aria-current="page"'), 'Desktop contact button has aria-current="page"');
 
-  // Mobile contact link inside <nav> has aria-current="page"
-  const activeMobile = mobileLinks.filter(l => l.ariaCurrent === 'page');
-  assert.strictEqual(activeMobile.length, 1);
-  assert.strictEqual(activeMobile[0].href, '/contact/');
+  // Mobile nav items should not be active on contact page
+  assert(mobileLinks.every(l => l.ariaCurrent === null));
 });
 
 test('dist/topics/index.html: Topics page builds cleanly and is absent from primary nav', () => {

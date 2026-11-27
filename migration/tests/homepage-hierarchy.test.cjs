@@ -76,12 +76,14 @@ test('Mobile layout puts primary hero content before decorative artwork in DOM',
 });
 
 test('Hero renders owner-approved AI engineering copy and hierarchy (T7)', () => {
-  assert(homeSource.includes('<p class="ps-eyebrow">AI engineer.</p>'), 'Eyebrow must be "AI engineer."');
+  assert(homeSource.includes('<p class="ps-eyebrow">AI Engineer</p>'), 'Eyebrow must be "AI Engineer"');
   assert(homeSource.includes('<h1 id="hero-title">Curiosity, made <em>useful.</em></h1>'), 'H1 must be "Curiosity, made useful."');
   assert(homeSource.includes('<p class="ps-hero-hook">Looking for signs of consciousness.</p>'), 'Hook must be "Looking for signs of consciousness."');
-  assert(homeSource.includes("I explore intelligence, computing, and the systems shaping emerging technology. Through research and hands-on software projects, I turn questions into things I can test, build, and improve. I believe there's always more to understand—and that's what keeps me curious."), 'Supporting copy must match approved T7-002 copy');
+  assert(homeSource.includes("I explore intelligence, computing, and the systems shaping emerging technology through research and hands-on software projects. I turn questions into things I can test, build, and improve. I believe there is always more to understand and that's what keeps me curious."), 'Supporting copy must match approved copy');
+  assert(!homeSource.includes("Through research and hands-on software projects,"), 'Must not contain old sentence split');
+  assert(!homeSource.includes("there's always more to understand"), 'Must not contain old contraction');
   assert(homeSource.includes('href="/projects/"'), 'Primary hero CTA must point to /projects/');
-  assert(homeSource.includes('View projects'), 'Primary hero CTA label must be View projects');
+  assert(homeSource.includes('View Projects'), 'Primary hero CTA label must be View Projects');
   assert(homeSource.includes('href="/about/"'), 'Secondary hero CTA must point to /about/');
   assert(!homeSource.includes('.pdf'), 'Hero must not include unverified resume PDF');
 });
@@ -135,7 +137,7 @@ test('Rendered section hierarchy follows exact order', () => {
 
 test('Hero primary CTA targets /projects/ directly', () => {
   assert(html.includes('href="/projects/"'), 'Hero primary CTA must point to /projects/');
-  assert(html.includes('View projects'), 'Hero primary CTA must read View projects');
+  assert(html.includes('View Projects'), 'Hero primary CTA must read View Projects');
 });
 
 test('Semantic heading hierarchy is valid', () => {
@@ -151,9 +153,11 @@ test('Semantic heading hierarchy is valid', () => {
 });
 
 test('Built HTML contains approved hero copy elements', () => {
-  assert(html.includes('AI engineer.'), 'Rendered HTML contains approved eyebrow');
+  assert(html.includes('AI Engineer'), 'Rendered HTML contains approved eyebrow');
   assert(html.includes('Looking for signs of consciousness.'), 'Rendered HTML contains supporting hook');
-  assert(html.includes("I explore intelligence, computing, and the systems shaping emerging technology. Through research and hands-on software projects, I turn questions into things I can test, build, and improve. I believe there's always more to understand—and that's what keeps me curious."), 'Rendered HTML contains approved T7-002 supporting copy');
+  assert(html.includes("I explore intelligence, computing, and the systems shaping emerging technology through research and hands-on software projects. I turn questions into things I can test, build, and improve. I believe there is always more to understand and that's what keeps me curious."), 'Rendered HTML contains approved supporting copy');
+  assert(!html.includes('Through research and hands-on software projects,'), 'Rendered HTML must not contain old sentence split');
+  assert(!html.includes("there's always more to understand"), 'Rendered HTML must not contain old contraction');
   assert(!html.includes('Research · Writing · Systems'), 'Rendered HTML does not contain obsolete eyebrow');
 });
 

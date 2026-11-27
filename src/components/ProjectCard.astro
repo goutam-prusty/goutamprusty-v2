@@ -82,8 +82,15 @@ const provenanceLabel: ProvenanceLabel | undefined = normalizeProvenanceLabel(ra
 
 // Status: normalize and resolve human-readable display label
 const rawStatus = propStatus || project?.status;
-const statusLabel = formatProjectStatus(rawStatus);
-const normalizedStatus = rawStatus ? rawStatus.trim().toLowerCase() : undefined;
+const baseStatusLabel = formatProjectStatus(rawStatus);
+const statusLabel = formatProjectStatus(rawStatus, {
+  _id: project?._id,
+  workbookId: project?.workbookId,
+  slug: slugString,
+}) ?? baseStatusLabel;
+const normalizedStatus = statusLabel
+  ? statusLabel.trim().toLowerCase().replace(/\s+/g, '-')
+  : undefined;
 
 // Stack tags: filter empty / non-string elements
 const rawStack = propTechStack || project?.techStack;

@@ -42,7 +42,7 @@ const title = project.title;
 const summary = project.summary;
 const rawCategory = typeof project.category === 'string' ? project.category.trim() : '';
 const category = rawCategory || 'Technology';
-const statusLabel = formatProjectStatus(project.status);
+const statusLabel = formatProjectStatus(project.status, project);
 const provenance = project.provenance;
 const role = project.role;
 const startDate = project.startDate;
@@ -93,20 +93,21 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
 >
   <div class="ps-page-head ps-article-head">
     {isLocalDraftPreview && (
-      <p class="mb-3 px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-stone-100 border border-stone-300 text-stone-800 rounded inline-block">
+      <p
+        class="mb-3 px-3 py-1.5 text-xs font-mono uppercase tracking-wider inline-block"
+        style="background: var(--color-sunken); border: 1px solid var(--color-line); color: var(--color-ink); border-radius: 2px;"
+      >
         Local Draft Preview · Not Published
       </p>
     )}
     <p class="ps-eyebrow">Project · {provenance || category}</p>
-    <h1 class="text-3xl md:text-5xl font-serif font-bold text-stone-900 tracking-tight leading-tight mt-2 mb-4">
-      {title}
-    </h1>
+    <h1>{title}</h1>
     {summary && (
-      <p class="ps-lede text-lg md:text-xl text-stone-700 leading-relaxed font-serif max-w-3xl mb-6">
+      <p class="ps-lede">
         {summary}
       </p>
     )}
-    <div class="ps-meta flex flex-wrap gap-4 text-xs font-mono text-stone-500 border-t border-stone-200 pt-3">
+    <div class="ps-meta" style="border-top: 1px solid var(--color-line); padding-top: 0.75rem;">
       {statusLabel && <span><strong>Status</strong> {statusLabel}</span>}
       {rawCategory && <span><strong>Category</strong> {rawCategory}</span>}
       {role && <span><strong>Role</strong> {role}</span>}
@@ -116,10 +117,13 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
     </div>
   </div>
 
-  <div class="ps-body-grid max-w-4xl mx-auto my-8">
+  <div class="my-8">
     <article class="ps-article">
       {coverSrc && (
-        <div class="my-8 rounded overflow-hidden border border-stone-200">
+        <div
+          class="my-8 overflow-hidden"
+          style="border: 1px solid var(--color-line); background: var(--color-surface); border-radius: 2px;"
+        >
           <img
             src={coverSrc}
             alt={coverImage.alt || title}
@@ -132,17 +136,20 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {hasLinks && (
-        <div class="my-6 p-4 bg-stone-50 border border-stone-200 rounded flex flex-wrap gap-3 items-center">
-          <span class="text-xs font-mono uppercase tracking-widest text-stone-500 mr-2">Links:</span>
+        <div
+          class="my-6 p-4 flex flex-wrap gap-3 items-center"
+          style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 2px;"
+        >
+          <span class="ps-eyebrow" style="margin: 0 0.25rem 0 0;">Links:</span>
           {links.live && (
             <a
               href={links.live}
               target="_blank"
               rel="noopener noreferrer"
-              style="color: #fafaf9;"
-              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-stone-900 text-stone-50 rounded hover:bg-stone-800 transition-colors"
+              class="ps-card-action ps-card-action--case-study"
             >
-              Live Deployment ↗
+              <span>Live Deployment</span>
+              <span class="ps-action-icon" aria-hidden="true">↗</span>
             </a>
           )}
           {links.repo && (
@@ -150,9 +157,10 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
               href={links.repo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-white text-stone-800 border border-stone-300 rounded hover:bg-stone-100 transition-colors"
+              class="ps-card-action"
             >
-              Repository ↗
+              <span>Repository</span>
+              <span class="ps-action-icon" aria-hidden="true">↗</span>
             </a>
           )}
           {links.demo && (
@@ -160,9 +168,10 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
               href={links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center text-xs font-mono font-medium px-3 py-1.5 bg-white text-stone-800 border border-stone-300 rounded hover:bg-stone-100 transition-colors"
+              class="ps-card-action"
             >
-              Demo ↗
+              <span>Demo</span>
+              <span class="ps-action-icon" aria-hidden="true">↗</span>
             </a>
           )}
         </div>
@@ -171,27 +180,31 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       {techStack.length > 0 && (
         <section class="my-6" aria-labelledby="project-tech-stack-heading">
           <h2 id="project-tech-stack-heading" class="ps-section-label">Technology Stack</h2>
-          <div class="flex flex-wrap gap-2">
+          <ul class="ps-card-stack" style="margin-top: 0.75rem; margin-bottom: 0;">
             {techStack.map((tech: string) => (
-              <span class="text-xs font-mono px-2.5 py-1 bg-stone-100 text-stone-800 rounded border border-stone-200">
+              <li class="ps-card-stack-tag">
                 {tech}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       )}
 
       {aiAttribution && (
-        <section class="my-8 p-4 bg-stone-50 border-l-4 border-stone-400 rounded-r text-stone-800" aria-labelledby="project-ai-disclosure-heading">
+        <section class="ps-note my-8" aria-labelledby="project-ai-disclosure-heading">
           <h2 id="project-ai-disclosure-heading" class="ps-section-label">AI-Assistance Disclosure</h2>
-          <p class="text-sm font-sans leading-relaxed">{aiAttribution}</p>
+          <p class="text-sm leading-relaxed" style="margin-bottom: 0;">{aiAttribution}</p>
         </section>
       )}
 
       {evaluationNotes && (
-        <section class="my-8 p-4 bg-stone-50 border border-stone-200 rounded text-stone-800" aria-labelledby="project-evaluation-heading">
+        <section
+          class="my-8 p-4"
+          style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 2px; color: var(--color-ink);"
+          aria-labelledby="project-evaluation-heading"
+        >
           <h2 id="project-evaluation-heading" class="ps-section-label">Evaluation &amp; Observations</h2>
-          <p class="text-sm font-sans leading-relaxed">{evaluationNotes}</p>
+          <p class="text-sm leading-relaxed" style="margin-bottom: 0;">{evaluationNotes}</p>
         </section>
       )}
 
@@ -202,18 +215,19 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {relatedResearch.length > 0 && (
-        <section class="mt-12 pt-8 border-t border-stone-200" aria-label="Related research">
-          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Related Research</p>
+        <section class="mt-12 pt-8" style="border-top: 1px solid var(--color-line);" aria-label="Related research">
+          <p class="ps-eyebrow" style="margin-bottom: 0.75rem;">Related Research</p>
           <div class="grid gap-4 sm:grid-cols-2">
             {relatedResearch.map((item: any) => {
               const itemSlug = item.slug?.current || item.slug;
               return (
                 <a
                   href={`/research/${itemSlug}/`}
-                  class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors"
+                  class="block p-4 transition-colors"
+                  style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 2px; text-decoration: none;"
                 >
-                  <h3 class="font-serif font-semibold text-stone-900 mb-1">{item.title}</h3>
-                  {item.summary && <p class="text-xs text-stone-600 line-clamp-2">{item.summary}</p>}
+                  <h3 style="margin-top: 0; font-size: 1.15rem;">{item.title}</h3>
+                  {item.summary && <p class="text-xs line-clamp-2" style="color: var(--color-secondary); margin-bottom: 0;">{item.summary}</p>}
                 </a>
               );
             })}
@@ -222,18 +236,19 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {relatedWriting.length > 0 && (
-        <section class="mt-12 pt-8 border-t border-stone-200" aria-label="Related writing">
-          <p class="text-xs font-mono text-stone-500 uppercase tracking-widest mb-2">Related Writing</p>
+        <section class="mt-12 pt-8" style="border-top: 1px solid var(--color-line);" aria-label="Related writing">
+          <p class="ps-eyebrow" style="margin-bottom: 0.75rem;">Related Writing</p>
           <div class="grid gap-4 sm:grid-cols-2">
             {relatedWriting.map((item: any) => {
               const itemSlug = item.slug?.current || item.slug;
               return (
                 <a
                   href={`/writing/${itemSlug}/`}
-                  class="block p-4 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded transition-colors"
+                  class="block p-4 transition-colors"
+                  style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 2px; text-decoration: none;"
                 >
-                  <h3 class="font-serif font-semibold text-stone-900 mb-1">{item.title}</h3>
-                  {item.summary && <p class="text-xs text-stone-600 line-clamp-2">{item.summary}</p>}
+                  <h3 style="margin-top: 0; font-size: 1.15rem;">{item.title}</h3>
+                  {item.summary && <p class="text-xs line-clamp-2" style="color: var(--color-secondary); margin-bottom: 0;">{item.summary}</p>}
                 </a>
               );
             })}
@@ -241,8 +256,8 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
         </section>
       )}
 
-      <nav class="mt-12 pt-6 border-t border-stone-200" aria-label="Project navigation">
-        <a href="/projects/" class="ps-text-link text-sm font-mono hover:underline">
+      <nav class="mt-12 pt-6" style="border-top: 1px solid var(--color-line);" aria-label="Project navigation">
+        <a href="/projects/" class="ps-text-link ps-touch-link text-sm font-mono hover:underline">
           ← Return to all projects
         </a>
       </nav>

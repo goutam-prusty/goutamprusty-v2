@@ -11,12 +11,82 @@ const projectId =
   proc?.env?.PUBLIC_SANITY_PROJECT_ID ||
   proc?.env?.SANITY_PROJECT_ID;
 
-const dataset =
-  env.PUBLIC_SANITY_DATASET ||
-  env.SANITY_DATASET ||
-  proc?.env?.PUBLIC_SANITY_DATASET ||
-  proc?.env?.SANITY_DATASET ||
-  'development';
+export interface ResolveDatasetOptions {
+  env?: Record<string, string | undefined>;
+  metaEnv?: Record<string, any>;
+  isDev?: boolean;
+  isProd?: boolean;
+}
+
+function getNonEmpty(val: unknown): string | undefined {
+  if (typeof val === 'string' && val.trim().length > 0) {
+    return val.trim();
+  }
+  return undefined;
+}
+
+/**
+ * Resolves the Sanity dataset name:
+ * 1. Explicit configuration takes precedence in strict four-tier order:
+ *    - import.meta.env.PUBLIC_SANITY_DATASET
+ *    - import.meta.env.SANITY_DATASET
+ *    - process.env.PUBLIC_SANITY_DATASET
+ *    - process.env.SANITY_DATASET
+ *    Whitespace-only or empty strings fall through to the next candidate.
+ * 2. In deployment/production build environments (Cloudflare Pages or production builds),
+ *    fails closed with a descriptive configuration error if no dataset is configured.
+ *    Production signals take strict precedence over any development signal.
+ * 3. In ordinary local development, defaults to 'development'.
+ */
+export function resolveSanityDataset(options?: ResolveDatasetOptions): string {
+  const p = (globalThis as any).process;
+  const meta =
+    options?.metaEnv !== undefined
+      ? options.metaEnv
+      : typeof import.meta !== 'undefined' && (import.meta as any).env
+        ? (import.meta as any).env
+        : {};
+
+  const procEnv =
+    options?.env !== undefined
+      ? options.env
+      : p?.env || {};
+
+  // Four-tier candidate evaluation
+  const configured =
+    getNonEmpty(meta.PUBLIC_SANITY_DATASET) ||
+    getNonEmpty(meta.SANITY_DATASET) ||
+    getNonEmpty(procEnv.PUBLIC_SANITY_DATASET) ||
+    getNonEmpty(procEnv.SANITY_DATASET);
+
+  if (configured) {
+    return configured;
+  }
+
+  // Production and deployment signal detection
+  const isCloudflarePages = Boolean(procEnv.CF_PAGES || meta.CF_PAGES);
+  const isProdBuild = Boolean(
+    options?.isProd ||
+    meta.PROD ||
+    meta.MODE === 'production' ||
+    procEnv.NODE_ENV === 'production' ||
+    procEnv.npm_lifecycle_event === 'build' ||
+    (Array.isArray(p?.argv) && p.argv.includes('build'))
+  );
+
+  // Production signals take strict precedence over any development signals
+  const requiresExplicitDataset = isCloudflarePages || isProdBuild;
+
+  if (requiresExplicitDataset) {
+    throw new Error(
+      '[CONFIGURATION ERROR] A Sanity dataset must be explicitly configured for production builds. Set SANITY_DATASET or PUBLIC_SANITY_DATASET.'
+    );
+  }
+
+  return 'development';
+}
+
+export const dataset = resolveSanityDataset();
 
 export interface SanityAuthResolution {
   token?: string;

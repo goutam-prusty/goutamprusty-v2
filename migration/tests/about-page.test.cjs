@@ -138,8 +138,21 @@ test('Accurately describes workspace purpose and documented tech stack', () => {
   assert(src.includes('Vite') && src.includes('React') && src.includes('TypeScript') && src.includes('Tailwind') && src.includes('Firebase'), 'Must state full tech stack');
 });
 
+test('Links AI Engineer Command Center to internal case study', () => {
+  assert(src.includes('href="/projects/ai-engineer-command-center/"'), 'Must link to /projects/ai-engineer-command-center/');
+});
+
 test('Explicitly disclaims being an AI model, LLM product, or AI-powered app', () => {
   assert(src.includes('not an AI model, LLM product, or AI-powered application') || src.includes('not an AI model'), 'Must disclaim being an AI model');
+});
+
+test('Introduces Grounded Technical Docs RAG Assistant with in-development status and accurate foundation', () => {
+  assert(src.includes('Grounded Technical Docs RAG Assistant'), 'Must include exact PRJ-005 name');
+  assert(src.includes('href="/projects/grounded-technical-docs-rag-assistant/"'), 'Must link to /projects/grounded-technical-docs-rag-assistant/');
+  assert(src.includes('In Development'), 'Must mark as In Development');
+  assert(src.includes('Python/FastAPI service foundation stage'), 'Must accurately describe foundation stage');
+  assert(src.includes('Retrieval, generation, citation validation, and evaluation components remain planned work') || src.includes('planned work'), 'Must state planned work');
+  assert(src.includes('not deployed or publicly available'), 'Must state application is not deployed or publicly available');
 });
 
 // -------------------------------------------------------------
@@ -215,6 +228,12 @@ test('Explicitly references the Projects library without pretending summaries ar
   assert(src.includes('represent targeted software and data experiments rather than complete production case studies'), 'Must disclaim complete case studies');
 });
 
+test('Groups four older project explorations under three approved thematic categories', () => {
+  assert(src.includes('Natural Language Processing'), 'Must include Natural Language Processing category');
+  assert(src.includes('Behavioral & Interaction Systems'), 'Must include Behavioral & Interaction Systems category');
+  assert(src.includes('Workflow Utilities'), 'Must include Workflow Utilities category');
+});
+
 // -------------------------------------------------------------
 // Suite 8: Negative Constraints & Deliberately Omitted Facts
 // -------------------------------------------------------------
@@ -274,6 +293,61 @@ test('Page defines table of contents aside navigation with all matching anchor I
   assert(src.includes('id="ethos"'), 'Must have #ethos section');
 });
 
+test('Sections follow approved target order: Background -> Workspace -> Projects -> Training -> Education -> Experience -> Ethos', () => {
+  const bgIndex = src.indexOf('id="background"');
+  const wsIndex = src.indexOf('id="workspace"');
+  const prIndex = src.indexOf('id="projects"');
+  const trIndex = src.indexOf('id="training"');
+  const edIndex = src.indexOf('id="education"');
+  const exIndex = src.indexOf('id="experience"');
+  const etIndex = src.indexOf('id="ethos"');
+
+  assert(bgIndex !== -1 && wsIndex !== -1 && prIndex !== -1 && trIndex !== -1 && edIndex !== -1 && exIndex !== -1 && etIndex !== -1, 'All section IDs must exist');
+  assert(bgIndex < wsIndex, '#background must appear before #workspace');
+  assert(wsIndex < prIndex, '#workspace must appear before #projects');
+  assert(prIndex < trIndex, '#projects must appear before #training (Master Plan K7)');
+  assert(trIndex < edIndex, '#training must appear before #education');
+  assert(edIndex < exIndex, '#education must appear before #experience');
+  assert(exIndex < etIndex, '#experience must appear before #ethos');
+});
+
+test('Mobile table of contents appears after beginning of article (#background) and before #workspace', () => {
+  const bgIndex = src.indexOf('id="background"');
+  const mobileTocIndex = src.indexOf('class="ps-toc-mobile"');
+  const wsIndex = src.indexOf('id="workspace"');
+
+  assert(mobileTocIndex !== -1, 'Must include ps-toc-mobile');
+  assert(bgIndex < mobileTocIndex, '#background must precede mobile TOC');
+  assert(mobileTocIndex < wsIndex, 'Mobile TOC must precede #workspace');
+});
+
+test('Library ethos section links to research, writing, and contact', () => {
+  const ethosSection = src.slice(src.indexOf('id="ethos"'));
+  assert(ethosSection.includes('href="/research/"'), 'Ethos must link to /research/');
+  assert(ethosSection.includes('href="/writing/"'), 'Ethos must link to /writing/');
+  assert(ethosSection.includes('href="/contact/"'), 'Ethos must link to /contact/');
+});
+
+test('About page markup scopes body-grid with .ps-body-grid--about', () => {
+  assert(src.includes('class="ps-body-grid ps-body-grid--about"'), 'About page must scope body grid with ps-body-grid--about');
+});
+
+test('About page mobile TOC disclosure exists and is hidden on desktop', () => {
+  assert(src.includes('class="ps-toc-mobile"'), 'About page must include ps-toc-mobile in markup');
+  assert(src.includes('class="ps-toc-disclosure"'), 'About page must include ps-toc-disclosure in markup');
+  assert(cssSource.includes('.ps-toc-mobile {\n  display: none;\n}') || cssSource.includes('.ps-toc-mobile { display: none; }') || cssSource.includes('.ps-toc-mobile {\r\n  display: none;\r\n}'), 'Must hide mobile TOC disclosure on desktop');
+});
+
+test('About page desktop aside is hidden only on mobile via scoped selector, not globally', () => {
+  assert(cssSource.includes('.ps-body-grid--about .ps-aside { display: none; }'), 'Must hide aside only when scoped to About page');
+  assert(cssSource.includes('.ps-aside { position: static; grid-row: 1; }'), 'Shared .ps-aside must preserve position: static; grid-row: 1 on mobile');
+  assert(!cssSource.includes('\n  .ps-aside { display: none; }') && !cssSource.includes('\r\n  .ps-aside { display: none; }'), 'Shared .ps-aside must NOT be globally display: none on mobile');
+});
+
+test('Desktop sticky aside styling remains intact', () => {
+  assert(cssSource.includes('.ps-aside { position: sticky; top: 1.25rem;'), 'Desktop aside must retain sticky styling');
+});
+
 test('CSS defines profile entry layout rules in Paper & Signal design tokens', () => {
   assert(cssSource.includes('.ps-profile-entry'), 'Must define .ps-profile-entry');
   assert(cssSource.includes('.ps-profile-entry-header'), 'Must define .ps-profile-entry-header');
@@ -294,9 +368,18 @@ test('Built dist/about/index.html renders verified facts when build exists', () 
     assert(html.includes('Intugine'), 'Built HTML contains Intugine');
     assert(html.includes('Brand Compass'), 'Built HTML contains Brand Compass');
     assert(html.includes('Session-tracking tool for therapists'), 'Built HTML contains project');
+    assert(html.includes('class="ps-body-grid ps-body-grid--about"'), 'Built HTML contains scoped body grid');
     assert(html.includes('DataMites AI Engineer Program'), 'Built HTML contains DataMites training');
     assert(html.includes('AI Engineer Command Center'), 'Built HTML contains workspace');
     assert(html.includes('https://ai-engineer-command-center-seven.vercel.app/'), 'Built HTML contains workspace live link');
+    assert(html.includes('href="/projects/ai-engineer-command-center/"'), 'Built HTML contains workspace case study link');
+    assert(html.includes('Grounded Technical Docs RAG Assistant'), 'Built HTML contains PRJ-005 title');
+    assert(html.includes('href="/projects/grounded-technical-docs-rag-assistant/"'), 'Built HTML contains PRJ-005 link');
+    assert(html.includes('Natural Language Processing'), 'Built HTML contains NLP category');
+    assert(html.includes('Behavioral &amp; Interaction Systems') || html.includes('Behavioral & Interaction Systems'), 'Built HTML contains behavioral category');
+    assert(html.includes('Workflow Utilities'), 'Built HTML contains workflow category');
+    assert(html.includes('href="/research/"'), 'Built HTML contains research link');
+    assert(html.includes('href="/writing/"'), 'Built HTML contains writing link');
     assert(!html.includes('deliberate and evidence-based'), 'Built HTML does not contain deliberate and evidence-based');
     assert(!html.includes('Certified AI Engineer'), 'Built HTML does not claim certificate');
   }
