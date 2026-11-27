@@ -3,7 +3,14 @@ import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayo
 import { getAllProjects } from '../../lib/sanityClient';
 import ProjectCard from '../../components/ProjectCard.astro';
 
-const projects = await getAllProjects();
+const allProjects = await getAllProjects();
+const projects = [...allProjects].sort((a: any, b: any) => {
+  const isACommandCenter = a.workbookId === 'PRJ-004' || a.slug?.current === 'ai-engineer-command-center' || a.slug === 'ai-engineer-command-center';
+  const isBCommandCenter = b.workbookId === 'PRJ-004' || b.slug?.current === 'ai-engineer-command-center' || b.slug === 'ai-engineer-command-center';
+  if (isACommandCenter && !isBCommandCenter) return -1;
+  if (!isACommandCenter && isBCommandCenter) return 1;
+  return 0;
+});
 const title = 'Projects';
 const summary = 'Case studies, systems architecture, and engineering projects.';
 ---

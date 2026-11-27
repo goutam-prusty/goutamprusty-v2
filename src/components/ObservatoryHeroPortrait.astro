@@ -1,0 +1,390 @@
+---
+/**
+ * Observatory Hero Portrait Component
+ * Paper & Signal × The Observatory
+ *
+ * Combines an architectural arch portrait frame with Observatory-inspired
+ * technical geometry, coordinates, and subtle motion.
+ * Automatically displays /images/portrait/goutam-prusty.webp when placed,
+ * or an editorial architectural placeholder until the photo is added.
+ */
+const proc = (globalThis as any).process;
+const fsModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('fs') : null;
+const pathModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('path') : null;
+
+const candidateExtensions = ['webp', 'jpg', 'jpeg', 'png'];
+let detectedPortraitPath: string | null = null;
+
+if (fsModule && pathModule && proc?.cwd) {
+  const portraitDir = pathModule.resolve(proc.cwd(), 'public/images/portrait');
+  for (const ext of candidateExtensions) {
+    const candidateFile = `goutam-prusty.${ext}`;
+    if (fsModule.existsSync(pathModule.join(portraitDir, candidateFile))) {
+      detectedPortraitPath = `/images/portrait/${candidateFile}`;
+      break;
+    }
+  }
+}
+---
+
+<div class="ps-observatory-hero" role="region" aria-label="Portrait and Observatory visual composition">
+  <!-- Calibration Coordinate Badge -->
+  <div class="ps-observatory-coords" aria-hidden="true">
+    <span class="ps-coord-dot"></span>
+    <span class="ps-coord-text">OBS // 12.9716° N · 77.5946° E</span>
+    <span class="ps-coord-sep">·</span>
+    <span class="ps-coord-tag">BENGALURU</span>
+  </div>
+
+  <div class="ps-observatory-frame-wrap">
+    <!-- Rotating Celestial Sighting Ring (CSS Animated, Reduced-Motion Safe) -->
+    <div class="ps-observatory-ring" aria-hidden="true">
+      <svg viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-ring-svg">
+        <circle cx="230" cy="230" r="222" stroke="#17191A" stroke-width="1" stroke-dasharray="3 7" opacity="0.65" />
+        <circle cx="230" cy="230" r="206" stroke="#827D71" stroke-width="0.8" stroke-dasharray="1 11" opacity="0.5" />
+        <!-- Quadrant tick marks -->
+        <line x1="230" y1="0" x2="230" y2="12" stroke="#17191A" stroke-width="1.5" />
+        <line x1="230" y1="448" x2="230" y2="460" stroke="#17191A" stroke-width="1.5" />
+        <line x1="0" y1="230" x2="12" y2="230" stroke="#17191A" stroke-width="1.5" />
+        <line x1="448" y1="230" x2="460" y2="230" stroke="#17191A" stroke-width="1.5" />
+        <!-- Marker pips -->
+        <circle cx="230" cy="8" r="3" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+        <circle cx="452" cy="230" r="3" fill="#17191A" />
+      </svg>
+    </div>
+
+    <!-- Background Geometric Accent Layers (Paper & Signal) -->
+    <div class="ps-observatory-accent-arch" aria-hidden="true"></div>
+    <div class="ps-observatory-accent-blue" aria-hidden="true"></div>
+
+    <!-- Architectural Arch Frame Container -->
+    <div class="ps-observatory-arch">
+      {detectedPortraitPath ? (
+        <img
+          src={detectedPortraitPath}
+          alt="Goutam Prusty — AI Engineer"
+          width="480"
+          height="600"
+          class="ps-observatory-photo"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      ) : (
+        <div class="ps-observatory-placeholder" aria-label="Professional portrait slot">
+          <svg class="ps-placeholder-grid" viewBox="0 0 360 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <pattern id="dotgrid" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="1" fill="#827D71" opacity="0.35" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dotgrid)" />
+
+            <circle cx="180" cy="180" r="85" stroke="#17191A" stroke-width="1" stroke-dasharray="4 4" opacity="0.6" />
+            <circle cx="180" cy="180" r="6" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+            <line x1="180" y1="80" x2="180" y2="98" stroke="#17191A" stroke-width="1.5" />
+            <line x1="180" y1="262" x2="180" y2="280" stroke="#17191A" stroke-width="1.5" />
+            <line x1="80" y1="180" x2="98" y2="180" stroke="#17191A" stroke-width="1.5" />
+            <line x1="262" y1="180" x2="280" y2="180" stroke="#17191A" stroke-width="1.5" />
+          </svg>
+
+          <div class="ps-placeholder-monogram" aria-hidden="true">
+            <span class="ps-mono-initials">GP</span>
+            <span class="ps-mono-role">AI ENGINEER</span>
+          </div>
+
+          <div class="ps-placeholder-slot-badge">
+            <span class="ps-slot-pip" aria-hidden="true"></span>
+            <span>PORTRAIT ASSET SLOT</span>
+            <code class="ps-slot-path">/images/portrait/goutam-prusty.webp</code>
+          </div>
+        </div>
+      )}
+
+      <!-- Fine Inner Optical Border -->
+      <div class="ps-arch-inner-border" aria-hidden="true"></div>
+    </div>
+
+    <!-- Signal Lime Telemetry Pip (Top Right) -->
+    <div class="ps-observatory-pip" aria-hidden="true" title="Signal Active">
+      <div class="ps-pip-core"></div>
+    </div>
+
+    <!-- Bottom Telemetry Label -->
+    <div class="ps-observatory-label" aria-hidden="true">
+      <span>SYS // PAPER & SIGNAL</span>
+      <span class="ps-label-accent">OBS.01</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ps-observatory-hero {
+    position: relative;
+    width: 100%;
+    max-width: 27rem;
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .ps-observatory-coords {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface);
+    border-radius: 2px;
+    font: 600 0.72rem/1.2 var(--font-mono);
+    color: var(--color-secondary);
+    letter-spacing: 0.04em;
+    align-self: flex-start;
+  }
+
+  .ps-coord-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-signal);
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+  }
+
+  .ps-coord-tag {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  .ps-observatory-frame-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 33rem;
+  }
+
+  /* Rotating Sighting Ring */
+  .ps-observatory-ring {
+    position: absolute;
+    inset: -3%;
+    z-index: 0;
+    pointer-events: none;
+    animation: ps-observatory-spin 90s linear infinite;
+  }
+
+  .ps-ring-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes ps-observatory-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Geometric Accent Layers */
+  .ps-observatory-accent-arch {
+    position: absolute;
+    inset: 5% -4% -2% 4%;
+    background: var(--color-project);
+    border: 1px solid var(--color-ink);
+    border-radius: 220px 220px 0 0;
+    z-index: 1;
+  }
+
+  .ps-observatory-accent-blue {
+    position: absolute;
+    bottom: -2%;
+    left: -6%;
+    width: 38%;
+    height: 24%;
+    background: var(--color-research);
+    border: 1px solid var(--color-ink);
+    border-radius: 100px 100px 0 0;
+    z-index: 1;
+  }
+
+  /* Architectural Arch Frame */
+  .ps-observatory-arch {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    background: var(--color-sunken);
+    border: 1.5px solid var(--color-ink);
+    border-radius: 200px 200px 0 0;
+    box-shadow: 0 10px 28px rgba(23, 25, 26, 0.08);
+  }
+
+  .ps-observatory-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 400ms ease;
+  }
+
+  .ps-observatory-arch:hover .ps-observatory-photo {
+    transform: scale(1.02);
+  }
+
+  /* Placeholder Styling */
+  .ps-observatory-placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 1.5rem 1.5rem;
+    background: linear-gradient(180deg, #F8F5ED 0%, #EBE6DA 100%);
+  }
+
+  .ps-placeholder-grid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .ps-placeholder-monogram {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 2rem;
+  }
+
+  .ps-mono-initials {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 6vw, 4.2rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    color: var(--color-ink);
+    line-height: 1;
+  }
+
+  .ps-mono-role {
+    font: 700 0.74rem/1.2 var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--color-secondary);
+  }
+
+  .ps-placeholder-slot-badge {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.55rem 0.85rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-ink);
+    border-radius: 2px;
+    font: 700 0.68rem/1.3 var(--font-mono);
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    text-align: center;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .ps-slot-pip {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--color-signal);
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+  }
+
+  .ps-slot-path {
+    font-size: 0.64rem;
+    color: var(--color-secondary);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .ps-arch-inner-border {
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(23, 25, 26, 0.15);
+    border-radius: 195px 195px 0 0;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  /* Signal Lime Pip */
+  .ps-observatory-pip {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    background: var(--color-signal);
+    border: 1.5px solid var(--color-ink);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    z-index: 5;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .ps-pip-core {
+    width: 8px;
+    height: 8px;
+    background: var(--color-ink);
+    border-radius: 50%;
+  }
+
+  /* Bottom Telemetry Label */
+  .ps-observatory-label {
+    position: absolute;
+    bottom: -10px;
+    right: 12px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.55rem;
+    background: var(--color-ink);
+    color: var(--color-surface);
+    border: 1px solid var(--color-ink);
+    font: 700 0.66rem/1.2 var(--font-mono);
+    letter-spacing: 0.06em;
+  }
+
+  .ps-label-accent {
+    color: var(--color-signal);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 52rem) {
+    .ps-observatory-hero {
+      max-width: 19rem;
+      justify-self: center;
+      margin-top: 1rem;
+    }
+    .ps-observatory-coords {
+      align-self: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ps-observatory-ring {
+      animation: none !important;
+    }
+    .ps-observatory-photo {
+      transition: none !important;
+    }
+  }
+</style>

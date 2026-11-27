@@ -19,7 +19,7 @@
 
 :root { color-scheme: light; font-family: var(--font-body); color: var(--color-ink); background: var(--color-paper); font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 .ps, .ps * { box-sizing: border-box; }
-.ps { --gutter: clamp(1.25rem, 5vw, 4.5rem); --wide: 76rem; --reading: 44rem; min-width: 0; min-height: 100vh; margin: 0; background: var(--color-paper); font-size: 1rem; line-height: 1.65; }
+.ps { --gutter: clamp(1.25rem, 5vw, 4.5rem); --wide: 76rem; --reading: 44rem; min-width: 0; min-height: 100vh; margin: 0; background: var(--color-paper); font-size: 1rem; line-height: 1.65; overflow-x: clip; }
 .ps a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .22em; }
 .ps a:hover { text-decoration-thickness: .14em; }
 .ps :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; box-shadow: 0 0 0 7px var(--color-signal); }
@@ -43,7 +43,7 @@
 .ps-nav-menu nav a[aria-current="page"] { background: var(--color-sunken); }
 .ps-contact-link { display: inline-flex; min-height: 2.75rem; align-items: center; padding: .65rem .9rem; background: var(--color-signal); border: 1px solid var(--color-ink); }
 .ps-contact-link span { padding-left: .25rem; }
-.ps-footer { margin-top: clamp(3.5rem, 8vw, 5.5rem); border-top: 1px solid var(--color-line); }
+.ps-footer { margin-top: clamp(3.5rem, 8vw, 5.5rem); border-top: 3px solid var(--color-ink); }
 .ps-footer:not(:has(.ps-footer-grid)) { display: flex; min-height: 6.5rem; align-items: center; justify-content: space-between; gap: 1rem; }
 .ps-footer:not(:has(.ps-footer-grid)) p { margin: 0; color: var(--color-secondary); font-size: .85rem; }
 .ps-footer p span { padding-inline: .35rem; }
@@ -74,7 +74,7 @@
 .ps-section-head h2 { margin: 0; }
 .ps-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
 .ps-project-card, .ps-card-project { display: flex; min-height: 23rem; flex-direction: column; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--color-line); background: var(--color-project); text-decoration: none; box-shadow: none; position: relative; }
-.ps-card-mark { display: grid; width: 4.25rem; height: 4.25rem; place-items: center; margin-bottom: auto; border: 1px solid var(--color-ink); border-radius: 50%; font: 1.5rem var(--font-display); background: var(--color-surface); }
+.ps-card-mark { display: grid; width: 3rem; height: 3rem; place-items: center; margin-bottom: auto; border: 1px solid var(--color-ink); border-radius: 50%; font: 600 1.15rem var(--font-display); background: var(--color-surface); flex-shrink: 0; }
 .ps-project-card h2, .ps-project-card h3 { max-width: 32ch; margin-top: 1.5rem; font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: 0; }
 .ps-project-card p { color: var(--color-secondary); }
 .ps-card-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin-top: auto; padding-top: .8rem; border-top: 1px solid var(--color-line); font: .72rem var(--font-mono); text-transform: uppercase; }
@@ -909,12 +909,18 @@
 }
 
 .ps-profile-entry-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 0.25rem 1rem;
+  gap: 0.25rem 1.25rem;
   margin-bottom: 0.25rem;
+}
+
+@media (max-width: 34rem) {
+  .ps-profile-entry-header {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
 }
 
 .ps-profile-entry-title {
@@ -1058,6 +1064,186 @@
 
 .ps-toc-list li a:hover {
   text-decoration-color: var(--color-ink);
+}
+
+/* ==========================================================================
+   Visual Upgrade Enhancements — Phase 1 & 2
+   ========================================================================== */
+
+/* Alternating Section Backgrounds (Visual Rhythm) */
+.ps-section--sunken {
+  background: var(--color-sunken);
+  border: 1px solid var(--color-line);
+  padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  margin-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* Editorial Lead Card for Odd-Numbered Archives (Eliminates Orphan 21st Card) */
+@media (min-width: 52.01rem) {
+  .ps-project-grid--archive > .ps-card-lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    column-gap: 2.5rem;
+    align-items: start;
+    min-height: 18rem;
+  }
+  .ps-project-grid--archive > .ps-card-lead .ps-card-top {
+    grid-column: 1 / -1;
+  }
+  .ps-project-grid--archive > .ps-card-lead .ps-kicker {
+    grid-column: 1 / -1;
+  }
+  .ps-project-grid--archive > .ps-card-lead h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    max-width: 36ch;
+  }
+  .ps-project-grid--archive > .ps-card-lead p {
+    font-size: 1.05rem;
+    max-width: 56ch;
+  }
+  .ps-project-grid--archive > .ps-card-lead .ps-card-foot {
+    grid-column: 1 / -1;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Technologies & Tools Section Enhancements */
+.ps-tech-header-note {
+  max-width: 34ch;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-secondary);
+  line-height: 1.5;
+  text-align: right;
+}
+@media (max-width: 48rem) {
+  .ps-tech-header-note {
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+}
+
+.ps-tech-grid {
+  align-items: start;
+}
+
+.ps-tech-card {
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.ps-tech-card:hover {
+  border-color: var(--color-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(23, 25, 26, 0.06);
+}
+
+/* 6 Subtle Distinct Group Tints (Paper & Signal Palette) */
+.ps-tech-card--core-ai {
+  background: var(--color-surface);
+  border-color: var(--color-ink);
+}
+.ps-tech-card--programming-data {
+  background: #fdfbf7;
+}
+.ps-tech-card--ml-nlp {
+  background: #edf3f8;
+}
+.ps-tech-card--gen-ai {
+  background: #faf2ea;
+}
+.ps-tech-card--rag-agents {
+  background: #edf5ec;
+}
+.ps-tech-card--deployment-prod {
+  background: #f4f0e6;
+}
+
+.ps-tech-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.ps-tech-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.15rem;
+}
+
+.ps-tech-number {
+  font: 700 0.76rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+}
+
+.ps-tech-symbol {
+  font-size: 0.85rem;
+  color: var(--color-ink);
+}
+
+.ps-tech-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.ps-tech-focus {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--color-secondary);
+  line-height: 1.4;
+}
+
+.ps-roadmap-tag--linked {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  border-color: var(--color-ink);
+  background: var(--color-surface);
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+.ps-roadmap-tag--linked:hover {
+  background: var(--color-sunken);
+  transform: translateY(-1px);
+}
+
+.ps-tag-project-pip {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font: 700 0.62rem/1 var(--font-mono);
+  border-radius: 2px;
+  border: 1px solid var(--color-ink);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Project Card Color Differentiation: PRJ-004 vs PRJ-005 */
+.ps-project-card[data-project-slug="grounded-technical-docs-rag-assistant"],
+.ps-card-project--rag {
+  background: var(--color-research);
+}
+
+.ps-project-card[data-project-slug="ai-engineer-command-center"],
+.ps-card-project--command-center {
+  background: var(--color-project);
+}
+
+/* Card Body Balance: Eliminates Dead-Zone Gap */
+.ps-card-content-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 @media (prefers-reduced-motion: reduce) { .ps, .ps * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }

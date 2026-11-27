@@ -2,6 +2,7 @@
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import { getAllWritingArticles } from '../../lib/sanityClient';
 import { getArticleReadingTime } from '../../lib/readingTime';
+import { formatCategoryLabel } from '../../lib/formatters';
 
 const articles = await getAllWritingArticles();
 
@@ -51,7 +52,7 @@ const getSlug = (item: any): string => {
   </div>
 
   <section class="ps-section" aria-label="Articles and essays">
-    <div class="ps-project-grid">
+    <div class:list={['ps-project-grid', 'ps-project-grid--archive', { 'ps-project-grid--single': articles.length === 1 }]}>
       {articles.map((article: any, idx: number) => {
         const slug = getSlug(article);
         const hasReadingTimeSource =
@@ -63,17 +64,23 @@ const getSlug = (item: any): string => {
           : undefined;
         const pubDate = formatPublicationDate(article.publishedAt);
         const metaParts = [readingTime, pubDate].filter(Boolean);
+        const isLead = articles.length % 2 !== 0 && idx === 0;
 
         return (
           <a
-            class="ps-project-card ps-card-editorial ps-card-writing"
+            class:list={[
+              'ps-project-card',
+              'ps-card-editorial',
+              'ps-card-writing',
+              { 'ps-card-lead': isLead },
+            ]}
             href={`/writing/${slug}/`}
           >
             <div class="ps-card-top">
               <span class="ps-card-mark" aria-hidden="true">
                 {String(idx + 1).padStart(2, '0')}
               </span>
-              <span class="ps-card-badge">{article.category || 'Strategic essay'}</span>
+              <span class="ps-card-badge">{formatCategoryLabel(article.category, 'Strategic essay')}</span>
             </div>
             {article.workbookId ? (
               <p class="ps-kicker">Writing · {article.workbookId}</p>

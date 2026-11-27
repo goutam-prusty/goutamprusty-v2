@@ -1,0 +1,141 @@
+---
+// Architectural schematic of the Grounded Technical Docs RAG Assistant pipeline
+---
+
+<div class="ps-card-visual" aria-hidden="true">
+  <svg
+    viewBox="0 0 640 220"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="ps-visual-svg"
+    role="img"
+    aria-label="Architecture diagram of Grounded Technical Docs RAG Assistant showing implemented foundations and planned stages"
+  >
+    <!-- Background surface -->
+    <rect width="640" height="220" fill="#F4F8FA" stroke="#17191A" stroke-width="1" />
+
+    <!-- Top telemetry header -->
+    <rect x="0" y="0" width="640" height="26" fill="#D2E0EA" stroke="#17191A" stroke-width="1" />
+    <circle cx="16" cy="13" r="4" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+    <text x="28" y="17" font-family="'Cascadia Code', Consolas, monospace" font-size="9.5" font-weight="700" fill="#17191A" letter-spacing="0.08em">PIPELINE // GROUNDED RAG ARCHITECTURE</text>
+    <rect x="440" y="6" width="188" height="15" fill="#EFEBDF" stroke="#17191A" stroke-width="0.8" rx="2" />
+    <text x="446" y="17" font-family="'Cascadia Code', Consolas, monospace" font-size="8" font-weight="700" fill="#17191A">PRJ-005 · IN DEVELOPMENT</text>
+
+    <!-- Stage 1: Implemented Foundation (Solid Box) -->
+    <g transform="translate(18, 42)">
+      <rect width="138" height="158" fill="#FDFCF8" stroke="#17191A" stroke-width="1.8" />
+      <rect width="138" height="24" fill="#17191A" />
+      <text x="8" y="16" font-family="'Cascadia Code', Consolas, monospace" font-size="8" font-weight="700" fill="#FDFCF8" letter-spacing="0.06em">01. FOUNDATION</text>
+
+      <!-- Completed status pill -->
+      <rect x="8" y="32" width="122" height="18" fill="#D3F03C" stroke="#17191A" stroke-width="0.8" rx="2" />
+      <text x="14" y="44" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">● IMPLEMENTED</text>
+
+      <!-- Details -->
+      <text x="8" y="66" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">• Python 3.12 (uv)</text>
+      <text x="8" y="80" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">• FastAPI Service</text>
+      <text x="8" y="94" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">• Pydantic v2 Models</text>
+      <text x="8" y="108" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">• HTTPX Async Client</text>
+      <text x="8" y="122" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="700" fill="#17191A">• Test Suite Active</text>
+
+      <line x1="8" y1="134" x2="130" y2="134" stroke="#D2E0EA" stroke-width="1" />
+      <text x="8" y="148" font-family="'Cascadia Code', Consolas, monospace" font-size="7" fill="#4A4F4C">SERVICE RUNTIME</text>
+    </g>
+
+    <!-- Connector 1 -> 2 -->
+    <g transform="translate(156, 114)">
+      <line x1="0" y1="0" x2="16" y2="0" stroke="#17191A" stroke-width="1.8" />
+      <polygon points="16,-3 21,0 16,3" fill="#17191A" />
+    </g>
+
+    <!-- Stage 2: Document Ingestion (In Development) -->
+    <g transform="translate(178, 42)">
+      <rect width="134" height="158" fill="#FDFCF8" stroke="#17191A" stroke-width="1.2" stroke-dasharray="4 2" />
+      <rect width="134" height="24" fill="#EFEBDF" stroke="#17191A" stroke-width="0.8" />
+      <text x="8" y="16" font-family="'Cascadia Code', Consolas, monospace" font-size="8" font-weight="700" fill="#17191A" letter-spacing="0.06em">02. INGESTION</text>
+
+      <!-- In-dev status pill -->
+      <rect x="8" y="32" width="118" height="18" fill="#EFEBDF" stroke="#827D71" stroke-width="0.8" rx="2" />
+      <text x="14" y="44" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" font-weight="600" fill="#4A4F4C">◌ IN DEVELOPMENT</text>
+
+      <!-- Details -->
+      <text x="8" y="66" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#4A4F4C">• Markdown Corpus</text>
+      <text x="8" y="80" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#4A4F4C">• Document Parser</text>
+      <text x="8" y="94" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#4A4F4C">• Chunk Windowing</text>
+      <text x="8" y="108" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#4A4F4C">• Metadata Tags</text>
+      <text x="8" y="122" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#4A4F4C">• Hashing & Cache</text>
+
+      <line x1="8" y1="134" x2="126" y2="134" stroke="#827D71" stroke-dasharray="2 2" />
+      <text x="8" y="148" font-family="'Cascadia Code', Consolas, monospace" font-size="7" fill="#827D71">DOC PROCESSING</text>
+    </g>
+
+    <!-- Connector 2 -> 3 -->
+    <g transform="translate(312, 114)">
+      <line x1="0" y1="0" x2="16" y2="0" stroke="#827D71" stroke-width="1.2" stroke-dasharray="2 2" />
+      <polygon points="16,-3 21,0 16,3" fill="#827D71" />
+    </g>
+
+    <!-- Stage 3: Retrieval & Vector Index (Planned) -->
+    <g transform="translate(334, 42)">
+      <rect width="134" height="158" fill="#FDFCF8" stroke="#827D71" stroke-width="1" stroke-dasharray="3 3" />
+      <rect width="134" height="24" fill="#F7F4EC" stroke="#827D71" stroke-width="0.8" />
+      <text x="8" y="16" font-family="'Cascadia Code', Consolas, monospace" font-size="8" font-weight="700" fill="#4A4F4C" letter-spacing="0.06em">03. RETRIEVAL</text>
+
+      <!-- Planned pill -->
+      <rect x="8" y="32" width="118" height="18" fill="#FDFCF8" stroke="#827D71" stroke-width="0.6" stroke-dasharray="2 2" rx="2" />
+      <text x="14" y="44" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">◌ PLANNED WORK</text>
+
+      <!-- Details -->
+      <text x="8" y="66" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Dense Embeddings</text>
+      <text x="8" y="80" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• BM25 Lexical Index</text>
+      <text x="8" y="94" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Hybrid Fusion</text>
+      <text x="8" y="108" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Cross-Encoder Rerank</text>
+      <text x="8" y="122" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Vector Store</text>
+
+      <line x1="8" y1="134" x2="126" y2="134" stroke="#827D71" stroke-dasharray="2 2" />
+      <text x="8" y="148" font-family="'Cascadia Code', Consolas, monospace" font-size="7" fill="#827D71">SEMANTIC SEARCH</text>
+    </g>
+
+    <!-- Connector 3 -> 4 -->
+    <g transform="translate(468, 114)">
+      <line x1="0" y1="0" x2="16" y2="0" stroke="#827D71" stroke-width="1.2" stroke-dasharray="2 2" />
+      <polygon points="16,-3 21,0 16,3" fill="#827D71" />
+    </g>
+
+    <!-- Stage 4: Grounded Synthesis & Verification (Planned) -->
+    <g transform="translate(490, 42)">
+      <rect width="132" height="158" fill="#FDFCF8" stroke="#827D71" stroke-width="1" stroke-dasharray="3 3" />
+      <rect width="132" height="24" fill="#F7F4EC" stroke="#827D71" stroke-width="0.8" />
+      <text x="8" y="16" font-family="'Cascadia Code', Consolas, monospace" font-size="8" font-weight="700" fill="#4A4F4C" letter-spacing="0.06em">04. GROUNDING</text>
+
+      <!-- Planned pill -->
+      <rect x="8" y="32" width="116" height="18" fill="#FDFCF8" stroke="#827D71" stroke-width="0.6" stroke-dasharray="2 2" rx="2" />
+      <text x="14" y="44" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">◌ PLANNED WORK</text>
+
+      <!-- Details -->
+      <text x="8" y="66" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Source Citations</text>
+      <text x="8" y="80" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Strict Abstention</text>
+      <text x="8" y="94" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Hallucination Guard</text>
+      <text x="8" y="108" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• MCP Interface</text>
+      <text x="8" y="122" font-family="'Cascadia Code', Consolas, monospace" font-size="7.5" fill="#827D71">• Automated Eval</text>
+
+      <line x1="8" y1="134" x2="124" y2="134" stroke="#827D71" stroke-dasharray="2 2" />
+      <text x="8" y="148" font-family="'Cascadia Code', Consolas, monospace" font-size="7" fill="#827D71">VERIFIED ANSWERS</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .ps-card-visual {
+    width: 100%;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .ps-visual-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 640 / 220;
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import { getAllResearchReports } from '../../lib/sanityClient';
+import { formatCategoryLabel } from '../../lib/formatters';
 
 const reports = await getAllResearchReports();
 
@@ -50,7 +51,7 @@ const getSlug = (item: any): string => {
   </div>
 
   <section class="ps-section" aria-label="Research reports">
-    <div class:list={['ps-project-grid', { 'ps-project-grid--single': reports.length === 1 }]}>
+    <div class:list={['ps-project-grid', 'ps-project-grid--archive', { 'ps-project-grid--single': reports.length === 1 }]}>
       {reports.map((report: any, idx: number) => {
         const slug = getSlug(report);
         const readingTime = report.lengthEstimateMinutes
@@ -58,17 +59,23 @@ const getSlug = (item: any): string => {
           : undefined;
         const pubDate = formatPublicationDate(report.publishedAt);
         const metaParts = [readingTime, pubDate].filter(Boolean);
+        const isLead = reports.length % 2 !== 0 && idx === 0;
 
         return (
           <a
-            class="ps-project-card ps-card-editorial ps-card-research"
+            class:list={[
+              'ps-project-card',
+              'ps-card-editorial',
+              'ps-card-research',
+              { 'ps-card-lead': isLead },
+            ]}
             href={`/research/${slug}/`}
           >
             <div class="ps-card-top">
               <span class="ps-card-mark" aria-hidden="true">
                 {String(idx + 1).padStart(2, '0')}
               </span>
-              <span class="ps-card-badge">{report.category || 'Research report'}</span>
+              <span class="ps-card-badge">{formatCategoryLabel(report.category, 'Research report')}</span>
             </div>
             {report.workbookId ? (
               <p class="ps-kicker">Research · {report.workbookId}</p>

@@ -8,12 +8,20 @@ import {
 import { getArticleReadingTime } from '../lib/readingTime';
 import ProjectCard from '../components/ProjectCard.astro';
 import TechnologiesTools from '../components/TechnologiesTools.astro';
+import ObservatoryHeroPortrait from '../components/ObservatoryHeroPortrait.astro';
 import { verifiedTechnologies } from '../data/technologies';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
-// Only eligible featured projects for homepage display
-const featuredProjects = allProjects.filter((p: any) => p.featured || p.legacyFeatured);
+// Only eligible featured projects for homepage display (PRJ-004 published leads over PRJ-005 in-dev)
+const sortedProjects = [...allProjects].sort((a: any, b: any) => {
+  const isACommandCenter = a.workbookId === 'PRJ-004' || a.slug?.current === 'ai-engineer-command-center' || a.slug === 'ai-engineer-command-center';
+  const isBCommandCenter = b.workbookId === 'PRJ-004' || b.slug?.current === 'ai-engineer-command-center' || b.slug === 'ai-engineer-command-center';
+  if (isACommandCenter && !isBCommandCenter) return -1;
+  if (!isACommandCenter && isBCommandCenter) return 1;
+  return 0;
+});
+const featuredProjects = sortedProjects.filter((p: any) => p.featured || p.legacyFeatured);
 
 // 2. Verified Research and Writing selections (preserved from existing homepage)
 const res018Slug = 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026';
@@ -73,13 +81,7 @@ const homeJsonLd = [
         <a class="ps-text-link" href="/about/">About Goutam <span aria-hidden="true">→</span></a>
       </div>
     </div>
-    <div class="ps-art" role="img" aria-label="Abstract geometric composition in peach, lime and blue representing inquiry and systems">
-      <div class="art-arch"></div>
-      <div class="art-circle"></div>
-      <div class="art-half"></div>
-      <div class="art-ring"></div>
-      <span class="ps-art-label" aria-hidden="true">PAPER / SIGNAL</span>
-    </div>
+    <ObservatoryHeroPortrait />
   </section>
 
   {/* 2. Featured Projects (Conditional: rendered only when verified eligible projects exist) */}
@@ -169,6 +171,6 @@ const homeJsonLd = [
       <h2 id="contact-title">Have a thoughtful question or discussion?</h2>
       <p>Whether discussing frontier research, technical methodology, or potential collaboration, genuine inquiries are welcome.</p>
     </div>
-    <a class="ps-button" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
+    <a class="ps-button" href="/contact/">Get in touch</a>
   </section>
 </ProductionPaperSignalLayout>
