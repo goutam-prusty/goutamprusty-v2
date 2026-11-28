@@ -313,6 +313,30 @@
   text-transform: uppercase;
   color: var(--color-secondary);
 }
+.ps-mobile-nav-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  font: 700 1rem/1 var(--font-mono);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.ps-mobile-nav-close-btn:hover {
+  border-color: var(--color-ink);
+  background: var(--color-sunken);
+}
+.ps-mobile-nav-close-btn:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--color-signal);
+}
 
 .ps-card-research { background: var(--color-research) !important; }
 .ps-card-writing { background: var(--color-writing) !important; }
@@ -1621,7 +1645,7 @@
 .ps-skill-cat-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* height: 100% removed — cards size to their content, no forced equal height */
   padding: 1.5rem;
   border: 1px solid var(--color-line);
   background: var(--color-surface);
@@ -1902,7 +1926,7 @@
 
 /* Chapter: Featured Projects — warm peach engineering atmosphere */
 .ps-section--chapter-projects {
-  background-color: rgba(244, 217, 198, 0.28);
+  background-color: rgba(244, 217, 198, 0.52);
   border-top: 1px solid rgba(244, 217, 198, 0.9);
   position: relative;
 }
@@ -1919,7 +1943,7 @@
 
 /* Chapter: Skills & Capabilities — cool sage technical atmosphere */
 .ps-section--chapter-skills {
-  background-color: rgba(213, 226, 208, 0.25);
+  background-color: rgba(213, 226, 208, 0.48);
   border-top: 1px solid rgba(213, 226, 208, 0.85);
   position: relative;
 }
@@ -1935,7 +1959,7 @@
 }
 /* Override the sunken background from the existing .ps-section--sunken when chapter class is applied */
 .ps-section--chapter-skills.ps-section--sunken {
-  background-color: rgba(213, 226, 208, 0.22);
+  background-color: rgba(213, 226, 208, 0.42);
   border: none;
   border-top: 1px solid rgba(213, 226, 208, 0.85);
   margin-block: 0;
@@ -1943,7 +1967,7 @@
 
 /* Chapter: Research & Writing — cool slate-blue scholarly atmosphere */
 .ps-section--chapter-research {
-  background-color: rgba(210, 224, 234, 0.22);
+  background-color: rgba(210, 224, 234, 0.46);
   border-top: 1px solid rgba(210, 224, 234, 0.8);
   position: relative;
 }
@@ -1975,7 +1999,8 @@
    inside chapter sections. */
 .ps-section--chapter-projects .ps-eyebrow::before,
 .ps-section--chapter-skills .ps-eyebrow::before,
-.ps-section--chapter-research .ps-eyebrow::before {
+.ps-section--chapter-research .ps-eyebrow::before,
+.ps-hero .ps-eyebrow::before {
   content: '◉';
   display: inline-block;
   margin-right: 0.45rem;
@@ -2032,9 +2057,13 @@
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  overflow: visible; /* Allow crosshair corner marks to extend beyond frame border */
   border: 1.5px solid var(--color-ink);
   background: var(--color-sunken);
+}
+/* Clip only the photo (not the decorative corner marks or compass overlay) */
+.ps-portrait-photo {
+  overflow: hidden; /* belt-and-suspenders: photo fills frame via object-fit:cover */
 }
 
 /* Crosshair registration marks — hairlines extending beyond frame corners */
@@ -2261,16 +2290,9 @@
 }
 
 /* ============================================================
-   SKILLS METRIC STRIP — positive framing reframe
+   SKILLS METRIC STRIP — all 3 items are positive; no de-emphasis needed
    ============================================================ */
-.ps-skills-stat-strip--positive .ps-stat-item:nth-child(3) .ps-stat-num {
-  font-size: 1.4rem;
-  color: var(--color-secondary);
-}
-.ps-skills-stat-strip--positive .ps-stat-item:nth-child(3) .ps-stat-label {
-  color: var(--color-secondary);
-  opacity: 0.75;
-}
+/* (De-emphasis rules removed — metric strip now has 3 positive stats only) */
 
 /* ============================================================
    PROJECT CARD VISUAL — enhanced prominence

@@ -103,6 +103,11 @@ const isActive = (href: string) => {
           <nav aria-label="Mobile navigation">
             <div class="ps-mobile-nav-close-row">
               <span class="ps-mobile-nav-heading">Navigation</span>
+              <button
+                class="ps-mobile-nav-close-btn"
+                aria-label="Close navigation menu"
+                onclick="this.closest('details').removeAttribute('open')"
+              >✕</button>
             </div>
             {nav.map((item) => (
               <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
