@@ -19,7 +19,7 @@
 
 :root { color-scheme: light; font-family: var(--font-body); color: var(--color-ink); background: var(--color-paper); font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 .ps, .ps * { box-sizing: border-box; }
-.ps { --gutter: clamp(1.25rem, 5vw, 4.5rem); --wide: 76rem; --reading: 44rem; min-width: 0; min-height: 100vh; margin: 0; background: var(--color-paper); font-size: 1rem; line-height: 1.65; overflow-x: clip; }
+.ps { --gutter: clamp(1.25rem, 5vw, 4.5rem); --wide: 76rem; --reading: 44rem; --reading-wide: 52rem; min-width: 0; min-height: 100vh; margin: 0; background: var(--color-paper); font-size: 1rem; line-height: 1.65; overflow-x: clip; }
 .ps a {
   color: inherit;
   text-decoration: none;
@@ -191,6 +191,24 @@
 .ps-visual-label { position: relative; z-index: 1; max-width: 14ch; padding: 1rem; background: var(--color-surface); border: 1px solid var(--color-ink); font: 700 .78rem/1.5 var(--font-mono); text-align: center; text-transform: uppercase; }
 .ps-body-grid { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
 .ps-article { min-width: 0; max-width: var(--reading); }
+
+/* Reading layout for single-column long-form articles (writing and research) */
+.ps-body-grid--reading {
+  display: block;
+  width: 100%;
+  max-width: var(--reading-wide, 52rem);
+  margin-inline: auto;
+}
+.ps-body-grid--reading .ps-article {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.ps-body-grid--reading .ps-article-content p,
+.ps-body-grid--reading .ps-article-content li,
+.ps-body-grid--reading .ps-article-content blockquote {
+  max-width: 70ch;
+}
 .ps-article > section { padding-block: 1.8rem; border-bottom: 1px solid var(--color-line); }
 .ps-article h2 { margin-top: .2rem; font-size: clamp(1.8rem, 3.5vw, 2.45rem); }
 .ps-article h2.ps-section-label { margin: 0 0 .5rem; color: var(--color-secondary); font: 700 .75rem/1.4 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
