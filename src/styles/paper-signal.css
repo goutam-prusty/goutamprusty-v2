@@ -345,7 +345,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+/* When a diagram visual immediately follows the badge row,
+   the border-top on ps-card-visual acts as the separator */
+.ps-card-top + .ps-card-visual {
+  margin-top: 0;
 }
 .ps-card-top .ps-card-mark {
   margin-bottom: 0;
@@ -2000,6 +2006,8 @@
 .ps-section--chapter-projects .ps-eyebrow::before,
 .ps-section--chapter-skills .ps-eyebrow::before,
 .ps-section--chapter-research .ps-eyebrow::before,
+.ps-section--chapter-about .ps-eyebrow::before,
+.ps-contact .ps-eyebrow::before,
 .ps-hero .ps-eyebrow::before {
   content: '◉';
   display: inline-block;
@@ -2295,16 +2303,18 @@
 /* (De-emphasis rules removed — metric strip now has 3 positive stats only) */
 
 /* ============================================================
-   PROJECT CARD VISUAL — enhanced prominence
-   Make SVG schematics the visual centrepiece of the card header
+   PROJECT CARD VISUAL — engineering diagram as full-width header
+   Bleeds to card edges horizontally; sits cleanly below badge row.
+   No upward negative margin — that caused overlap with ps-card-top.
    ============================================================ */
 .ps-card-visual {
   width: calc(100% + clamp(1.25rem, 3vw, 2rem) * 2);
   margin-left: calc(-1 * clamp(1.25rem, 3vw, 2rem));
   margin-right: calc(-1 * clamp(1.25rem, 3vw, 2rem));
-  margin-top: calc(-1 * clamp(1.25rem, 3vw, 2rem));
-  margin-bottom: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
   overflow: hidden;
+  border-top: 1px solid var(--color-ink);
   border-bottom: 1px solid var(--color-ink);
 }
 
