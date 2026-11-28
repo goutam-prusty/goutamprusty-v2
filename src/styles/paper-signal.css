@@ -47,6 +47,10 @@
   background-size: 0 0 !important;
   text-decoration: none !important;
 }
+.ps a.ps-project-card,
+.ps a.ps-card-editorial {
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+}
 .ps :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; box-shadow: 0 0 0 7px var(--color-signal); }
 .ps main:focus:not(:focus-visible) { outline: none; box-shadow: none; }
 .ps-shell { width: min(calc(100% - 2 * var(--gutter)), var(--wide)); margin-inline: auto; }
