@@ -7,9 +7,8 @@ import {
 } from '../lib/sanityClient';
 import { getArticleReadingTime } from '../lib/readingTime';
 import ProjectCard from '../components/ProjectCard.astro';
-import TechnologiesTools from '../components/TechnologiesTools.astro';
+import SkillsOverview from '../components/SkillsOverview.astro';
 import ObservatoryHeroPortrait from '../components/ObservatoryHeroPortrait.astro';
-import { verifiedTechnologies } from '../data/technologies';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -102,8 +101,8 @@ const homeJsonLd = [
     </section>
   )}
 
-  {/* 3. Verified Technologies & Tools */}
-  <TechnologiesTools data={verifiedTechnologies} id="technologies" />
+  {/* 3. Technical Skills Overview (Compact Recruiter-Focused Matrix) */}
+  <SkillsOverview id="skills-overview" />
 
   {/* 4. Research & Writing */}
   <section class="ps-section" id="research-writing" aria-labelledby="research-writing-title">

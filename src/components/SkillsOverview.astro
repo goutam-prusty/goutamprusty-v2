@@ -1,0 +1,89 @@
+---
+import { getHomepageOverviewData } from '../lib/skills';
+
+export interface Props {
+  id?: string;
+  class?: string;
+}
+
+const {
+  id = 'skills-overview',
+  class: className = '',
+} = Astro.props;
+
+const overviewData = getHomepageOverviewData();
+---
+
+<section class:list={['ps-section', 'ps-section--sunken', 'ps-skills-overview-section', className]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="ps-section-head">
+    <div>
+      <p class="ps-eyebrow">Engineering Capabilities</p>
+      <h2 id={`${id}-title`}>Technical Competencies &amp; Systems Focus</h2>
+    </div>
+    <p class="ps-tech-header-note">
+      55 technologies, frameworks and engineering concepts across projects, active development, research and structured learning.
+    </p>
+  </div>
+
+  <div class="ps-skills-matrix-grid">
+    {overviewData.map(({ category, representativeSkills }) => (
+      <div class="ps-skills-matrix-cell" aria-labelledby={`${id}-cat-${category.id}`}>
+        <div class="ps-matrix-cell-head">
+          <span class="ps-matrix-num" aria-hidden="true">{category.number}</span>
+          <h3 class="ps-matrix-cat-title" id={`${id}-cat-${category.id}`}>
+            {category.title}
+          </h3>
+        </div>
+
+        <ul class="ps-skill-tags-list" role="list">
+          {representativeSkills.map((skill) => {
+            const hasEvidence = skill.evidence && skill.evidence.length > 0;
+            const primaryEvidence = hasEvidence ? skill.evidence[0] : null;
+
+            return (
+              <li class="ps-skill-tag-item">
+                {hasEvidence && primaryEvidence ? (
+                  <a
+                    href={`/skills/${skill.id}/`}
+                    class="ps-skill-tag ps-skill-tag--evidence"
+                    title={`View evidence: ${primaryEvidence.badgeLabel}`}
+                  >
+                    <span>{skill.name}</span>
+                    <span
+                      class:list={[
+                        'ps-tag-pip',
+                        {
+                          'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
+                          'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
+                          'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
+                          'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
+                        },
+                      ]}
+                    >
+                      {primaryEvidence.badgeLabel}
+                    </span>
+                  </a>
+                ) : (
+                  <span class="ps-skill-tag ps-skill-tag--static">
+                    <span>{skill.name}</span>
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="ps-skills-overview-foot">
+    <div class="ps-skills-overview-cta">
+      <a class="ps-button" href="/skills/">
+        Explore Full Skills Directory (All 55 Technologies &amp; Evidence) <span aria-hidden="true">→</span>
+      </a>
+      <p class="ps-skills-cta-hint">
+        Clickable entries link to verified project repositories, active development endpoints, research papers, or technical articles. Display-only entries represent curriculum coursework and conceptual knowledge.
+      </p>
+    </div>
+  </div>
+</section>

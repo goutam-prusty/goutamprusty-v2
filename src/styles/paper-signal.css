@@ -20,8 +20,18 @@
 :root { color-scheme: light; font-family: var(--font-body); color: var(--color-ink); background: var(--color-paper); font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 .ps, .ps * { box-sizing: border-box; }
 .ps { --gutter: clamp(1.25rem, 5vw, 4.5rem); --wide: 76rem; --reading: 44rem; min-width: 0; min-height: 100vh; margin: 0; background: var(--color-paper); font-size: 1rem; line-height: 1.65; overflow-x: clip; }
-.ps a { color: inherit; text-decoration-thickness: .08em; text-underline-offset: .22em; }
-.ps a:hover { text-decoration-thickness: .14em; }
+.ps a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  transition: text-decoration-color 140ms ease, color 140ms ease;
+}
+.ps a:hover {
+  text-decoration-color: var(--color-ink);
+  text-decoration-thickness: 1.5px;
+}
 .ps :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; box-shadow: 0 0 0 7px var(--color-signal); }
 .ps main:focus:not(:focus-visible) { outline: none; box-shadow: none; }
 .ps-shell { width: min(calc(100% - 2 * var(--gutter)), var(--wide)); margin-inline: auto; }
@@ -62,7 +72,21 @@
 .ps-lede { max-width: 37rem !important; color: var(--color-secondary); font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
 .ps-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1.5rem; margin-top: 1.75rem; }
 .ps-button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .65rem; padding: .7rem 1rem; border: 1px solid var(--color-ink); background: var(--color-signal); color: var(--color-ink); font-weight: 700; text-decoration: none; }
-.ps-text-link { font-weight: 650; }
+.ps-text-link {
+  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.ps-text-link span[aria-hidden="true"],
+.ps-text-link span {
+  display: inline-block;
+  transition: transform 140ms ease;
+}
+.ps-text-link:hover span[aria-hidden="true"],
+.ps-text-link:hover span {
+  transform: translateX(2px);
+}
 .ps-art { position: relative; width: min(100%, 27rem); aspect-ratio: 1; justify-self: end; }
 .ps-art .art-arch { position: absolute; inset: 8% 10% 0; overflow: hidden; border: 1px solid var(--color-ink); border-radius: 50% 50% 0 0; background: var(--color-project); }
 .ps-art .art-circle { position: absolute; top: 2%; right: 0; width: 34%; aspect-ratio: 1; border: 1px solid var(--color-ink); border-radius: 50%; background: var(--color-signal); }
@@ -392,11 +416,19 @@
   align-items: start;
 }
 
-/* Mobile (< 37.5rem / 600px): Stacked single column */
+/* Mobile (< 37.5rem / 600px): Two columns */
 @media (max-width: 37.49rem) {
   .ps-footer-grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 1.25rem;
+  }
+  .ps-footer-brand {
+    grid-column: span 2;
+  }
+  .ps-footer-top-col {
+    grid-column: span 2;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--color-line);
   }
 }
 
@@ -411,15 +443,12 @@
   }
 }
 
-/* Desktop (>= 56.25rem / 900px): Compact, content-hugging balanced row */
+/* Desktop (>= 56.25rem / 900px): Spacious, balanced multi-column layout */
 @media (min-width: 56.25rem) {
   .ps-footer-grid {
-    grid-template-columns: minmax(15rem, 26rem) auto auto;
+    grid-template-columns: minmax(16rem, 26rem) auto auto auto;
     justify-content: space-between;
-    gap: 2rem 3rem;
-  }
-  .ps-footer-grid:has(.ps-footer-social-col) {
-    grid-template-columns: minmax(15rem, 26rem) auto auto auto;
+    gap: 2rem 3.5rem;
   }
   .ps-footer-top-col {
     justify-self: end;
@@ -1282,6 +1311,475 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+}
+
+/* ==========================================================================
+   Evidence-Driven Skills Directory & Evidence Detail Styling
+   ========================================================================== */
+
+.ps-skills-stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--color-line);
+}
+
+.ps-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ps-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.ps-stat-label {
+  font: 700 0.68rem/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+
+/* Skills Legend Panel */
+.ps-skills-legend-panel {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 2px;
+  margin-bottom: 2.5rem;
+}
+
+.ps-legend-title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ps-legend-desc {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: var(--color-secondary);
+  max-width: 65ch;
+  line-height: 1.5;
+}
+
+.ps-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  font: 500 0.76rem/1.3 var(--font-mono);
+  color: var(--color-secondary);
+}
+
+.ps-legend-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ps-legend-sample {
+  pointer-events: none;
+}
+
+/* Skills Directory Grid */
+.ps-skills-directory-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .ps-skills-directory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 72rem) {
+  .ps-skills-directory-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Compact Recruiter-First Skills Matrix (Homepage Section) */
+.ps-skills-overview-section {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.ps-skills-matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 42rem) {
+  .ps-skills-matrix-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 68rem) {
+  .ps-skills-matrix-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.ps-skills-matrix-cell {
+  display: flex;
+  flex-direction: column;
+  padding: 1.15rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  gap: 0.85rem;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.ps-skills-matrix-cell:hover {
+  border-color: var(--color-ink);
+  box-shadow: 0 3px 10px rgba(23, 25, 26, 0.05);
+}
+
+.ps-matrix-cell-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--color-line);
+}
+
+.ps-matrix-num {
+  font: 700 0.72rem/1 var(--font-mono);
+  color: var(--color-secondary);
+  letter-spacing: 0.06em;
+}
+
+.ps-matrix-cat-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+.ps-skills-overview-foot {
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--color-line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ps-skills-overview-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 58ch;
+}
+
+.ps-skills-cta-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--color-secondary);
+}
+
+.ps-skill-cat-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  border-radius: 2px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.ps-skill-cat-card:hover {
+  border-color: var(--color-ink);
+  box-shadow: 0 4px 14px rgba(23, 25, 26, 0.05);
+}
+
+.ps-skill-cat-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.ps-skill-cat-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.15rem;
+}
+
+.ps-skill-cat-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.ps-skill-cat-focus {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-secondary);
+  line-height: 1.45;
+}
+
+.ps-skill-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ps-skill-tag-item {
+  display: inline-flex;
+  min-width: 0;
+}
+
+/* Base Skill Tag */
+.ps-skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  min-height: 2.1rem;
+  border-radius: 2px;
+  font: 500 0.82rem/1.3 var(--font-body);
+  text-decoration: none !important;
+  box-sizing: border-box;
+}
+
+/* Evidence-Backed Skill (Clickable) */
+.ps-skill-tag--evidence {
+  cursor: pointer;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-ink);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.ps-skill-tag--evidence:hover {
+  transform: translateY(-1px);
+  background: var(--color-sunken);
+  box-shadow: 0 3px 8px rgba(23, 25, 26, 0.08);
+}
+
+/* Display-Only Skill (Static Text — NO pointer cursor, NO anchor, NO button) */
+.ps-skill-tag--static {
+  cursor: default !important;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  color: var(--color-secondary);
+  user-select: text;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.ps-skill-tag--static:hover {
+  background: var(--color-sunken);
+  color: var(--color-ink);
+}
+
+/* Tag Evidence Pip Badge */
+.ps-tag-pip {
+  display: inline-block;
+  padding: 0.12rem 0.38rem;
+  font: 700 0.62rem/1 var(--font-mono);
+  border-radius: 2px;
+  border: 1px solid var(--color-ink);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ps-tag-pip--published {
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+.ps-tag-pip--in-dev {
+  background: var(--color-research);
+  color: var(--color-ink);
+}
+
+.ps-tag-pip--research {
+  background: var(--color-project);
+  color: var(--color-ink);
+}
+
+.ps-tag-pip--writing {
+  background: var(--color-writing);
+  color: var(--color-ink);
+}
+
+/* Evidence Detail Page Styling (/skills/[slug]/) */
+.ps-breadcrumbs {
+  margin-bottom: 1.25rem;
+}
+
+.ps-back-link {
+  display: inline-flex;
+  align-items: center;
+  font: 600 0.8rem/1.3 var(--font-mono);
+  color: var(--color-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-line);
+  text-underline-offset: 0.25rem;
+  transition: color 140ms ease, text-decoration-color 140ms ease;
+}
+
+.ps-back-link:hover {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-ink);
+}
+
+.ps-evidence-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ps-evidence-card {
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-surface);
+  border-radius: 2px;
+  box-shadow: 0 4px 16px rgba(23, 25, 26, 0.05);
+}
+
+.ps-evidence-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.ps-evidence-badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.85rem;
+}
+
+.ps-evidence-type-tag {
+  font: 700 0.72rem/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.ps-evidence-status-tag {
+  font: 600 0.7rem/1.2 var(--font-mono);
+  color: var(--color-secondary);
+  padding: 0.1rem 0.4rem;
+  background: var(--color-sunken);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+}
+
+.ps-evidence-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.ps-evidence-content-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-line);
+  text-underline-offset: 0.25rem;
+  transition: text-decoration-color 140ms ease;
+}
+
+.ps-evidence-content-link:hover {
+  text-decoration-color: var(--color-ink);
+}
+
+.ps-evidence-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 48rem) {
+  .ps-evidence-body {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.ps-evidence-block {
+  padding: 1.25rem;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.ps-evidence-block--demonstrates {
+  border: 1px solid var(--color-ink);
+  background: #fdfdf9;
+  border-left: 4px solid var(--color-signal);
+}
+
+.ps-evidence-block--boundary {
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  border-left: 4px solid var(--color-line);
+}
+
+.ps-evidence-block-label {
+  margin: 0 0 0.5rem;
+  font: 700 0.72rem/1.3 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.ps-evidence-block p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #272b29;
+}
+
+.ps-evidence-footer {
+  padding-top: 0.5rem;
+}
+
+.ps-button--small {
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.84rem;
 }
 
 @media (prefers-reduced-motion: reduce) { .ps, .ps * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
