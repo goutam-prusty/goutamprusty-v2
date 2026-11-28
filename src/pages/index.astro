@@ -10,6 +10,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import SkillsOverview from '../components/SkillsOverview.astro';
 import ObservatoryHeroPortrait from '../components/ObservatoryHeroPortrait.astro';
 import EditorialCarousel from '../components/EditorialCarousel.astro';
+import { normalizeAssetPath } from '../lib/pathNormalizer';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -53,6 +54,12 @@ const blg1Length = getArticleReadingTime(blg001);
 const blg2Title = blg002?.title || "AI's Physical Limits";
 const blg2Summary = blg002?.summary || "Why energy, transmission, cooling, and silicon manufacturing — not algorithmic ceilings — represent the binding constraints on frontier AI expansion.";
 const blg2Length = getArticleReadingTime(blg002) || '11 min read';
+
+// Genuine Cover Image Resolution (Stage 2: Editorial Cover Cards)
+const res018Cover = res018?.coverImage?.assetPath ? normalizeAssetPath(res018.coverImage.assetPath) : null;
+const res004Cover = res004?.coverImage?.assetPath ? normalizeAssetPath(res004.coverImage.assetPath) : null;
+const blg001Cover = blg001?.coverImage?.assetPath ? normalizeAssetPath(blg001.coverImage.assetPath) : null;
+const blg002Cover = blg002?.coverImage?.assetPath ? normalizeAssetPath(blg002.coverImage.assetPath) : null;
 
 const homeJsonLd = [
   {
@@ -157,59 +164,215 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
       label="Research & Writing"
       totalSlides={4}
     >
-      <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res018Slug}/`}>
+      <a class="ps-project-card ps-card-editorial ps-card-research ps-card-journal" href={`/research/${res018Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">01</span>
-          <span class="ps-card-badge">Research report</span>
+          <div class="ps-card-badges">
+            <span class="ps-card-badge">Research report</span>
+          </div>
         </div>
-        <p class="ps-kicker">Research · RES-018 · July 2026</p>
-        <h3>{resTitle}</h3>
-        <p>{resSummary}</p>
+
+        <div class="ps-journal-cover" aria-hidden="true">
+          {res018Cover ? (
+            <img
+              src={res018Cover}
+              alt=""
+              class="ps-journal-cover-img"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="360"
+            />
+          ) : (
+            <div class="ps-journal-cover-fallback">
+              <svg viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-journal-fallback-svg" role="img" aria-label="Observatory figure fallback">
+                <rect width="640" height="360" fill="#FDFCF8" stroke="#17191A" stroke-width="1" />
+                <line x1="0" y1="180" x2="640" y2="180" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <line x1="320" y1="0" x2="320" y2="360" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <circle cx="320" cy="180" r="90" stroke="#17191A" stroke-width="1.2" fill="none" />
+                <circle cx="320" cy="180" r="60" stroke="#827D71" stroke-width="0.8" stroke-dasharray="2 3" fill="none" />
+                <circle cx="320" cy="180" r="4" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+                <text x="320" y="295" font-family="'Cascadia Code', Consolas, monospace" font-size="11" font-weight="700" fill="#4A4F4C" text-anchor="middle" letter-spacing="0.12em">FIELD BRIEFING ARCHIVE</text>
+              </svg>
+            </div>
+          )}
+          <div class="ps-journal-cover-overlay"></div>
+          <div class="ps-journal-cover-plate">
+            <span>FIG // 01 · RES-018</span>
+          </div>
+          <div class="ps-journal-cover-coord">
+            <span>OBS // 12.97° N</span>
+          </div>
+        </div>
+
+        <div class="ps-card-content-wrap">
+          <p class="ps-kicker">Research · RES-018 · July 2026</p>
+          <h3>{resTitle}</h3>
+          <p>{resSummary}</p>
+        </div>
+
         <span class="ps-card-foot">
           <span>{resLength} · {resCitations}</span>
-          <span aria-hidden="true">Read report</span>
+          <span class="ps-foot-action" aria-hidden="true">Read report <span class="ps-action-icon">→</span></span>
         </span>
       </a>
 
-      <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res004Slug}/`}>
+      <a class="ps-project-card ps-card-editorial ps-card-research ps-card-journal" href={`/research/${res004Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">02</span>
-          <span class="ps-card-badge">Research report</span>
+          <div class="ps-card-badges">
+            <span class="ps-card-badge">Research report</span>
+          </div>
         </div>
-        <p class="ps-kicker">Research · RES-004 · July 2026</p>
-        <h3>{res004Title}</h3>
-        <p>{res004Summary}</p>
+
+        <div class="ps-journal-cover" aria-hidden="true">
+          {res004Cover ? (
+            <img
+              src={res004Cover}
+              alt=""
+              class="ps-journal-cover-img"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="360"
+            />
+          ) : (
+            <div class="ps-journal-cover-fallback">
+              <svg viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-journal-fallback-svg" role="img" aria-label="Observatory figure fallback">
+                <rect width="640" height="360" fill="#FDFCF8" stroke="#17191A" stroke-width="1" />
+                <line x1="0" y1="180" x2="640" y2="180" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <line x1="320" y1="0" x2="320" y2="360" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <circle cx="320" cy="180" r="90" stroke="#17191A" stroke-width="1.2" fill="none" />
+                <circle cx="320" cy="180" r="60" stroke="#827D71" stroke-width="0.8" stroke-dasharray="2 3" fill="none" />
+                <circle cx="320" cy="180" r="4" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+                <text x="320" y="295" font-family="'Cascadia Code', Consolas, monospace" font-size="11" font-weight="700" fill="#4A4F4C" text-anchor="middle" letter-spacing="0.12em">FIELD BRIEFING ARCHIVE</text>
+              </svg>
+            </div>
+          )}
+          <div class="ps-journal-cover-overlay"></div>
+          <div class="ps-journal-cover-plate">
+            <span>FIG // 02 · RES-004</span>
+          </div>
+          <div class="ps-journal-cover-coord">
+            <span>OBS // 12.97° N</span>
+          </div>
+        </div>
+
+        <div class="ps-card-content-wrap">
+          <p class="ps-kicker">Research · RES-004 · July 2026</p>
+          <h3>{res004Title}</h3>
+          <p>{res004Summary}</p>
+        </div>
+
         <span class="ps-card-foot">
           <span>{res004Length} · {res004Citations}</span>
-          <span aria-hidden="true">Read report</span>
+          <span class="ps-foot-action" aria-hidden="true">Read report <span class="ps-action-icon">→</span></span>
         </span>
       </a>
 
-      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg001Slug}/`}>
+      <a class="ps-project-card ps-card-editorial ps-card-writing ps-card-journal" href={`/writing/${blg001Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">03</span>
-          <span class="ps-card-badge">Strategic essay</span>
+          <div class="ps-card-badges">
+            <span class="ps-card-badge">Strategic essay</span>
+          </div>
         </div>
-        <p class="ps-kicker">Writing · BLG-001 · July 2026</p>
-        <h3>{blg1Title}</h3>
-        <p>{blg1Summary}</p>
+
+        <div class="ps-journal-cover" aria-hidden="true">
+          {blg001Cover ? (
+            <img
+              src={blg001Cover}
+              alt=""
+              class="ps-journal-cover-img"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="360"
+            />
+          ) : (
+            <div class="ps-journal-cover-fallback">
+              <svg viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-journal-fallback-svg" role="img" aria-label="Observatory figure fallback">
+                <rect width="640" height="360" fill="#FDFCF8" stroke="#17191A" stroke-width="1" />
+                <line x1="0" y1="180" x2="640" y2="180" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <line x1="320" y1="0" x2="320" y2="360" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <circle cx="320" cy="180" r="90" stroke="#17191A" stroke-width="1.2" fill="none" />
+                <circle cx="320" cy="180" r="60" stroke="#827D71" stroke-width="0.8" stroke-dasharray="2 3" fill="none" />
+                <circle cx="320" cy="180" r="4" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+                <text x="320" y="295" font-family="'Cascadia Code', Consolas, monospace" font-size="11" font-weight="700" fill="#4A4F4C" text-anchor="middle" letter-spacing="0.12em">FIELD BRIEFING ARCHIVE</text>
+              </svg>
+            </div>
+          )}
+          <div class="ps-journal-cover-overlay"></div>
+          <div class="ps-journal-cover-plate">
+            <span>FIG // 03 · BLG-001</span>
+          </div>
+          <div class="ps-journal-cover-coord">
+            <span>OBS // 12.97° N</span>
+          </div>
+        </div>
+
+        <div class="ps-card-content-wrap">
+          <p class="ps-kicker">Writing · BLG-001 · July 2026</p>
+          <h3>{blg1Title}</h3>
+          <p>{blg1Summary}</p>
+        </div>
+
         <span class="ps-card-foot">
           <span>{blg1Length} · Derived from RES-018</span>
-          <span aria-hidden="true">Read article</span>
+          <span class="ps-foot-action" aria-hidden="true">Read article <span class="ps-action-icon">→</span></span>
         </span>
       </a>
 
-      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg002Slug}/`}>
+      <a class="ps-project-card ps-card-editorial ps-card-writing ps-card-journal" href={`/writing/${blg002Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">04</span>
-          <span class="ps-card-badge">Strategic essay</span>
+          <div class="ps-card-badges">
+            <span class="ps-card-badge">Strategic essay</span>
+          </div>
         </div>
-        <p class="ps-kicker">Writing · BLG-002 · July 2026</p>
-        <h3>{blg2Title}</h3>
-        <p>{blg2Summary}</p>
+
+        <div class="ps-journal-cover" aria-hidden="true">
+          {blg002Cover ? (
+            <img
+              src={blg002Cover}
+              alt=""
+              class="ps-journal-cover-img"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="360"
+            />
+          ) : (
+            <div class="ps-journal-cover-fallback">
+              <svg viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-journal-fallback-svg" role="img" aria-label="Observatory figure fallback">
+                <rect width="640" height="360" fill="#FDFCF8" stroke="#17191A" stroke-width="1" />
+                <line x1="0" y1="180" x2="640" y2="180" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <line x1="320" y1="0" x2="320" y2="360" stroke="#827D71" stroke-width="0.8" stroke-dasharray="4 4" />
+                <circle cx="320" cy="180" r="90" stroke="#17191A" stroke-width="1.2" fill="none" />
+                <circle cx="320" cy="180" r="60" stroke="#827D71" stroke-width="0.8" stroke-dasharray="2 3" fill="none" />
+                <circle cx="320" cy="180" r="4" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
+                <text x="320" y="295" font-family="'Cascadia Code', Consolas, monospace" font-size="11" font-weight="700" fill="#4A4F4C" text-anchor="middle" letter-spacing="0.12em">FIELD BRIEFING ARCHIVE</text>
+              </svg>
+            </div>
+          )}
+          <div class="ps-journal-cover-overlay"></div>
+          <div class="ps-journal-cover-plate">
+            <span>FIG // 04 · BLG-002</span>
+          </div>
+          <div class="ps-journal-cover-coord">
+            <span>OBS // 12.97° N</span>
+          </div>
+        </div>
+
+        <div class="ps-card-content-wrap">
+          <p class="ps-kicker">Writing · BLG-002 · July 2026</p>
+          <h3>{blg2Title}</h3>
+          <p>{blg2Summary}</p>
+        </div>
+
         <span class="ps-card-foot">
           <span>{blg2Length} · Energy, Heat &amp; Silicon</span>
-          <span aria-hidden="true">Read article</span>
+          <span class="ps-foot-action" aria-hidden="true">Read article <span class="ps-action-icon">→</span></span>
         </span>
       </a>
     </EditorialCarousel>

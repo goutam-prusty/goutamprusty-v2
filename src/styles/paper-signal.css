@@ -692,6 +692,208 @@ button.ps-button {
   }
 }
 
+/* ============================================================
+   Stage 2: Research & Writing Editorial Cover Cards
+   ============================================================ */
+.ps-card-journal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms ease,
+              border-color 220ms ease;
+  cursor: pointer;
+}
+
+/* Ensure kicker and h3 spacing is balanced when cover frame is present */
+.ps-card-journal .ps-kicker {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+}
+
+.ps-card-journal h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.ps-card-journal p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.ps-card-journal .ps-card-content-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
+/* Journal Cover Figure Window */
+.ps-journal-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--color-ink);
+  background-color: var(--color-sunken);
+}
+
+.ps-journal-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: blur(1.5px);
+  transform: scale(1.03);
+  transform-origin: center center;
+  transition: filter 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Restrained optical overlay */
+.ps-journal-cover-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 260ms ease, background 260ms ease;
+}
+
+/* Research specific cool tint */
+.ps-card-research .ps-journal-cover-overlay {
+  background: linear-gradient(180deg, rgba(210, 224, 234, 0.28) 0%, rgba(23, 25, 26, 0.18) 100%);
+}
+
+/* Writing specific sage/warm tint */
+.ps-card-writing .ps-journal-cover-overlay {
+  background: linear-gradient(180deg, rgba(213, 226, 208, 0.28) 0%, rgba(23, 25, 26, 0.18) 100%);
+}
+
+/* Observatory plate detail */
+.ps-journal-cover-plate {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  background: rgba(253, 252, 248, 0.94);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--color-ink);
+  font: 700 0.65rem/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  text-transform: uppercase;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ps-journal-cover-coord {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.45rem;
+  background: rgba(23, 25, 26, 0.88);
+  border: 1px solid rgba(253, 252, 248, 0.25);
+  font: 600 0.62rem/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: #fdfcf8;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Fallback cover styling */
+.ps-journal-cover-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface);
+  position: relative;
+}
+
+.ps-journal-fallback-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Hover & Focus state for Journal Cards on fine pointers */
+@media (hover: hover) and (pointer: fine) {
+  .ps-card-journal:hover,
+  .ps-card-journal:focus-visible {
+    border-color: var(--color-ink);
+    box-shadow: 0 8px 26px rgba(23, 25, 26, 0.09);
+    transform: translateY(-2px);
+  }
+
+  .ps-card-journal:hover .ps-journal-cover-img,
+  .ps-card-journal:focus-visible .ps-journal-cover-img {
+    filter: blur(0px);
+    transform: scale(1.01);
+  }
+
+  .ps-card-journal:hover .ps-journal-cover-overlay,
+  .ps-card-journal:focus-visible .ps-journal-cover-overlay {
+    opacity: 0.4;
+  }
+
+  .ps-card-journal:hover .ps-foot-action .ps-action-icon,
+  .ps-card-journal:focus-visible .ps-foot-action .ps-action-icon {
+    transform: translateX(3px);
+  }
+}
+
+/* Keyboard focus state (always accessible) */
+.ps-card-journal:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px var(--color-signal);
+}
+
+.ps-foot-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.ps-foot-action .ps-action-icon {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+/* Reduced motion support for Journal Cards */
+@media (prefers-reduced-motion: reduce) {
+  .ps-card-journal,
+  .ps-card-journal:hover,
+  .ps-card-journal:focus-visible {
+    transform: none !important;
+    transition: none !important;
+  }
+  .ps-journal-cover-img,
+  .ps-card-journal:hover .ps-journal-cover-img,
+  .ps-card-journal:focus-visible .ps-journal-cover-img {
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .ps-journal-cover-overlay {
+    transition: none !important;
+  }
+  .ps-foot-action .ps-action-icon {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 .ps-card-actions {
   display: flex;
   flex-wrap: wrap;
