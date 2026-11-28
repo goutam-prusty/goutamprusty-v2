@@ -1,0 +1,214 @@
+---
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import {
+  getEvidenceBackedSkills,
+  formatEvidenceClassification,
+  formatSkillProjectCount,
+  getSkillBadgeLabel,
+  type CanonicalSkill,
+  type EvidenceRecord,
+} from '../../lib/skills';
+import { CANONICAL_SKILLS, SKILL_CATEGORIES } from '../../data/skillsEvidenceRegistry';
+
+export async function getStaticPaths() {
+  const evidenceSkills = getEvidenceBackedSkills();
+  return evidenceSkills.map((skill) => ({
+    params: { slug: skill.id },
+    props: { skill },
+  }));
+}
+
+interface Props {
+  skill: CanonicalSkill;
+}
+
+const { skill } = Astro.props;
+
+if (!skill || !skill.evidence || skill.evidence.length === 0) {
+  return Astro.redirect('/404');
+}
+
+const primaryEvidence = skill.evidence[0];
+const category = SKILL_CATEGORIES.find((c) => c.id === skill.categoryId);
+const siblingSkills = category
+  ? category.skillIds
+      .map((id) => CANONICAL_SKILLS[id])
+      .filter((s): s is CanonicalSkill => Boolean(s && s.id !== skill.id))
+  : [];
+
+const pageTitle = `${skill.name} — Technical Capability & Evidence — Goutam Prusty`;
+const pageDescription = `Verified engineering evidence and implementation details for ${skill.name} in Goutam Prusty's portfolio.`;
+const projectCountText = formatSkillProjectCount(skill);
+
+function getContentHref(item: EvidenceRecord): string {
+  switch (item.contentType) {
+    case 'project':
+      return `/projects/${item.contentSlug}/`;
+    case 'research':
+      return `/research/${item.contentSlug}/`;
+    case 'writing':
+      return `/writing/${item.contentSlug}/`;
+    default:
+      return '/';
+  }
+}
+
+function getActionLabel(item: EvidenceRecord): string {
+  switch (item.contentType) {
+    case 'project':
+      return 'View Project Case Study →';
+    case 'research':
+      return 'Read Research Briefing →';
+    case 'writing':
+      return 'Read Technical Article →';
+    default:
+      return 'View Content →';
+  }
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: pageTitle,
+  description: pageDescription,
+  author: {
+    '@type': 'Person',
+    name: 'Goutam Prusty',
+    url: 'https://goutamprusty.com/',
+  },
+};
+---
+
+<ProductionPaperSignalLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonLd={jsonLd}
+>
+  <div class="ps-page-head">
+    <nav class="ps-breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="/skills/" class="ps-back-link">← Return to Skills Directory</a>
+    </nav>
+    <p class="ps-eyebrow">
+      {skill.categoryNumber}. {skill.categoryName} · {formatEvidenceClassification(primaryEvidence.classification)}
+    </p>
+    <h1>{skill.name}</h1>
+    <p class="ps-lede">{skill.focus}</p>
+
+    <div class="ps-meta" aria-label="Evidence status metadata">
+      <span>
+        Classification: <strong>{formatEvidenceClassification(primaryEvidence.classification)}</strong>
+      </span>
+      {projectCountText && (
+        <span class="ps-meta-item ps-meta-project-count">
+          Verified Projects: <strong>{projectCountText}</strong>
+        </span>
+      )}
+      <span>
+        Supporting sources: <strong>{skill.evidence.length} documented</strong>
+      </span>
+      <span>
+        Status: <strong>{primaryEvidence.status === 'published' ? 'Published' : 'In Development'}</strong>
+      </span>
+    </div>
+  </div>
+
+  <section class="ps-section" aria-labelledby="evidence-heading">
+    <div class="ps-section-head">
+      <div>
+        <p class="ps-eyebrow">Documented Ground Truth</p>
+        <h2 id="evidence-heading">Supporting Evidence &amp; Verification</h2>
+      </div>
+      <p class="ps-tech-header-note">
+        Direct references to published applications, active development repositories, research reports, or technical writing.
+      </p>
+    </div>
+
+    <div class="ps-evidence-entries">
+      {skill.evidence.map((item, idx) => (
+        <article class="ps-evidence-card" aria-labelledby={`evidence-title-${idx}`}>
+          <div class="ps-evidence-card-header">
+            <div class="ps-evidence-badge-group">
+              <span
+                class:list={[
+                  'ps-tag-pip',
+                  {
+                    'ps-tag-pip--published': item.classification === 'project_implementation',
+                    'ps-tag-pip--in-dev': item.classification === 'active_development',
+                    'ps-tag-pip--research': item.classification === 'research_evidence',
+                    'ps-tag-pip--writing': item.classification === 'technical_writing',
+                  },
+                ]}
+              >
+                {item.contentType === 'project' ? '1 project' : item.badgeLabel}
+              </span>
+              <span class="ps-evidence-type-tag">
+                {formatEvidenceClassification(item.classification)}
+              </span>
+              <span class="ps-evidence-status-tag">
+                {item.status === 'published' ? 'Published' : 'Active Development'}
+              </span>
+            </div>
+
+            <h3 class="ps-evidence-title" id={`evidence-title-${idx}`}>
+              <a href={getContentHref(item)} class="ps-evidence-content-link">
+                {item.contentTitle}
+              </a>
+            </h3>
+          </div>
+
+          <div class="ps-evidence-body">
+            <div class="ps-evidence-block ps-evidence-block--demonstrates">
+              <h4 class="ps-evidence-block-label">What this demonstrates</h4>
+              <p>{item.demonstrates}</p>
+            </div>
+
+            <div class="ps-evidence-block ps-evidence-block--boundary">
+              <h4 class="ps-evidence-block-label">What this does not demonstrate</h4>
+              <p>{item.doesNotDemonstrate}</p>
+            </div>
+          </div>
+
+          <div class="ps-evidence-footer">
+            <a href={getContentHref(item)} class="ps-button ps-button--small">
+              {getActionLabel(item)}
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  {siblingSkills.length > 0 && (
+    <section class="ps-section ps-section--sunken" aria-labelledby="siblings-heading">
+      <div class="ps-section-head">
+        <div>
+          <p class="ps-eyebrow">Category Context</p>
+          <h2 id="siblings-heading">Other Technologies in {skill.categoryName}</h2>
+        </div>
+      </div>
+      <ul class="ps-skill-tags-list" role="list">
+        {siblingSkills.map((sibling) => {
+          const hasEv = sibling.evidence && sibling.evidence.length > 0;
+          const badge = getSkillBadgeLabel(sibling);
+          return (
+            <li class="ps-skill-tag-item">
+              {hasEv ? (
+                <a
+                  href={`/skills/${sibling.id}/`}
+                  class="ps-skill-tag ps-skill-tag--evidence"
+                >
+                  <span>{sibling.name}</span>
+                  {badge && <span class="ps-tag-pip ps-tag-pip--in-dev">{badge}</span>}
+                </a>
+              ) : (
+                <span class="ps-skill-tag ps-skill-tag--static">
+                  <span>{sibling.name}</span>
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+</ProductionPaperSignalLayout>

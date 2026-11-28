@@ -1,9 +1,12 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
 import PortableText from '../../components/PortableText.astro';
+import CommandCenterVisual from '../../components/visuals/CommandCenterVisual.astro';
+import RagPipelineVisual from '../../components/visuals/RagPipelineVisual.astro';
 import { normalizeAssetPath } from '../../lib/pathNormalizer';
 import { getImageDimensions } from '../../lib/imageDimensions';
 import { formatProjectStatus } from '../../lib/projectCompatibility';
+import { formatCategoryLabel } from '../../lib/formatters';
 import {
   getAllProjectSlugs,
   getLocalDraftProjectPreview,
@@ -41,7 +44,7 @@ if (!project) {
 const title = project.title;
 const summary = project.summary;
 const rawCategory = typeof project.category === 'string' ? project.category.trim() : '';
-const category = rawCategory || 'Technology';
+const category = formatCategoryLabel(rawCategory, 'Technology');
 const statusLabel = formatProjectStatus(project.status, project);
 const provenance = project.provenance;
 const role = project.role;
@@ -65,6 +68,72 @@ const relatedWriting = Array.isArray(project.relatedWriting)
   ? project.relatedWriting.filter((item: any) => Boolean(item && (item.slug?.current || item.slug)))
   : [];
 const ogImage = coverImage?.assetPath ? normalizeAssetPath(coverImage.assetPath) : null;
+
+// PRJ-004 Video Asset Detection
+const isCommandCenter = slug === 'ai-engineer-command-center';
+const isRagAssistant = slug === 'grounded-technical-docs-rag-assistant';
+let commandCenterVideoSrc: { webm?: string; mp4?: string; poster?: string } | null = null;
+
+if (isCommandCenter) {
+  try {
+    const proc = (globalThis as any).process;
+    const fsModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('fs') : null;
+    const pathModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('path') : null;
+    if (fsModule && pathModule && proc?.cwd) {
+      const videoDir = pathModule.resolve(proc.cwd(), 'public/videos');
+      const webmExists = fsModule.existsSync(pathModule.join(videoDir, 'prj-004-command-center-demo.webm'));
+      const mp4Exists = fsModule.existsSync(pathModule.join(videoDir, 'prj-004-command-center-demo.mp4'));
+      const posterExists = fsModule.existsSync(pathModule.join(videoDir, 'prj-004-command-center-poster.webp'));
+      if (webmExists || mp4Exists) {
+        commandCenterVideoSrc = {
+          webm: webmExists ? '/videos/prj-004-command-center-demo.webm' : undefined,
+          mp4: mp4Exists ? '/videos/prj-004-command-center-demo.mp4' : undefined,
+          poster: posterExists ? '/videos/prj-004-command-center-poster.webp' : undefined,
+        };
+      }
+    }
+  } catch {
+    // build safety
+  }
+}
+
+// Table of Contents Item Builder
+const bodyHeadings = bodyBlocks
+  .filter((b: any) => b._type === 'block' && (b.style === 'h2' || b.style === 'h3'))
+  .map((b: any) => {
+    const text = b.children?.map((c: any) => c.text || '').join('') || '';
+    const id = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').trim();
+    return { id, title: text.trim(), level: b.style === 'h2' ? 2 : 3 };
+  })
+  .filter((h: any) => h.id && h.title);
+
+const tocItems: Array<{ id: string; title: string }> = [];
+if (isCommandCenter) {
+  tocItems.push({ id: 'project-workspace-schematic', title: 'Workspace Schematic' });
+  tocItems.push({ id: 'project-product-demonstration', title: 'Product Demonstration' });
+}
+if (isRagAssistant) {
+  tocItems.push({ id: 'project-architecture-pipeline', title: 'Architecture Pipeline' });
+}
+if (techStack.length > 0) {
+  tocItems.push({ id: 'project-tech-stack-heading', title: 'Technology Stack' });
+}
+if (aiAttribution) {
+  tocItems.push({ id: 'project-ai-disclosure-heading', title: 'AI-Assistance Disclosure' });
+}
+if (evaluationNotes) {
+  tocItems.push({ id: 'project-evaluation-heading', title: 'Evaluation & Observations' });
+}
+for (const h of bodyHeadings) {
+  tocItems.push({ id: h.id, title: h.title });
+}
+if (relatedResearch.length > 0) {
+  tocItems.push({ id: 'project-related-research', title: 'Related Research' });
+}
+if (relatedWriting.length > 0) {
+  tocItems.push({ id: 'project-related-writing', title: 'Related Writing' });
+}
+
 const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
   ? {
       '@context': 'https://schema.org',
@@ -109,7 +178,7 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
     )}
     <div class="ps-meta" style="border-top: 1px solid var(--color-line); padding-top: 0.75rem;">
       {statusLabel && <span><strong>Status</strong> {statusLabel}</span>}
-      {rawCategory && <span><strong>Category</strong> {rawCategory}</span>}
+      {rawCategory && <span><strong>Category</strong> {category}</span>}
       {role && <span><strong>Role</strong> {role}</span>}
       {provenance && <span><strong>Provenance</strong> {provenance}</span>}
       {dateDisplay && <span><strong>Timeline</strong> {dateDisplay}</span>}
@@ -117,8 +186,26 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
     </div>
   </div>
 
-  <div class="my-8">
+  <div class="ps-body-grid ps-body-grid--project" style="padding-top: 2rem;">
     <article class="ps-article">
+      {/* Mobile Table of Contents Disclosure */}
+      {tocItems.length > 0 && (
+        <nav class="ps-toc-mobile" aria-label="Table of contents">
+          <details class="ps-toc-disclosure">
+            <summary class="ps-toc-summary">
+              <span>On this page</span>
+              <span class="ps-toc-summary-badge">{tocItems.length} sections</span>
+              <span class="ps-toc-summary-icon" aria-hidden="true">▾</span>
+            </summary>
+            <ol class="ps-toc-list">
+              {tocItems.map((item) => (
+                <li><a class="ps-touch-link" href={`#${item.id}`}>{item.title}</a></li>
+              ))}
+            </ol>
+          </details>
+        </nav>
+      )}
+
       {coverSrc && (
         <div
           class="my-8 overflow-hidden"
@@ -133,6 +220,138 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
             loading="eager"
           />
         </div>
+      )}
+
+      {/* Schematic Architecture Visuals */}
+      {isCommandCenter && (
+        <section class="my-6" id="project-workspace-schematic" aria-labelledby="project-schematic-heading">
+          <h2 id="project-schematic-heading" class="ps-section-label">Workspace Architecture Schematic</h2>
+          <CommandCenterVisual />
+        </section>
+      )}
+
+      {isRagAssistant && (
+        <section class="my-6" id="project-architecture-pipeline" aria-labelledby="project-pipeline-heading">
+          <h2 id="project-pipeline-heading" class="ps-section-label">System Architecture Pipeline</h2>
+          <RagPipelineVisual />
+          <p class="text-xs text-[var(--color-secondary)] mt-2 font-mono">
+            System status: Implemented Python 3.12 / FastAPI foundation in solid stroke; planned retrieval & citation verification in dashed stroke.
+          </p>
+        </section>
+      )}
+
+      {/* Interface & Live Application Walkthrough for PRJ-004 */}
+      {isCommandCenter && (
+        <section class="my-8" id="project-product-demonstration" aria-labelledby="project-video-heading">
+          <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <div>
+              <h2 id="project-video-heading" class="ps-section-label" style="margin: 0;">Verified Interface & Application Views</h2>
+              <p class="text-xs text-[var(--color-secondary)] font-mono mt-0.5">
+                Authentic screen captures from the live deployment at ai-engineer-command-center-seven.vercel.app
+              </p>
+            </div>
+            {links.live && (
+              <a
+                href={links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ps-text-link text-xs font-mono"
+              >
+                Open live application ↗
+              </a>
+            )}
+          </div>
+
+          {commandCenterVideoSrc ? (
+            <div class="overflow-hidden border border-[var(--color-line)] bg-black rounded-sm shadow-sm mb-6">
+              <video
+                controls
+                preload="metadata"
+                poster={commandCenterVideoSrc.poster}
+                class="w-full h-auto aspect-video"
+              >
+                {commandCenterVideoSrc.webm && <source src={commandCenterVideoSrc.webm} type="video/webm" />}
+                {commandCenterVideoSrc.mp4 && <source src={commandCenterVideoSrc.mp4} type="video/mp4" />}
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+          ) : null}
+
+          {/* Featured Hero Screenshot */}
+          <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm mb-4">
+            <img
+              src="/images/projects/command-center/dashboard-overview.png"
+              alt="AI Engineer Command Center — Dashboard overview with 20-week curriculum roadmap and study room"
+              width="1440"
+              height="900"
+              class="w-full h-auto block"
+              loading="lazy"
+            />
+            <figcaption class="p-3 border-t border-[var(--color-line)] bg-[var(--color-sunken)] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[var(--color-secondary)]">
+              <span>VIEW 01 // MAIN WORKSPACE DASHBOARD & 20-WEEK CURRICULUM ROADMAP</span>
+              <span class="text-[var(--color-ink)] font-semibold">WEEK 1 ACTIVE</span>
+            </figcaption>
+          </figure>
+
+          {/* Sub-interface 2-column Grid */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/study-room.png"
+                alt="Weekly Study Room — Data Science Foundation module checklist and scope"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 02 // WEEKLY STUDY ROOM & SUBTOPICS
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/flashcards-revision.png"
+                alt="Interactive Flashcards deck with 46 active recall cards and spaced repetition tags"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 03 // ACTIVE RECALL FLASHCARDS (46 CARDS)
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/progress-analytics.png"
+                alt="Progress Analytics — Official curriculum completion curves and topic mastery"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 04 // COMPETENCY METRICS & STUDY ANALYTICS
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/learning-journal.png"
+                alt="Learning Journal — Structured engineering study reflection and bug logs"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 05 // STUDY REFLECTIONS & LOGGED NOTES
+              </figcaption>
+            </figure>
+          </div>
+        </section>
       )}
 
       {hasLinks && (
@@ -178,8 +397,8 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {techStack.length > 0 && (
-        <section class="my-6" aria-labelledby="project-tech-stack-heading">
-          <h2 id="project-tech-stack-heading" class="ps-section-label">Technology Stack</h2>
+        <section class="my-6" id="project-tech-stack-heading" aria-labelledby="project-tech-stack-heading">
+          <h2 class="ps-section-label">Technology Stack</h2>
           <ul class="ps-card-stack" style="margin-top: 0.75rem; margin-bottom: 0;">
             {techStack.map((tech: string) => (
               <li class="ps-card-stack-tag">
@@ -191,8 +410,8 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {aiAttribution && (
-        <section class="ps-note my-8" aria-labelledby="project-ai-disclosure-heading">
-          <h2 id="project-ai-disclosure-heading" class="ps-section-label">AI-Assistance Disclosure</h2>
+        <section class="ps-note my-8" id="project-ai-disclosure-heading" aria-labelledby="project-ai-disclosure-heading">
+          <h2 class="ps-section-label">AI-Assistance Disclosure</h2>
           <p class="text-sm leading-relaxed" style="margin-bottom: 0;">{aiAttribution}</p>
         </section>
       )}
@@ -200,10 +419,11 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       {evaluationNotes && (
         <section
           class="my-8 p-4"
+          id="project-evaluation-heading"
           style="background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 2px; color: var(--color-ink);"
           aria-labelledby="project-evaluation-heading"
         >
-          <h2 id="project-evaluation-heading" class="ps-section-label">Evaluation &amp; Observations</h2>
+          <h2 class="ps-section-label">Evaluation &amp; Observations</h2>
           <p class="text-sm leading-relaxed" style="margin-bottom: 0;">{evaluationNotes}</p>
         </section>
       )}
@@ -215,7 +435,7 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {relatedResearch.length > 0 && (
-        <section class="mt-12 pt-8" style="border-top: 1px solid var(--color-line);" aria-label="Related research">
+        <section class="mt-12 pt-8" id="project-related-research" style="border-top: 1px solid var(--color-line);" aria-label="Related research">
           <p class="ps-eyebrow" style="margin-bottom: 0.75rem;">Related Research</p>
           <div class="grid gap-4 sm:grid-cols-2">
             {relatedResearch.map((item: any) => {
@@ -236,7 +456,7 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
       )}
 
       {relatedWriting.length > 0 && (
-        <section class="mt-12 pt-8" style="border-top: 1px solid var(--color-line);" aria-label="Related writing">
+        <section class="mt-12 pt-8" id="project-related-writing" style="border-top: 1px solid var(--color-line);" aria-label="Related writing">
           <p class="ps-eyebrow" style="margin-bottom: 0.75rem;">Related Writing</p>
           <div class="grid gap-4 sm:grid-cols-2">
             {relatedWriting.map((item: any) => {
@@ -256,11 +476,129 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
         </section>
       )}
 
-      <nav class="mt-12 pt-6" style="border-top: 1px solid var(--color-line);" aria-label="Project navigation">
+      <nav class="mt-8 pt-4" aria-label="Project navigation">
         <a href="/projects/" class="ps-text-link ps-touch-link text-sm font-mono hover:underline">
           ← Return to all projects
         </a>
       </nav>
     </article>
+
+    {/* Sticky Desktop Aside (Table of Contents + Quick Facts) */}
+    {tocItems.length > 0 && (
+      <aside class="ps-aside ps-aside--project" aria-label="Project case study sections">
+        <div class="ps-aside-block">
+          <h2>Quick Facts</h2>
+          <div class="ps-aside-meta">
+            {statusLabel && (
+              <div class="ps-aside-meta-row">
+                <span class="ps-aside-meta-label">Status</span>
+                <span class="ps-aside-meta-val">{statusLabel}</span>
+              </div>
+            )}
+            <div class="ps-aside-meta-row">
+              <span class="ps-aside-meta-label">Category</span>
+              <span class="ps-aside-meta-val">{category}</span>
+            </div>
+            {provenance && (
+              <div class="ps-aside-meta-row">
+                <span class="ps-aside-meta-label">Provenance</span>
+                <span class="ps-aside-meta-val">{provenance}</span>
+              </div>
+            )}
+            {project.workbookId && (
+              <div class="ps-aside-meta-row">
+                <span class="ps-aside-meta-label">ID</span>
+                <span class="ps-aside-meta-val font-mono">{project.workbookId}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="ps-aside-block mt-5 pt-5" style="border-top: 1px solid var(--color-line);">
+          <h2>On this page</h2>
+          <ol class="ps-aside-toc-list">
+            {tocItems.map((item) => (
+              <li>
+                <a href={`#${item.id}`}>{item.title}</a>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {hasLinks && (
+          <div class="ps-aside-block mt-5 pt-5" style="border-top: 1px solid var(--color-line);">
+            <h2>Project Links</h2>
+            <div class="flex flex-col gap-2 mt-2">
+              {links.live && (
+                <a href={links.live} target="_blank" rel="noopener noreferrer" class="ps-card-action ps-card-action--case-study text-xs">
+                  <span>Live Deployment</span>
+                  <span class="ps-action-icon" aria-hidden="true">↗</span>
+                </a>
+              )}
+              {links.repo && (
+                <a href={links.repo} target="_blank" rel="noopener noreferrer" class="ps-card-action text-xs">
+                  <span>GitHub Repository</span>
+                  <span class="ps-action-icon" aria-hidden="true">↗</span>
+                </a>
+              )}
+              {links.demo && (
+                <a href={links.demo} target="_blank" rel="noopener noreferrer" class="ps-card-action text-xs">
+                  <span>Demo</span>
+                  <span class="ps-action-icon" aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </aside>
+    )}
   </div>
 </ProductionPaperSignalLayout>
+
+<style>
+  .ps-aside-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-top: 0.6rem;
+  }
+  .ps-aside-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+  }
+  .ps-aside-meta-label {
+    color: var(--color-secondary);
+    font-weight: 500;
+  }
+  .ps-aside-meta-val {
+    color: var(--color-ink);
+    font-weight: 600;
+    text-align: right;
+  }
+  .ps-aside-toc-list {
+    margin: 0.4rem 0 0;
+    padding-left: 1.15rem;
+    list-style: decimal;
+  }
+  .ps-aside-toc-list li {
+    margin-block: 0.25rem;
+    font-size: 0.84rem;
+  }
+  .ps-aside-toc-list li a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-line);
+    text-underline-offset: 0.2rem;
+  }
+  .ps-aside-toc-list li a:hover {
+    text-decoration-color: var(--color-ink);
+  }
+  @media (max-width: 52rem) {
+    .ps-aside--project {
+      display: none;
+    }
+  }
+</style>

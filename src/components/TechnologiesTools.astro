@@ -1,5 +1,5 @@
 ---
-import type { TechnologiesSectionData } from '../data/technologies';
+import type { TechnologiesSectionData, TechnologyItem } from '../data/technologies';
 
 export interface Props {
   data: TechnologiesSectionData;
@@ -12,30 +12,96 @@ const {
   id = 'technologies',
   class: className = '',
 } = Astro.props;
+
+function getItemName(item: string | TechnologyItem): string {
+  return typeof item === 'string' ? item : item.name;
+}
+
+function getItemProject(item: string | TechnologyItem): { slug: string; code: string } | null {
+  if (typeof item === 'object' && item.projectSlug && item.projectCode) {
+    return { slug: item.projectSlug, code: item.projectCode };
+  }
+  return null;
+}
 ---
 
-<section class:list={['ps-section', 'ps-technologies', className]} id={id} aria-labelledby={`${id}-title`}>
+<section class:list={['ps-section', 'ps-technologies', 'ps-section--sunken', className]} id={id} aria-labelledby={`${id}-title`}>
   <div class="ps-section-head">
     <div>
       <p class="ps-eyebrow">{data.eyebrow}</p>
       <h2 id={`${id}-title`}>{data.title}</h2>
     </div>
+    <p class="ps-tech-header-note">
+      55 technologies, frameworks and engineering concepts across projects, active development, research and structured learning.
+    </p>
   </div>
 
-  <div class="ps-roadmap-subgroups-grid">
-    {data.groups.map((group, idx) => (
-      <div class="ps-roadmap-subgroup" aria-labelledby={`${id}-group-${idx}`}>
-        <h3 class="ps-roadmap-subgroup-title" id={`${id}-group-${idx}`}>
-          {group.title}
-        </h3>
-        <ul class="ps-roadmap-list" role="list">
-          {group.items.map((item) => (
-            <li class="ps-roadmap-item">
-              <span class="ps-roadmap-tag--supporting">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+  <div class="ps-roadmap-subgroups-grid ps-tech-grid">
+    {data.groups.map((group, idx) => {
+      const isCore = group.id === 'core-ai';
+      return (
+        <div
+          class:list={[
+            'ps-roadmap-subgroup',
+            'ps-tech-card',
+            `ps-tech-card--${group.id}`,
+            { 'ps-tech-card--featured': isCore },
+          ]}
+          aria-labelledby={`${id}-group-${idx}`}
+        >
+          <div class="ps-tech-card-header">
+            <div class="ps-tech-card-meta">
+              <span class="ps-tech-number" aria-hidden="true">{group.number}</span>
+              <span class="ps-tech-symbol" aria-hidden="true">{group.symbol}</span>
+            </div>
+            <h3 class="ps-roadmap-subgroup-title ps-tech-title" id={`${id}-group-${idx}`}>
+              {group.title}
+            </h3>
+            {group.focus && (
+              <p class="ps-tech-focus">{group.focus}</p>
+            )}
+          </div>
+
+          <ul class:list={['ps-roadmap-list', { 'ps-roadmap-list--two-col': isCore }]} role="list">
+            {group.items.map((item) => {
+              const name = getItemName(item);
+              const project = getItemProject(item);
+              return (
+                <li class="ps-roadmap-item">
+                  {project ? (
+                    <a
+                      href={`/projects/${project.slug}/`}
+                      class="ps-roadmap-tag--supporting ps-roadmap-tag--linked"
+                      title={`Active in ${project.code}`}
+                    >
+                      <span>{name}</span>
+                      <span class="ps-tag-project-pip" aria-hidden="true">
+                        {project.code}
+                      </span>
+                    </a>
+                  ) : (
+                    <span class="ps-roadmap-tag--supporting">{name}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="ps-tech-legend" aria-hidden="true">
+    <span class="ps-tech-legend-item">
+      <span class="ps-tag-project-pip">PRJ-004 / PRJ-005</span> Active Project Evidence
+    </span>
+    <span class="ps-tech-legend-group">
+      <span class="ps-tech-legend-sep">·</span>
+      <span class="ps-tech-legend-item">Curriculum &amp; Empirical Research</span>
+    </span>
+    <span class="ps-tech-legend-group">
+      <span class="ps-tech-legend-sep">·</span>
+      <span class="ps-tech-legend-item">Conceptual &amp; Exploring</span>
+    </span>
   </div>
 </section>

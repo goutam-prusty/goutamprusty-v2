@@ -1,0 +1,140 @@
+---
+import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
+import { getCategoriesWithSkills, getAllSkills, getEvidenceBackedSkills, getSkillBadgeLabel } from '../../lib/skills';
+
+const categories = getCategoriesWithSkills();
+const allSkills = getAllSkills();
+const evidenceBackedSkills = getEvidenceBackedSkills();
+const totalCount = allSkills.length;
+const evidenceCount = evidenceBackedSkills.length;
+
+const pageTitle = 'Technical Skills Directory — Goutam Prusty';
+const pageDescription = '55 technologies, frameworks and engineering concepts across projects, active development, research and structured learning.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageTitle,
+  description: pageDescription,
+  url: 'https://goutamprusty.com/skills/',
+};
+---
+
+<ProductionPaperSignalLayout
+  title={pageTitle}
+  description={pageDescription}
+  jsonLd={jsonLd}
+>
+  <div class="ps-page-head">
+    <p class="ps-eyebrow">Capabilities &amp; Verification</p>
+    <h1>Technical Skills Directory</h1>
+    <p class="ps-lede">
+      55 technologies, frameworks and engineering concepts across projects, active development, research and structured learning.
+    </p>
+    <div class="ps-skills-stat-strip ps-skills-stat-strip--positive" aria-label="Skills directory summary">
+      <div class="ps-stat-item">
+        <span class="ps-stat-num">{totalCount}</span>
+        <span class="ps-stat-label">Technologies &amp; Concepts</span>
+      </div>
+      <div class="ps-stat-item">
+        <span class="ps-stat-num">{evidenceCount}</span>
+        <span class="ps-stat-label">Evidence-Backed</span>
+      </div>
+      <div class="ps-stat-item">
+        <span class="ps-stat-num">{categories.length}</span>
+        <span class="ps-stat-label">Core Domains</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="ps-section" aria-label="Skills taxonomy and evidence legend">
+    {/* Explicit Interaction & Evidence Legend */}
+    <div class="ps-skills-legend-panel">
+      <h2 class="ps-legend-title">Evidence Interaction Rules</h2>
+      <p class="ps-legend-desc">
+        A technology is clickable only when supported by verifiable project code, active development, empirical research, or analytical writing.
+      </p>
+      <div class="ps-legend-items">
+        <div class="ps-legend-entry">
+          <span class="ps-tag-pip ps-tag-pip--published">1 project</span>
+          <span>Published Project Implementation (Clickable)</span>
+        </div>
+        <div class="ps-legend-entry">
+          <span class="ps-tag-pip ps-tag-pip--in-dev">1 project</span>
+          <span>Active Development Foundation (Clickable)</span>
+        </div>
+        <div class="ps-legend-entry">
+          <span class="ps-tag-pip ps-tag-pip--research">Research</span>
+          <span>Empirical Research Briefing (Clickable)</span>
+        </div>
+        <div class="ps-legend-entry">
+          <span class="ps-tag-pip ps-tag-pip--writing">Analysis</span>
+          <span>Technical Writing Analysis (Clickable)</span>
+        </div>
+        <div class="ps-legend-entry">
+          <span class="ps-skill-tag ps-skill-tag--static ps-legend-sample">Sample</span>
+          <span>Coursework &amp; Conceptual (Display-Only)</span>
+        </div>
+      </div>
+    </div>
+
+    {/* 6 Engineering Categories Grid */}
+    <div class="ps-skills-directory-grid">
+      {categories.map((category) => (
+        <article class="ps-skill-cat-card" aria-labelledby={`cat-${category.id}`}>
+          <div class="ps-skill-cat-header">
+            <div class="ps-skill-cat-meta">
+              <span class="ps-tech-number" aria-hidden="true">{category.number}</span>
+              <span class="ps-tech-symbol" aria-hidden="true">{category.symbol}</span>
+            </div>
+            <h3 class="ps-skill-cat-title" id={`cat-${category.id}`}>
+              {category.title}
+            </h3>
+            <p class="ps-skill-cat-focus">{category.focus}</p>
+          </div>
+
+          <ul class="ps-skill-tags-list" role="list">
+            {category.skills.map((skill) => {
+              const hasEvidence = skill.evidence && skill.evidence.length > 0;
+              const primaryEvidence = hasEvidence ? skill.evidence[0] : null;
+              const badgeLabel = getSkillBadgeLabel(skill);
+
+              return (
+                <li class="ps-skill-tag-item">
+                  {hasEvidence && primaryEvidence ? (
+                    <a
+                      href={`/skills/${skill.id}/`}
+                      class="ps-skill-tag ps-skill-tag--evidence"
+                      aria-label={`${skill.name} — ${badgeLabel ? badgeLabel + ' · ' : ''}${primaryEvidence.classification.replace('_', ' ')}`}
+                    >
+                      <span class="ps-skill-name">{skill.name}</span>
+                      {badgeLabel && (
+                        <span
+                          class:list={[
+                            'ps-tag-pip',
+                            {
+                              'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
+                              'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
+                              'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
+                              'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
+                            },
+                          ]}
+                        >
+                          {badgeLabel}
+                        </span>
+                      )}
+                    </a>
+                  ) : (
+                    <span class="ps-skill-tag ps-skill-tag--static">
+                      <span class="ps-skill-name">{skill.name}</span>
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+</ProductionPaperSignalLayout>

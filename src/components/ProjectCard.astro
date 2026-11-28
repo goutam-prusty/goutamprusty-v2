@@ -1,5 +1,7 @@
 ---
 import { normalizeProvenanceLabel, formatProjectStatus, type ProvenanceLabel } from '../lib/projectCompatibility';
+import CommandCenterVisual from './visuals/CommandCenterVisual.astro';
+import RagPipelineVisual from './visuals/RagPipelineVisual.astro';
 
 export interface ProjectCardData {
   _id?: string;
@@ -119,9 +121,12 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     'ps-project-card',
     'ps-card-editorial',
     'ps-card-project',
+    { 'ps-card-project--rag': slugString === 'grounded-technical-docs-rag-assistant' },
+    { 'ps-card-project--command-center': slugString === 'ai-engineer-command-center' },
     className,
   ]}
   data-project-card
+  data-project-slug={slugString}
 >
   <div class="ps-card-top">
     {markNumber ? (
@@ -145,60 +150,69 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     </div>
   </div>
 
-  {workbookId ? (
-    <p class="ps-kicker">Project · {workbookId}</p>
-  ) : (
-    <p class="ps-kicker">Project · Case study</p>
+  {slugString === 'ai-engineer-command-center' && (
+    <CommandCenterVisual />
+  )}
+  {slugString === 'grounded-technical-docs-rag-assistant' && (
+    <RagPipelineVisual />
   )}
 
-  {headingLevel === 2 ? (
-    <h2 class="ps-card-title">
-      {caseStudyHref ? (
-        <a
-          href={caseStudyHref}
-          class="ps-card-title-link"
-          aria-label={`Read case study: ${title}`}
-        >
-          {title}
-        </a>
-      ) : (
-        <span>{title}</span>
-      )}
-    </h2>
-  ) : (
-    <h3 class="ps-card-title">
-      {caseStudyHref ? (
-        <a
-          href={caseStudyHref}
-          class="ps-card-title-link"
-          aria-label={`Read case study: ${title}`}
-        >
-          {title}
-        </a>
-      ) : (
-        <span>{title}</span>
-      )}
-    </h3>
-  )}
+  <div class="ps-card-content-wrap">
+    {workbookId ? (
+      <p class="ps-kicker">Project · {workbookId}</p>
+    ) : (
+      <p class="ps-kicker">Project · Case study</p>
+    )}
 
-  {problemStatement && (
-    <p class="ps-card-problem">{problemStatement}</p>
-  )}
+    {headingLevel === 2 ? (
+      <h2 class="ps-card-title">
+        {caseStudyHref ? (
+          <a
+            href={caseStudyHref}
+            class="ps-card-title-link"
+            aria-label={`Read case study: ${title}`}
+          >
+            {title}
+          </a>
+        ) : (
+          <span>{title}</span>
+        )}
+      </h2>
+    ) : (
+      <h3 class="ps-card-title">
+        {caseStudyHref ? (
+          <a
+            href={caseStudyHref}
+            class="ps-card-title-link"
+            aria-label={`Read case study: ${title}`}
+          >
+            {title}
+          </a>
+        ) : (
+          <span>{title}</span>
+        )}
+      </h3>
+    )}
 
-  {metricText && (
-    <div class="ps-card-metric" aria-label="Project metric">
-      <span class="ps-metric-label">Key Metric:</span>
-      <span class="ps-metric-value">{metricText}</span>
-    </div>
-  )}
+    {problemStatement && (
+      <p class="ps-card-problem">{problemStatement}</p>
+    )}
 
-  {stackTags.length > 0 && (
-    <ul class="ps-card-stack" aria-label="Technologies used">
-      {stackTags.map((tech) => (
-        <li class="ps-card-stack-tag">{tech}</li>
-      ))}
-    </ul>
-  )}
+    {metricText && (
+      <div class="ps-card-metric" aria-label="Project metric">
+        <span class="ps-metric-label">Key Metric:</span>
+        <span class="ps-metric-value">{metricText}</span>
+      </div>
+    )}
+
+    {stackTags.length > 0 && (
+      <ul class="ps-card-stack" aria-label="Technologies used">
+        {stackTags.map((tech) => (
+          <li class="ps-card-stack-tag">{tech}</li>
+        ))}
+      </ul>
+    )}
+  </div>
 
   <div class="ps-card-actions" aria-label={`Actions for ${title}`}>
     {githubUrl && (

@@ -179,7 +179,7 @@ Below is the complete, schema-compliant document payload prepared for owner revi
     "cloud-firestore",
     "dashboard"
   ],
-  "role": "Project conception, learning workflow specification, and prompt formulation; copying and applying AI-generated code.",
+  "role": "Project conception, learning workflow specification, prompt direction, code integration, and local functional validation.",
   "links": {
     "_type": "object",
     "repo": "https://github.com/goutam-prusty/ai-engineer-command-center",
@@ -195,7 +195,7 @@ Below is the complete, schema-compliant document payload prepared for owner revi
     "Motion",
     "Recharts"
   ],
-  "aiAttribution": "The idea was mine and I initially made the project for my own use. I later expanded it so my friends could use it too. ChatGPT, Claude and Antigravity IDE generated the code and suggested the architecture, technology stack, project structure and development plan. My hands-on coding contribution was copying and applying the AI-generated code.",
+  "aiAttribution": "Conceived and specified as a personal learning workspace for an intensive 20-week AI engineering curriculum. Developed through an AI-assisted engineering workflow using ChatGPT, Claude, and Antigravity IDE. My contribution focused on defining functional requirements and learning workflows, directing implementation through structured prompts, integrating generated code into a working repository, and validating application behaviour locally.",
   "evaluationNotes": "Operational learning tracker verified through read-only inspection of public repository. Runs local-first in browser with optional Firebase Cloud Firestore synchronization. Contains zero neural network models, LLM pipelines, or ML inference runtimes.",
   "body": [
     {
@@ -220,7 +220,7 @@ Below is the complete, schema-compliant document payload prepared for owner revi
         {
           "_key": "cc-span-02",
           "_type": "span",
-          "text": "The system operates strictly as an administrative and educational tracking tool. It does not train, fine-tune, host, or execute artificial intelligence models, LLM agents, or inference runtimes. Application code, technical architecture, and development planning were generated using AI tools (ChatGPT, Claude, and Antigravity IDE), with hands-on development focused on defining workflow requirements, prompt direction, copying, applying, and validating generated code locally.",
+          "text": "The system operates strictly as an administrative and educational tracking tool. It does not train, fine-tune, host, or execute artificial intelligence models, LLM agents, or inference runtimes. Application code and project structure were developed collaboratively through AI assistance (ChatGPT, Claude, and Antigravity IDE), with hands-on development centered on specifying curriculum workflows, iterative prompt direction, component integration, and local validation.",
           "marks": []
         }
       ],

@@ -39,6 +39,7 @@ const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 const nav = [
   { label: 'Projects', href: '/projects/' },
+  { label: 'Skills', href: '/skills/' },
   { label: 'Research', href: '/research/' },
   { label: 'Writing', href: '/writing/' },
   { label: 'About', href: '/about/' },
@@ -97,9 +98,17 @@ const isActive = (href: string) => {
           ))}
         </nav>
 
-        <details class="ps-nav-menu ps-mobile-nav">
-          <summary><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
+        <details class="ps-nav-menu ps-mobile-nav" id="ps-mobile-nav-drawer">
+          <summary aria-label="Open navigation menu"><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
           <nav aria-label="Mobile navigation">
+            <div class="ps-mobile-nav-close-row">
+              <span class="ps-mobile-nav-heading">Navigation</span>
+              <button
+                class="ps-mobile-nav-close-btn"
+                aria-label="Close navigation menu"
+                onclick="this.closest('details').removeAttribute('open')"
+              >✕</button>
+            </div>
             {nav.map((item) => (
               <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}
@@ -112,7 +121,7 @@ const isActive = (href: string) => {
           class="ps-contact-link"
           href="/contact/"
           aria-current={isActive('/contact/') ? 'page' : undefined}
-        >Get in touch <span aria-hidden="true">↗</span></a>
+        >Get in touch</a>
       </header>
 
       <main id="main" tabindex="-1">
