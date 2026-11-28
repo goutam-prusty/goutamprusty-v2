@@ -1934,23 +1934,6 @@
    No JavaScript required.
    ============================================================ */
 
-/* Chapter: Featured Projects — warm peach engineering atmosphere */
-.ps-section--chapter-projects {
-  background-color: rgba(244, 217, 198, 0.52);
-  border-top: 1px solid rgba(244, 217, 198, 0.9);
-  position: relative;
-}
-.ps-section--chapter-projects::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-project) 0%, transparent 100%);
-  opacity: 0.6;
-}
-
 /* Chapter: Skills & Capabilities — cool sage technical atmosphere */
 .ps-section--chapter-skills {
   background-color: rgba(213, 226, 208, 0.48);
@@ -1975,23 +1958,6 @@
   margin-block: 0;
 }
 
-/* Chapter: Research & Writing — cool slate-blue scholarly atmosphere */
-.ps-section--chapter-research {
-  background-color: rgba(210, 224, 234, 0.46);
-  border-top: 1px solid rgba(210, 224, 234, 0.8);
-  position: relative;
-}
-.ps-section--chapter-research::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-research) 0%, transparent 100%);
-  opacity: 0.6;
-}
-
 /* Chapter: About — neutral warm (subtle lift from base cream) */
 .ps-section--chapter-about {
   background-color: rgba(247, 244, 236, 0.6);
@@ -2007,9 +1973,9 @@
 /* Chapter marker: a small inline Observatory marker that can appear
    at section eyebrow level. Used as a ::before pseudo on .ps-eyebrow
    inside chapter sections. */
-.ps-section--chapter-projects .ps-eyebrow::before,
+#featured-projects .ps-eyebrow::before,
 .ps-section--chapter-skills .ps-eyebrow::before,
-.ps-section--chapter-research .ps-eyebrow::before,
+#research-writing .ps-eyebrow::before,
 .ps-section--chapter-about .ps-eyebrow::before,
 .ps-contact .ps-eyebrow::before,
 .ps-hero .ps-eyebrow::before {
@@ -2332,9 +2298,7 @@
   border-top: 1px solid var(--color-line);
 }
 /* Chapter sections override the default grey border */
-.ps-section--chapter-projects,
 .ps-section--chapter-skills,
-.ps-section--chapter-research,
 .ps-section--chapter-about {
   border-top: none; /* handled by ::before gradient stripe */
 }
