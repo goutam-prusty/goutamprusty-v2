@@ -1,0 +1,166 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  totalSlides: number;
+  class?: string;
+}
+
+const { id, label, totalSlides, class: className = '' } = Astro.props;
+const formattedTotal = String(totalSlides).padStart(2, '0');
+---
+
+<div class:list={['ps-carousel', className]} id={id} data-carousel data-total={totalSlides}>
+  <div class="ps-carousel-controls-bar">
+    <div class="ps-carousel-counter" aria-live="polite">
+      <span class="ps-carousel-current" data-carousel-current>01</span>
+      <span class="ps-carousel-sep">/</span>
+      <span class="ps-carousel-total">{formattedTotal}</span>
+    </div>
+    <div class="ps-carousel-nav">
+      <button
+        type="button"
+        class="ps-carousel-btn ps-carousel-btn--prev"
+        data-carousel-prev
+        aria-label={`Previous ${label} slide`}
+        disabled
+      >
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="ps-carousel-btn ps-carousel-btn--next"
+        data-carousel-next
+        aria-label={`Next ${label} slide`}
+      >
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="ps-carousel-track"
+    data-carousel-track
+    role="region"
+    aria-roledescription="carousel"
+    aria-label={label}
+    tabindex="0"
+  >
+    <slot />
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    if (window.__psEditorialCarouselAttached) return;
+    window.__psEditorialCarouselAttached = true;
+
+    function initCarousels() {
+      var carousels = document.querySelectorAll('[data-carousel]');
+      carousels.forEach(function (carousel) {
+        var track = carousel.querySelector('[data-carousel-track]');
+        var prevBtn = carousel.querySelector('[data-carousel-prev]');
+        var nextBtn = carousel.querySelector('[data-carousel-next]');
+        var currentSpan = carousel.querySelector('[data-carousel-current]');
+        if (!track) return;
+
+        function getSlides() {
+          return Array.from(track.children).filter(function (el) {
+            return el.tagName !== 'SCRIPT' && el.nodeType === 1;
+          });
+        }
+
+        function updateState() {
+          var items = getSlides();
+          if (items.length === 0) return;
+
+          var scrollLeft = track.scrollLeft;
+          var maxScroll = track.scrollWidth - track.clientWidth;
+
+          // Find current active slide
+          var activeIndex = 0;
+          if (maxScroll <= 4) {
+            activeIndex = 0;
+          } else if (scrollLeft >= maxScroll - 6) {
+            activeIndex = items.length - 1;
+          } else {
+            var bestDiff = Infinity;
+            for (var i = 0; i < items.length; i++) {
+              var diff = Math.abs((items[i].offsetLeft - track.offsetLeft) - scrollLeft);
+              if (diff < bestDiff) {
+                bestDiff = diff;
+                activeIndex = i;
+              }
+            }
+          }
+
+          if (currentSpan) {
+            currentSpan.textContent = String(activeIndex + 1).padStart(2, '0');
+          }
+
+          if (prevBtn) {
+            prevBtn.disabled = scrollLeft <= 4;
+          }
+          if (nextBtn) {
+            nextBtn.disabled = scrollLeft >= maxScroll - 6 || maxScroll <= 4;
+          }
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function () {
+            var items = getSlides();
+            var cardWidth = items[0] ? items[0].offsetWidth : 300;
+            track.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function () {
+            var items = getSlides();
+            var cardWidth = items[0] ? items[0].offsetWidth : 300;
+            track.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
+          });
+        }
+
+        var ticking = false;
+        track.addEventListener(
+          'scroll',
+          function () {
+            if (!ticking) {
+              window.requestAnimationFrame(function () {
+                updateState();
+                ticking = false;
+              });
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+
+        track.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (prevBtn && !prevBtn.disabled) prevBtn.click();
+          } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (nextBtn && !nextBtn.disabled) nextBtn.click();
+          }
+        });
+
+        // Initialize state
+        updateState();
+        window.addEventListener('resize', updateState, { passive: true });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCarousels);
+    } else {
+      initCarousels();
+    }
+  })();
+</script>

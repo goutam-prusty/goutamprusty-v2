@@ -83,7 +83,7 @@ const isActive = (href: string) => {
   <body class="ps" id="top">
     <a class="ps-skip" href="#main">Skip to content</a>
     <div class="ps-shell">
-      <header class="ps-header">
+      <header class="ps-header" id="ps-site-header">
         <a class="ps-wordmark" href="/" aria-label="goutamprusty.com home">g<span>.</span></a>
 
         <nav class="ps-desktop-nav" aria-label="Main navigation">
@@ -130,5 +130,137 @@ const isActive = (href: string) => {
 
       <SiteFooter socialLinks={socialLinks} aiDisclosure={aiDisclosure} />
     </div>
+
+    <script is:inline>
+      (function () {
+        var header = document.getElementById('ps-site-header');
+        var drawer = document.getElementById('ps-mobile-nav-drawer');
+        if (!header) return;
+
+        var lastScrollY = window.scrollY;
+        var ticking = false;
+        var SCROLL_DOWN_THRESHOLD = 12;
+        var SCROLL_UP_THRESHOLD = 8;
+        var TOP_THRESHOLD = 48;
+
+        function updateHeader() {
+          var currentScrollY = window.scrollY;
+
+          // Never hide header when mobile drawer is open
+          if (drawer && drawer.hasAttribute('open')) {
+            header.classList.remove('ps-header--hidden');
+            lastScrollY = currentScrollY;
+            ticking = false;
+            return;
+          }
+
+          // Always visible at the top of the page; remove stuck shadow
+          if (currentScrollY <= TOP_THRESHOLD) {
+            header.classList.remove('ps-header--hidden');
+            header.classList.remove('ps-header--stuck');
+            lastScrollY = currentScrollY;
+            ticking = false;
+            return;
+          }
+
+          // Beyond top threshold -> stuck
+          header.classList.add('ps-header--stuck');
+
+          var delta = currentScrollY - lastScrollY;
+
+          // Scroll down meaningfully -> hide smoothly
+          if (delta > SCROLL_DOWN_THRESHOLD) {
+            header.classList.add('ps-header--hidden');
+            lastScrollY = currentScrollY;
+          }
+          // Scroll up meaningfully -> reveal immediately
+          else if (delta < -SCROLL_UP_THRESHOLD) {
+            header.classList.remove('ps-header--hidden');
+            lastScrollY = currentScrollY;
+          }
+
+          ticking = false;
+        }
+
+        window.addEventListener(
+          'scroll',
+          function () {
+            if (!ticking) {
+              window.requestAnimationFrame(updateHeader);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+
+        // Auto-close mobile drawer on link selection
+        if (drawer) {
+          var navLinks = drawer.querySelectorAll('nav a');
+          for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].addEventListener('click', function () {
+              drawer.removeAttribute('open');
+            });
+          }
+        }
+
+        // Expandable card buttons (description & tech tags)
+        document.addEventListener('click', function (e) {
+          var target = e.target;
+          if (!target) return;
+          var btn = target.closest('.ps-card-expand-btn');
+          if (!btn) return;
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!isExpanded));
+
+          var targetId = btn.getAttribute('aria-controls');
+          if (targetId) {
+            var el = document.getElementById(targetId);
+            if (el) {
+              el.classList.toggle('ps-expanded', !isExpanded);
+            }
+          }
+
+          var textSpan = btn.querySelector('.ps-expand-text');
+          var iconSpan = btn.querySelector('.ps-expand-icon');
+
+          if (btn.classList.contains('ps-desc-toggle')) {
+            if (textSpan) textSpan.textContent = !isExpanded ? 'Less' : 'More';
+            if (iconSpan) iconSpan.textContent = !isExpanded ? '−' : '+';
+          } else if (btn.classList.contains('ps-tech-toggle')) {
+            var overflowCount = btn.getAttribute('data-overflow-count') || '';
+            if (textSpan) textSpan.textContent = !isExpanded ? 'Less' : '+' + overflowCount + ' More';
+          }
+        });
+
+        // Card-level click navigation for playbook project cards
+        document.addEventListener('click', function (e) {
+          var target = e.target;
+          if (!target) return;
+          // Do not navigate if user clicked an anchor, button, or expand button
+          if (target.closest('a, button, .ps-card-expand-btn')) return;
+
+          // Do not navigate if user is selecting text
+          var selection = window.getSelection();
+          if (selection && selection.toString().length > 0) return;
+
+          var card = target.closest('.ps-playbook-card');
+          if (!card) return;
+
+          var caseLink = card.querySelector('.ps-card-action--case-study');
+          if (caseLink && caseLink.href) {
+            // Respect modifier keys (Cmd/Ctrl/Shift/Alt) to open in a new tab
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+              window.open(caseLink.href, '_blank');
+            } else {
+              window.location.href = caseLink.href;
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

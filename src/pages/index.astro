@@ -9,6 +9,7 @@ import { getArticleReadingTime } from '../lib/readingTime';
 import ProjectCard from '../components/ProjectCard.astro';
 import SkillsOverview from '../components/SkillsOverview.astro';
 import ObservatoryHeroPortrait from '../components/ObservatoryHeroPortrait.astro';
+import EditorialCarousel from '../components/EditorialCarousel.astro';
 
 // 1. Projects Data (Sanity-backed T4 integration)
 const allProjects = await getAllProjects();
@@ -22,13 +23,17 @@ const sortedProjects = [...allProjects].sort((a: any, b: any) => {
 });
 const featuredProjects = sortedProjects.filter((p: any) => p.featured || p.legacyFeatured);
 
-// 2. Verified Research and Writing selections (preserved from existing homepage)
+// 2. Verified Research and Writing selections (curated 4 pieces: 2 research + 2 writing)
 const res018Slug = 'strategic-intelligence-report-the-state-of-artificial-intelligence-and-frontier-technologies-in-2026';
+const res004Slug = 'indias-digital-governance-ecosystem-evaluation';
 const blg001Slug = 'agentic-inflection-point';
+const blg002Slug = 'ai-physical-limits';
 
-const [res018, blg001] = await Promise.all([
+const [res018, res004, blg001, blg002] = await Promise.all([
   getResearchReportBySlug(res018Slug),
+  getResearchReportBySlug(res004Slug),
   getWritingArticleBySlug(blg001Slug),
+  getWritingArticleBySlug(blg002Slug),
 ]);
 
 const resTitle = res018?.title || 'Strategic Intelligence Report: The State of Artificial Intelligence and Frontier Technologies in 2026';
@@ -36,9 +41,18 @@ const resSummary = res018?.summary || 'A comprehensive 2026 strategic briefing o
 const resLength = (res018?.lengthEstimateMinutes || 15) + ' min read';
 const resCitations = Array.isArray(res018?.bibliography) ? `${res018.bibliography.length} citations` : '71 citations';
 
+const res004Title = res004?.title || "India's Digital Governance Ecosystem Evaluation";
+const res004Summary = res004?.summary || "An empirical evaluation of India's Digital Public Infrastructure, assessing economic impact, digital divides, privacy, and cybersecurity.";
+const res004Length = (res004?.lengthEstimateMinutes || 15) + ' min read';
+const res004Citations = Array.isArray(res004?.bibliography) ? `${res004.bibliography.length} citations` : '97 citations';
+
 const blg1Title = blg001?.title || 'The Agentic Inflection Point';
 const blg1Summary = blg001?.summary || 'A strategic analysis of where autonomous AI systems actually are, the capability gaps that remain, and what the trajectory implies for organizations.';
 const blg1Length = getArticleReadingTime(blg001);
+
+const blg2Title = blg002?.title || "AI's Physical Limits";
+const blg2Summary = blg002?.summary || "Why energy, transmission, cooling, and silicon manufacturing — not algorithmic ceilings — represent the binding constraints on frontier AI expansion.";
+const blg2Length = getArticleReadingTime(blg002) || '11 min read';
 
 const homeJsonLd = [
   {
@@ -105,11 +119,15 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
           <span aria-hidden="true" set:html={ArrowRight}></span>
         </a>
       </div>
-      <div class:list={['ps-project-grid', { 'ps-project-grid--single': featuredProjects.length === 1 }]}>
+      <EditorialCarousel
+        id="featured-projects-carousel"
+        label="Featured Projects"
+        totalSlides={featuredProjects.length}
+      >
         {featuredProjects.map((project: any, idx: number) => (
           <ProjectCard project={project} index={idx} />
         ))}
-      </div>
+      </EditorialCarousel>
     </section>
   )}
 
@@ -134,7 +152,11 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
         </a>
       </div>
     </div>
-    <div class="ps-project-grid">
+    <EditorialCarousel
+      id="research-writing-carousel"
+      label="Research & Writing"
+      totalSlides={4}
+    >
       <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res018Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">01</span>
@@ -149,9 +171,23 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
         </span>
       </a>
 
-      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg001Slug}/`}>
+      <a class="ps-project-card ps-card-editorial ps-card-research" href={`/research/${res004Slug}/`}>
         <div class="ps-card-top">
           <span class="ps-card-mark" aria-hidden="true">02</span>
+          <span class="ps-card-badge">Research report</span>
+        </div>
+        <p class="ps-kicker">Research · RES-004 · July 2026</p>
+        <h3>{res004Title}</h3>
+        <p>{res004Summary}</p>
+        <span class="ps-card-foot">
+          <span>{res004Length} · {res004Citations}</span>
+          <span aria-hidden="true">Read report</span>
+        </span>
+      </a>
+
+      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg001Slug}/`}>
+        <div class="ps-card-top">
+          <span class="ps-card-mark" aria-hidden="true">03</span>
           <span class="ps-card-badge">Strategic essay</span>
         </div>
         <p class="ps-kicker">Writing · BLG-001 · July 2026</p>
@@ -162,7 +198,21 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
           <span aria-hidden="true">Read article</span>
         </span>
       </a>
-    </div>
+
+      <a class="ps-project-card ps-card-editorial ps-card-writing" href={`/writing/${blg002Slug}/`}>
+        <div class="ps-card-top">
+          <span class="ps-card-mark" aria-hidden="true">04</span>
+          <span class="ps-card-badge">Strategic essay</span>
+        </div>
+        <p class="ps-kicker">Writing · BLG-002 · July 2026</p>
+        <h3>{blg2Title}</h3>
+        <p>{blg2Summary}</p>
+        <span class="ps-card-foot">
+          <span>{blg2Length} · Energy, Heat &amp; Silicon</span>
+          <span aria-hidden="true">Read article</span>
+        </span>
+      </a>
+    </EditorialCarousel>
     <p class="ps-shelf-note">
       Independent research and analysis are presented as static, structured briefings. Full source archives and data tables are linked directly within each document.
     </p>

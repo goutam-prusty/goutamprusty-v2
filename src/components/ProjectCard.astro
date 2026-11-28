@@ -43,6 +43,7 @@ export interface Props {
   githubUrl?: string | null;
   demoUrl?: string | null;
   metric?: string | null;
+  role?: string;
   index?: number;
   featured?: boolean;
   headingLevel?: 2 | 3;
@@ -62,6 +63,7 @@ const {
   githubUrl: propGithubUrl,
   demoUrl: propDemoUrl,
   metric: propMetric,
+  role: propRole,
   index: propIndex,
   headingLevel = 3,
   class: className = '',
@@ -111,6 +113,10 @@ const demoUrl = typeof rawDemo === 'string' && rawDemo.trim().length > 0 ? rawDe
 const rawMetric = propMetric || project?.metric;
 const metricText = typeof rawMetric === 'string' && rawMetric.trim().length > 0 ? rawMetric.trim() : undefined;
 
+// Role / Contribution
+const rawRole = propRole || project?.role;
+const role = typeof rawRole === 'string' && rawRole.trim().length > 0 ? rawRole.trim() : undefined;
+
 // Identifiers
 const workbookId = project?.workbookId;
 const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStart(2, '0') : undefined;
@@ -121,6 +127,7 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     'ps-project-card',
     'ps-card-editorial',
     'ps-card-project',
+    'ps-playbook-card',
     { 'ps-card-project--rag': slugString === 'grounded-technical-docs-rag-assistant' },
     { 'ps-card-project--command-center': slugString === 'ai-engineer-command-center' },
     className,
@@ -137,6 +144,11 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
       <div class="ps-card-top-spacer" aria-hidden="true" />
     )}
     <div class="ps-card-badges">
+      {workbookId && (
+        <span class="ps-card-badge ps-card-badge--playbook">
+          Playbook · {workbookId}
+        </span>
+      )}
       {provenanceLabel && (
         <span class="ps-card-badge ps-card-badge--provenance" data-provenance={provenanceLabel}>
           {provenanceLabel}
@@ -195,7 +207,29 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     )}
 
     {problemStatement && (
-      <p class="ps-card-problem">{problemStatement}</p>
+      <div class="ps-card-problem-wrap">
+        <p class="ps-card-problem ps-card-clamp" id={`desc-${slugString}`}>{problemStatement}</p>
+        <button
+          type="button"
+          class="ps-card-expand-btn ps-desc-toggle"
+          aria-expanded="false"
+          aria-controls={`desc-${slugString}`}
+          aria-label={`Toggle full description for ${title}`}
+        >
+          <span class="ps-expand-text">More</span>
+          <span class="ps-expand-icon" aria-hidden="true">+</span>
+        </button>
+      </div>
+    )}
+
+    {role && (
+      <div class="ps-playbook-dossier" aria-label={`Engineering contribution for ${title}`}>
+        <div class="ps-dossier-header">
+          <span class="ps-dossier-indicator" aria-hidden="true" />
+          <span class="ps-dossier-label">Engineering Contribution</span>
+        </div>
+        <p class="ps-dossier-text">{role}</p>
+      </div>
     )}
 
     {metricText && (
@@ -206,11 +240,25 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
     )}
 
     {stackTags.length > 0 && (
-      <ul class="ps-card-stack" aria-label="Technologies used">
-        {stackTags.map((tech) => (
-          <li class="ps-card-stack-tag">{tech}</li>
-        ))}
-      </ul>
+      <div class="ps-card-stack-wrap">
+        <ul class="ps-card-stack" id={`stack-${slugString}`} aria-label="Technologies used">
+          {stackTags.map((tech, idx) => (
+            <li class:list={['ps-card-stack-tag', { 'ps-tag--overflow': idx >= 4 }]}>{tech}</li>
+          ))}
+        </ul>
+        {stackTags.length > 4 && (
+          <button
+            type="button"
+            class="ps-card-expand-btn ps-tech-toggle"
+            aria-expanded="false"
+            aria-controls={`stack-${slugString}`}
+            data-overflow-count={stackTags.length - 4}
+            aria-label={`Toggle all technologies for ${title}`}
+          >
+            <span class="ps-expand-text">+{stackTags.length - 4} More</span>
+          </button>
+        )}
+      </div>
     )}
   </div>
 
@@ -243,9 +291,9 @@ const markNumber = typeof propIndex === 'number' ? String(propIndex + 1).padStar
       <a
         href={caseStudyHref}
         class="ps-card-action ps-card-action--case-study"
-        aria-label={`View case study for ${title}`}
+        aria-label={`Explore case study for ${title}`}
       >
-        <span>Case Study</span>
+        <span>Explore Case Study</span>
         <span class="ps-action-icon" aria-hidden="true">→</span>
       </a>
     )}
