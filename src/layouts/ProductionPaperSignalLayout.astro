@@ -98,9 +98,12 @@ const isActive = (href: string) => {
           ))}
         </nav>
 
-        <details class="ps-nav-menu ps-mobile-nav">
-          <summary><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
+        <details class="ps-nav-menu ps-mobile-nav" id="ps-mobile-nav-drawer">
+          <summary aria-label="Open navigation menu"><span>Menu</span><span class="ps-menu-icon" aria-hidden="true">☰</span></summary>
           <nav aria-label="Mobile navigation">
+            <div class="ps-mobile-nav-close-row">
+              <span class="ps-mobile-nav-heading">Navigation</span>
+            </div>
             {nav.map((item) => (
               <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
                 {item.label}

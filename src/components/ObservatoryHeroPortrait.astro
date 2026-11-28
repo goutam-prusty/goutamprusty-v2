@@ -1,18 +1,25 @@
 ---
 /**
- * Observatory Hero Portrait Component
- * Paper & Signal × The Observatory
+ * Editorial Hero Portrait — Option C (Full-bleed, deliberate composition)
+ * Paper & Signal × The Observatory — Visual Experience Upgrade
  *
- * Combines an architectural arch portrait frame with Observatory-inspired
- * technical geometry, coordinates, and subtle motion.
- * Automatically displays /images/portrait/goutam-prusty.webp when placed,
- * or an editorial architectural placeholder until the photo is added.
+ * - Full-bleed editorial photograph, no arch, no floating elements
+ * - Rectangular frame with crosshair registration marks (four corners)
+ * - Observatory compass reticle composited into the lower-left corner
+ *   as an SVG overlay (mix-blend-mode: multiply)
+ * - Coordinate badge above the frame
+ * - Black caption strip below: name · role · location · OBS.01
+ * - Clean vignette gradient to integrate photo with the cream paper background
+ *
+ * Automatically uses /images/portrait/goutam-prusty-editorial-restrained.webp
+ * then .../goutam-prusty-editorial.webp then .../goutam-prusty.webp.
+ * Falls back to a styled monogram placeholder if no photo is found.
  */
 const proc = (globalThis as any).process;
 const fsModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('fs') : null;
 const pathModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('path') : null;
 
-// Approved editorial portrait takes priority, falling back to original or placeholder
+// Approved editorial portrait takes priority
 const candidateFiles = [
   'goutam-prusty-editorial-restrained.webp',
   'goutam-prusty-editorial.webp',
@@ -34,418 +41,82 @@ if (fsModule && pathModule && proc?.cwd) {
 }
 ---
 
-<div class="ps-observatory-hero" role="region" aria-label="Portrait and Observatory visual composition">
-  <!-- Calibration Coordinate Badge -->
-  <div class="ps-observatory-coords" aria-hidden="true">
-    <span class="ps-coord-dot"></span>
-    <span class="ps-coord-text">OBS // 12.9716° N · 77.5946° E</span>
-    <span class="ps-coord-sep">·</span>
-    <span class="ps-coord-tag">BENGALURU</span>
+<div class="ps-editorial-portrait" role="region" aria-label="Editorial portrait composition">
+
+  <!-- Observatory Coordinate Badge -->
+  <div class="ps-portrait-obs-badge" aria-hidden="true">
+    <span class="ps-portrait-obs-dot"></span>
+    <span>OBS // 12.9716° N · 77.5946° E</span>
+    <span style="color: var(--color-ink); font-weight: 700; padding-left: 0.2rem;">BENGALURU</span>
   </div>
 
-  <div class="ps-observatory-frame-wrap">
-    <!-- Rotating Celestial Sighting Ring (CSS Animated, Reduced-Motion Safe) -->
-    <div class="ps-observatory-ring" aria-hidden="true">
-      <svg viewBox="0 0 460 460" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-ring-svg">
-        <circle cx="230" cy="230" r="222" stroke="#17191A" stroke-width="1" stroke-dasharray="3 7" opacity="0.65" />
-        <circle cx="230" cy="230" r="206" stroke="#827D71" stroke-width="0.8" stroke-dasharray="1 11" opacity="0.5" />
-        <!-- Quadrant tick marks -->
-        <line x1="230" y1="0" x2="230" y2="12" stroke="#17191A" stroke-width="1.5" />
-        <line x1="230" y1="448" x2="230" y2="460" stroke="#17191A" stroke-width="1.5" />
-        <line x1="0" y1="230" x2="12" y2="230" stroke="#17191A" stroke-width="1.5" />
-        <line x1="448" y1="230" x2="460" y2="230" stroke="#17191A" stroke-width="1.5" />
-        <!-- Marker pips -->
-        <circle cx="230" cy="8" r="3" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
-        <circle cx="452" cy="230" r="3" fill="#17191A" />
+  <!-- Portrait Frame with crosshair registration marks -->
+  <div class="ps-portrait-frame">
+
+    {detectedPortraitPath ? (
+      <img
+        src={detectedPortraitPath}
+        alt="Goutam Prusty — AI Engineer"
+        width="480"
+        height="600"
+        class="ps-portrait-photo"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    ) : (
+      <div class="ps-portrait-placeholder" aria-label="Professional portrait slot">
+        <span class="ps-portrait-mono-initials">GP</span>
+        <span class="ps-portrait-mono-role">AI ENGINEER</span>
+      </div>
+    )}
+
+    <!-- Vignette to integrate photo with paper background -->
+    <div class="ps-portrait-vignette" aria-hidden="true"></div>
+
+    <!-- Observatory compass reticle composited in lower-left of frame -->
+    <div class="ps-portrait-compass-overlay" aria-hidden="true">
+      <svg
+        viewBox="0 0 48 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width="44"
+        height="44"
+        aria-hidden="true"
+      >
+        <!-- Outer calibration ring -->
+        <circle cx="24" cy="24" r="22" stroke="#17191A" stroke-width="1.2" fill="#FDFCF8" fill-opacity="0.9" />
+        <!-- Inner dashed ring -->
+        <circle cx="24" cy="24" r="18.5" stroke="#827D71" stroke-width="0.7" stroke-dasharray="1 3" />
+        <!-- Cardinal tick marks -->
+        <line x1="24" y1="2" x2="24" y2="6.5" stroke="#17191A" stroke-width="1.5" />
+        <line x1="24" y1="41.5" x2="24" y2="46" stroke="#17191A" stroke-width="1.5" />
+        <line x1="2" y1="24" x2="6.5" y2="24" stroke="#17191A" stroke-width="1.5" />
+        <line x1="41.5" y1="24" x2="46" y2="24" stroke="#17191A" stroke-width="1.5" />
+        <!-- 45-degree azimuth ticks -->
+        <line x1="8.5" y1="8.5" x2="11.5" y2="11.5" stroke="#827D71" stroke-width="0.9" />
+        <line x1="39.5" y1="8.5" x2="36.5" y2="11.5" stroke="#827D71" stroke-width="0.9" />
+        <line x1="8.5" y1="39.5" x2="11.5" y2="36.5" stroke="#827D71" stroke-width="0.9" />
+        <line x1="39.5" y1="39.5" x2="36.5" y2="36.5" stroke="#827D71" stroke-width="0.9" />
+        <!-- North directional arrow -->
+        <polygon points="24,7 26.5,14 24,12.5 21.5,14" fill="#17191A" />
+        <!-- N label -->
+        <text x="24" y="20" font-family="'Cascadia Code', Consolas, monospace" font-size="5" font-weight="700" fill="#17191A" text-anchor="middle" letter-spacing="0.05em">N</text>
+        <!-- Reticle centre — signal lime pip -->
+        <circle cx="24" cy="24" r="5" fill="#D3F03C" stroke="#17191A" stroke-width="0.9" />
+        <circle cx="24" cy="24" r="1.5" fill="#17191A" />
       </svg>
     </div>
 
-    <!-- Background Geometric Accent Layers (Paper & Signal) -->
-    <div class="ps-observatory-accent-arch" aria-hidden="true"></div>
-    <div class="ps-observatory-accent-blue" aria-hidden="true"></div>
-
-    <!-- Architectural Arch Frame Container -->
-    <div class="ps-observatory-arch">
-      {detectedPortraitPath ? (
-        <img
-          src={detectedPortraitPath}
-          alt="Goutam Prusty — AI Engineer"
-          width="480"
-          height="600"
-          class="ps-observatory-photo"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      ) : (
-        <div class="ps-observatory-placeholder" aria-label="Professional portrait slot">
-          <svg class="ps-placeholder-grid" viewBox="0 0 360 450" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <pattern id="dotgrid" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="12" cy="12" r="1" fill="#827D71" opacity="0.35" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dotgrid)" />
-
-            <circle cx="180" cy="180" r="85" stroke="#17191A" stroke-width="1" stroke-dasharray="4 4" opacity="0.6" />
-            <circle cx="180" cy="180" r="6" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
-            <line x1="180" y1="80" x2="180" y2="98" stroke="#17191A" stroke-width="1.5" />
-            <line x1="180" y1="262" x2="180" y2="280" stroke="#17191A" stroke-width="1.5" />
-            <line x1="80" y1="180" x2="98" y2="180" stroke="#17191A" stroke-width="1.5" />
-            <line x1="262" y1="180" x2="280" y2="180" stroke="#17191A" stroke-width="1.5" />
-          </svg>
-
-          <div class="ps-placeholder-monogram" aria-hidden="true">
-            <span class="ps-mono-initials">GP</span>
-            <span class="ps-mono-role">AI ENGINEER</span>
-          </div>
-
-          <div class="ps-placeholder-slot-badge">
-            <span class="ps-slot-pip" aria-hidden="true"></span>
-            <span>PORTRAIT ASSET SLOT</span>
-            <code class="ps-slot-path">/images/portrait/goutam-prusty.webp</code>
-          </div>
-        </div>
-      )}
-
-      <!-- Fine Inner Optical Border -->
-      <div class="ps-arch-inner-border" aria-hidden="true"></div>
-    </div>
-
-    <!-- Integrated Observatory Navigational Compass Instrument -->
-    <div class="ps-observatory-compass" aria-hidden="true" title="Observatory Calibration Instrument">
-      <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-compass-svg">
-        <!-- Outer Graduation Rim -->
-        <circle cx="27" cy="27" r="25" stroke="#17191A" stroke-width="1.25" fill="#FDFCF8" />
-        <circle cx="27" cy="27" r="22" stroke="#827D71" stroke-width="0.75" stroke-dasharray="1 3" />
-        <!-- Cardinal Tick Marks -->
-        <line x1="27" y1="2" x2="27" y2="7" stroke="#17191A" stroke-width="1.5" />
-        <line x1="27" y1="47" x2="27" y2="52" stroke="#17191A" stroke-width="1.5" />
-        <line x1="2" y1="27" x2="7" y2="27" stroke="#17191A" stroke-width="1.5" />
-        <line x1="47" y1="27" x2="52" y2="27" stroke="#17191A" stroke-width="1.5" />
-        <!-- 45-degree Azimuth Ticks -->
-        <line x1="9.3" y1="9.3" x2="12.8" y2="12.8" stroke="#827D71" stroke-width="1" />
-        <line x1="44.7" y1="9.3" x2="41.2" y2="12.8" stroke="#827D71" stroke-width="1" />
-        <line x1="9.3" y1="44.7" x2="12.8" y2="41.2" stroke="#827D71" stroke-width="1" />
-        <line x1="44.7" y1="44.7" x2="41.2" y2="41.2" stroke="#827D71" stroke-width="1" />
-        <!-- Directional North Indicator Arrow -->
-        <polygon points="27,8 30,16 27,14 24,16" fill="#17191A" />
-        <!-- Micro North Label -->
-        <text x="27" y="21.5" font-family="'Cascadia Code', Consolas, monospace" font-size="5.5" font-weight="700" fill="#17191A" text-anchor="middle" letter-spacing="0.05em">N</text>
-        <!-- Concentric Reticle Center -->
-        <circle cx="27" cy="27" r="6" fill="#D3F03C" stroke="#17191A" stroke-width="1" />
-        <circle cx="27" cy="27" r="2" fill="#17191A" />
-      </svg>
-    </div>
-
-    <!-- Bottom Telemetry Label -->
-    <div class="ps-observatory-label" aria-hidden="true">
-      <span>SYS // PAPER & SIGNAL</span>
-      <span class="ps-label-accent">OBS.01</span>
-    </div>
+    <!-- Crosshair corner marks (top-right, bottom-left positioned as absolute divs) -->
+    <div class="ps-portrait-corner-tr" aria-hidden="true"></div>
+    <div class="ps-portrait-corner-bl" aria-hidden="true"></div>
   </div>
+
+  <!-- Editorial caption strip -->
+  <div class="ps-portrait-caption" aria-hidden="true">
+    <span class="ps-portrait-caption-name">Goutam Prusty · AI Engineer · Bengaluru</span>
+    <span class="ps-portrait-caption-id">OBS.01</span>
+  </div>
+
 </div>
-
-<style>
-  .ps-observatory-hero {
-    position: relative;
-    width: 100%;
-    max-width: 24.5rem;
-    justify-self: end;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .ps-observatory-coords {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.22rem 0.55rem;
-    border: 1px solid var(--color-line);
-    background: var(--color-surface);
-    border-radius: 2px;
-    font: 600 clamp(0.58rem, 1.35vw, 0.7rem)/1.2 var(--font-mono);
-    color: var(--color-secondary);
-    letter-spacing: 0.02em;
-    align-self: flex-start;
-    white-space: nowrap;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .ps-coord-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--color-signal);
-    border: 1px solid var(--color-ink);
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .ps-coord-tag {
-    color: var(--color-ink);
-    font-weight: 700;
-  }
-
-  .ps-observatory-frame-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    max-height: 33rem;
-  }
-
-  /* Rotating Sighting Ring */
-  .ps-observatory-ring {
-    position: absolute;
-    inset: -6%;
-    z-index: 1;
-    pointer-events: none;
-    animation: ps-observatory-spin 90s linear infinite;
-  }
-
-  .ps-ring-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  @keyframes ps-observatory-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* Geometric Accent Layers */
-  .ps-observatory-accent-arch {
-    position: absolute;
-    inset: 5% -4% -2% 4%;
-    background: var(--color-project);
-    border: 1px solid var(--color-ink);
-    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
-    z-index: 1;
-  }
-
-  .ps-observatory-accent-blue {
-    position: absolute;
-    bottom: -2%;
-    left: -6%;
-    width: 38%;
-    height: 24%;
-    background: var(--color-research);
-    border: 1px solid var(--color-ink);
-    border-radius: 100px 100px 0 0;
-    z-index: 1;
-  }
-
-  /* Architectural Arch Frame */
-  .ps-observatory-arch {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    overflow: hidden;
-    background: var(--color-sunken);
-    border: 1.5px solid var(--color-ink);
-    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
-    box-shadow: 0 10px 28px rgba(23, 25, 26, 0.08);
-  }
-
-  .ps-observatory-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    transform: translateY(32px) scale(1.10);
-    transform-origin: center top;
-    display: block;
-    transition: transform 400ms ease;
-  }
-
-  .ps-observatory-arch:hover .ps-observatory-photo {
-    transform: translateY(32px) scale(1.12);
-  }
-
-  /* Placeholder Styling */
-  .ps-observatory-placeholder {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2.5rem 1.5rem 1.5rem;
-    background: linear-gradient(180deg, #F8F5ED 0%, #EBE6DA 100%);
-  }
-
-  .ps-placeholder-grid {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .ps-placeholder-monogram {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: 2rem;
-  }
-
-  .ps-mono-initials {
-    font-family: var(--font-display);
-    font-size: clamp(3.2rem, 6vw, 4.2rem);
-    font-weight: 500;
-    letter-spacing: -0.04em;
-    color: var(--color-ink);
-    line-height: 1;
-  }
-
-  .ps-mono-role {
-    font: 700 0.74rem/1.2 var(--font-mono);
-    letter-spacing: 0.12em;
-    color: var(--color-secondary);
-  }
-
-  .ps-placeholder-slot-badge {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.55rem 0.85rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-ink);
-    border-radius: 2px;
-    font: 700 0.68rem/1.3 var(--font-mono);
-    letter-spacing: 0.08em;
-    color: var(--color-ink);
-    text-align: center;
-    box-shadow: 2px 2px 0 var(--color-ink);
-  }
-
-  .ps-slot-pip {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--color-signal);
-    border: 1px solid var(--color-ink);
-    border-radius: 50%;
-  }
-
-  .ps-slot-path {
-    font-size: 0.64rem;
-    color: var(--color-secondary);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-
-  .ps-arch-inner-border {
-    position: absolute;
-    inset: 5px;
-    border: 1px solid rgba(23, 25, 26, 0.15);
-    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
-    pointer-events: none;
-    z-index: 4;
-  }
-
-  /* Integrated Observatory Navigational Compass Instrument */
-  .ps-observatory-compass {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    width: 52px;
-    height: 52px;
-    z-index: 5;
-    filter: drop-shadow(2px 2px 0 var(--color-ink));
-    transition: transform 300ms ease;
-  }
-
-  .ps-observatory-compass:hover {
-    transform: rotate(15deg);
-  }
-
-  .ps-compass-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* Bottom Telemetry Label */
-  .ps-observatory-label {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.25rem 0.55rem;
-    background: var(--color-ink);
-    color: var(--color-surface);
-    border: 1px solid var(--color-ink);
-    font: 700 0.66rem/1.2 var(--font-mono);
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-  }
-
-  .ps-label-accent {
-    color: var(--color-signal);
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 52rem) {
-    .ps-observatory-hero {
-      max-width: 21rem;
-      justify-self: center;
-      margin-top: 1rem;
-    }
-    .ps-observatory-photo {
-      transform: translateY(26px) scale(1.10);
-    }
-    .ps-observatory-arch:hover .ps-observatory-photo {
-      transform: translateY(26px) scale(1.12);
-    }
-    .ps-observatory-coords {
-      align-self: center;
-      font-size: 0.65rem;
-      padding: 0.22rem 0.6rem;
-      gap: 0.35rem;
-    }
-  }
-
-  @media (max-width: 26rem) {
-    .ps-observatory-hero {
-      max-width: 18rem;
-    }
-    .ps-observatory-photo {
-      transform: translateY(20px) scale(1.10);
-    }
-    .ps-observatory-arch:hover .ps-observatory-photo {
-      transform: translateY(20px) scale(1.12);
-    }
-    .ps-observatory-coords {
-      font-size: 0.58rem;
-      padding: 0.18rem 0.45rem;
-      gap: 0.3rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .ps-observatory-ring {
-      animation: none !important;
-    }
-    .ps-observatory-photo {
-      transition: none !important;
-    }
-  }
-</style>

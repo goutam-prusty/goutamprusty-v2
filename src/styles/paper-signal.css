@@ -86,7 +86,49 @@
 .ps-hero-hook { margin: 0 0 .85rem; color: var(--color-ink); font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.65rem); font-weight: 500; line-height: 1.28; letter-spacing: -.02em; }
 .ps-lede { max-width: 37rem !important; color: var(--color-secondary); font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; }
 .ps-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1.5rem; margin-top: 1.75rem; }
-.ps-button { display: inline-flex; min-height: 3rem; align-items: center; justify-content: center; gap: .65rem; padding: .7rem 1rem; border: 1px solid var(--color-ink); background: var(--color-signal); color: var(--color-ink); font-weight: 700; text-decoration: none; }
+/* ============================================================
+   Buttons — vertical alignment fix (Segoe UI metric compensation)
+   Replace Unicode arrow with an SVG arrow span; keep fallback.
+   ============================================================ */
+.ps-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: .65rem 1.15rem;
+  border: 1px solid var(--color-ink);
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.ps-button span[aria-hidden="true"] {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  font-style: normal;
+}
+.ps-contact-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  padding: .6rem .9rem;
+  background: var(--color-signal);
+  border: 1px solid var(--color-ink);
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1;
+}
+.ps-contact-link span {
+  padding-left: .25rem;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
 .ps-text-link {
   font-weight: 650;
   display: inline-flex;
@@ -128,8 +170,8 @@
 .ps-link-list a { display: flex; min-height: 4.2rem; align-items: center; justify-content: space-between; gap: 1rem; font-size: 1.1rem; text-decoration: none; }
 .ps-topic-row { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1.2rem; }
 .ps-topic { padding: .35rem .65rem; border: 1px solid var(--color-line); background: var(--color-sunken); font-size: .83rem; }
-.ps-contact { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 5vw, 3rem); background: var(--color-ink); color: var(--color-surface); }
-.ps-contact h2 { max-width: 15ch; color: var(--color-surface); }
+.ps-contact { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3rem); background: var(--color-ink); color: var(--color-surface); }
+.ps-contact h2 { max-width: 22ch; color: var(--color-surface); }
 .ps-contact p { color: #efede5; }
 .ps-contact .ps-button { flex: 0 0 auto; color: var(--color-ink); }
 .ps-page-head { padding-block: clamp(3rem, 7vw, 6rem) 2.5rem; border-bottom: 1px solid var(--color-line); }
@@ -185,7 +227,8 @@
   .ps-header { min-height: 4rem; flex-wrap: nowrap; padding-block: 0.5rem; gap: 0.5rem; }
   .ps-nav-menu { order: 2; width: auto; margin-left: auto; }
   .ps-nav-menu summary { min-height: 2.25rem; padding: 0.35rem 0.65rem; font-size: 0.82rem; }
-  .ps-nav-menu nav { position: absolute; z-index: 50; top: calc(100% + 0.4rem); right: 0; width: max-content; min-width: 12rem; margin-top: 0; box-shadow: 0 8px 24px rgba(23, 25, 26, 0.12); }
+  /* Mobile nav drawer overrides the small-screen absolute positioning */
+  .ps-mobile-nav.ps-nav-menu nav { position: fixed; top: 0; right: auto; width: 100%; min-width: 0; box-shadow: 0 8px 32px rgba(23, 25, 26, 0.18); }
   .ps-contact-link { order: 3; min-height: 2.25rem; padding: 0.35rem 0.65rem; font-size: 0.8rem !important; }
   .ps-hero { padding-top: 2.25rem; }
   .ps h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
@@ -197,7 +240,9 @@
   .ps-arrow { transform: rotate(90deg); justify-self: center; }
 }
 
-/* Production Paper & Signal additions */
+/* ============================================================
+   Production Paper & Signal — Navigation
+   ============================================================ */
 .ps-desktop-nav {
   display: flex;
   align-items: center;
@@ -206,6 +251,8 @@
 .ps-mobile-nav {
   display: none;
 }
+
+/* Mobile nav: full-width opaque drawer (fixes overlay-on-hero bug) */
 @media (max-width: 48rem) {
   .ps-desktop-nav {
     display: none;
@@ -213,6 +260,58 @@
   .ps-mobile-nav {
     display: block;
   }
+  /* Override the default small floating dropdown with a full-width drawer */
+  .ps-mobile-nav.ps-nav-menu nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    min-width: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 1rem 1.25rem 1.5rem;
+    background: var(--color-surface);
+    border: none;
+    border-bottom: 3px solid var(--color-ink);
+    box-shadow: 0 8px 32px rgba(23, 25, 26, 0.18);
+    gap: 0.25rem;
+  }
+  .ps-mobile-nav.ps-nav-menu[open] ~ * {
+    /* prevent body scroll behind open drawer */
+    overflow: hidden;
+  }
+  .ps-mobile-nav.ps-nav-menu nav a {
+    min-height: 3.25rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .ps-mobile-nav.ps-nav-menu nav a:last-child {
+    border-bottom: none;
+  }
+  .ps-mobile-nav.ps-nav-menu summary {
+    min-height: 2.5rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+.ps-mobile-nav-close-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.5rem 0.9rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 2px solid var(--color-ink);
+}
+.ps-mobile-nav-heading {
+  font: 700 0.75rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
 }
 
 .ps-card-research { background: var(--color-research) !important; }
@@ -337,6 +436,7 @@
   font-weight: 600;
   text-decoration: none;
   border-radius: 2px;
+  line-height: 1;
 }
 .ps-card-action:hover {
   background: var(--color-sunken);
@@ -353,6 +453,8 @@
 .ps-card-action .ps-action-icon {
   font-size: .95rem;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .ps-card-editorial h3 {
@@ -460,9 +562,9 @@
 /* Desktop (>= 56.25rem / 900px): Spacious, balanced multi-column layout */
 @media (min-width: 56.25rem) {
   .ps-footer-grid {
-    grid-template-columns: minmax(16rem, 26rem) auto auto auto;
-    justify-content: space-between;
-    gap: 2rem 3.5rem;
+    grid-template-columns: minmax(16rem, 24rem) 1fr 1fr auto;
+    justify-content: start;
+    gap: 2rem 4rem;
   }
   .ps-footer-top-col {
     justify-self: end;
@@ -1410,17 +1512,20 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  align-items: start;
 }
 
 @media (min-width: 48rem) {
   .ps-skills-directory-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
   }
 }
 
 @media (min-width: 72rem) {
   .ps-skills-directory-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
   }
 }
 
@@ -1787,3 +1892,435 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .ps, .ps * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+/* ============================================================
+   EDITORIAL CHAPTER SYSTEM — Visual Chapter Colour Identity
+   Each homepage section has a distinct tonal identity.
+   Implemented as CSS-only background washes on the section wrapper.
+   No JavaScript required.
+   ============================================================ */
+
+/* Chapter: Featured Projects — warm peach engineering atmosphere */
+.ps-section--chapter-projects {
+  background-color: rgba(244, 217, 198, 0.28);
+  border-top: 1px solid rgba(244, 217, 198, 0.9);
+  position: relative;
+}
+.ps-section--chapter-projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-project) 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* Chapter: Skills & Capabilities — cool sage technical atmosphere */
+.ps-section--chapter-skills {
+  background-color: rgba(213, 226, 208, 0.25);
+  border-top: 1px solid rgba(213, 226, 208, 0.85);
+  position: relative;
+}
+.ps-section--chapter-skills::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-writing) 0%, transparent 100%);
+  opacity: 0.65;
+}
+/* Override the sunken background from the existing .ps-section--sunken when chapter class is applied */
+.ps-section--chapter-skills.ps-section--sunken {
+  background-color: rgba(213, 226, 208, 0.22);
+  border: none;
+  border-top: 1px solid rgba(213, 226, 208, 0.85);
+  margin-block: 0;
+}
+
+/* Chapter: Research & Writing — cool slate-blue scholarly atmosphere */
+.ps-section--chapter-research {
+  background-color: rgba(210, 224, 234, 0.22);
+  border-top: 1px solid rgba(210, 224, 234, 0.8);
+  position: relative;
+}
+.ps-section--chapter-research::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-research) 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* Chapter: About — neutral warm (subtle lift from base cream) */
+.ps-section--chapter-about {
+  background-color: rgba(247, 244, 236, 0.6);
+  border-top: 1px solid var(--color-line);
+}
+
+/* ============================================================
+   OBSERVATORY IDENTITY THREAD
+   Compass marker + coordinate strip used as section divider elements
+   across the page to tie sections together with a subtle motif.
+   ============================================================ */
+
+/* Chapter marker: a small inline Observatory marker that can appear
+   at section eyebrow level. Used as a ::before pseudo on .ps-eyebrow
+   inside chapter sections. */
+.ps-section--chapter-projects .ps-eyebrow::before,
+.ps-section--chapter-skills .ps-eyebrow::before,
+.ps-section--chapter-research .ps-eyebrow::before {
+  content: '◉';
+  display: inline-block;
+  margin-right: 0.45rem;
+  font-size: 0.6rem;
+  color: var(--color-signal);
+  vertical-align: middle;
+  position: relative;
+  top: -0.05em;
+}
+
+/* ============================================================
+   EDITORIAL PORTRAIT — Option C
+   Full-bleed editorial portrait with observatory caption strip.
+   Replaces the arch/ring/floating-compass composition.
+   ============================================================ */
+
+.ps-editorial-portrait {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Observatory coordinate badge — stays above the portrait */
+.ps-portrait-obs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.6rem;
+  margin-bottom: 0.6rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  font: 600 clamp(0.58rem, 1.3vw, 0.68rem)/1.2 var(--font-mono);
+  color: var(--color-secondary);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.ps-portrait-obs-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-signal);
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* The main portrait frame — editorial rectangular crop with crosshair corners */
+.ps-portrait-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-sunken);
+}
+
+/* Crosshair registration marks — hairlines extending beyond frame corners */
+.ps-portrait-frame::before,
+.ps-portrait-frame::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+/* Top-left and bottom-right crosshair corners via outline + clip trick */
+.ps-portrait-frame::before {
+  top: -6px;
+  left: -6px;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid var(--color-ink);
+  border-left: 1px solid var(--color-ink);
+  opacity: 0.5;
+}
+.ps-portrait-frame::after {
+  bottom: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-bottom: 1px solid var(--color-ink);
+  border-right: 1px solid var(--color-ink);
+  opacity: 0.5;
+}
+
+/* Remaining two crosshair corners via additional elements inside the frame */
+.ps-portrait-corner-tr,
+.ps-portrait-corner-bl {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.ps-portrait-corner-tr {
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid var(--color-ink);
+  border-right: 1px solid var(--color-ink);
+}
+.ps-portrait-corner-bl {
+  bottom: -6px;
+  left: -6px;
+  width: 18px;
+  height: 18px;
+  border-bottom: 1px solid var(--color-ink);
+  border-left: 1px solid var(--color-ink);
+}
+
+/* The portrait photograph — full-bleed fill, no translateY offset */
+.ps-portrait-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 500ms ease;
+}
+
+.ps-portrait-frame:hover .ps-portrait-photo {
+  transform: scale(1.03);
+}
+
+/* Observatory compass reticle — printed inside lower-left corner of frame,
+   as an SVG composited into the image layer */
+.ps-portrait-compass-overlay {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  z-index: 2;
+  opacity: 0.75;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+.ps-portrait-frame:hover .ps-portrait-compass-overlay {
+  opacity: 0.9;
+}
+
+/* Subtle vignette on the portrait to integrate photo with paper background */
+.ps-portrait-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, transparent 55%, rgba(239, 235, 223, 0.45) 100%),
+    linear-gradient(to right, rgba(239, 235, 223, 0.15) 0%, transparent 20%, transparent 80%, rgba(239, 235, 223, 0.15) 100%);
+}
+
+/* Editorial caption strip — below the portrait frame */
+.ps-portrait-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.4rem 0.65rem;
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font: 600 0.65rem/1.2 var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+.ps-portrait-caption-name {
+  color: var(--color-surface);
+}
+
+.ps-portrait-caption-id {
+  color: var(--color-signal);
+}
+
+/* Placeholder (when no photo available) */
+.ps-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #F8F5ED 0%, #EBE6DA 100%);
+  gap: 0.5rem;
+}
+
+.ps-portrait-mono-initials {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+
+.ps-portrait-mono-role {
+  font: 700 0.72rem/1.2 var(--font-mono);
+  letter-spacing: 0.12em;
+  color: var(--color-secondary);
+}
+
+/* Responsive portrait */
+@media (max-width: 52rem) {
+  .ps-editorial-portrait {
+    max-width: 18rem;
+    justify-self: center;
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 34rem) {
+  .ps-editorial-portrait {
+    max-width: 15rem;
+  }
+}
+
+/* ============================================================
+   HOMEPAGE ABOUT SECTION — editorial two-column treatment
+   ============================================================ */
+.ps-about-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.ps-about-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+.ps-about-aside-label {
+  font: 700 0.72rem/1.4 var(--font-mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin: 0 0 0.75rem;
+}
+.ps-about-aside-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed var(--color-line);
+}
+.ps-about-aside-stat:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.ps-about-aside-num {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-ink);
+}
+.ps-about-aside-desc {
+  font: 600 0.7rem/1.3 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+}
+@media (max-width: 48rem) {
+  .ps-about-editorial {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .ps-about-aside {
+    display: none;
+  }
+}
+
+/* ============================================================
+   SKILLS OVERVIEW — section enhancements for chapter identity
+   ============================================================ */
+.ps-skills-overview-section.ps-section--chapter-skills {
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: 0;
+  margin-block: 0;
+}
+
+/* ============================================================
+   SKILLS METRIC STRIP — positive framing reframe
+   ============================================================ */
+.ps-skills-stat-strip--positive .ps-stat-item:nth-child(3) .ps-stat-num {
+  font-size: 1.4rem;
+  color: var(--color-secondary);
+}
+.ps-skills-stat-strip--positive .ps-stat-item:nth-child(3) .ps-stat-label {
+  color: var(--color-secondary);
+  opacity: 0.75;
+}
+
+/* ============================================================
+   PROJECT CARD VISUAL — enhanced prominence
+   Make SVG schematics the visual centrepiece of the card header
+   ============================================================ */
+.ps-card-visual {
+  width: calc(100% + clamp(1.25rem, 3vw, 2rem) * 2);
+  margin-left: calc(-1 * clamp(1.25rem, 3vw, 2rem));
+  margin-right: calc(-1 * clamp(1.25rem, 3vw, 2rem));
+  margin-top: calc(-1 * clamp(1.25rem, 3vw, 2rem));
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-ink);
+}
+
+/* ============================================================
+   SECTION TRANSITION LINES — replace uniform line-only dividers
+   with slightly more interesting section openers for chapters
+   ============================================================ */
+.ps-section {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  border-top: 1px solid var(--color-line);
+}
+/* Chapter sections override the default grey border */
+.ps-section--chapter-projects,
+.ps-section--chapter-skills,
+.ps-section--chapter-research,
+.ps-section--chapter-about {
+  border-top: none; /* handled by ::before gradient stripe */
+}
+
+/* ============================================================
+   SKILLS OVERVIEW CTA — fix button text wrapping
+   ============================================================ */
+.ps-skills-overview-cta .ps-button {
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   REDUCED MOTION — override everything at the end
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .ps, .ps * {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .ps-portrait-frame:hover .ps-portrait-photo {
+    transform: none !important;
+  }
+}

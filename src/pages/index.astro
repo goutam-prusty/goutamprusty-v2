@@ -59,11 +59,14 @@ const homeJsonLd = [
     ],
   },
 ];
+
+// Inline SVG arrow — replaces Unicode → for consistent cross-platform alignment
+const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M2 6.5h9M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 ---
 
 <ProductionPaperSignalLayout
-  title="Goutam Prusty — Research, writing, and practical systems"
-  description="A personal library of strategic intelligence, analytical writing, and practical experiments by Goutam Prusty."
+  title="Goutam Prusty — AI Engineer"
+  description="AI Engineering portfolio — projects, technical skills, research, and writing by Goutam Prusty. Based in Bengaluru."
   jsonLd={homeJsonLd}
 >
   {/* 1. Hero */}
@@ -76,22 +79,31 @@ const homeJsonLd = [
         I explore intelligence, computing, and the systems shaping emerging technology through research and hands-on software projects. I turn questions into things I can test, build, and improve. I believe there is always more to understand and that's what keeps me curious.
       </p>
       <div class="ps-actions">
-        <a class="ps-button" href="/projects/">View Projects <span aria-hidden="true">→</span></a>
-        <a class="ps-text-link" href="/about/">About Goutam <span aria-hidden="true">→</span></a>
+        <a class="ps-button" href="/projects/">
+          View Projects
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
+        <a class="ps-text-link" href="/about/">
+          About Goutam
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
       </div>
     </div>
     <ObservatoryHeroPortrait />
   </section>
 
-  {/* 2. Featured Projects (Conditional: rendered only when verified eligible projects exist) */}
+  {/* 2. Featured Projects — Chapter: warm peach engineering */}
   {featuredProjects.length > 0 && (
-    <section class="ps-section" id="featured-projects" aria-labelledby="featured-projects-title">
+    <section class="ps-section ps-section--chapter-projects" id="featured-projects" aria-labelledby="featured-projects-title">
       <div class="ps-section-head">
         <div>
           <p class="ps-eyebrow">Engineering &amp; Systems</p>
           <h2 id="featured-projects-title">Featured Projects</h2>
         </div>
-        <a class="ps-text-link" href="/projects/">Explore all projects <span aria-hidden="true">→</span></a>
+        <a class="ps-text-link" href="/projects/">
+          Explore all projects
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
       </div>
       <div class:list={['ps-project-grid', { 'ps-project-grid--single': featuredProjects.length === 1 }]}>
         {featuredProjects.map((project: any, idx: number) => (
@@ -101,19 +113,25 @@ const homeJsonLd = [
     </section>
   )}
 
-  {/* 3. Technical Skills Overview (Compact Recruiter-Focused Matrix) */}
-  <SkillsOverview id="skills-overview" />
+  {/* 3. Technical Skills Overview — Chapter: sage technical field */}
+  <SkillsOverview id="skills-overview" class="ps-section--chapter-skills" />
 
-  {/* 4. Research & Writing */}
-  <section class="ps-section" id="research-writing" aria-labelledby="research-writing-title">
+  {/* 4. Research & Writing — Chapter: cool blue scholarly */}
+  <section class="ps-section ps-section--chapter-research" id="research-writing" aria-labelledby="research-writing-title">
     <div class="ps-section-head">
       <div>
         <p class="ps-eyebrow">Curated briefings &amp; analysis</p>
         <h2 id="research-writing-title">Research &amp; Writing</h2>
       </div>
       <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-        <a class="ps-text-link" href="/research/">Explore all research <span aria-hidden="true">→</span></a>
-        <a class="ps-text-link" href="/writing/">Browse all writing <span aria-hidden="true">→</span></a>
+        <a class="ps-text-link" href="/research/">
+          Explore all research
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
+        <a class="ps-text-link" href="/writing/">
+          Browse all writing
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
       </div>
     </div>
     <div class="ps-project-grid">
@@ -127,7 +145,7 @@ const homeJsonLd = [
         <p>{resSummary}</p>
         <span class="ps-card-foot">
           <span>{resLength} · {resCitations}</span>
-          <span aria-hidden="true">Read report →</span>
+          <span aria-hidden="true">Read report</span>
         </span>
       </a>
 
@@ -141,7 +159,7 @@ const homeJsonLd = [
         <p>{blg1Summary}</p>
         <span class="ps-card-foot">
           <span>{blg1Length} · Derived from RES-018</span>
-          <span aria-hidden="true">Read article →</span>
+          <span aria-hidden="true">Read article</span>
         </span>
       </a>
     </div>
@@ -150,23 +168,49 @@ const homeJsonLd = [
     </p>
   </section>
 
-  {/* 5. About */}
-  <section class="ps-section" id="about" aria-labelledby="about-title">
-    <p class="ps-eyebrow">About the work</p>
-    <h2 id="about-title">Work worth understanding.</h2>
-    <p class="ps-lede">
-      This site brings together software projects, structured research briefings, and analytical writing focused on how computing systems and artificial intelligence operate under real-world constraints.
-    </p>
-    <p>
-      Every project and report is documented with clear scope, source evidence, and practical evaluation.
-    </p>
-    <a class="ps-text-link" href="/about/">More on the About page <span aria-hidden="true">→</span></a>
+  {/* 5. About — Chapter: neutral warm, editorial two-column */}
+  <section class="ps-section ps-section--chapter-about" id="about" aria-labelledby="about-title">
+    <div class="ps-about-editorial">
+      <div>
+        <p class="ps-eyebrow">About the work</p>
+        <h2 id="about-title">Work worth understanding.</h2>
+        <p class="ps-lede">
+          This site brings together software projects, structured research briefings, and analytical writing focused on how computing systems and artificial intelligence operate under real-world constraints.
+        </p>
+        <p>
+          Every project and report is documented with clear scope, source evidence, and practical evaluation.
+        </p>
+        <a class="ps-text-link" href="/about/">
+          More on the About page
+          <span aria-hidden="true" set:html={ArrowRight}></span>
+        </a>
+      </div>
+      <aside class="ps-about-aside" aria-label="Quick facts">
+        <p class="ps-about-aside-label">At a glance</p>
+        <div class="ps-about-aside-stat">
+          <span class="ps-about-aside-num">2</span>
+          <span class="ps-about-aside-desc">Published projects</span>
+        </div>
+        <div class="ps-about-aside-stat">
+          <span class="ps-about-aside-num">55</span>
+          <span class="ps-about-aside-desc">Technologies &amp; skills</span>
+        </div>
+        <div class="ps-about-aside-stat">
+          <span class="ps-about-aside-num">42+</span>
+          <span class="ps-about-aside-desc">Research &amp; writing pieces</span>
+        </div>
+        <div class="ps-about-aside-stat">
+          <span class="ps-about-aside-num">BLR</span>
+          <span class="ps-about-aside-desc">12.9716° N · 77.5946° E</span>
+        </div>
+      </aside>
+    </div>
   </section>
 
   {/* 6. Contact strip */}
   <section class="ps-contact" id="contact" aria-labelledby="contact-title">
     <div>
-      <p class="ps-eyebrow">Inquiries &amp; Exchange</p>
+      <p class="ps-eyebrow" style="color: rgba(253,252,248,0.65);">Inquiries &amp; Exchange</p>
       <h2 id="contact-title">Have a thoughtful question or discussion?</h2>
       <p>Whether discussing frontier research, technical methodology, or potential collaboration, genuine inquiries are welcome.</p>
     </div>
