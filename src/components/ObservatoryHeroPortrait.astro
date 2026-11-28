@@ -150,7 +150,7 @@ if (fsModule && pathModule && proc?.cwd) {
   .ps-observatory-hero {
     position: relative;
     width: 100%;
-    max-width: 27rem;
+    max-width: 24.5rem;
     justify-self: end;
     display: flex;
     flex-direction: column;
@@ -225,7 +225,7 @@ if (fsModule && pathModule && proc?.cwd) {
     inset: 5% -4% -2% 4%;
     background: var(--color-project);
     border: 1px solid var(--color-ink);
-    border-radius: 220px 220px 0 0;
+    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
     z-index: 1;
   }
 
@@ -249,7 +249,7 @@ if (fsModule && pathModule && proc?.cwd) {
     overflow: hidden;
     background: var(--color-sunken);
     border: 1.5px solid var(--color-ink);
-    border-radius: 9999px 9999px 0 0;
+    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
     box-shadow: 0 10px 28px rgba(23, 25, 26, 0.08);
   }
 
@@ -257,13 +257,15 @@ if (fsModule && pathModule && proc?.cwd) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center top;
+    transform: translateY(32px) scale(1.10);
+    transform-origin: center top;
     display: block;
     transition: transform 400ms ease;
   }
 
   .ps-observatory-arch:hover .ps-observatory-photo {
-    transform: scale(1.02);
+    transform: translateY(32px) scale(1.12);
   }
 
   /* Placeholder Styling */
@@ -350,7 +352,7 @@ if (fsModule && pathModule && proc?.cwd) {
     position: absolute;
     inset: 5px;
     border: 1px solid rgba(23, 25, 26, 0.15);
-    border-radius: 9999px 9999px 0 0;
+    border-radius: 50% 50% 0 0 / 34% 34% 0 0;
     pointer-events: none;
     z-index: 4;
   }
@@ -358,8 +360,8 @@ if (fsModule && pathModule && proc?.cwd) {
   /* Integrated Observatory Navigational Compass Instrument */
   .ps-observatory-compass {
     position: absolute;
-    top: -4px;
-    right: -4px;
+    top: -6px;
+    right: -6px;
     width: 52px;
     height: 52px;
     z-index: 5;
@@ -403,9 +405,15 @@ if (fsModule && pathModule && proc?.cwd) {
   /* Responsive Adjustments */
   @media (max-width: 52rem) {
     .ps-observatory-hero {
-      max-width: 22rem;
+      max-width: 21rem;
       justify-self: center;
       margin-top: 1rem;
+    }
+    .ps-observatory-photo {
+      transform: translateY(26px) scale(1.10);
+    }
+    .ps-observatory-arch:hover .ps-observatory-photo {
+      transform: translateY(26px) scale(1.12);
     }
     .ps-observatory-coords {
       align-self: center;
@@ -417,7 +425,13 @@ if (fsModule && pathModule && proc?.cwd) {
 
   @media (max-width: 26rem) {
     .ps-observatory-hero {
-      max-width: 19rem;
+      max-width: 18rem;
+    }
+    .ps-observatory-photo {
+      transform: translateY(20px) scale(1.10);
+    }
+    .ps-observatory-arch:hover .ps-observatory-photo {
+      transform: translateY(20px) scale(1.12);
     }
     .ps-observatory-coords {
       font-size: 0.58rem;

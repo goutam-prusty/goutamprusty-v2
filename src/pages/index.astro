@@ -91,7 +91,7 @@ const homeJsonLd = [
           <p class="ps-eyebrow">Engineering &amp; Systems</p>
           <h2 id="featured-projects-title">Featured Projects</h2>
         </div>
-        <a class="ps-text-link" href="/projects/">Explore all projects ↗</a>
+        <a class="ps-text-link" href="/projects/">Explore all projects <span aria-hidden="true">→</span></a>
       </div>
       <div class:list={['ps-project-grid', { 'ps-project-grid--single': featuredProjects.length === 1 }]}>
         {featuredProjects.map((project: any, idx: number) => (
@@ -112,8 +112,8 @@ const homeJsonLd = [
         <h2 id="research-writing-title">Research &amp; Writing</h2>
       </div>
       <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-        <a class="ps-text-link" href="/research/">Explore all research ↗</a>
-        <a class="ps-text-link" href="/writing/">Browse all writing ↗</a>
+        <a class="ps-text-link" href="/research/">Explore all research <span aria-hidden="true">→</span></a>
+        <a class="ps-text-link" href="/writing/">Browse all writing <span aria-hidden="true">→</span></a>
       </div>
     </div>
     <div class="ps-project-grid">
@@ -127,7 +127,7 @@ const homeJsonLd = [
         <p>{resSummary}</p>
         <span class="ps-card-foot">
           <span>{resLength} · {resCitations}</span>
-          <span aria-hidden="true">Read report ↗</span>
+          <span aria-hidden="true">Read report →</span>
         </span>
       </a>
 
@@ -141,7 +141,7 @@ const homeJsonLd = [
         <p>{blg1Summary}</p>
         <span class="ps-card-foot">
           <span>{blg1Length} · Derived from RES-018</span>
-          <span aria-hidden="true">Read article ↗</span>
+          <span aria-hidden="true">Read article →</span>
         </span>
       </a>
     </div>
@@ -160,7 +160,7 @@ const homeJsonLd = [
     <p>
       Every project and report is documented with clear scope, source evidence, and practical evaluation.
     </p>
-    <a class="ps-text-link" href="/about/">More on the About page ↗</a>
+    <a class="ps-text-link" href="/about/">More on the About page <span aria-hidden="true">→</span></a>
   </section>
 
   {/* 6. Contact strip */}

@@ -1,5 +1,5 @@
 ---
-import { getHomepageOverviewData } from '../lib/skills';
+import { getHomepageOverviewData, getSkillBadgeLabel } from '../lib/skills';
 
 export interface Props {
   id?: string;
@@ -39,6 +39,7 @@ const overviewData = getHomepageOverviewData();
           {representativeSkills.map((skill) => {
             const hasEvidence = skill.evidence && skill.evidence.length > 0;
             const primaryEvidence = hasEvidence ? skill.evidence[0] : null;
+            const badgeLabel = getSkillBadgeLabel(skill);
 
             return (
               <li class="ps-skill-tag-item">
@@ -46,22 +47,24 @@ const overviewData = getHomepageOverviewData();
                   <a
                     href={`/skills/${skill.id}/`}
                     class="ps-skill-tag ps-skill-tag--evidence"
-                    title={`View evidence: ${primaryEvidence.badgeLabel}`}
+                    title={`View evidence: ${badgeLabel ?? skill.name}`}
                   >
                     <span>{skill.name}</span>
-                    <span
-                      class:list={[
-                        'ps-tag-pip',
-                        {
-                          'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
-                          'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
-                          'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
-                          'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
-                        },
-                      ]}
-                    >
-                      {primaryEvidence.badgeLabel}
-                    </span>
+                    {badgeLabel && (
+                      <span
+                        class:list={[
+                          'ps-tag-pip',
+                          {
+                            'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
+                            'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
+                            'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
+                            'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
+                          },
+                        ]}
+                      >
+                        {badgeLabel}
+                      </span>
+                    )}
                   </a>
                 ) : (
                   <span class="ps-skill-tag ps-skill-tag--static">

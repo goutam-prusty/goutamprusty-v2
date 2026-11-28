@@ -104,3 +104,59 @@ export function formatEvidenceClassification(type: EvidenceClassification): stri
       return 'Supporting Evidence';
   }
 }
+
+/**
+ * Derives unique qualifying project count for a skill.
+ * Canonical data integrity rules:
+ * - Only counts explicit evidence where contentType === 'project' with a valid contentId
+ * - Counts UNIQUE project IDs, not evidence records
+ * - Never counts research reports or technical writing articles
+ * - Never counts planned architecture
+ */
+export function getSkillProjectCount(skill: CanonicalSkill): number {
+  if (!skill.evidence || skill.evidence.length === 0) return 0;
+  const projectIds = new Set<string>();
+  for (const item of skill.evidence) {
+    if (item.contentType === 'project' && item.contentId) {
+      projectIds.add(item.contentId);
+    }
+  }
+  return projectIds.size;
+}
+
+/**
+ * Returns formatted project count string:
+ * - Exactly 1 project: '1 project'
+ * - Multiple projects: 'X projects'
+ * - Zero projects: null (strictly never renders '0 projects' or empty badge)
+ */
+export function formatSkillProjectCount(skill: CanonicalSkill): string | null {
+  const count = getSkillProjectCount(skill);
+  if (count === 1) return '1 project';
+  if (count > 1) return `${count} projects`;
+  return null;
+}
+
+/**
+ * Returns the badge label for skill tag badges.
+ * Replaces individual project names/codes (e.g. PRJ-004, PRJ-005) with project counts:
+ * - Skills linked to projects: '1 project' (or 'X projects')
+ * - Skills linked to research: 'Research'
+ * - Skills linked to technical writing: 'Analysis'
+ * - Display-only skills: null
+ */
+export function getSkillBadgeLabel(skill: CanonicalSkill): string | null {
+  if (!skill.evidence || skill.evidence.length === 0) return null;
+  const projectCount = formatSkillProjectCount(skill);
+  if (projectCount) {
+    return projectCount;
+  }
+  const primary = skill.evidence[0];
+  if (primary.classification === 'research_evidence') {
+    return 'Research';
+  }
+  if (primary.classification === 'technical_writing') {
+    return 'Analysis';
+  }
+  return null;
+}

@@ -3,6 +3,8 @@ import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayo
 import {
   getEvidenceBackedSkills,
   formatEvidenceClassification,
+  formatSkillProjectCount,
+  getSkillBadgeLabel,
   type CanonicalSkill,
   type EvidenceRecord,
 } from '../../lib/skills';
@@ -36,6 +38,7 @@ const siblingSkills = category
 
 const pageTitle = `${skill.name} — Technical Capability & Evidence — Goutam Prusty`;
 const pageDescription = `Verified engineering evidence and implementation details for ${skill.name} in Goutam Prusty's portfolio.`;
+const projectCountText = formatSkillProjectCount(skill);
 
 function getContentHref(item: EvidenceRecord): string {
   switch (item.contentType) {
@@ -95,6 +98,11 @@ const jsonLd = {
       <span>
         Classification: <strong>{formatEvidenceClassification(primaryEvidence.classification)}</strong>
       </span>
+      {projectCountText && (
+        <span class="ps-meta-item ps-meta-project-count">
+          Verified Projects: <strong>{projectCountText}</strong>
+        </span>
+      )}
       <span>
         Supporting sources: <strong>{skill.evidence.length} documented</strong>
       </span>
@@ -131,7 +139,7 @@ const jsonLd = {
                   },
                 ]}
               >
-                {item.badgeLabel}
+                {item.contentType === 'project' ? '1 project' : item.badgeLabel}
               </span>
               <span class="ps-evidence-type-tag">
                 {formatEvidenceClassification(item.classification)}
@@ -181,6 +189,7 @@ const jsonLd = {
       <ul class="ps-skill-tags-list" role="list">
         {siblingSkills.map((sibling) => {
           const hasEv = sibling.evidence && sibling.evidence.length > 0;
+          const badge = getSkillBadgeLabel(sibling);
           return (
             <li class="ps-skill-tag-item">
               {hasEv ? (
@@ -189,7 +198,7 @@ const jsonLd = {
                   class="ps-skill-tag ps-skill-tag--evidence"
                 >
                   <span>{sibling.name}</span>
-                  <span class="ps-tag-pip ps-tag-pip--in-dev">{sibling.evidence[0].badgeLabel}</span>
+                  {badge && <span class="ps-tag-pip ps-tag-pip--in-dev">{badge}</span>}
                 </a>
               ) : (
                 <span class="ps-skill-tag ps-skill-tag--static">

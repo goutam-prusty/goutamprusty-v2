@@ -1,6 +1,6 @@
 ---
 import ProductionPaperSignalLayout from '../../layouts/ProductionPaperSignalLayout.astro';
-import { getCategoriesWithSkills, getAllSkills, getEvidenceBackedSkills } from '../../lib/skills';
+import { getCategoriesWithSkills, getAllSkills, getEvidenceBackedSkills, getSkillBadgeLabel } from '../../lib/skills';
 
 const categories = getCategoriesWithSkills();
 const allSkills = getAllSkills();
@@ -60,19 +60,19 @@ const jsonLd = {
       </p>
       <div class="ps-legend-items">
         <div class="ps-legend-entry">
-          <span class="ps-tag-pip ps-tag-pip--published">PRJ-004</span>
-          <span>Published Project Evidence (Clickable)</span>
+          <span class="ps-tag-pip ps-tag-pip--published">1 project</span>
+          <span>Published Project Implementation (Clickable)</span>
         </div>
         <div class="ps-legend-entry">
-          <span class="ps-tag-pip ps-tag-pip--in-dev">PRJ-005</span>
+          <span class="ps-tag-pip ps-tag-pip--in-dev">1 project</span>
           <span>Active Development Foundation (Clickable)</span>
         </div>
         <div class="ps-legend-entry">
-          <span class="ps-tag-pip ps-tag-pip--research">RES-018</span>
+          <span class="ps-tag-pip ps-tag-pip--research">Research</span>
           <span>Empirical Research Briefing (Clickable)</span>
         </div>
         <div class="ps-legend-entry">
-          <span class="ps-tag-pip ps-tag-pip--writing">BLG-001</span>
+          <span class="ps-tag-pip ps-tag-pip--writing">Analysis</span>
           <span>Technical Writing Analysis (Clickable)</span>
         </div>
         <div class="ps-legend-entry">
@@ -101,6 +101,7 @@ const jsonLd = {
             {category.skills.map((skill) => {
               const hasEvidence = skill.evidence && skill.evidence.length > 0;
               const primaryEvidence = hasEvidence ? skill.evidence[0] : null;
+              const badgeLabel = getSkillBadgeLabel(skill);
 
               return (
                 <li class="ps-skill-tag-item">
@@ -108,22 +109,24 @@ const jsonLd = {
                     <a
                       href={`/skills/${skill.id}/`}
                       class="ps-skill-tag ps-skill-tag--evidence"
-                      aria-label={`${skill.name} — Supported by ${primaryEvidence.badgeLabel} ${primaryEvidence.classification.replace('_', ' ')}`}
+                      aria-label={`${skill.name} — ${badgeLabel ? badgeLabel + ' · ' : ''}${primaryEvidence.classification.replace('_', ' ')}`}
                     >
                       <span class="ps-skill-name">{skill.name}</span>
-                      <span
-                        class:list={[
-                          'ps-tag-pip',
-                          {
-                            'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
-                            'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
-                            'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
-                            'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
-                          },
-                        ]}
-                      >
-                        {primaryEvidence.badgeLabel}
-                      </span>
+                      {badgeLabel && (
+                        <span
+                          class:list={[
+                            'ps-tag-pip',
+                            {
+                              'ps-tag-pip--published': primaryEvidence.classification === 'project_implementation',
+                              'ps-tag-pip--in-dev': primaryEvidence.classification === 'active_development',
+                              'ps-tag-pip--research': primaryEvidence.classification === 'research_evidence',
+                              'ps-tag-pip--writing': primaryEvidence.classification === 'technical_writing',
+                            },
+                          ]}
+                        >
+                          {badgeLabel}
+                        </span>
+                      )}
                     </a>
                   ) : (
                     <span class="ps-skill-tag ps-skill-tag--static">
