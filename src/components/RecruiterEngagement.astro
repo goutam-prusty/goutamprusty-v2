@@ -1,0 +1,509 @@
+---
+/**
+ * RecruiterEngagement.astro — Stage 3B
+ * Paper & Signal × Observatory
+ *
+ * Subtle, non-intrusive contextual engagement card for recruiters and hiring managers.
+ * Triggered only after meaningful visitor exploration.
+ * Dismissal persists per browser session.
+ */
+interface Props {
+  resumeUrl?: string | null;
+}
+
+const { resumeUrl = null } = Astro.props;
+---
+
+<aside
+  class="ps-recruiter-drawer"
+  id="recruiter-engagement"
+  aria-label="Recruiter Invitation"
+  role="region"
+  aria-live="polite"
+  hidden
+>
+  <!-- Observatory Header Strip -->
+  <div class="ps-recruiter-header">
+    <div class="ps-recruiter-badge">
+      <span class="ps-recruiter-dot" aria-hidden="true"></span>
+      <span>OBS // DISPATCH · REC.01</span>
+    </div>
+    <button
+      type="button"
+      class="ps-recruiter-close"
+      id="recruiter-close-btn"
+      aria-label="Dismiss recruiter invitation"
+      title="Dismiss"
+    >
+      <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="2" y1="2" x2="10" y2="10"></line>
+        <line x1="10" y1="2" x2="2" y2="10"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="ps-recruiter-body">
+    <!-- State 1: Prompt -->
+    <div id="recruiter-step-prompt" class="ps-recruiter-step">
+      <p class="ps-recruiter-msg">
+        A recruiter found their way here? Good timing. I've been building things worth talking about.
+      </p>
+      <div class="ps-recruiter-choices">
+        <button
+          type="button"
+          class="ps-recruiter-btn ps-recruiter-btn-primary"
+          id="recruiter-hiring-btn"
+        >
+          I'm hiring
+        </button>
+        <button
+          type="button"
+          class="ps-recruiter-btn ps-recruiter-btn-secondary"
+          id="recruiter-exploring-btn"
+        >
+          I'm just exploring
+        </button>
+      </div>
+    </div>
+
+    <!-- State 2: Actions / Next Steps -->
+    <div id="recruiter-step-actions" class="ps-recruiter-step" style="display: none;">
+      <p class="ps-recruiter-step-title">Next Steps</p>
+      <div class="ps-recruiter-actions-list">
+        <a href="/projects/" class="ps-recruiter-action-link" id="recruiter-action-projects">
+          <span>View Projects</span>
+          <span class="ps-recruiter-arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/contact/" class="ps-recruiter-action-link" id="recruiter-action-contact">
+          <span>Get in Touch</span>
+          <span class="ps-recruiter-arrow" aria-hidden="true">→</span>
+        </a>
+        {resumeUrl && (
+          <a
+            href={resumeUrl}
+            class="ps-recruiter-action-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="recruiter-action-resume"
+          >
+            <span>Download Résumé</span>
+            <span class="ps-recruiter-arrow" aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+      <div class="ps-recruiter-back-wrap">
+        <button type="button" class="ps-recruiter-back-btn" id="recruiter-back-btn">
+          ← Back
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .ps-recruiter-drawer {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 22.5rem;
+    max-width: calc(100vw - 3rem);
+    background: var(--color-surface, #FDFCF8);
+    border: 1px solid var(--color-ink, #17191A);
+    box-shadow: 0 10px 30px rgba(23, 25, 26, 0.12), 0 2px 8px rgba(23, 25, 26, 0.06);
+    border-radius: 4px;
+    z-index: 45;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .ps-recruiter-drawer.ps-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .ps-recruiter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.85rem;
+    background: var(--color-sunken, #EFEBDF);
+    border-bottom: 1px solid var(--color-ink, #17191A);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  .ps-recruiter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font: 700 0.65rem/1.2 var(--font-mono, monospace);
+    letter-spacing: 0.08em;
+    color: var(--color-ink, #17191A);
+    text-transform: uppercase;
+  }
+
+  .ps-recruiter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-signal, #D3F03C);
+    border: 1px solid var(--color-ink, #17191A);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .ps-recruiter-close {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-ink, #17191A);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border-radius: 2px;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  .ps-recruiter-close:hover {
+    background: rgba(23, 25, 26, 0.08);
+    border-color: rgba(23, 25, 26, 0.15);
+  }
+
+  .ps-recruiter-close:focus-visible {
+    outline: 2px solid var(--color-ink, #17191A);
+    outline-offset: 1px;
+  }
+
+  .ps-recruiter-body {
+    padding: 1.15rem 1.15rem 1.15rem;
+  }
+
+  .ps-recruiter-msg {
+    margin: 0 0 1rem;
+    font: 500 0.92rem/1.55 var(--font-body, sans-serif);
+    color: var(--color-ink, #17191A);
+  }
+
+  .ps-recruiter-choices {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .ps-recruiter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font: 600 0.85rem/1 var(--font-body, sans-serif);
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .ps-recruiter-btn-primary {
+    background: var(--color-ink, #17191A);
+    color: var(--color-surface, #FDFCF8);
+    border: 1px solid var(--color-ink, #17191A);
+  }
+
+  .ps-recruiter-btn-primary:hover {
+    background: #2D3133;
+    border-color: #2D3133;
+    transform: translateY(-1px);
+  }
+
+  .ps-recruiter-btn-primary:focus-visible {
+    outline: 2px solid var(--color-ink, #17191A);
+    outline-offset: 2px;
+  }
+
+  .ps-recruiter-btn-secondary {
+    background: transparent;
+    color: var(--color-secondary, #4A4F4C);
+    border: 1px solid transparent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0.6rem 0.5rem;
+  }
+
+  .ps-recruiter-btn-secondary:hover {
+    color: var(--color-ink, #17191A);
+  }
+
+  .ps-recruiter-btn-secondary:focus-visible {
+    outline: 2px solid var(--color-ink, #17191A);
+    outline-offset: 2px;
+  }
+
+  /* State 2: Actions */
+  .ps-recruiter-step-title {
+    margin: 0 0 0.75rem;
+    font: 700 1.05rem/1.2 var(--font-display, serif);
+    color: var(--color-ink, #17191A);
+  }
+
+  .ps-recruiter-actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ps-recruiter-action-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.85rem;
+    background: var(--color-paper, #F7F4EC);
+    border: 1px solid var(--color-ink, #17191A);
+    border-radius: 2px;
+    font: 600 0.88rem/1.2 var(--font-body, sans-serif);
+    color: var(--color-ink, #17191A);
+    text-decoration: none;
+    transition: background 150ms ease, transform 150ms ease;
+  }
+
+  .ps-recruiter-action-link:hover {
+    background: var(--color-sunken, #EFEBDF);
+    transform: translateX(2px);
+  }
+
+  .ps-recruiter-action-link:focus-visible {
+    outline: 2px solid var(--color-ink, #17191A);
+    outline-offset: 2px;
+  }
+
+  .ps-recruiter-arrow {
+    display: inline-block;
+    transition: transform 150ms ease;
+  }
+
+  .ps-recruiter-action-link:hover .ps-recruiter-arrow {
+    transform: translateX(2px);
+  }
+
+  .ps-recruiter-back-wrap {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .ps-recruiter-back-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-secondary, #4A4F4C);
+    font: 500 0.8rem/1 var(--font-body, sans-serif);
+    cursor: pointer;
+    padding: 0.35rem 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .ps-recruiter-back-btn:hover {
+    color: var(--color-ink, #17191A);
+  }
+
+  .ps-recruiter-back-btn:focus-visible {
+    outline: 2px solid var(--color-ink, #17191A);
+    outline-offset: 2px;
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 767px) {
+    .ps-recruiter-drawer {
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      width: auto;
+      max-width: none;
+    }
+    .ps-recruiter-choices {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ps-recruiter-drawer {
+      transition: none !important;
+      transform: none !important;
+    }
+    .ps-recruiter-btn,
+    .ps-recruiter-action-link,
+    .ps-recruiter-arrow {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function initRecruiterEngagement() {
+    const STORAGE_KEY = 'ps_recruiter_engagement';
+
+    function getStorage(key: string): string | null {
+      try {
+        return window.sessionStorage ? window.sessionStorage.getItem(key) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setStorage(key: string, val: string): void {
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(key, val);
+      } catch (e) {}
+    }
+
+    // If dismissed or interacted in this session, do not show again
+    if (getStorage(STORAGE_KEY)) {
+      return;
+    }
+
+    const drawer = document.getElementById('recruiter-engagement') as HTMLElement | null;
+    const closeBtn = document.getElementById('recruiter-close-btn');
+    const hiringBtn = document.getElementById('recruiter-hiring-btn');
+    const exploringBtn = document.getElementById('recruiter-exploring-btn');
+    const backBtn = document.getElementById('recruiter-back-btn');
+    const stepPrompt = document.getElementById('recruiter-step-prompt');
+    const stepActions = document.getElementById('recruiter-step-actions');
+    const firstActionLink = document.getElementById('recruiter-action-projects');
+
+    if (!drawer || !closeBtn || !hiringBtn || !exploringBtn) {
+      return;
+    }
+
+    let isVisible = false;
+    let triggerTimeout: number | undefined;
+
+    function reveal(): void {
+      if (!drawer || isVisible || getStorage(STORAGE_KEY)) return;
+      isVisible = true;
+      drawer.hidden = false;
+      // Force layout for smooth transition
+      void drawer.offsetWidth;
+      drawer.classList.add('ps-visible');
+    }
+
+    function dismiss(): void {
+      if (!drawer || !isVisible) return;
+      isVisible = false;
+      setStorage(STORAGE_KEY, 'dismissed');
+      drawer.classList.remove('ps-visible');
+      setTimeout(() => {
+        if (drawer) drawer.hidden = true;
+      }, 300);
+    }
+
+    // User selects "I'm hiring" -> reveal next steps
+    hiringBtn.addEventListener('click', () => {
+      setStorage(STORAGE_KEY, 'engaged');
+      if (stepPrompt && stepActions) {
+        stepPrompt.style.display = 'none';
+        stepActions.style.display = 'block';
+        if (firstActionLink) {
+          firstActionLink.focus();
+        }
+      }
+    });
+
+    // User selects "I'm just exploring" -> graceful dismissal
+    exploringBtn.addEventListener('click', () => {
+      dismiss();
+    });
+
+    // User clicks close (X)
+    closeBtn.addEventListener('click', () => {
+      dismiss();
+    });
+
+    // Return back to prompt from next-steps
+    if (backBtn && stepPrompt && stepActions) {
+      backBtn.addEventListener('click', () => {
+        stepActions.style.display = 'none';
+        stepPrompt.style.display = 'block';
+        hiringBtn.focus();
+      });
+    }
+
+    // Keyboard Escape to dismiss when card is active
+    window.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isVisible) {
+        dismiss();
+      }
+    });
+
+    // --- TRIGGER LOGIC ---
+    // Minimum wait time before evaluating triggers: 6 seconds
+    // Trigger on:
+    // 1. Scroll past 35% of page (exploring projects / research)
+    // 2. OR spending 25 seconds of engaged browsing
+    // 3. OR interaction with a project card expander or carousel
+
+    const MIN_TIME_MS = 6000;
+    const MAX_TIME_MS = 25000;
+    let minTimePassed = false;
+
+    setTimeout(() => {
+      minTimePassed = true;
+    }, MIN_TIME_MS);
+
+    // Safety fallback: reveal after sustained engagement (25s) if still on page and user has scrolled at least 150px
+    triggerTimeout = window.setTimeout(() => {
+      if (!getStorage(STORAGE_KEY) && window.scrollY > 150) {
+        reveal();
+      }
+    }, MAX_TIME_MS);
+
+    // Scroll listener (throttled)
+    let scrollScheduled = false;
+    function handleScroll() {
+      if (scrollScheduled || isVisible || getStorage(STORAGE_KEY)) return;
+      scrollScheduled = true;
+
+      window.requestAnimationFrame(() => {
+        scrollScheduled = false;
+        if (!minTimePassed || isVisible || getStorage(STORAGE_KEY)) return;
+
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+          const scrollFraction = window.scrollY / docHeight;
+          // Trigger when user has explored ~30% into the page
+          if (scrollFraction >= 0.30) {
+            reveal();
+            if (triggerTimeout) clearTimeout(triggerTimeout);
+          }
+        }
+      });
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Interaction trigger: clicking a project details expander or carousel button
+    function handleInteraction(e: Event) {
+      if (isVisible || getStorage(STORAGE_KEY) || !minTimePassed) return;
+      const target = e.target as HTMLElement | null;
+      if (target && target.closest('.ps-expand-btn, .ps-carousel-btn')) {
+        // Visitor actively engaged with interactive projects/carousels
+        setTimeout(() => {
+          if (!isVisible && !getStorage(STORAGE_KEY)) {
+            reveal();
+          }
+        }, 1200);
+      }
+    }
+
+    document.addEventListener('click', handleInteraction, { passive: true });
+  })();
+</script>

@@ -10,6 +10,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import SkillsOverview from '../components/SkillsOverview.astro';
 import ObservatoryHeroPortrait from '../components/ObservatoryHeroPortrait.astro';
 import EditorialCarousel from '../components/EditorialCarousel.astro';
+import RecruiterEngagement from '../components/RecruiterEngagement.astro';
 import { normalizeAssetPath } from '../lib/pathNormalizer';
 
 // 1. Projects Data (Sanity-backed T4 integration)
@@ -429,4 +430,7 @@ const ArrowRight = `<svg aria-hidden="true" focusable="false" width="13" height=
     </div>
     <a class="ps-button" href="/contact/">Get in touch</a>
   </section>
+
+  <!-- Contextual Recruiter Engagement (Stage 3B) -->
+  <RecruiterEngagement />
 </ProductionPaperSignalLayout>
