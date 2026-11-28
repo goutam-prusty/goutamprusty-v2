@@ -139,11 +139,11 @@
 }
 @media (max-width: 34rem) {
   .ps { --gutter: 1rem; }
-  .ps-header { min-height: 4.5rem; flex-wrap: wrap; padding-block: .75rem; }
-  .ps-nav-menu { order: 3; width: 100%; }
-  .ps-nav-menu summary { justify-content: space-between; }
-  .ps-nav-menu nav { position: static; width: 100%; margin-top: .4rem; }
-  .ps-contact-link { padding: .48rem .6rem; font-size: .8rem !important; }
+  .ps-header { min-height: 4rem; flex-wrap: nowrap; padding-block: 0.5rem; gap: 0.5rem; }
+  .ps-nav-menu { order: 2; width: auto; margin-left: auto; }
+  .ps-nav-menu summary { min-height: 2.25rem; padding: 0.35rem 0.65rem; font-size: 0.82rem; }
+  .ps-nav-menu nav { position: absolute; z-index: 50; top: calc(100% + 0.4rem); right: 0; width: max-content; min-width: 12rem; margin-top: 0; box-shadow: 0 8px 24px rgba(23, 25, 26, 0.12); }
+  .ps-contact-link { order: 3; min-height: 2.25rem; padding: 0.35rem 0.65rem; font-size: 0.8rem !important; }
   .ps-hero { padding-top: 2.25rem; }
   .ps h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
   .ps-section-head, .ps-contact { align-items: flex-start; flex-direction: column; }
@@ -1125,11 +1125,17 @@
 }
 
 .ps-tech-grid {
-  align-items: start;
+  align-items: stretch;
 }
 
 .ps-tech-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.ps-tech-card .ps-roadmap-list {
+  margin-top: 0;
 }
 .ps-tech-card:hover {
   border-color: var(--color-ink);
@@ -1226,6 +1232,38 @@
   letter-spacing: 0.03em;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.ps-tech-legend {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--color-line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem 0.85rem;
+  font: 500 0.74rem/1.3 var(--font-mono);
+  color: var(--color-secondary);
+  letter-spacing: 0.02em;
+}
+.ps-tech-legend-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  white-space: nowrap;
+}
+.ps-tech-legend-item {
+  white-space: nowrap;
+}
+.ps-tech-legend-sep {
+  color: var(--color-line);
+  user-select: none;
+}
+@media (max-width: 48rem) {
+  .ps-tech-legend {
+    justify-content: flex-start;
+  }
 }
 
 /* Project Card Color Differentiation: PRJ-004 vs PRJ-005 */

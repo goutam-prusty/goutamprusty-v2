@@ -240,12 +240,30 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
         </section>
       )}
 
-      {/* Product Video / Walkthrough Slot for PRJ-004 */}
+      {/* Interface & Live Application Walkthrough for PRJ-004 */}
       {isCommandCenter && (
         <section class="my-8" id="project-product-demonstration" aria-labelledby="project-video-heading">
-          <h2 id="project-video-heading" class="ps-section-label">Product Demonstration</h2>
+          <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+            <div>
+              <h2 id="project-video-heading" class="ps-section-label" style="margin: 0;">Verified Interface & Application Views</h2>
+              <p class="text-xs text-[var(--color-secondary)] font-mono mt-0.5">
+                Authentic screen captures from the live deployment at ai-engineer-command-center-seven.vercel.app
+              </p>
+            </div>
+            {links.live && (
+              <a
+                href={links.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ps-text-link text-xs font-mono"
+              >
+                Open live application ↗
+              </a>
+            )}
+          </div>
+
           {commandCenterVideoSrc ? (
-            <div class="overflow-hidden border border-[var(--color-line)] bg-black rounded-sm shadow-sm">
+            <div class="overflow-hidden border border-[var(--color-line)] bg-black rounded-sm shadow-sm mb-6">
               <video
                 controls
                 preload="metadata"
@@ -257,28 +275,82 @@ const projectJsonLd: Record<string, unknown> | undefined = !isLocalDraftPreview
                 Your browser does not support HTML5 video.
               </video>
             </div>
-          ) : (
-            <div class="p-6 border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm">
-              <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-                <span class="ps-card-badge ps-card-badge--status">Screen Recording Slot</span>
-                <span class="text-xs font-mono text-[var(--color-secondary)]">20–30s Demonstration</span>
-              </div>
-              <p class="text-sm text-[var(--color-secondary)] mb-4 leading-relaxed">
-                A live demonstration recording of the 20-week tracker, spaced revision deck, study session logger, and analytics engine. Place recording at <code class="text-xs bg-[var(--color-sunken)] px-1.5 py-0.5 rounded border border-[var(--color-line)]">/videos/prj-004-command-center-demo.webm</code>.
-              </p>
-              {links.live && (
-                <a
-                  href={links.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="ps-card-action ps-card-action--case-study"
-                >
-                  <span>Open Live Application to Inspect Interface</span>
-                  <span class="ps-action-icon" aria-hidden="true">↗</span>
-                </a>
-              )}
-            </div>
-          )}
+          ) : null}
+
+          {/* Featured Hero Screenshot */}
+          <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm mb-4">
+            <img
+              src="/images/projects/command-center/dashboard-overview.png"
+              alt="AI Engineer Command Center — Dashboard overview with 20-week curriculum roadmap and study room"
+              width="1440"
+              height="900"
+              class="w-full h-auto block"
+              loading="lazy"
+            />
+            <figcaption class="p-3 border-t border-[var(--color-line)] bg-[var(--color-sunken)] flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-[var(--color-secondary)]">
+              <span>VIEW 01 // MAIN WORKSPACE DASHBOARD & 20-WEEK CURRICULUM ROADMAP</span>
+              <span class="text-[var(--color-ink)] font-semibold">WEEK 1 ACTIVE</span>
+            </figcaption>
+          </figure>
+
+          {/* Sub-interface 2-column Grid */}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/study-room.png"
+                alt="Weekly Study Room — Data Science Foundation module checklist and scope"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 02 // WEEKLY STUDY ROOM & SUBTOPICS
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/flashcards-revision.png"
+                alt="Interactive Flashcards deck with 46 active recall cards and spaced repetition tags"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 03 // ACTIVE RECALL FLASHCARDS (46 CARDS)
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/progress-analytics.png"
+                alt="Progress Analytics — Official curriculum completion curves and topic mastery"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 04 // COMPETENCY METRICS & STUDY ANALYTICS
+              </figcaption>
+            </figure>
+
+            <figure class="border border-[var(--color-line)] bg-[var(--color-surface)] rounded-sm overflow-hidden shadow-sm">
+              <img
+                src="/images/projects/command-center/learning-journal.png"
+                alt="Learning Journal — Structured engineering study reflection and bug logs"
+                width="1440"
+                height="900"
+                class="w-full h-auto block"
+                loading="lazy"
+              />
+              <figcaption class="p-2.5 border-t border-[var(--color-line)] bg-[var(--color-sunken)] text-xs font-mono text-[var(--color-secondary)]">
+                VIEW 05 // STUDY REFLECTIONS & LOGGED NOTES
+              </figcaption>
+            </figure>
+          </div>
         </section>
       )}
 

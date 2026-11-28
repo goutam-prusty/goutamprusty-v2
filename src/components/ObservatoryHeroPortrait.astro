@@ -12,15 +12,22 @@ const proc = (globalThis as any).process;
 const fsModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('fs') : null;
 const pathModule: any = proc?.getBuiltinModule ? proc.getBuiltinModule('path') : null;
 
-const candidateExtensions = ['webp', 'jpg', 'jpeg', 'png'];
+// Approved editorial portrait takes priority, falling back to original or placeholder
+const candidateFiles = [
+  'goutam-prusty-editorial-restrained.webp',
+  'goutam-prusty-editorial.webp',
+  'goutam-prusty.webp',
+  'goutam-prusty.png',
+  'goutam-prusty.jpg',
+  'goutam-prusty.jpeg',
+];
 let detectedPortraitPath: string | null = null;
 
 if (fsModule && pathModule && proc?.cwd) {
   const portraitDir = pathModule.resolve(proc.cwd(), 'public/images/portrait');
-  for (const ext of candidateExtensions) {
-    const candidateFile = `goutam-prusty.${ext}`;
-    if (fsModule.existsSync(pathModule.join(portraitDir, candidateFile))) {
-      detectedPortraitPath = `/images/portrait/${candidateFile}`;
+  for (const file of candidateFiles) {
+    if (fsModule.existsSync(pathModule.join(portraitDir, file))) {
+      detectedPortraitPath = `/images/portrait/${file}`;
       break;
     }
   }
@@ -133,15 +140,18 @@ if (fsModule && pathModule && proc?.cwd) {
   .ps-observatory-coords {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 0.65rem;
+    gap: 0.4rem;
+    padding: 0.22rem 0.55rem;
     border: 1px solid var(--color-line);
     background: var(--color-surface);
     border-radius: 2px;
-    font: 600 0.72rem/1.2 var(--font-mono);
+    font: 600 clamp(0.58rem, 1.35vw, 0.7rem)/1.2 var(--font-mono);
     color: var(--color-secondary);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     align-self: flex-start;
+    white-space: nowrap;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .ps-coord-dot {
@@ -150,6 +160,7 @@ if (fsModule && pathModule && proc?.cwd) {
     background: var(--color-signal);
     border: 1px solid var(--color-ink);
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   .ps-coord-tag {
@@ -167,8 +178,8 @@ if (fsModule && pathModule && proc?.cwd) {
   /* Rotating Sighting Ring */
   .ps-observatory-ring {
     position: absolute;
-    inset: -3%;
-    z-index: 0;
+    inset: -6%;
+    z-index: 1;
     pointer-events: none;
     animation: ps-observatory-spin 90s linear infinite;
   }
@@ -217,7 +228,7 @@ if (fsModule && pathModule && proc?.cwd) {
     overflow: hidden;
     background: var(--color-sunken);
     border: 1.5px solid var(--color-ink);
-    border-radius: 200px 200px 0 0;
+    border-radius: 9999px 9999px 0 0;
     box-shadow: 0 10px 28px rgba(23, 25, 26, 0.08);
   }
 
@@ -318,7 +329,7 @@ if (fsModule && pathModule && proc?.cwd) {
     position: absolute;
     inset: 5px;
     border: 1px solid rgba(23, 25, 26, 0.15);
-    border-radius: 195px 195px 0 0;
+    border-radius: 9999px 9999px 0 0;
     pointer-events: none;
     z-index: 4;
   }
@@ -350,7 +361,8 @@ if (fsModule && pathModule && proc?.cwd) {
   .ps-observatory-label {
     position: absolute;
     bottom: -10px;
-    right: 12px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 5;
     display: inline-flex;
     align-items: center;
@@ -361,6 +373,7 @@ if (fsModule && pathModule && proc?.cwd) {
     border: 1px solid var(--color-ink);
     font: 700 0.66rem/1.2 var(--font-mono);
     letter-spacing: 0.06em;
+    white-space: nowrap;
   }
 
   .ps-label-accent {
@@ -370,12 +383,26 @@ if (fsModule && pathModule && proc?.cwd) {
   /* Responsive Adjustments */
   @media (max-width: 52rem) {
     .ps-observatory-hero {
-      max-width: 19rem;
+      max-width: 22rem;
       justify-self: center;
       margin-top: 1rem;
     }
     .ps-observatory-coords {
       align-self: center;
+      font-size: 0.65rem;
+      padding: 0.22rem 0.6rem;
+      gap: 0.35rem;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .ps-observatory-hero {
+      max-width: 19rem;
+    }
+    .ps-observatory-coords {
+      font-size: 0.58rem;
+      padding: 0.18rem 0.45rem;
+      gap: 0.3rem;
     }
   }
 
