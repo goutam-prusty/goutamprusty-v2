@@ -2309,6 +2309,7 @@
    ============================================================ */
 .ps-card-visual {
   width: calc(100% + clamp(1.25rem, 3vw, 2rem) * 2);
+  max-width: none;
   margin-left: calc(-1 * clamp(1.25rem, 3vw, 2rem));
   margin-right: calc(-1 * clamp(1.25rem, 3vw, 2rem));
   margin-top: 0;
